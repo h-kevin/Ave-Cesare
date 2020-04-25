@@ -14,7 +14,7 @@
 
     <body>
         <h1 class="container text-center mb-5">Hyrje ne llogari</h1>
-        <form class="container w-50">
+        <form class="container w-50" action="../php/login.php" method="POST">
             <div class="form-group">
                 <input type="email" class="form-control bg-transparent"
                     id="email" name="email" placeholder="E-mail" required>
@@ -24,7 +24,7 @@
                     id="password" name="pass" placeholder="Fjalekalimi" required>
             </div>
             <div class="d-flex justify-content-center">
-                <button type="submit" class="btn btn-primary">Kycu</button>
+                <button type="submit" name="register" class="btn btn-primary">Kycu</button>
             </div>
         </form>
 
