@@ -26,7 +26,7 @@
         if ($stmt->num_rows > 0) {
             echo "Kjo adrese i perket nje perdoruesi tjeter.";
             $stmt->close();
-            $conn.close();
+            $conn->close();
             exit(1);
         }
     
@@ -38,7 +38,7 @@
     
         if ($result) {
             $mail = new PHPMailer(true);
-            //$mail->isSMTP();
+            $mail->isSMTP();
             $mail->SMTPAuth = true;
             $mail->SMTPSecure = 'ssl';
             $mail->Host = 'smtp.gmail.com';
