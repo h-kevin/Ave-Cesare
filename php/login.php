@@ -8,7 +8,7 @@
         $email = $_POST['email'];
         $pass = $_POST['pass'];
     
-        $stmt = $conn->prepare("SELECT id, name, surname, password, verified FROM user WHERE email = ?");
+        $stmt = $conn->prepare("SELECT id, name, surname, password, verified FROM User WHERE email = ?");
         $stmt->bind_param('s', $email);
     
         $stmt->execute();
