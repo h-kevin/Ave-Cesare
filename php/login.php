@@ -4,7 +4,7 @@
 
     require_once('db_connect.php');
 
-    if (isset($_POST['register']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['login']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
         $email = $_POST['email'];
         $pass = $_POST['pass'];
     
