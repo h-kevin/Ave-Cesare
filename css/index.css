@@ -3,3 +3,12 @@
 @import "../vendors/bootstrap/css/bootstrap.min.css";
 
 /* Fonts */
+
+/* Base */
+
+@import "./base/document.css";
+
+/* Components */
+
+@import "./components/register.css";
+@import "./components/login.css";
