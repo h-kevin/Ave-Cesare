@@ -7,11 +7,12 @@
     $query = "SELECT * FROM Offer";  
     $result = mysqli_query($conn, $query); 
 
-    $stmt = "SELECT admin FROM User";
-    $res = mysqli_query($conn, $stmt);
+    //$stmt = "SELECT admin FROM User";
+    //$res = mysqli_query($conn, $stmt);
 
-    while ($row = mysqli_fetch_array($result) && $s = mysqli_fetch_array($res)) {
-        if ($s['admin'] == 1 && $row[0]) {
+    $i = 0;
+    while ($row = mysqli_fetch_array($result)) {
+       /* if ($s['admin'] == 1 && $i = 0) {
             echo '<div class="carousel-item active">';
             echo '<img class="d-block w-100" src="../img/favicon.png" alt="First slide">';
             echo '<div class="carousel-caption d-none d-md-block">';
@@ -19,26 +20,28 @@
             echo '<p>' . $row['description'] . '</p>';
             echo '<p>' . $row['start_date'] . '</p>';
             echo '<p>' . $row['end_date'] . '</p>';
-            echo '<button type="button" class="btn btn-success">Porosit</button>';
             echo '<button type="button" class="btn btn-primary">Modifiko</button>
                 <button type="button" class="btn btn-danger">Fshi</button>';
             echo '</div>';
             echo '</div>';
-        } else {
-            echo '<div class="carousel-item">';
-            echo '<img class="d-block w-100" src="../img/favicon.png" alt="First slide">';
-            echo '<div class="carousel-caption d-none d-md-block">';
-            echo '<h3>' .  $row['sale'] . '</h3>';
-            echo '<p>' . $row['description'] . '</p>';
-            echo '<p>' . $row['start_date'] . '</p>';
-            echo '<p>' . $row['end_date'] . '</p>';
-            echo '<button type="button" class="btn btn-success">Porosit</button>';
-            echo '<button type="button" class="btn btn-primary">Modifiko</button>
-                <button type="button" class="btn btn-danger">Fshi</button>';
-            echo '</div>';
-            echo '</div>';
-        }
-        if ($row[0]) {
+            
+            if ($s['admin'] == 1) {
+                echo '<div class="carousel-item">';
+                echo '<img class="d-block w-100" src="../img/favicon.png" alt="First slide">';
+                echo '<div class="carousel-caption d-none d-md-block">';
+                echo '<h3>' .  $row['sale'] . '</h3>';
+                echo '<p>' . $row['description'] . '</p>';
+                echo '<p>' . $row['start_date'] . '</p>';
+                echo '<p>' . $row['end_date'] . '</p>';
+                echo '<button type="button" class="btn btn-primary">Modifiko</button>
+                    <button type="button" class="btn btn-danger">Fshi</button>';
+                echo '</div>';
+                echo '</div>';
+            }
+            $i++;
+        } 
+        */
+        if ($i == 0 ) {
             echo '<div class="carousel-item active">';
             echo '<img class="d-block w-100" src="../img/favicon.png" alt="First slide">';
             echo '<div class="carousel-caption d-none d-md-block">';
@@ -61,5 +64,6 @@
             echo '</div>';
             echo '</div>';
         }
+        $i++;
     }
 ?>
