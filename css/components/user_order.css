@@ -1,0 +1,7 @@
+/* media query to make phone number span icon disappear in lower resolution */
+
+@media (max-width: 992px) {
+    .tel-icon {
+        display: none !important;
+    }
+}
