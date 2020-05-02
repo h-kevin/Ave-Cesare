@@ -11,6 +11,7 @@ $(document).ready(function(){
               });
 });
 
+//Function to fill the category buttons from the db
 $(document).ready(function(){  
     $.ajax({
                  type: 'GET',
@@ -20,3 +21,15 @@ $(document).ready(function(){
                   }
               });
 });
+
+//Display product cards by category button clicked
+function display(cat_id){
+         $.ajax({  
+              url:"../php/selected_category.php",  
+              method:"post",  
+              data:{cat_id:cat_id},  
+              success:function(response){
+                $('#menu-cards').html(response);
+              }  
+         });  
+        }

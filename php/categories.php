@@ -9,7 +9,7 @@
     $result = $stmt->get_result();
     
     while ($row = mysqli_fetch_array($result)) {
-        echo '<button type="button" class="btn btn-primary btn-block">' . $row['name'] . '</button>';
+        echo '<button type="button" onclick="display('. $row['id'] .')" class="btn btn-primary btn-block">' . $row['name'] . '</button>';
     }
     
 ?>
