@@ -1,0 +1,45 @@
+*{
+    margin:0;
+    padding:0;
+}
+
+#header{
+    width=100%;
+}
+
+.navbar{
+    padding= 50px 0;
+}
+
+.navbar-brand{
+    font-weight: 500;
+    font-size: 1.5em;
+}
+
+.navbar-dark .navbar-brand{
+    color: #dcdde1;
+}
+
+.nav-item{
+    font-weight: 800;
+    text-transform: uppercase;
+    padding-left: 40px;
+}
+
+
+/*
+Extra small (xs) devices (portrait phones, less than 576px)
+No media query since this is the default in Bootstrap
+
+Small (sm) devices (landscape phones, 576px and up)
+@media (min-width: 576px) { ... }
+
+Medium (md) devices (tablets, 768px and up)
+@media (min-width: 768px) { ... }
+
+Large (lg) devices (desktops, 992px and up)
+@media (min-width: 992px) { ... }
+
+Extra (xl) large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) { ... }
+*/
