@@ -2,10 +2,10 @@
 
 <?php
 
-    $dbServername = 'localhost';
-    $dbUsername = 'root';
-    $dbPassword = '';
-    $dbName = 'avecesare';
+    $dbServername = 'remotemysql.com';
+    $dbUsername = 'OxBKxErBYb';
+    $dbPassword = 'VxUmHNePFp';
+    $dbName = 'OxBKxErBYb';
 
     $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
 

@@ -12,6 +12,10 @@
         $pass1 = $_POST['pass1'];
         $pass2 = $_POST['pass2'];
 
+        if($pass1 != $pass2){
+            exit("Fjalekalimet nuk perputhen. Kontrolloni dhe provoni serish.");
+        }
+
         $vkey = md5(time() . $email);
         $password = password_hash($pass1, PASSWORD_DEFAULT);
     
@@ -24,10 +28,9 @@
         $stmt->store_result();
     
         if ($stmt->num_rows > 0) {
-            echo "Kjo adrese i perket nje perdoruesi tjeter.";
             $stmt->close();
             $conn->close();
-            exit(1);
+            exit("Kjo adrese i perket nje perdoruesi tjeter.");
         }
     
         $stmt = $conn->prepare("INSERT INTO User 
@@ -38,7 +41,6 @@
     
         if ($result) {
             $mail = new PHPMailer(true);
-            $mail->isSMTP();
             $mail->SMTPAuth = true;
             $mail->SMTPSecure = 'ssl';
             $mail->Host = 'smtp.gmail.com';
