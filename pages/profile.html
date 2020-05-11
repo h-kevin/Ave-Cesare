@@ -164,7 +164,7 @@
                     </div>
                 </div>
             </div>
-            <!-- modal for profile edit -->
+            <!-- modal for profile image edit -->
             <div class="modal fade" id="modal2" tabindex="-1"
                 role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -176,25 +176,29 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <!-- info editing form -->
-                            <form class="container d-flex flex-column">
+                            <!-- profile image edit form -->
+                            <form class="imgform container d-flex flex-column" id="imgform">
                                 <small class="text-center mb-3">
                                     Perzgjidh foton e profilit
                                 </small>
                                 <div class="input-group mb-3">
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="inputGroupFile02">
+                                        <input type="file" class="custom-file-input"
+                                            name="profimg" id="imgin">
                                         <label class="custom-file-label" for="inputGroupFile02">
                                             Choose file
                                         </label>
                                     </div>
                                 </div>
+                                <small class="piw text-center text-danger">
+                                    Fotoja e re nuk eshte perzgjedhur!
+                                </small>
                             </form>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary"
                                 data-dismiss="modal">Mbyll</button>
-                            <button type="button" class="btn btn-primary">
+                            <button type="button" class="pimgs btn btn-primary">
                                 <span class="spinner-border spinner-border-sm d-none"
                                     role="status" aria-hidden="true"></span>
                                     Ruaj
@@ -208,6 +212,7 @@
         <script src="../vendors/jquery/jquery-3.4.1.min.js"></script>
         <script src="../vendors/popper/popper.min.js"></script>
         <script src="../vendors/bootstrap/js/bootstrap.min.js"></script>
+        <script src="../vendors/jquery/notify.min.js"></script>
         <script type="text/javascript" src="../js/profile.js"></script>
     </body>
 </html>

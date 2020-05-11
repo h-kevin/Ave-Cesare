@@ -23,6 +23,8 @@
         $infoObj = json_encode($infoObj);
 
         echo $infoObj;
+    } else {
+        exit(1);
     }
 
 ?>

@@ -134,6 +134,19 @@
     opacity: 0.7;
 }
 
+/* empty upload warning for profile image */
+
+.piw {
+    display: none;
+}
+
+/* profile image input label */
+
+.custom-file-label {
+    overflow: hidden;
+    white-space: nowrap;
+}
+
 /* change info button */
 
 .change-info {
