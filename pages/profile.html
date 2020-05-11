@@ -27,33 +27,44 @@
                 d-flex w-75 h-100 justify-content-center">
                 <!-- profile image -->
                 <div class="row col-12 col-md-5 d-flex justify-content-center mb-md-0 mb-4">
-                    <div class="prof-img rounded-circle align-self-center mb-2"></div>
+                    <div class="prof-img rounded-circle align-self-center mb-2">
+                        <i class="material-icons">add_a_photo</i>
+                    </div>
                 </div>
                 <!-- profile info -->
                 <div class="col-12 col-md-7 d-flex justify-content-center">
                     <ul class="info-list align-self-center d-flex
                         flex-column justify-content-center w-100 m-0">
-                        <li class="list-group-item list-group-item mb-2 w-100">
+                        <li class="liname list-group-item list-group-item mb-2 w-100">
                             Emri: 
                         </li>
-                        <li class="list-group-item list-group-item mb-2 w-100">
+                        <li class="lisur list-group-item list-group-item mb-2 w-100">
                             Mbiemri: 
                         </li>
-                        <li class="list-group-item list-group-item mb-2 w-100">
+                        <li class="limail list-group-item list-group-item mb-2 w-100">
                             E-mail: 
                         </li>
-                        <li class="list-group-item list-group-item mb-2 w-100">
+                        <li class="litel list-group-item list-group-item mb-2 w-100">
                             Telefon: 
                         </li>
                     </ul>
                 </div>
-                <!-- change info button -->
-                <button type="button" class="change-info btn w-25 mt-md-5 btn-warning btn-sm"
-                    data-toggle="modal" data-target="#exampleModal">Ndrysho te dhenat
-                </button>
+                <div class="d-flex flex-column w-100 mt-md-3 justify-content-start">
+                    <!-- change info button -->
+                    <button type="button" class="change-info btn w-25 rounded-pill
+                        btn-success btn-sm align-self-center" data-toggle="modal"
+                        data-target="#modal1">Ndrysho te dhenat</button>
+                    <!-- logout button -->
+                    <button type="button" class="logout btn mt-2 mt-md-3 rounded-pill
+                        btn-dark btn-sm align-self-center">
+                        <span class="spinner-border spinner-border-sm d-none"
+                            role="status" aria-hidden="true"></span>
+                            Dil
+                    </button>
+                </div>
             </div>
             <!-- modal for profile edit -->
-            <div class="modal fade" id="exampleModal" tabindex="-1"
+            <div class="modal fade" id="modal1" tabindex="-1"
                 role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -131,8 +142,8 @@
                                             <div class="input-group-append">
                                                 <button class="btn btn-outline-secondary" 
                                                     type="button" id="button-addon2">
-                                                    <!-- <span class="spinner-border spinner-border-sm" 
-                                                    role="status" aria-hidden="true"></span> -->
+                                                    <span class="spinner-border spinner-border-sm d-none" 
+                                                    role="status" aria-hidden="true"></span>
                                                     Fshi
                                                 </button>
                                             </div>
@@ -144,7 +155,50 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary"
                                 data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-primary">
+                                <span class="spinner-border spinner-border-sm d-none"
+                                    role="status" aria-hidden="true"></span>
+                                    Save changes
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- modal for profile edit -->
+            <div class="modal fade" id="modal2" tabindex="-1"
+                role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Ndrysho foton e profilit</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- info editing form -->
+                            <form class="container d-flex flex-column">
+                                <small class="text-center mb-3">
+                                    Perzgjidh foton e profilit
+                                </small>
+                                <div class="input-group mb-3">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="inputGroupFile02">
+                                        <label class="custom-file-label" for="inputGroupFile02">
+                                            Choose file
+                                        </label>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary"
+                                data-dismiss="modal">Mbyll</button>
+                            <button type="button" class="btn btn-primary">
+                                <span class="spinner-border spinner-border-sm d-none"
+                                    role="status" aria-hidden="true"></span>
+                                    Ruaj
+                            </button>
                         </div>
                     </div>
                 </div>

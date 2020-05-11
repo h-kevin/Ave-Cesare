@@ -110,25 +110,52 @@
 /* profile image */
 
 .prof-img {
-    background-image: url('https://a.wattpad.com/cover/65706944-256-k793391.jpg');
     background-size: cover;
+    background-position: center;
     height: 200px;
     width: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    color: transparent;
+    transition: color 0.3s;
+}
+
+.prof-img:hover {
+    color: black;
+}
+
+/* change profile image icon */
+
+.prof-img i {
+    font-size: 60px;
+    opacity: 0.7;
 }
 
 /* change info button */
 
 .change-info {
-    height: 30px;
+    height: 40px;
+}
+
+/* logout butoon */
+
+.logout {
+    width: 10%;
+    height: 35px;
 }
 
 /* profile info list elements */
 
 .info-list li {
     background: rgba(255, 255, 255, 0.4);
+    overflow: hidden;
+    white-space: nowrap;
 }
 
-/* media query for info list elements and change info button */
+/* media query for info list elements and change info / logout buttons */
 
 @media (max-width: 992px) {
     .info-list li {
@@ -136,7 +163,8 @@
         padding: 5px;
         font-size: small;
     }
-    .change-info {
+    .change-info, .logout {
         width: 75% !important;
+        height: 30px;
     }
 }
