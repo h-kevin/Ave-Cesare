@@ -9,6 +9,10 @@
         $email = $_POST['email'];
         $pass1 = $_POST['pass1'];
 
+        if($pass1 != $pass2){
+            exit("Fjalekalimet nuk perputhen. Kontrolloni dhe provoni serish.");
+        }
+
         $vkey = md5(time() . $email);
         $password = password_hash($pass1, PASSWORD_DEFAULT);
     

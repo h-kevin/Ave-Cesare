@@ -3,7 +3,7 @@ $(document).ready(function(){
         type: 'GET',
         url:  '../php/offers.php',
         success: function(response) {
-            $('.carousel-inner').html(response);
+            $('#offer-cards').html(response);
         }
     });
 });

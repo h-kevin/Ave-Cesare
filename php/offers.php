@@ -7,34 +7,17 @@
     $query = "SELECT * FROM Offer";  
     $result = mysqli_query($conn, $query); 
 
-    //$stmt = "SELECT admin FROM User";
-    //$res = mysqli_query($conn, $stmt);
+    echo '<div class="row justify-content-center">';
 
-    $i = 0;
     while ($row = mysqli_fetch_array($result)) {
-        if ($i == 0 ) {
-            echo '<div class="carousel-item active">';
-            echo '<img class="d-block w-100" src="../img/favicon.png" alt="First slide">';
-            echo '<div class="carousel-caption d-none d-md-block">';
-            echo '<h3>' .  $row['sale'] . '</h3>';
-            echo '<p>' . $row['description'] . '</p>';
-            echo '<p>' . $row['start_date'] . '</p>';
-            echo '<p>' . $row['end_date'] . '</p>';
-            echo '<button type="button" class="btn btn-success">Porosit</button>';
-            echo '</div>';
-            echo '</div>';
-        } else {
-            echo '<div class="carousel-item">';
-            echo '<img class="d-block w-100" src="../img/favicon.png" >';
-            echo '<div class="carousel-caption d-none d-md-block">';
-            echo '<h3>' .  $row['sale'] . '</h3>';
-            echo '<p>' . $row['description'] . '</p>';
-            echo '<p>' . $row['start_date'] . '</p>';
-            echo '<p>' . $row['end_date'] . '</p>';
-            echo '<button type="button" class="btn btn-success">Porosit</button>';
-            echo '</div>';
-            echo '</div>';
-        }
-        $i++;
+        echo '<div class="card col-lg-3 col-md-2 col-sm-12 ml-3 mb-3">';
+        echo '<img src="../img/favicon.png" class="card-img-top h-50">';
+        echo '<div class="card-body text-center d-flex flex-column">';
+        echo '<h5 class="card-title">' . $row['start_date'] . '-' . $row['end_date'] . '</h5>';
+        echo '<p class="card-text">' . $row['description']. '</p>';
+        echo '<button type="button" class="btn btn-success mt-auto">' . $row['sale'] . ' Lek</button>';
+        echo '</div>';
+        echo '</div>';
     }
+    echo '</div>';
 ?>
