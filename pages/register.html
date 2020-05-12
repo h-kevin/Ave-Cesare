@@ -14,7 +14,9 @@
 
     <body>
         <h1 class="container text-center mb-5">Krijo Llogarine Tende</h1>
-        <form class="form-container container" action="../php/signup.php" method="POST">
+        
+        <form class="form-container container" id="register-form">
+            <p id="errBox" class="text-center"></p>
             <div class="form-group">
                 <input type="text" class="form-control bg-transparent"
                     id="name" name="name" placeholder="Emri" required>
@@ -46,5 +48,6 @@
         <script src="../vendors/popper/popper.min.js"></script>
         <script src="../vendors/bootstrap/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="../js/index.js"></script>
+        <script type="text/javascript" src="../js/signup.js"></script>
     </body>
 </html>

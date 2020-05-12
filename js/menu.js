@@ -25,7 +25,7 @@ $(document).ready(function(){
 //Display product cards by category button clicked
 function display(cat_id){
          $.ajax({  
-              url:"../php/selected_category.php",  
+              url:"../php/menu.php",  
               method:"post",  
               data:{cat_id:cat_id},  
               success:function(response){
