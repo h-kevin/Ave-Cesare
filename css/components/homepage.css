@@ -2,13 +2,18 @@
     margin:0;
     padding:0;
 }
-
-#header{
-    width=100%;
+body{
+    margin: 1px 0px;
+}
+#brand-image{
+    height: 80px;
 }
 
 .navbar{
-    padding= 50px 0;
+    padding: 10px 0;
+    z-index: 100;
+    background-color: transparent;
+    transition: background-color 0.7s;
 }
 
 .navbar-brand{
@@ -16,14 +21,126 @@
     font-size: 1.5em;
 }
 
-.navbar-dark .navbar-brand{
-    color: #dcdde1;
-}
-
 .nav-item{
     font-weight: 800;
     text-transform: uppercase;
     padding-left: 40px;
+}
+/* to make the carousel responsive */
+.carousel-item-next, .carousel-item-prev, .carousel-item.active {
+    display: block !important;
+}
+
+/* first slide */
+.carousel-inner .carousel-item .first{
+  background-image: url("../../img/diavola.jpg");
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100vh;
+}
+
+/* second slide */
+.carousel-inner .carousel-item .second{
+  background-image: url("../../img/margherita.jpg");
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100vh;
+ }
+
+/* third slide */
+.carousel-inner .carousel-item .third{
+  background-image: url("../../img/hammushroom.jpg");
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100vh;
+}
+
+.post-slider{
+    position: relative;
+}
+
+/* shigjeta djathtas */
+.post-slider .next{
+    position: absolute;
+    top: 35%;
+    right: 30px;
+    margin-left: 15px;
+    font-size: 2em;
+    color:gray;
+    cursor: pointer;
+}
+
+/* shigjeta majtas */
+.post-slider .prev{
+    position: absolute;
+    top: 35%;
+    left: 30px;
+    font-size: 2em;
+    color:gray;
+    cursor: pointer;
+}
+.post-slider .post-wrapper{
+    width: 90%;
+    height: 310px;
+    margin: 0px auto;
+    overflow: hidden;
+    padding: 10px 0px 10px 0px;
+}
+.post-slider .post-wrapper .post{
+    width: 300px;
+    height: 310px;
+    display: inline-block;
+    margin: 0px 10px;
+    background: white;
+    border-radius: 5px;
+}
+.post-slider .post-wrapper .post .post-info{
+    height: 110px;
+    padding: 0px 10px;
+}
+.post-slider .post-wrapper .post .btn-primary{
+    padding: 0px 30px;
+    margin: 0px 23px;
+}
+.post-slider .post-wrapper .post .slider-image{
+    width: 100%;
+    height:200px;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 1rem 1rem 1rem -1rem #a0a0a033;
+}
+.my-container {
+    /* border: 1px solid green; */
+}
+
+.my-container .my-row .my-cola{
+    /* border: 1px solid violet; */
+}
+
+.my-row {
+    /* border: 3px solid yellow; */
+}
+.my-cols{
+    /* height: 200px;  */
+}
+.banner{
+    /* position: relative; */
+    background-size: cover;
+    background-position: center;
+}
+
+.index-intro{ 
+    /* background-color: red; */
+}
+.jumbotron{
+    background-image: url("../../img/bannerbckgr.webp");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+#koha{
+    color: white;
 }
 
 
