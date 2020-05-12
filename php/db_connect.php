@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * PHP file to set up connection with the database
+ */
+
     $dbServername = 'remotemysql.com';
     $dbUsername = 'OxBKxErBYb';
     $dbPassword = 'VxUmHNePFp';
