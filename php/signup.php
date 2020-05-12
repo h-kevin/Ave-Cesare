@@ -41,6 +41,7 @@
     
         if ($result) {
             $mail = new PHPMailer(true);
+            $mail->isSMTP();
             $mail->SMTPAuth = true;
             $mail->SMTPSecure = 'ssl';
             $mail->Host = 'smtp.gmail.com';
