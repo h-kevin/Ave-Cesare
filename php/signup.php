@@ -1,21 +1,16 @@
-<!-- Create an account -->
-
 <?php
 
     require_once('db_connect.php');
     require_once('../vendors/PHPMailer/PHPMailerAutoload.php');
 
-    if (isset($_POST['register']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
+    
         $name = $_POST['name'];
         $surname = $_POST['surname'];
         $email = $_POST['email'];
         $pass1 = $_POST['pass1'];
-        $pass2 = $_POST['pass2'];
 
         $vkey = md5(time() . $email);
         $password = password_hash($pass1, PASSWORD_DEFAULT);
-    
-        echo "<h3>Duke shtuar perdoruesin $name $surname ...</h3>";
     
         $stmt = $conn->prepare("SELECT * FROM User WHERE email = ?");
         $stmt->bind_param('s', $email);
@@ -24,10 +19,9 @@
         $stmt->store_result();
     
         if ($stmt->num_rows > 0) {
-            echo "Kjo adrese i perket nje perdoruesi tjeter.";
             $stmt->close();
             $conn->close();
-            exit(1);
+            echo "Kjo adrese i perket nje perdoruesi tjeter.";
         }
     
         $stmt = $conn->prepare("INSERT INTO User 
@@ -38,7 +32,6 @@
     
         if ($result) {
             $mail = new PHPMailer(true);
-            $mail->isSMTP();
             $mail->SMTPAuth = true;
             $mail->SMTPSecure = 'ssl';
             $mail->Host = 'smtp.gmail.com';
@@ -54,27 +47,22 @@
 
             try {
                 $mail->Send();
-                echo "<p>Faleminderit per regjistrimin.
-                    Kontrolloni E-mail per verifikimin e llogarise.</p>";
+                echo "Faleminderit per regjistrimin.
+                    Kontrolloni E-mail per verifikimin e llogarise.";
                 $stmt->close();
                 $conn->close();
                 exit(0);
             } catch (phpmailerException $e) {
-                echo "<p>E-mail nuk u dergua me sukses. Ju lutem provoni me vone." . $e->errorMessage() . "</p>";
+                echo "E-mail nuk u dergua me sukses. Ju lutem provoni me vone." . $e->errorMessage();
                 $stmt->close();
                 $conn->close();
                 exit(1);
             }
         } else {
-            echo "<p>$conn->error</p>";
+            echo $conn->error;
             $stmt->close();
             $conn->close();
             exit(1);
         }
-    } else {
-        echo "<p>Kerkesa nuk u pranua.</p>";
-        $conn->close();
-        exit(1);
-    }
 
 ?>

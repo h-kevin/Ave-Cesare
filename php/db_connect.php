@@ -1,5 +1,3 @@
-<!-- Set up connection with the database -->
-
 <?php
 
     $dbServername = 'remotemysql.com';

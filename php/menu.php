@@ -5,22 +5,28 @@
     require_once('db_connect.php');
 
     //Get all products from db display in a card deck
-    $stmt_prod = $conn->prepare("SELECT * FROM Product");
+    $query = "SELECT * FROM Product";
+
+    if(isset($_POST["cat_id"])) { 
+        $query .= " WHERE cat_id='" . $_POST["cat_id"] . "'";
+    }
+
+    $stmt_prod = $conn->prepare($query);
     $stmt_prod->execute();
     $res_prod = $stmt_prod->get_result();
 
-    echo '<div class="card-deck">';
+    echo '<div class="row justify-content-center">';
     
     while ($row = mysqli_fetch_array($res_prod)) {
-        echo '<div class="card">';
-        echo '<img src="' . $row['image'] . '" height="300px" width="300px" object-fit="cover" class="card-img-top">';
-        echo '<div class="card-body">';
+        echo '<div class="card col-lg-3 col-md-4 col-sm-12 ml-3 mb-3">';
+        echo '<img src="' . $row['image'] . '" class="card-img-top h-50">';
+        echo '<div class="card-body text-center d-flex flex-column">';
         echo '<h5 class="card-title">' . $row['name'] . '</h5>';
         echo '<p class="card-text">' . $row['description']. '</p>';
         echo '<p class="card-text"><small class="text-muted">';
 
             //for each product get all the ingredients
-            $stmt_ing = $conn->prepare("SELECT name FROM (Ingredient INNER JOIN Prod_ingredient ON Prod_ingredient.ing_id=Ingredient.id) WHERE Prod_Ingredient.prod_id=?");
+            $stmt_ing = $conn->prepare("SELECT name FROM (Ingredient INNER JOIN Prod_Ingredient ON Prod_Ingredient.ing_id=Ingredient.id) WHERE Prod_Ingredient.prod_id=?");
             $stmt_ing->bind_param('i', $row['id']);
             $stmt_ing->execute();
             $res_ing = $stmt_ing->get_result();
@@ -33,7 +39,7 @@
             echo substr($ing_list ,0,-2);
 
         echo '</small></p>';
-        echo '<button type="button" class="btn btn-success">' . $row['price'] . 'Lek</button>';
+        echo '<button type="button" class="btn btn-success mt-auto">' . $row['price'] . 'Lek</button>';
         echo '</div>';
         echo '</div>';
     }
