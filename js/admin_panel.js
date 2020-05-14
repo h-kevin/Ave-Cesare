@@ -35,6 +35,7 @@ $(document).on('click', '.delete', function(e){
 $(document).on('click', '#add', function(e){
     e.preventDefault();
     e.stopImmediatePropagation();
+    $('form').trigger('reset');
     let name = $('#name_add').val();
     let surname = $('#surname_add').val();
     let email = $('#email_add').val();
@@ -75,6 +76,7 @@ $(document).on('click', '#add', function(e){
    $(document).on('click', '.update', function(e){
     e.preventDefault();
     e.stopImmediatePropagation();
+    $('form').trigger('reset');
     var user_id = $(this).attr("id");
 
     $(document).on('click', '#update_mod', function(){

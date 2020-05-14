@@ -23,6 +23,7 @@ $(document).ready(function(){
                 method:"POST",
                 data:{name:name,surname:surname,email:email,pass1:pass1},
                 success:function(data){
+                    $('form').trigger('reset');
                     $('#errBox').html(data);
                 }
                 });
