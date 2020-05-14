@@ -9,9 +9,14 @@
         session_start();
     }
 
-    // destroy session
-    session_destroy();
-    
-    echo 'loggedOut';
+    if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+        // destroy session
+        session_destroy();
+        
+        echo 'loggedOut';
+    } else {
+        header('HTTP/1.1 400 Bad Request');
+        exit("Kerkesa u rrefuzua!");
+    }
 
 ?>
