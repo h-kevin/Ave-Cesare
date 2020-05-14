@@ -48,8 +48,9 @@
         }
 
         if ($newprof->password != '') {
+            $newpass = password_hash($newprof->password, PASSWORD_DEFAULT);
             $stmt = $conn->prepare("UPDATE `User` SET password = ? WHERE id = ?");
-            $stmt->bind_param("sd", password_hash($newprof->password, PASSWORD_DEFAULT), $_SESSION['id']);
+            $stmt->bind_param("sd", $newpass, $_SESSION['id']);
             
             try {
                 // try to execute statement

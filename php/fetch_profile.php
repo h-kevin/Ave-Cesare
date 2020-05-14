@@ -11,6 +11,7 @@
 
     // create json object with session data
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $infoObj = new stdClass();
         $infoObj->id = $_SESSION['id'];
         $infoObj->email = $_SESSION['email'];
         $infoObj->name = $_SESSION['name'];
