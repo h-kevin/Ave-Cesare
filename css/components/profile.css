@@ -134,12 +134,6 @@
     opacity: 0.7;
 }
 
-/* empty upload warning for profile image */
-
-.piw {
-    display: none;
-}
-
 /* profile image input label */
 
 .custom-file-label {
@@ -166,6 +160,12 @@
     background: rgba(255, 255, 255, 0.4);
     overflow: hidden;
     white-space: nowrap;
+}
+
+/* warning message text */
+
+.piw, .ns-warn, .tel-warn, .pass-warn, .rem-warn {
+    display: none;
 }
 
 /* media query for info list elements and change info / logout buttons */

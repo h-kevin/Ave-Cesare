@@ -1,7 +1,7 @@
 <?php
 
 /**
- * PHP file to handle profile page requests
+ * PHP file to fetch user info from the database
  */
 
     // check if session is active
@@ -20,11 +20,17 @@
         $infoObj->prof_img = $_SESSION['prof_img'];
         $infoObj->admin = $_SESSION['admin'];
 
+        if ($_SESSION['mobile'] != null)
+            $infoObj->mobile = $_SESSION['mobile'];
+        else
+            $infoObj->mobile = '';
+
         $infoObj = json_encode($infoObj);
 
         echo $infoObj;
     } else {
-        exit(1);
+        header('HTTP/1.1 400 Bad Request');
+        exit("Kerkesa u rrefuzua!");
     }
 
 ?>

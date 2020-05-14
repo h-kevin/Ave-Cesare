@@ -33,7 +33,7 @@
                 </div>
                 <!-- profile info -->
                 <div class="col-12 col-md-7 d-flex justify-content-center">
-                    <ul class="info-list align-self-center d-flex
+                    <ul class="info-list align-self-center d-flex p-0
                         flex-column justify-content-center w-100 m-0">
                         <li class="liname list-group-item list-group-item mb-2 w-100">
                             Emri: 
@@ -85,7 +85,7 @@
                                     aria-controls="collapse1">
                                     Emri / Mbiemri
                                 </button>
-                                <div class="collapse" id="collapse1">
+                                <div class="collapse ns-coll" id="collapse1">
                                     <div class="card card-body">
                                         <div class="input-group">
                                             <input type="text" aria-label="First name" class="form-control"
@@ -93,6 +93,7 @@
                                             <input type="text" aria-label="Last name" class="form-control"
                                                 name="surname" placeholder="Mbiemri">
                                         </div>
+                                        <small class="ns-warn text-center text-danger mt-1">Bitch</small>
                                     </div>
                                 </div>
                                 <button class="btn btn-primary btn-sm mt-2" type="button" 
@@ -100,7 +101,7 @@
                                     aria-expanded="false" aria-controls="collapse2">
                                     Telefon
                                 </button>
-                                <div class="collapse" id="collapse2">
+                                <div class="collapse tel-coll" id="collapse2">
                                     <div class="card card-body">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
@@ -110,6 +111,7 @@
                                             </div>
                                             <input type="tel" class="form-control" name="tel">
                                         </div>
+                                        <small class="tel-warn text-center text-danger mt-1"></small>
                                     </div>
                                 </div>
                                 <button class="btn btn-primary btn-sm mt-2" type="button" 
@@ -117,7 +119,7 @@
                                     aria-expanded="false" aria-controls="collapse3">
                                     Fjalekalimi
                                 </button>
-                                <div class="collapse" id="collapse3">
+                                <div class="collapse pass-coll" id="collapse3">
                                     <div class="card card-body">
                                         <div class="input-group-sm">
                                             <input type="password" class="form-control"
@@ -127,6 +129,7 @@
                                             <input type="password" class="form-control mt-1"
                                                 placeholder="Perserit fjalekalimin" name="pass2">
                                         </div>
+                                        <small class="pass-warn text-center text-danger mt-1"></small>
                                     </div>
                                 </div>
                                 <button class="btn btn-danger btn-sm mt-2" type="button" 
@@ -134,20 +137,21 @@
                                     aria-expanded="false" aria-controls="collapse4">
                                     Kliko ketu per te fshire llogarine
                                 </button>
-                                <div class="collapse" id="collapse4">
+                                <div class="collapse rem-coll" id="collapse4">
                                     <div class="card card-body">
-                                        <div class="input-group mb-3">
+                                        <div class="input-group">
                                             <input type="password" class="form-control" 
                                                 placeholder="Vendos fjalekalimin" name="pass">
                                             <div class="input-group-append">
                                                 <button class="btn btn-outline-secondary" 
-                                                    type="button" id="button-addon2">
+                                                    type="button" id="button-addon2" disabled>
                                                     <span class="spinner-border spinner-border-sm d-none" 
                                                     role="status" aria-hidden="true"></span>
                                                     Fshi
                                                 </button>
                                             </div>
                                         </div>
+                                        <small class="rem-warn text-center text-danger mt-1"></small>
                                     </div>
                                 </div>
                             </form>
@@ -155,7 +159,7 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary"
                                 data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">
+                            <button type="button" class="btn btn-primary ps-changes">
                                 <span class="spinner-border spinner-border-sm d-none"
                                     role="status" aria-hidden="true"></span>
                                     Save changes
