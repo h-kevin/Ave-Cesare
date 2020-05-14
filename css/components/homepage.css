@@ -1,4 +1,14 @@
+<<<<<<< HEAD
 /* Logo's size */
+=======
+/* *{
+    margin:0;
+    padding:0;
+}
+body{
+    margin: 1px 0px;
+} */
+>>>>>>> 61bcea5b5261c1a8fd0f7dca23f3a5ef8de2d043
 #brand-image{
     height: 80px;
 }

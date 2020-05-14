@@ -10,13 +10,13 @@
         $email = $_POST['email'];
         $pass = $_POST['pass'];
     
-        $stmt = $conn->prepare("SELECT id, name, surname, password, verified, prof_img, admin
+        $stmt = $conn->prepare("SELECT id, name, surname, password, verified, prof_img, mobile, admin
             FROM `User` WHERE email = ?");
         $stmt->bind_param('s', $email);
     
         $stmt->execute();
         $stmt->store_result();
-        $stmt->bind_result($id, $name, $surname, $hash, $verified, $prof_img, $admin);
+        $stmt->bind_result($id, $name, $surname, $hash, $verified, $prof_img, $mobile, $admin);
         $stmt->fetch();
     
         if (password_verify($pass, $hash)) { // if password matches
@@ -30,6 +30,11 @@
                 $_SESSION['verified'] = $verified;
                 $_SESSION['prof_img'] = $prof_img;
                 $_SESSION['admin'] = $admin;
+
+                if ($mobile != null)
+                    $_SESSION['mobile'] = $mobile;
+                else
+                    $_SESSION['mobile'] = '';
 
                 $stmt->close();
                 $conn->close();
