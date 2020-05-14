@@ -345,7 +345,7 @@ $('#modal1 .ps-changes').click(function () {
                 $.notify('Te dhenat u perditesuan me sukses!', 'success');
                 $('#modal1').modal('hide');
             },
-            error: function () {
+            error: function (xhr, ajaxOptions, thrownError) {
                 $('.ps-changes .spinner-border').addClass('d-none');
                 $.notify(xhr.responseText, "error");
             }
