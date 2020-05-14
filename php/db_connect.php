@@ -12,8 +12,8 @@
     $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
 
     if (mysqli_connect_errno()) {
-        echo "Lidhja me databazen deshtoi: " . mysqli_connect_error();
-        exit(1);
+        header('HTTP/1.1 500 Internal Server Error');
+        exit('Lidhja me databazen deshtoi!');
     }
 
 ?>
