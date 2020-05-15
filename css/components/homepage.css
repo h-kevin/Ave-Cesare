@@ -1,53 +1,104 @@
-<<<<<<< HEAD
-/* Logo's size */
-=======
-/* *{
-    margin:0;
-    padding:0;
-}
-body{
-    margin: 1px 0px;
-} */
->>>>>>> 61bcea5b5261c1a8fd0f7dca23f3a5ef8de2d043
-#brand-image{
-    height: 80px;
-}
+ /* Body background */
+ 
+ .homepage {
+     background-color: #FFE6D0;
+ }
+ 
+ 
+ /* Navigation Bar padding */
 
-.navbar{
-    z-index: 100;
-    background-color: transparent;
-    transition: background-color 0.7s;
+.navigationbar {
+    padding: 20px 10px 20px 10px ;
 }
+    
+/* Brand */
 
-.navbar-brand{
-    font-weight: 500;
-    font-size: 1.5em;
-}
+.navigationbar .container .navbar-brand {
+    display: flex;
+    justify-content: center;
+    color: white;
+    letter-spacing: 4px;
+    font-size: x-large;
+    text-shadow: 4px 4px 4px rgb(0, 0, 0);
+    
+  }
 
-.nav-item{
-    font-weight: 800;
-    text-transform: uppercase;
-}
+  .navigationbar .container .navbar-brand b {
+      align-self: center;
+      padding-top: 4px;
+      padding-bottom: 10px;
+  }
 
-/* media-query */
-@media (max-width: 992px) {
-    .nav-item {
-        font-size: small !important;
+  /* Media query for navbar-brand */
+
+  @media (max-width: 292px ) {
+    .navigationbar .container .navbar-brand {
+        margin-right: 0px;
+        margin-left: 0px;  
+    }
+    .navigationbar .container .navbar-toggler {
+        padding-left: 0px;
     }
 }
 
-.mycarousel {
-    width: 100vw;
-    margin-left: -19px;
-}
+  /* Ave */
 
-/* to make the carousel responsive */
-.carousel-item-next, .carousel-item-prev, .carousel-item.active {
-    display: block !important;
-}
+  .navigationbar .container .navbar-brand span {
+    color: rgb(240, 53, 53);
+  }
+
+ /* Toggler */
+
+.navigationbar .container .navbar-toggler i {
+    color: white; 
+  }
+
+/* Menu items */
+
+.navigationbar .container .navbar-collapse .navbar-nav .nav-item {
+    padding-left: 20px;
+    padding-right: 20px;
+    font-weight: bolder;
+  }
+
+.navigationbar .container .navbar-collapse .navbar-nav .nav-item a {
+    font-family: primary-light;
+    color: white;
+    font-size: medium;
+    letter-spacing: 1px;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.6s;
+  }
+
+.navigationbar .container .navbar-collapse .navbar-nav .nav-item a:hover {
+    border-color: white;
+  }
+
+/* Media queries for navigation bar */
+
+@media screen and (max-width: 991px) {
+    .navigationbar .container {
+      margin-left: 5px;
+      margin-right: 5px;
+    }
+
+    .navigationbar .container .navbar-collapse .navbar-nav {
+      padding-top: 15px;
+    }
+  
+    .navigationbar .container .navbar-collapse .navbar-nav .nav-item {
+      padding-left: 0;
+    }
+  
+    .navigationbar .container .navbar-collapse .navbar-nav .nav-item a {
+      border-bottom: none;
+      font-size: small;
+    } 
+  } 
 
 /* first slide */
-.carousel-inner .carousel-item .first{
+
+.carousel-inner .carousel-item .first {
   background-image: url("../../img/ave-cesare1.jpg");
   background-size: cover;
   background-position: center;
@@ -56,7 +107,8 @@ body{
 }
 
 /* second slide */
-.carousel-inner .carousel-item .second{
+
+.carousel-inner .carousel-item .second {
   background-image: url("../../img/ave-cesare2.jpg");
   background-size: cover;
   background-position: center;
@@ -65,124 +117,66 @@ body{
  }
 
 /* third slide */
-.carousel-inner .carousel-item .third{
-  background-image: url("../../img/ave-cesare4.jpg");
+
+.carousel-inner .carousel-item .third {
+  background-image: url("../../img/ave-cesare8.jpg");
   background-size: cover;
   background-position: center;
   width: 100%;
   height: 100vh;
 }
 
-.post-slider{
-    position: relative;
-}
+/* Banner background */
 
-/* next card */
-.post-slider .next{
-    position: absolute;
-    top: 35%;
-    right: 30px;
-    margin-left: 15px;
-    font-size: 2em;
-    color:gray;
-    cursor: pointer;
-}
-
-/* previous card */
-.post-slider .prev{
-    position: absolute;
-    top: 35%;
-    left: 30px;
-    font-size: 2em;
-    color:gray;
-    cursor: pointer;
-}
-
-.post-slider .post-wrapper{
-    width: 90%;
-    height: 310px;
-    margin: 0px auto;
-    overflow: hidden;
-    padding: 10px 0px 10px 0px;
-}
-
-/* each card */
-.post-slider .post-wrapper .post{
-    width: 300px;
-    height: 310px;
-    display: inline-block;
-    margin: 0px 10px;
-    background: white;
-    border-radius: 5px;
-}
-
-/* information for each card */
-.post-slider .post-wrapper .post .post-info{
-    height: 110px;
-    padding: 0px 10px;
-    text-align: center;
-    
-}
-
-
-/* .post-slider .post-wrapper .post .btn-primary{
-    padding: 0px 30px;
-    margin: 0px 23px;
-} */
-.post-slider .post-wrapper .post .slider-image{
-    width: 100%;
-    height:200px;
-    border-radius: 5px 5px 5px 5px;
-    box-shadow: 1rem 1rem 1rem -1rem #a0a0a033;
-}
-
-
-.my-row .my-leftcontainer .jumbotron{
-    background-image: url("../../img/bannerbckgr.webp");
+.my-row .my-leftcontainer .servicetime .jumbotron {
+    background-image: url("../../img/pizzabanner.jpg");
     background-size: cover;
     background-repeat: no-repeat;
 }
 
 
-#banner{
-    color: rgb(226, 14, 14);
+#banner {
+    font-family: fantasy;
+    color: rgb(255, 255, 255);
+    text-shadow: 4px 4px 4px rgb(0, 0, 0);
     text-align: center;
 }
 
-.my-row .my-leftcontainer .fourinfo .jumbotron{
-    background-image: url("../../img/infobckgr.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
+/* 4 infos */
+
+.my-row .my-leftcontainer .fourinfo .jumbotron {
+    background-color: rgba(248, 163, 163, 0.945);
 }
 
-.my-row .my-leftcontainer .fourinfo .jumbotron h6{
-    color: rgb(185, 69, 69);
+.my-row .my-leftcontainer .fourinfo .jumbotron h6 {
+    color: rgb(0, 0, 0);
     text-align: center;
 }
 
-.my-row .my-rightcontainer .jumbotron{
-    background-image: url("../../img/mobileapp.jpg");
+/* mobile-version */
+
+.my-row .my-rightcontainer .mobile {
+    background-image: url("../../img/side-content.png");
     background-size: cover;
     background-position: center;
-    width: 100%;
-    height: 100vh;
 }
 
-/* footer design */
-.footer .mylastcontainer .mylastrow h2 h3{
-    color:#fff;
-}
+/* footer */
 
-.footer .mylastcontainer .mylastrow h2{
-    font-size: 18px;
-}
-
-.footer{
-    background: rgb(0, 0, 0);
+.footer {
+    background: rgb(199, 68, 68);
     padding-top: 50px;
 }
 
-.footer-item h3{
+.footer .mylastcontainer .mylastrow h2 h3 {
+    color:#fff;
+}
+
+.footer .mylastcontainer .mylastrow h2 {
+    font-size: 18px;
+}
+
+.footer-item h3 {
     font-family: 'Lucida Grande';
     color: rgb(255, 255, 255);
     margin: 10px 0;
@@ -191,32 +185,34 @@ body{
     text-shadow: cornsilk;
 }
 
-.footer-item ul{
+.footer-item ul {
     margin: 0;
     padding: 0;
     list-style: none;
     text-align: justify;
 }
 
-.footer-item ul li{
+.footer-item ul li {
     border-bottom: 1px solid rgba(243, 236, 236, 0.3);
     line-height: 30px;
     text-align: center;
 }
 
 /* quick menu */
-.footer-item ul li a{
+
+.footer-item ul li a {
     text-decoration: none;
     color: #fff;
     transition: 0.3s;
 }
 
 /* quick menu on hover */
-.footer-item ul li a:hover{
+
+.footer-item ul li a:hover {
     color: crimson;
 }
 
-.footer-item i{
+.footer-item i {
     margin: 20px 5px;
     padding: 10px;
     color: #fff;
@@ -224,8 +220,21 @@ body{
     border: 1px solid grey;
 }
 
+.footer-item .socmed {
+    display: grid;
+    grid-template-columns: 0fr 1fr 1fr 1fr 1fr 0fr;
+}
+
+/* media query for social media icons */
+
+@media (max-width: 768px ) {
+    .footer-item .socmed {
+        grid-template-columns: 2fr 1fr 1fr 1fr 1fr 2fr;  
+    }
+}
+
 /* &copy */
-.footer .footer-bottom{
+.footer .footer-bottom {
     text-align: center;
     letter-spacing: 3px;
     padding: 30px;
