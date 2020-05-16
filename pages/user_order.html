@@ -3,59 +3,39 @@
 <!DOCTYPE html>
 
 <html>
-    <head>
-        <title>Ave Cesare!</title>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <link rel="icon" type="image/png" href="../img/favicon.png" />
-        <link rel="stylesheet" type="text/css" href="../css/index.css" /> 
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-    </head>
 
-    <body class="container">
-      <div class="d-flex flex-column align-items-center">
-        <img class="w-25 my-4" src="../img/open.png" class="card-img-top" alt="open-sign">
-      </div>
-      <div class="row">
-        <div class="container col-md mb-3">
-          <h3 class="container text-center mb-3">Shporta</h3>
-          <ul class="list-group">
-            <li class="list-group-item list-group-item-info">A simple info list group item</li>
-            <li class="list-group-item list-group-item-info">A simple info list group item</li>
-            <li class="list-group-item list-group-item-info">A simple info list group item</li>
-            <li class="list-group-item list-group-item-info">A simple info list group item</li>
-            <li class="list-group-item list-group-item-info">A simple info list group item</li>
-            <li class="list-group-item list-group-item-info">A simple info list group item</li>
-            <li class="list-group-item list-group-item-info">A simple info list group item</li>
-          </ul>
+  <head>
+    <title>Ave Cesare!</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="icon" type="image/png" href="../img/favicon.png" />
+    <link rel="stylesheet" type="text/css" href="../css/index.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  </head>
+
+  <body class="container-fluid usro">
+    <div class="container-fluid border border-dark my-4">
+      <div class="row d-flex justify-content-center my-3">
+        <div class="d-flex flex-column justify-content-center mr-2">
+          <span class="badge badge-pill badge-success opn">Open</span>
         </div>
-        <form class="container col-md mb-3 d-flex flex-column">
-          <h3 class="container text-center mb-3">Informacione mbi porosine</h3>
-          <div class="form-group row">
-            <label for="phoneNumber" class="col-md-3 col-12 pt-md-2 pr-md-0">Numri i telefonit</label>
-            <div class="container col-md col-12 px-md-0">
-              <input type="tel" class="form-control text-center" id="areaCode"
-                aria-describedby="areaCodeHelp" value="+355" disabled>
-              <small id="areaCodeHelp" class="form-text text-muted">Kodi i zones</small>
-            </div>
-            <span class="tel-icon material-icons col-md-1 text-center pt-md-2 px-md-0">remove</span>
-            <div class="container col-md-6 col-12 pl-md-0">
-              <input type="tel" class="form-control" id="phone" aria-describedby="emailHelp">
-              <small id="emailHelp" class="form-text text-muted">Numri</small>
-            </div>
-          </div>
-        </form>
-        <div class="container col-md-12 d-flex justify-content-center mb-3">
-          <div id="paypal-button-container"></div>
+        <div class="clock">
+          <div class="middle1"></div>
+          <div id="hour" class="hour"></div>
+          <div id="minute" class="minute"></div>
+          <div id="second" class="second"></div>
+        </div>
+        <div class="d-flex flex-column justify-content-center ml-2">
+          <span class="badge badge-pill badge-secondary cls">Closed</span>
         </div>
       </div>
+    </div>
 
-        <script src="../vendors/jquery/jquery-3.4.1.min.js"></script>
-        <script src="../vendors/popper/popper.min.js"></script>
-        <script src="../vendors/bootstrap/js/bootstrap.min.js"></script>
-        <script src="https://www.paypal.com/sdk/js?client-id=Af2WX3Y0b1rTnVhN_h6NmwoqGYByqWXowqbyAo8zK8ldkrQDC28mhjWOFlCfvCof0p5KSSwt5fX5RrS2&currency=USD"
-          data-sdk-integration-source="button-factory"></script>
-        <script type="text/javascript" src="../js/checkout.js"></script>
-        <script type="text/javascript" src="../js/index.js"></script>
-    </body>
+    <script src="../vendors/jquery/jquery-3.4.1.min.js"></script>
+    <script src="../vendors/popper/popper.min.js"></script>
+    <script src="../vendors/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../vendors/jquery/notify.min.js"></script>
+    <script type="text/javascript" src="../js/user_order.js"></script>
+  </body>
+
 </html>
