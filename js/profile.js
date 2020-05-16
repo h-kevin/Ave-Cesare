@@ -188,6 +188,7 @@ $('.modal').on('hidden.bs.modal', function () {
 $(document).click(function (e) {
   if (!$(e.target).is('.collapse *, .ps-changes')) {
     $('.collapse').collapse('hide');
+    $('#modal1 small').fadeOut();
   }
 });
 
@@ -352,6 +353,7 @@ $('#modal1 .ps-changes').click(function () {
   } else if (no_warnings == '.ns-coll, .tel-coll, .pass-coll, .rem-coll'
     && (name == '' && surname == '' && tel == '' && newpass == '')) {
     $.notify('Ju lutem plotesoni te pakten njeren nga fushat!', 'error');
+    $('#modal1 small').fadeOut();
   }
 });
 

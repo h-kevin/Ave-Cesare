@@ -68,7 +68,7 @@
         </div>
       </div>
       <!-- modal for profile edit -->
-      <div class="modal fade" id="modal1" tabindex="-1" role="dialog"
+      <div class="modal fade" id="modal1" tabindex="-1" role="dialog" data-backdrop="static"
         aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -81,9 +81,6 @@
             <div class="modal-body">
               <!-- info editing form -->
               <form class="container d-flex flex-column">
-                <small class="text-center mb-3">
-                  Perzgjidh fushat
-                </small>
                 <button class="btn btn-primary btn-sm" type="button" data-toggle="collapse"
                   data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
                   Emri / Mbiemri
@@ -167,7 +164,7 @@
         </div>
       </div>
       <!-- modal for profile image edit -->
-      <div class="modal fade" id="modal2" tabindex="-1" role="dialog"
+      <div class="modal fade" id="modal2" tabindex="-1" role="dialog" data-backdrop="static"
         aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -180,18 +177,15 @@
             <div class="modal-body">
               <!-- profile image edit form -->
               <form class="imgform container d-flex flex-column" id="imgform">
-                <small class="text-center mb-3">
-                  Perzgjidh foton e profilit
-                </small>
-                <div class="input-group mb-3">
+                <div class="input-group mb-0">
                   <div class="custom-file">
                     <input type="file" class="custom-file-input" name="profimg" id="imgin">
-                    <label class="custom-file-label" for="inputGroupFile02">
+                    <label class="custom-file-label mb-0" for="inputGroupFile02">
                       Choose file
                     </label>
                   </div>
                 </div>
-                <small class="piw text-center text-danger">
+                <small class="piw text-center text-danger mt-1">
                   Fotoja e re nuk eshte perzgjedhur!
                 </small>
               </form>
