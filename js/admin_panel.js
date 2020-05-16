@@ -11,31 +11,39 @@ $(document).ready(function getAll(){
               });
 
 
-$(document).on('click', '.delete', function(e){
+$('.modal').on('hidden.bs.modal', function() {
+    $(this).find('form')[0].reset();
+    $(this).find('.collapse').collapse('hide');
+    $(this).find('small').fadeOut();
+});
+
+$(document).on('click', '.delete', function(){
+    var user_id = $(this).attr("id");
+    $(document).on('click', '#delete_mod', function(e){
     e.preventDefault();
     e.stopImmediatePropagation();
-    var user_id = $(this).attr("id");
-    if(confirm("Jeni te sigurt qe doni ta fshini kete perdorues?")){
      $.ajax({
       url:"../php/delete_user.php",
       method:"POST",
       data:{user_id:user_id},
       success:function(data){
-       alert(data);
-       getAll();
-      }
+        $("#delete_mod").hide();
+        $('#modal_msgDel').addClass('alert alert-primary');
+        $('#modal_msgDel').html(data);
+        getAll();
+        setTimeout(function(){ 
+            $('#modal_msgDel').html('');
+            $('#modal_msgDel').removeClass('alert alert-primary');
+            $('#userModalDelete').modal('hide'); }, 2500);
+        }   
      });
-    }
-    else{
-     return false; 
-    }
+    });
    });
 
 
 $(document).on('click', '#add', function(e){
     e.preventDefault();
     e.stopImmediatePropagation();
-    $('form').trigger('reset');
     let name = $('#name_add').val();
     let surname = $('#surname_add').val();
     let email = $('#email_add').val();
@@ -44,39 +52,37 @@ $(document).on('click', '#add', function(e){
     
     if(name == "" || surname == "" || email == "" || pass == "" || pass2 == ""){
         $('#modal_msgAd').html('Duhen shtuar te gjitha te dhenat e kerkuara!');
+        $('#modal_msgAd').addClass('alert alert-primary');
     }
 
     else if(pass != pass2){
         $('#modal_msgAd').html('Fjalekalimet nuk perputhen!');
+        $('#modal_msgAd').addClass('alert alert-primary');
     }
 
-    else{
-        if(confirm("Jeni te sigurt qe doni ta shtoni kete perdorues?")){ 
-                    
+    else{     
             $.ajax({
             url:"../php/add_user.php",
             method:"POST",
             data:{name:name,surname:surname,email:email,pass:pass},
             success:function(data){
+                $('#modal_msgAd').addClass('alert alert-primary');
                 $('#modal_msgAd').html(data);
                 getAll();
                 $('form').trigger('reset');
+                setTimeout(function(){ 
+                    $('#modal_msgAd').html('');
+                    $('#modal_msgAd').removeClass('alert alert-primary');
+                    $('#userModalAdd').modal('hide'); }, 2500);
             }
             });
-        }
-        else{
-            return false; 
-            }
     }
-  
-   
-   });
+});
 
    
    $(document).on('click', '.update', function(e){
     e.preventDefault();
     e.stopImmediatePropagation();
-    $('form').trigger('reset');
     var user_id = $(this).attr("id");
 
     $(document).on('click', '#update_mod', function(){
@@ -86,23 +92,25 @@ $(document).on('click', '#add', function(e){
 
     if(name == "" && surname == "" && type_user == undefined){
         $('#modal_msgUp').html('Ju nuk keni modifikuar asnje te dhene!');
+        $('#modal_msgUp').addClass('alert alert-primary');
     }
     else{
-        if(confirm("Jeni te sigurt qe doni ta modifikoni kete perdorues?")){
+
             $.ajax({
              url:"../php/update_user.php",
              method:"POST",
              data:{user_id:user_id,name:name,surname:surname,type_user:type_user},
              success:function(data){
                 $('#modal_msgUp').html(data);
+                $('#modal_msgUp').addClass('alert alert-primary');
                 getAll();
                 $('form').trigger('reset');
+                setTimeout(function(){ 
+                    $('#modal_msgUp').html('');
+                    $('#modal_msgUp').removeClass('alert alert-primary');
+                    $('#userModalUpdate').modal('hide'); }, 2000);
              }
             });
-           }
-           else{
-            return false; 
-           }
     }
 });
 });

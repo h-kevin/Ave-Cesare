@@ -2,15 +2,15 @@
 
     require_once('db_connect.php');
 
-    echo '<table id="user_data" class="table table-bordered table-striped">';
+    echo '<table id="user_data" class="table table-bordered table-responsive">';
     echo '<thead>';
     echo '<tr>';
-    echo '<th width="10%">Imazh</th>';
-    echo '<th width="30%">Emer</th>';
-    echo '<th width="30%">Mbiemer</th>';
-    echo '<th width="10%">Admin</th>';
-    echo '<th width="10%">Modifiko</th>';
-    echo '<th width="10%">Fshi</th>';
+    echo '<th width="10%">IMAZH</th>';
+    echo '<th width="30%">EMER</th>';
+    echo '<th width="30%">MBIEMER</th>';
+    echo '<th width="10%">ADMIN</th>';
+    echo '<th width="10%">MODIFIKO</th>';
+    echo '<th width="10%">FSHI</th>';
     
     $query = "SELECT * FROM User";
 
@@ -39,8 +39,8 @@
     else{
     echo '<td>False</td>';
     }
-    echo '<td><button type="button" name="update" id="'.$row["id"].'" data-target="#userModalUpdate" data-toggle="modal" class="btn btn-warning btn-xs update">Modifiko</button></td>';
-    echo '<td><button type="button" name="delete" id="'.$row["id"].'" class="btn btn-danger btn-xs delete">Fshi</button></td>';
+    echo '<td><button type="button" name="update" id="'.$row["id"].'" data-target="#userModalUpdate" data-toggle="modal" class="btn btn-success btn-lg update">Modifiko</button></td>';
+    echo '<td><button type="button" name="delete" id="'.$row["id"].'" data-target="#userModalDelete" data-toggle="modal" class="btn btn-danger btn-lg delete">Fshi</button></td>';
     echo '</tr>';
     }
 

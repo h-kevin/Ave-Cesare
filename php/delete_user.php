@@ -18,7 +18,7 @@
         $result = $stmt->execute();
 
         if($result){
-        echo 'Perdoruesi u fshi!';
+        echo 'Perdoruesi u fshi me sukses!';
         }
         else{
             echo 'Error: perdoruesi nuk u fshi';
