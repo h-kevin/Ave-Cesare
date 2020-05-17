@@ -15,7 +15,7 @@ $(document).ready(function getAll(){
                 }
               });
 
-
+//on success fill table with results
 function getAllFormat (response) {
 
     var tblVar = '<table id="user_data" class="table table-bordered table-responsive">';
@@ -46,6 +46,7 @@ function getAllFormat (response) {
     $('#tblHolder').html(tblVar);
 }
 
+//ne klikimin jashte modalit i bejm reset cdo inputi
 $('.modal').on('hidden.bs.modal', function() {
     $(this).find('form')[0].reset();
     $('[data-toggle="buttons"] :radio').prop('checked', false);
@@ -54,9 +55,11 @@ $('.modal').on('hidden.bs.modal', function() {
     $(this).find('small').fadeOut();
 });
 
+
 $(document).on('click', '.delete', function(){
     var user_id = $(this).attr("id");
     $("#delete_mod").show();
+
     $(document).on('click', '#delete_mod', function(e){
     e.preventDefault();
     e.stopImmediatePropagation();
@@ -72,7 +75,7 @@ $(document).on('click', '.delete', function(){
         setTimeout(function(){ 
             $('#modal_msgDel').html('');
             $('#modal_msgDel').removeClass('alert alert-primary');
-            $('#userModalDelete').modal('hide'); }, 1500);
+            $('#userModalDelete').modal('hide'); }, 2000);
         }   
      });
     });

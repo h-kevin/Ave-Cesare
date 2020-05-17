@@ -3,6 +3,11 @@
     require_once('db_connect.php');
     require_once('../vendors/PHPMailer/PHPMailerAutoload.php');
 
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+        
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     
         $name = $_POST['name'];
         $surname = $_POST['surname'];
@@ -21,7 +26,7 @@
         if ($stmt->num_rows > 0) {
             $stmt->close();
             $conn->close();
-            echo "Kjo adrese i perket nje perdoruesi tjeter.";
+            exit ("Kjo adrese i perket nje perdoruesi tjeter.");
         }
     
         $stmt = $conn->prepare("INSERT INTO User 
@@ -49,7 +54,7 @@
             try {
                 $mail->Send();
                 echo "Faleminderit per regjistrimin.
-                    Kontrolloni E-mail per verifikimin e llogarise.";
+                    Kontrolloni e-maili tuaj per verifikimin e llogarise.";
                 $stmt->close();
                 $conn->close();
                 exit(0);
@@ -65,5 +70,9 @@
             $conn->close();
             exit(1);
         }
+    } else {
+        header('HTTP/1.1 400 Bad Request');
+        exit("Kerkesa u refuzua!");
+}
 
 ?>
