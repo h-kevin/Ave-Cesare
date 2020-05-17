@@ -2,51 +2,50 @@
 
     require_once('db_connect.php');
 
-    echo '<table id="user_data" class="table table-bordered table-responsive">';
-    echo '<thead>';
-    echo '<tr>';
-    echo '<th width="10%">IMAZH</th>';
-    echo '<th width="30%">EMER</th>';
-    echo '<th width="30%">MBIEMER</th>';
-    echo '<th width="10%">ADMIN</th>';
-    echo '<th width="10%">MODIFIKO</th>';
-    echo '<th width="10%">FSHI</th>';
-    
-    $query = "SELECT * FROM User";
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+        
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        
+        $query = "SELECT * FROM User";
 
-    $stmt = $conn->prepare($query);
-    $stmt->execute();
-    $result = $stmt->get_result();
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-    foreach($result as $row){
-    $prof_img = '';
+        $responseArray = array ();
 
-    if($row["prof_img"] != ''){
-    $prof_img = '<img src="' . $row["prof_img"] . '" class="rounded-circle" width="50" height="50" />';
+        foreach($result as $row){
+
+            $responseObj = new stdClass();
+            $prof_img = '';
+            $admin = false;
+
+            if($row["prof_img"] != ''){
+                $prof_img = $row["prof_img"];
+            }
+
+            if($row["admin"] == 1){
+                $admin = true;
+            }
+
+            $responseObj->id = $row["id"];
+            $responseObj->prof_img = $prof_img;
+            $responseObj->name = $row["name"];
+            $responseObj->surname = $row["surname"];
+            $responseObj->admin = $admin;
+
+            array_push($responseArray, $responseObj);
+        }
+
+        echo json_encode($responseArray);
+
+    } else {
+            header('HTTP/1.1 400 Bad Request');
+            exit("Kerkesa u refuzua!");
     }
 
-    else{
-    $prof_img = '';
-    }
-
-    echo '<tr>';
-    echo '<td>' . $prof_img . '</td>';
-    echo '<td>' . $row["name"] . '</td>';
-    echo '<td>' . $row["surname"] . '</td>';
-    if($row["admin"] == 1){
-        echo '<td>True</td>';
-    }
-    else{
-    echo '<td>False</td>';
-    }
-    echo '<td><button type="button" name="update" id="'.$row["id"].'" data-target="#userModalUpdate" data-toggle="modal" class="btn btn-success btn-lg update">Modifiko</button></td>';
-    echo '<td><button type="button" name="delete" id="'.$row["id"].'" data-target="#userModalDelete" data-toggle="modal" class="btn btn-danger btn-lg delete">Fshi</button></td>';
-    echo '</tr>';
-    }
-
-    echo '</tr>';
-    echo '</thead>';
-    echo '</table>';
 
 ?>
    
