@@ -1,8 +1,11 @@
 /* Vendors */
 
 @import "../vendors/bootstrap/css/bootstrap.min.css";
+@import "../vendors/bootstrap-select/dist/css/bootstrap-select.min.css";
 
 /* Fonts */
+
+@import "./fonts/fonts.css";
 
 /* Base */
 

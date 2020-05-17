@@ -3,220 +3,211 @@
 <!DOCTYPE html>
 
 <html>
-    <head>
-        <title>Ave Cesare!</title>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <link rel="icon" type="image/png" href="../img/favicon.png" />
-        <link rel="stylesheet" type="text/css" href="../css/index.css" /> 
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-    </head>
 
-    <body class="profile-body vh-100">
-        <div class="container d-flex flex-column h-25 pt-4">
-            <!-- welcome ribbon -->
-            <div class="ribbon w-75 w-md-50 align-self-center">
-                <div class="ribbon-stitches-top"></div>
-                <div class="ribbon-content"><p><b>Pershendetje&nbsp;</b></p></div>
-                <div class="ribbon-stitches-bottom"></div>
-            </div>
-        </div>
-        <div class="container h-75 d-flex flex-column justify-content-start">
-            <!-- profile section -->
-            <div class="profile-container rounded row align-self-center
-                d-flex w-75 h-100 justify-content-center">
-                <!-- profile image -->
-                <div class="row col-12 col-md-5 d-flex justify-content-center mb-md-0 mb-4">
-                    <div class="prof-img rounded-circle align-self-center mb-2">
-                        <i class="material-icons">add_a_photo</i>
-                    </div>
-                </div>
-                <!-- profile info -->
-                <div class="col-12 col-md-7 d-flex justify-content-center">
-                    <ul class="info-list align-self-center d-flex p-0
-                        flex-column justify-content-center w-100 m-0">
-                        <li class="liname list-group-item list-group-item mb-2 w-100">
-                            Emri: 
-                        </li>
-                        <li class="lisur list-group-item list-group-item mb-2 w-100">
-                            Mbiemri: 
-                        </li>
-                        <li class="limail list-group-item list-group-item mb-2 w-100">
-                            E-mail: 
-                        </li>
-                        <li class="litel list-group-item list-group-item mb-2 w-100">
-                            Telefon: 
-                        </li>
-                    </ul>
-                </div>
-                <div class="d-flex flex-column w-100 mt-md-3 justify-content-start">
-                    <!-- change info button -->
-                    <button type="button" class="change-info btn w-25 rounded-pill
-                        btn-success btn-sm align-self-center" data-toggle="modal"
-                        data-target="#modal1">Ndrysho te dhenat</button>
-                    <!-- logout button -->
-                    <button type="button" class="logout btn mt-2 mt-md-3 rounded-pill
-                        btn-dark btn-sm align-self-center">
-                        <span class="spinner-border spinner-border-sm d-none"
-                            role="status" aria-hidden="true"></span>
-                            Dil
-                    </button>
-                </div>
-            </div>
-            <!-- modal for profile edit -->
-            <div class="modal fade" id="modal1" tabindex="-1"
-                role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Ndrysho te dhenat</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <!-- info editing form -->
-                            <form class="container d-flex flex-column">
-                                <small class="text-center mb-3">
-                                    Perzgjidh fushat
-                                </small>
-                                <button class="btn btn-primary btn-sm" type="button" data-toggle="collapse" 
-                                    data-target="#collapse1" aria-expanded="false" 
-                                    aria-controls="collapse1">
-                                    Emri / Mbiemri
-                                </button>
-                                <div class="collapse ns-coll" id="collapse1">
-                                    <div class="card card-body">
-                                        <div class="input-group">
-                                            <input type="text" aria-label="First name" class="form-control"
-                                                name="name" placeholder="Emri">
-                                            <input type="text" aria-label="Last name" class="form-control"
-                                                name="surname" placeholder="Mbiemri">
-                                        </div>
-                                        <small class="ns-warn text-center text-danger mt-1">Bitch</small>
-                                    </div>
-                                </div>
-                                <button class="btn btn-primary btn-sm mt-2" type="button" 
-                                    data-toggle="collapse" data-target="#collapse2"
-                                    aria-expanded="false" aria-controls="collapse2">
-                                    Telefon
-                                </button>
-                                <div class="collapse tel-coll" id="collapse2">
-                                    <div class="card card-body">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">
-                                                    +355
-                                                </span>
-                                            </div>
-                                            <input type="tel" class="form-control" name="tel">
-                                        </div>
-                                        <small class="tel-warn text-center text-danger mt-1"></small>
-                                    </div>
-                                </div>
-                                <button class="btn btn-primary btn-sm mt-2" type="button" 
-                                    data-toggle="collapse" data-target="#collapse3"
-                                    aria-expanded="false" aria-controls="collapse3">
-                                    Fjalekalimi
-                                </button>
-                                <div class="collapse pass-coll" id="collapse3">
-                                    <div class="card card-body">
-                                        <div class="input-group-sm">
-                                            <input type="password" class="form-control"
-                                                placeholder="Fjalekalimi aktual" name="passcurr">
-                                            <input type="password" class="form-control mt-1"
-                                                placeholder="Fjalekalimi i ri" name="pass1">
-                                            <input type="password" class="form-control mt-1"
-                                                placeholder="Perserit fjalekalimin" name="pass2">
-                                        </div>
-                                        <small class="pass-warn text-center text-danger mt-1"></small>
-                                    </div>
-                                </div>
-                                <button class="btn btn-danger btn-sm mt-2" type="button" 
-                                    data-toggle="collapse" data-target="#collapse4"
-                                    aria-expanded="false" aria-controls="collapse4">
-                                    Kliko ketu per te fshire llogarine
-                                </button>
-                                <div class="collapse rem-coll" id="collapse4">
-                                    <div class="card card-body">
-                                        <div class="input-group">
-                                            <input type="password" class="form-control" 
-                                                placeholder="Vendos fjalekalimin" name="pass">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-outline-secondary" 
-                                                    type="button" id="button-addon2" disabled>
-                                                    <span class="spinner-border spinner-border-sm d-none" 
-                                                    role="status" aria-hidden="true"></span>
-                                                    Fshi
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <small class="rem-warn text-center text-danger mt-1"></small>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary"
-                                data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary ps-changes">
-                                <span class="spinner-border spinner-border-sm d-none"
-                                    role="status" aria-hidden="true"></span>
-                                    Save changes
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- modal for profile image edit -->
-            <div class="modal fade" id="modal2" tabindex="-1"
-                role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Ndrysho foton e profilit</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <!-- profile image edit form -->
-                            <form class="imgform container d-flex flex-column" id="imgform">
-                                <small class="text-center mb-3">
-                                    Perzgjidh foton e profilit
-                                </small>
-                                <div class="input-group mb-3">
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input"
-                                            name="profimg" id="imgin">
-                                        <label class="custom-file-label" for="inputGroupFile02">
-                                            Choose file
-                                        </label>
-                                    </div>
-                                </div>
-                                <small class="piw text-center text-danger">
-                                    Fotoja e re nuk eshte perzgjedhur!
-                                </small>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary"
-                                data-dismiss="modal">Mbyll</button>
-                            <button type="button" class="pimgs btn btn-primary">
-                                <span class="spinner-border spinner-border-sm d-none"
-                                    role="status" aria-hidden="true"></span>
-                                    Ruaj
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <head>
+    <title>Ave Cesare!</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="icon" type="image/png" href="../img/favicon.png" />
+    <link rel="stylesheet" type="text/css" href="../css/index.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  </head>
 
-        <script src="../vendors/jquery/jquery-3.4.1.min.js"></script>
-        <script src="../vendors/popper/popper.min.js"></script>
-        <script src="../vendors/bootstrap/js/bootstrap.min.js"></script>
-        <script src="../vendors/jquery/notify.min.js"></script>
-        <script type="text/javascript" src="../js/profile.js"></script>
-    </body>
+  <body class="profile-body vh-100">
+    <div class="container d-flex flex-column h-25 pt-4">
+      <!-- welcome ribbon -->
+      <div class="ribbon w-75 w-md-50 align-self-center">
+        <div class="ribbon-stitches-top"></div>
+        <div class="ribbon-content">
+          <p><b>Pershendetje&nbsp;</b></p>
+        </div>
+        <div class="ribbon-stitches-bottom"></div>
+      </div>
+    </div>
+    <div class="container h-75 d-flex flex-column justify-content-start">
+      <!-- profile section -->
+      <div
+        class="profile-container rounded row align-self-center d-flex w-75 h-100 justify-content-center">
+        <!-- profile image -->
+        <div class="row col-12 col-md-5 d-flex justify-content-center mb-md-0 mb-4">
+          <div class="prof-img rounded-circle align-self-center mb-2">
+            <i class="material-icons">add_a_photo</i>
+          </div>
+        </div>
+        <!-- profile info -->
+        <div class="col-12 col-md-7 d-flex justify-content-center">
+          <ul
+            class="info-list align-self-center d-flex p-0 flex-column justify-content-center w-100 m-0">
+            <li class="liname list-group-item list-group-item mb-2 w-100">
+              Emri:
+            </li>
+            <li class="lisur list-group-item list-group-item mb-2 w-100">
+              Mbiemri:
+            </li>
+            <li class="limail list-group-item list-group-item mb-2 w-100">
+              E-mail:
+            </li>
+            <li class="litel list-group-item list-group-item mb-2 w-100">
+              Telefon:
+            </li>
+          </ul>
+        </div>
+        <div class="d-flex flex-column w-100 mt-md-3 justify-content-start">
+          <!-- change info button -->
+          <button type="button"
+            class="change-info btn w-25 rounded-pill btn-success btn-sm align-self-center"
+            data-toggle="modal" data-target="#modal1">Ndrysho te dhenat
+          </button>
+          <!-- logout button -->
+          <button type="button"
+            class="logout btn mt-2 mt-md-3 rounded-pill btn-dark btn-sm align-self-center">
+            <span class="spinner-border spinner-border-sm d-none" role="status"
+              aria-hidden="true"></span>
+            Dil
+          </button>
+        </div>
+      </div>
+      <!-- modal for profile edit -->
+      <div class="modal fade" id="modal1" tabindex="-1" role="dialog" data-backdrop="static"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Ndrysho te dhenat</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <!-- info editing form -->
+              <form class="container d-flex flex-column">
+                <button class="btn btn-primary btn-sm" type="button" data-toggle="collapse"
+                  data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
+                  Emri / Mbiemri
+                </button>
+                <div class="collapse ns-coll" id="collapse1">
+                  <div class="card card-body">
+                    <div class="input-group">
+                      <input type="text" aria-label="First name" class="form-control" name="name"
+                        placeholder="Emri">
+                      <input type="text" aria-label="Last name" class="form-control" name="surname"
+                        placeholder="Mbiemri">
+                    </div>
+                    <small class="ns-warn text-center text-danger mt-1">Bitch</small>
+                  </div>
+                </div>
+                <button class="btn btn-primary btn-sm mt-2" type="button" data-toggle="collapse"
+                  data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">Telefon
+                </button>
+                <div class="collapse tel-coll" id="collapse2">
+                  <div class="card card-body">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          +355
+                        </span>
+                      </div>
+                      <input type="tel" class="form-control" name="tel">
+                    </div>
+                    <small class="tel-warn text-center text-danger mt-1"></small>
+                  </div>
+                </div>
+                <button class="btn btn-primary btn-sm mt-2" type="button" data-toggle="collapse"
+                  data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                  Fjalekalimi
+                </button>
+                <div class="collapse pass-coll" id="collapse3">
+                  <div class="card card-body">
+                    <div class="input-group-sm">
+                      <input type="password" class="form-control" placeholder="Fjalekalimi aktual"
+                        name="passcurr">
+                      <input type="password" class="form-control mt-1"
+                        placeholder="Fjalekalimi i ri" name="pass1">
+                      <input type="password" class="form-control mt-1"
+                        placeholder="Perserit fjalekalimin" name="pass2">
+                    </div>
+                    <small class="pass-warn text-center text-danger mt-1"></small>
+                  </div>
+                </div>
+                <button class="btn btn-danger btn-sm mt-2" type="button" data-toggle="collapse"
+                  data-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                  Kliko ketu per te fshire llogarine
+                </button>
+                <div class="collapse rem-coll" id="collapse4">
+                  <div class="card card-body">
+                    <div class="input-group">
+                      <input type="password" class="form-control" placeholder="Vendos fjalekalimin"
+                        name="pass">
+                      <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="button-addon2"
+                          disabled>
+                          <span class="spinner-border spinner-border-sm d-none" role="status"
+                            aria-hidden="true"></span>
+                          Fshi
+                        </button>
+                      </div>
+                    </div>
+                    <small class="rem-warn text-center text-danger mt-1"></small>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary ps-changes">
+                <span class="spinner-border spinner-border-sm d-none" role="status"
+                  aria-hidden="true"></span>
+                Save changes
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- modal for profile image edit -->
+      <div class="modal fade" id="modal2" tabindex="-1" role="dialog" data-backdrop="static"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Ndrysho foton e profilit</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <!-- profile image edit form -->
+              <form class="imgform container d-flex flex-column" id="imgform">
+                <div class="input-group mb-0">
+                  <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="profimg" id="imgin">
+                    <label class="custom-file-label mb-0" for="inputGroupFile02">
+                      Choose file
+                    </label>
+                  </div>
+                </div>
+                <small class="piw text-center text-danger mt-1">
+                  Fotoja e re nuk eshte perzgjedhur!
+                </small>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Mbyll</button>
+              <button type="button" class="pimgs btn btn-primary">
+                <span class="spinner-border spinner-border-sm d-none" role="status"
+                  aria-hidden="true"></span>
+                Ruaj
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="../vendors/jquery/jquery-3.4.1.min.js"></script>
+    <script src="../vendors/popper/popper.min.js"></script>
+    <script src="../vendors/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../vendors/jquery/notify.min.js"></script>
+    <script type="text/javascript" src="../js/profile.js"></script>
+  </body>
+
 </html>
