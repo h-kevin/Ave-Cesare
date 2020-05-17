@@ -4,10 +4,20 @@
 	background: #f8c985;
 }
 
+/* mycontainer */
+
+.usro .mycontainer {
+	background-image: url('https://www.transparenttextures.com/patterns/food.png');
+	background-repeat: repeat;
+	background-size: inherit;
+	background-position: center;
+}
+
 /* clock body */
 
 .clock {
-	background: #F68656;
+	background: #C7914E;
+	opacity: 0.8;
 	width: 25vmin;
 	height: 25vmin;
 	border-radius: 50%;
@@ -25,7 +35,7 @@
 	bottom: 0;
 	width: 5%;
 	height: 5%;
-	background: #F46A30;
+	background: #2E1912;
 	border-radius: 50%;
 	z-index: 1;
 }
@@ -37,7 +47,7 @@
 	margin: auto;
 	left: 49%;
 	bottom: 50%;
-	background: #AB3908;
+	background: #5D382A;
 	width: 2%;
 	height: 40%;
 	transform: rotate(0);
@@ -55,7 +65,7 @@
 	width: 2%;
 	transform: rotate(0);
 	transform-origin: 50% 100%;
-	background: #DB490C;
+	background: #7B5C3C;
 }
 
 /* clock second hand */
@@ -68,7 +78,131 @@
 	width: 1%;
 	transform: rotate(0);
 	transform-origin: 50% 100%;
-	background: #F9A987;
+	background: #BC6C55;
 }
 
-/*  */
+/* open & closed sign */
+
+.sign {
+	font-family: 'Indie Flower';
+	font-size: 25px;
+	font-weight: bold;
+	letter-spacing: 1px;
+}
+
+/* border */
+
+.mycontainer {
+	border-width: 2px !important;
+}
+
+/* sign */
+
+.usro .sign {
+	font-size: x-large;
+}
+
+@media (max-width: 576px) {
+	.usro .sign {
+		font-size: large;
+	}
+}
+
+/* hr */
+
+.usro hr {
+	border-width: medium;
+}
+
+/* h1 */
+
+.usro h1 {
+	font-family: 'Bree Serif';
+	font-size: xx-large;
+}
+
+@media (max-width: 576px) {
+	.usro h1 {
+		font-size: x-large;
+	}
+}
+
+/* cart table head */
+
+.cart-table thead tr th {
+	border-top: none;
+	border-bottom: 1px solid black;
+	font-size: small;
+}
+
+/* cart table body */
+
+.cart-table .table tbody tr td {
+	border-bottom: 1px solid black;
+	font-size: smaller;
+	text-align: center;
+	vertical-align: middle;
+}
+
+/* cart table body buttons */
+
+.cart-table .table tbody .btn:focus {
+	box-shadow: none;
+	outline: none !important;
+}
+
+/* cart table product name */
+
+.cart-table .table tbody tr td:nth-child(3) {
+	text-align: start;
+}
+
+/* table remove icon */
+
+.cart-table .table tbody tr td .material-icons {
+	vertical-align: middle;
+	cursor: pointer;
+	-webkit-user-select: none;
+}
+
+/* table product image */
+
+.cart-table .table tbody tr td img {
+	width: 100%;
+	min-width: 75px !important;
+	max-width: 80px !important;
+	min-height: 55px !important;
+	max-height: 55px !important;
+}
+
+/* delivery form type focus */
+
+.delivery-form .btn:focus, .delivery-form .dropdown-menu .dropdown-item, .delivery-form input:focus {
+	box-shadow: none;
+	outline: none !important;
+}
+
+/* delivery form type dropdown menu */
+
+.delivery-form .dropdown-menu {
+	background-color: #F8C986;
+}
+
+/* delivery form type dropdown item */
+
+.delivery-form .dropdown-menu .dropdown-item {
+	background-color: #F8C986;
+	color: #343a40;
+}
+
+/* delivery form type dropdown item on hover */
+
+.delivery-form .dropdown-menu .dropdown-item:hover {
+	background-color: burlywood;
+}
+
+/* delivery form type dropdown item active */
+
+.delivery-form .dropdown-menu .active {
+	background-color: burlywood;
+}
