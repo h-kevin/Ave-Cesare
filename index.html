@@ -11,6 +11,8 @@
    <link rel="icon" type="image/png" href="./img/favicon.png" />
    <link rel="stylesheet" type="text/css" href="./css/index.css" /> 
    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Righteous">
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Satisfy">
  </head>
 
  <body class="homepage">
@@ -23,28 +25,25 @@
         <i class="material-icons">menu</i>
         </button>
        <div class="collapse navbar-collapse" id="navbarResponsive">
-         <ul class="navbar-nav py-0 mr-auto">
-           <li class="nav-item  mr-4">
-             <a class="nav-link" href="#">POROSIT </a>
-           </li>
+         <ul class="navbar-nav py-0 ml-auto">
            <li class="nav-item mr-4">
              <a class="nav-link" href="#">MENU</a>
            </li>
            <li class="nav-item mr-4">
              <a class="nav-link" href="#">OFERTA</a>
            </li>
-         </ul>
-         <ul class="navbar-nav py-0 navbar-right">
            <li class="nav-item mr-4">
              <a class="nav-link" href="#">KYCU</a>
            </li>
-           <li class="nav-item mr-4">
-             <a class="nav-link" href="#">SHPORTA</a>
+           <li class="nav-item mr-4 porosit">
+             <a class="nav-link porosit" href="#">POROSIT</a>
            </li>
          </ul>
        </div>
      </div>    
    </nav>
+  
+
    
    <!-- Carousel -->
    <div id="mycarousel" class="carousel slide carousel-fade mb-5 w-100 vh-100 mycarousel" data-ride="carousel" data-pause="false" >
@@ -59,7 +58,7 @@
        <div class="carousel-item active">
          <div class="d-block w-100 first"></div>
          <div class="carousel-caption">
-           <h1 class="display-4">Best pizza in town!</h1>
+           <h2 style="font-family: 'Righteous', serif" class="display-4 ">Best pizza in town!</h2>
            <h3>Porosit tani picen tende te preferuar</h3>
          </div>
        </div>
@@ -80,8 +79,121 @@
        <span class="sr-only">Next</span>
      </a>
     </div>
+    
 
     <!-- Card carousel -->
+    <div class="container my-4">
+      
+  
+      <!--Carousel Wrapper-->
+      <div id="cards" class="carousel slide carousel-multi-item" data-ride="carousel">
+  
+        <!--Controls-->
+        <div class="controls-top">
+          <a class="btn-floating float-left majtas" href="#cards" data-slide="prev"><i class="fa fa-chevron-left"></i></a>
+          <a class="btn-floating float-right djathtas" href="#cards" data-slide="next"><i class="fa fa-chevron-right"></i></a>
+        </div>
+        <!--/.Controls-->
+   
+       <!--Slides-->
+        <div class="carousel-inner" role="listbox">
+  
+          <!--First slide-->
+          <div class="carousel-item active">
+  
+            <div class="row">
+              <div class="col-md-4">
+                <div class="card text-center mb-2">
+                  <img class="card-img-top foto" src="img/2+1.jpg"
+                    alt="Card image cap">
+                  <div class="card-body">
+                    <h4 class="card-title">Oferta familjare1</h4>
+                    <p class="card-text">Porosit 2 pica familjare sipas deshires suaj dhe perfito 1 cola 1lt falas !</p>
+                    <a class="btn btn-primary">Përfito!</a>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="col-md-4 clearfix d-none d-md-block">
+                <div class="card text-center mb-2">
+                  <img class="card-img-top" src="img/2+1.jpg"
+                    alt="Card image cap">
+                  <div class="card-body">
+                    <h4 class="card-title">Oferta 2</h4>
+                    <p class="card-text">Porosit 2 pica familjare sipas deshires suaj dhe perfito 1 cola 1lt falas !</p>
+                    <a class="btn btn-primary">Përfito!</a>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="col-md-4 clearfix d-none d-md-block">
+                <div class="card text-center mb-2">
+                  <img class="card-img-top" src="img/2+1.jpg"
+                    alt="Card image cap">
+                  <div class="card-body">
+                    <h4 class="card-title">Oferta 3</h4>
+                    <p class="card-text">Porosit 2 pica familjare sipas deshires suaj dhe perfito 1 cola 1lt falas !</p>
+                    <a class="btn btn-primary">Përfito!</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+          </div>
+          <!--/.First slide-->
+  
+          <!--Second slide-->
+          <div class="carousel-item">
+  
+            <div class="row">
+              <div class="col-md-4">
+                <div class="card text-center mb-2">
+                  <img class="card-img-top" src="img/2+1.jpg"
+                    alt="Card image cap">
+                  <div class="card-body">
+                    <h4 class="card-title">Oferta 4</h4>
+                    <p class="card-text">Porosit 2 pica familjare sipas deshires suaj dhe perfito 1 cola 1lt falas !</p>
+                    <a class="btn btn-primary">Përfito!</a>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="col-md-4 clearfix d-none d-md-block">
+                <div class="card text-center mb-2">
+                  <img class="card-img-top" src="img/2+1.jpg"
+                    alt="Card image cap">
+                  <div class="card-body">
+                    <h4 class="card-title">Oferta 5</h4>
+                    <p class="card-text">Porosit 2 pica familjare sipas deshires suaj dhe perfito 1 cola 1lt falas !</p>
+                    <a class="btn btn-primary">Përfito!</a>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="col-md-4 clearfix d-none d-md-block">
+                <div class="card text-center mb-2">
+                  <img class="card-img-top" src="img/2+1.jpg"
+                    alt="Card image cap">
+                  <div class="card-body">
+                    <h4 class="card-title">Oferta 6</h4>
+                    <p class="card-text">Porosit 2 pica familjare sipas deshires suaj dhe perfito 1 cola 1lt falas !</p>
+                    <a class="btn btn-primary">Përfito!</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+          </div>
+          <!--/.Second slide-->
+  
+        </div>
+        <!--/.Slides-->
+  
+      </div>
+      <!--/.Carousel Wrapper-->
+  
+  
+    </div>  
 
     
    
@@ -122,8 +234,8 @@
           </div>
           </div> 
         </div>
-        <div class="container col-md-4 col-12 my-rightcontainer">
-          <div class="mobile mw-100 mh-100"></div>
+        <div class="container d-flex flex-column h-100 w-100 justify-content-center col-md-4 col-12 my-rightcontainer">
+          <div class="mobile w-100 vh-100"></div>
         </div>
       </div>
    </div>
