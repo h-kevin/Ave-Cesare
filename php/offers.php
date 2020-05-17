@@ -11,9 +11,9 @@
 
     while ($row = mysqli_fetch_array($result)) {
         echo '<div class="card col-lg-3 col-md-4 col-sm-12 ml-3 mb-3">';
-        echo '<img src="../img/favicon.png" class="card-img-top h-50 img-fluid">';
+        echo '<img src="' . $row['image'] . '" class="card-img-top h-50 img-fluid">';
         echo '<div class="card-body text-center d-flex flex-column">';
-        echo '<h5 class="card-title">SUPER OFERTE!</h5>';
+        echo '<h6 class="card-title">SUPER OFERTE!</h6>';
         echo '<p class="card-text">' . date('d-m-Y', strtotime($row['start_date'])) . ' - ' . date('d-m-Y', strtotime($row['end_date'])) . 
             '<br>'. $row['description']. '<br>';
 
@@ -29,7 +29,7 @@
                 $ing_list .= ', ';
             }
             echo substr($ing_list ,0,-2);
-        //echo '<p>Ulje: ' . $row['sale'] . ' Lek</p>';
+        echo '<p>Totali: ' . $row['sale'] . ' Lek</p>';
         echo '</p>';
         echo '<button type="button" class="btn btn-success mt-auto">Perfito</button>';
         echo '</div>';
