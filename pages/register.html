@@ -3,54 +3,55 @@
 <!DOCTYPE html>
 
 <html>
+    <head>
+        <title>Ave Cesare!</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <link rel="icon" type="image/png" href="../img/favicon.png" />
+        <link rel="stylesheet" type="text/css" href="../css/signup.css" />
+        <link rel="stylesheet" type="text/css" href="../css/index.css" /> 
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Barlow+Condensed">
+    </head>
 
-  <head>
-    <title>Ave Cesare!</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <link rel="icon" type="image/png" href="../img/favicon.png" />
-    <link rel="stylesheet" type="text/css" href="../css/index.css" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-  </head>
+    <body>
+        <div class = "signup-page">
+        <h1 class="container text-center mb-5">Krijo Llogarine Tende</h1>
+        
+        <form class="form-container container" id="register-form">
+            <p id="errBox" class="text-center"></p>
+            <div class="form-group">
+                <input type="text" class="form-control"
+                    id="name" name="name" placeholder="Emri" required>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control"
+                    id="surname" name="surname" placeholder="Mbiemri" required>
+            </div>
+            <div class="form-group">
+                <input type="email" class="form-control"
+                    id="email" name="email" placeholder="E-mail" required>
+            </div>
+            <div class="form-group row m-0">
+                <input type="password" class="form-control col-12 col-md mr-md-2 mb-3"
+                    id="password1" name="pass1" placeholder="Fjalekalimi" required>
+                <input type="password" class="form-control col-12 col-md ml-md-2 mb-3"
+                    id="password2" name="pass2" placeholder="Konfirmo Fjalekalimin" required>
+            </div>
+            <div class="form-group form-check">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
+              <label class="form-check-label" for="exampleCheck1">Prano kushtet e perdorimit.</label>
+            </div>
+            <p class="text-center">Keni nje llogari? <a href="../pages/login.html">Kycuni.</a></p>
+            <div class="d-flex justify-content-center">
+                <button type="submit" name="register" class="btn btn-primary">Regjistrohu</button>
+            </div>
+        </form>
+    </div>
 
-  <body>
-    <h1 class="container text-center mb-5">Krijo Llogarine Tende</h1>
-
-    <form class="form-container container" id="register-form">
-      <p id="errBox" class="text-center"></p>
-      <div class="form-group">
-        <input type="text" class="form-control bg-transparent" id="name" name="name"
-          placeholder="Emri" required>
-      </div>
-      <div class="form-group">
-        <input type="text" class="form-control bg-transparent" id="surname" name="surname"
-          placeholder="Mbiemri" required>
-      </div>
-      <div class="form-group">
-        <input type="email" class="form-control bg-transparent" id="email" name="email"
-          placeholder="E-mail" required>
-      </div>
-      <div class="form-group row m-0">
-        <input type="password" class="form-control bg-transparent col-12 col-md mr-md-2 mb-3"
-          id="password1" name="pass1" placeholder="Fjalekalimi" required>
-        <input type="password" class="form-control bg-transparent col-12 col-md ml-md-2 mb-3"
-          id="password2" name="pass2" placeholder="Konfirmo Fjalekalimin" required>
-      </div>
-      <div class="form-group form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
-        <label class="form-check-label" for="exampleCheck1">Prano kushtet e
-          perdorimit.</label>
-      </div>
-      <div class="d-flex justify-content-center">
-        <button type="submit" name="register" class="btn btn-primary">Regjistrohu</button>
-      </div>
-    </form>
-
-    <script src="../vendors/jquery/jquery-3.4.1.min.js"></script>
-    <script src="../vendors/popper/popper.min.js"></script>
-    <script src="../vendors/bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../js/index.js"></script>
-    <script type="text/javascript" src="../js/signup.js"></script>
-  </body>
-
+        <script src="../vendors/jquery/jquery-3.4.1.min.js"></script>
+        <script src="../vendors/popper/popper.min.js"></script>
+        <script src="../vendors/bootstrap/js/bootstrap.min.js"></script>
+        <script src="../vendors/jquery/notify.min.js"></script>
+        <script type="text/javascript" src="../js/signup.js"></script>
+    </body>
 </html>
