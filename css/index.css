@@ -5,6 +5,8 @@
 
 /* Fonts */
 
+@import "./fonts/fonts.css";
+
 /* Base */
 
 @import "./base/document.css";

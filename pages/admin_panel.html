@@ -10,12 +10,14 @@
         <link rel="icon" type="image/png" href="../img/favicon.png" />
         <link rel="stylesheet" type="text/css" href="../css/index.css" /> 
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+        <link rel="stylesheet" type="text/css" href="../css/admin_panel.css" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Barlow+Condensed">
     </head>
 
     <body>
 
-    <div class="container box">
-        <h1 class="container text-center mb-5">Paneli i Perdoruesve</h1>
+    <div class="container box justify-content-center" id="kuti">
+        <h1 id="titulli" class="container text-center mb-5">PANELI I PERDORUESVE</h1>
 
         <div id="tblHolder" class="table-responsive">
 
@@ -29,36 +31,40 @@
         <script src="../vendors/jquery/jquery-3.4.1.min.js"></script>
         <script src="../vendors/popper/popper.min.js"></script>
         <script src="../vendors/bootstrap/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="../js/index.js"></script>
+        <script src="../vendors/jquery/notify.min.js"></script>
         <script type="text/javascript" src="../js/admin_panel.js"></script>
 
     </body>
 </html>
           
           <div class="modal fade" id="userModalAdd">
-           <div class="modal-dialog">
+           <div class="modal-dialog" id="userModalDialog">
              <div class="modal-content">
                 <div class="modal-header">
-                <h4 class="modal-title">Shto Perdorues</h4>
+                <h4 class="modal-title">SHTO PERDORUES</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
                     <div class="modal-body">
                     <p id="modal_msgAd"></p>
                     <form>
-                        <input type="text" name="name" id="name_add" class="form-control" placeholder="Emri" />
-                    <br>
-                        <input type="text" name="surname" id="surname_add" class="form-control" placeholder="Mbiemri" />
+                        <div class="input-group">
+                            <input type="text" name="name" id="name_add" class="form-control" placeholder="Emri" />
+                            <input type="text" name="surname" id="surname_add" class="form-control" placeholder="Mbiemri" />
+                        </div>
                     <br>
                         <input type="email" name="email" id="email_add" class="form-control" placeholder="Emaili" />
                     <br>
-                        <input type="password" name="pass1" id="pass1_add" class="form-control" placeholder="Fjalekalimi" />
-                        <input type="password" name="pass2" id="pass2_add" class="form-control" placeholder="Rishkruani fjalekalimin" />
+                        <div class="input-group">
+                            <input type="password" name="pass1" id="pass1_add" class="form-control" placeholder="Fjalekalimi" />
+                            <input type="password" name="pass2" id="pass2_add" class="form-control" placeholder="Rishkruani fjalekalimin" />
+                        </div>
+                        
                     </form>
                     </div>
 
                 <div class="modal-footer">
-                <button type="button" name="add" id="add" class="btn btn-success">Shto</button>
+                <button type="button" name="add" id="add" class="btn btn-block btn-lg btn-primary">Shto</button>
                 </div>
              </div>
            </div>
@@ -68,33 +74,48 @@
             <div class="modal-dialog">
               <div class="modal-content">
                  <div class="modal-header">
-                 <h4 class="modal-title">Modifiko Perdoruesin</h4>
+                 <h4 class="modal-title">MODIFIKO PERDORUESIN</h4>
                  <button type="button" class="close" data-dismiss="modal">&times;</button>
                  </div>
  
                      <div class="modal-body">
                      <p id="modal_msgUp"></p>
                      <form>
-                         <input type="text" name="name" id="name_up" class="form-control" placeholder="Emri" />
-                     <br>
-                         <input type="text" name="surname" id="surname_up" class="form-control" placeholder="Mbiemri" />
-                     <br>
-                     <label>Lloji i perdoruesit</label>
-                     <br>
-                     <div class="radio">
-                         <label>
-                             <input type="radio" name="user_type" id="user" value="user">User
-                         </label>
-                         <label>
-                             <input type="radio" name="user_type" id="admin" value="admin">Admin
-                         </label>
-                     </div>
+                        <div class="input-group">
+                            <input type="text" name="name" id="name_up" class="form-control" placeholder="Emri" />
+                            <input type="text" name="surname" id="surname_up" class="form-control" placeholder="Mbiemri" />
+                        </div>
+                        <br>
+                        <label style="font-family: 'Barlow Condensed', serif;">Lloji i perdoruesit:</label>
+                        <div class="radio btn-group btn-block btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-primary col-6">
+                          <input type="radio" name="user_type" id="user" autocomplete="off" value="user">User
+                        </label>
+                        <label class="btn btn-primary col-6">
+                          <input type="radio" name="user_type" id="admin" autocomplete="off" value="admin">Admin
+                        </label>
+                      </div>
                      </form>
                      </div>
  
                  <div class="modal-footer">
-                 <button type="button" name="update" id="update_mod" class="btn btn-success">Modifiko</button>
+                 <button type="button" name="update" id="update_mod" class="btn btn-block btn-lg btn-success">Modifiko</button>
                  </div>
+              </div>
+            </div>
+           </div>
+
+           <div class="modal fade" id="userModalDelete">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                 <div class="modal-header">
+                 <h4 class="modal-title">JENI TE SIGURTE?</h4>
+                 <button type="button" class="close" data-dismiss="modal">&times;</button>
+                 </div>
+                    <div class="modal-body">
+                        <p id="modal_msgDel"></p>
+                        <button type="button" name="delete" id="delete_mod" class="btn btn-block btn-lg btn-danger">Fshi perfundimisht</button>
+                    </div>
               </div>
             </div>
            </div>
