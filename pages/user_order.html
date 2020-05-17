@@ -3,59 +3,153 @@
 <!DOCTYPE html>
 
 <html>
-    <head>
-        <title>Ave Cesare!</title>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <link rel="icon" type="image/png" href="../img/favicon.png" />
-        <link rel="stylesheet" type="text/css" href="../css/index.css" /> 
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-    </head>
 
-    <body class="container">
-      <div class="d-flex flex-column align-items-center">
-        <img class="w-25 my-4" src="../img/open.png" class="card-img-top" alt="open-sign">
-      </div>
-      <div class="row">
-        <div class="container col-md mb-3">
-          <h3 class="container text-center mb-3">Shporta</h3>
-          <ul class="list-group">
-            <li class="list-group-item list-group-item-info">A simple info list group item</li>
-            <li class="list-group-item list-group-item-info">A simple info list group item</li>
-            <li class="list-group-item list-group-item-info">A simple info list group item</li>
-            <li class="list-group-item list-group-item-info">A simple info list group item</li>
-            <li class="list-group-item list-group-item-info">A simple info list group item</li>
-            <li class="list-group-item list-group-item-info">A simple info list group item</li>
-            <li class="list-group-item list-group-item-info">A simple info list group item</li>
-          </ul>
+  <head>
+    <title>Ave Cesare!</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="icon" type="image/png" href="../img/favicon.png" />
+    <link rel="stylesheet" type="text/css" href="../css/index.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  </head>
+
+  <body class="container usro">
+    <div class="container border border-dark my-5 mycontainer shadow">
+      <div class="row d-flex flex-column pt-3">
+        <!-- clock -->
+        <div class="clock align-self-center">
+          <div class="middle1"></div>
+          <div id="hour" class="hour"></div>
+          <div id="minute" class="minute"></div>
+          <div id="second" class="second"></div>
         </div>
-        <form class="container col-md mb-3 d-flex flex-column">
-          <h3 class="container text-center mb-3">Informacione mbi porosine</h3>
-          <div class="form-group row">
-            <label for="phoneNumber" class="col-md-3 col-12 pt-md-2 pr-md-0">Numri i telefonit</label>
-            <div class="container col-md col-12 px-md-0">
-              <input type="tel" class="form-control text-center" id="areaCode"
-                aria-describedby="areaCodeHelp" value="+355" disabled>
-              <small id="areaCodeHelp" class="form-text text-muted">Kodi i zones</small>
-            </div>
-            <span class="tel-icon material-icons col-md-1 text-center pt-md-2 px-md-0">remove</span>
-            <div class="container col-md-6 col-12 pl-md-0">
-              <input type="tel" class="form-control" id="phone" aria-describedby="emailHelp">
-              <small id="emailHelp" class="form-text text-muted">Numri</small>
+        <!-- sign -->
+        <span class="text-center sign align-self-center mt-2">&nbsp;</span>
+      </div>
+      <hr class="border-dark">
+      <div class="row">
+        <div class="col-12 col-md-8">
+          <h1>Shporta</h1>
+          <hr class="border-dark">
+          <!-- cart table -->
+          <div class="container px-0 cart">
+            <div class="cart-table">
+              <table class="table table-hover table-responsive-lg">
+                <thead>
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col">PRODUKTI</th>
+                    <th scope="col" class="text-center">CMIMI</th>
+                    <th scope="col" class="text-center">SASIA</th>
+                    <th scope="col" class="text-center">TOTAL</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <span class="material-icons">highlight_off</span>
+                    </td>
+                    <td>
+                      <img
+                        src="https://media-cdn.tripadvisor.com/media/photo-s/14/7d/2a/cf/img-20180906-181850-01.jpg"
+                        class="img-fluid rounded" alt="Responsive image">
+                    </td>
+                    <td>BIG MAC</td>
+                    <td>670</td>
+                    <td>
+                      <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-outline-dark">-</button>
+                        <span class="btn border-dark">1</span>
+                        <button type="button" class="btn btn-outline-dark">+</button>
+                      </div>
+                    </td>
+                    <td>670</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <span class="material-icons">highlight_off</span>
+                    </td>
+                    <td>
+                      <img
+                        src="https://assets.biggreenegg.eu/app/uploads/2018/06/28115815/topimage-pizza-special17-800x500.jpg"
+                        class="img-fluid rounded" alt="Responsive image">
+                    </td>
+                    <td>BIG MAC VERY OMG SO FUCKING BIG</td>
+                    <td>670</td>
+                    <td>
+                      <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-outline-dark">-</button>
+                        <span class="btn border-dark">1</span>
+                        <button type="button" class="btn btn-outline-dark">+</button>
+                      </div>
+                    </td>
+                    <td>670</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
-        </form>
-        <div class="container col-md-12 d-flex justify-content-center mb-3">
-          <div id="paypal-button-container"></div>
+        </div>
+        <div class="col-12 col-md-4">
+          <h1>Dorezimi</h1>
+          <hr class="border-dark">
+          <!-- delivery form -->
+          <div class="delivery-form container px-0">
+            <!-- delivery type -->
+            <select class="selectpicker show-tick mb-4"
+              data-style="bg-transparent border-dark text-body" data-width="100%">
+              <option selected>Ne Shtepi (50 Lek)</option>
+              <option>Take Away</option>
+            </select>
+            <!-- mobile number -->
+            <div class="w-100 mb-3">
+              <small id="telHelp" class="form-text text-body my-2">Telefon</small>
+              <input type="tel" class="form-control bg-transparent border-dark text-body">
+            </div>
+            <!-- input for location -->
+            <!-- <div class="container-fluid p-0">
+              <div class="input-group row m-0">
+                <input class="form-control col mr-1 bg-transparent border-dark text-body"
+                  type="text" id="event-address-val">
+                <button type="button" class="btn btn-sm btn-warning col ml-1 p-1"
+                  data-toggle="modal" data-target="#modal1">
+                  Shto Adresen
+                </button>
+              </div>
+            </div> -->
+            <!-- modal map -->
+            <!-- <div class="modal fade" id="modal1" tabindex="-1" role="dialog" data-backdrop="static"
+              aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Vendndodhja</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    ...
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary"
+                      data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+          </div>
         </div>
       </div>
 
-        <script src="../vendors/jquery/jquery-3.4.1.min.js"></script>
-        <script src="../vendors/popper/popper.min.js"></script>
-        <script src="../vendors/bootstrap/js/bootstrap.min.js"></script>
-        <script src="https://www.paypal.com/sdk/js?client-id=Af2WX3Y0b1rTnVhN_h6NmwoqGYByqWXowqbyAo8zK8ldkrQDC28mhjWOFlCfvCof0p5KSSwt5fX5RrS2&currency=USD"
-          data-sdk-integration-source="button-factory"></script>
-        <script type="text/javascript" src="../js/checkout.js"></script>
-        <script type="text/javascript" src="../js/index.js"></script>
-    </body>
+      <script src="../vendors/jquery/jquery-3.4.1.min.js"></script>
+      <script src="../vendors/popper/popper.min.js"></script>
+      <script src="../vendors/bootstrap/js/bootstrap.min.js"></script>
+      <script src="../vendors/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+      <script src="../vendors/jquery/notify.min.js"></script>
+      <script type="text/javascript" src="../js/user_order.js"></script>
+  </body>
+
 </html>
