@@ -1,8 +1,12 @@
 /* Vendors */
 
 @import "../vendors/bootstrap/css/bootstrap.min.css";
+@import "../vendors/font-awesome/css/font-awesome.min.css";
+@import "../vendors/boostrap-select/css/bootstrap-select.min.css";
 
 /* Fonts */
+
+@import "./fonts/fonts.css";
 
 /* Base */
 
