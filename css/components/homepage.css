@@ -143,7 +143,7 @@
 
 /* Card carousel */
 
- .card-body {
+.homepage .card-body {
    background-color: #FFE6D0;
    justify-content: center;
  }
