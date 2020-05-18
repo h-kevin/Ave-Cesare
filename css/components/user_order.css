@@ -26,7 +26,7 @@
 
 /* clock middle dot */
 
-.middle1 {
+.clock .middle1 {
 	position: absolute;
 	margin: auto;
 	left: 0;
@@ -42,7 +42,7 @@
 
 /* clock hour hand */
 
-.hour {
+.clock .hour {
 	position: absolute;
 	margin: auto;
 	left: 49%;
@@ -56,7 +56,7 @@
 
 /* clock minute hand */
 
-.minute {
+.clock .minute {
 	position: absolute;
 	left: 49%;
 	bottom: 50%;
@@ -70,7 +70,7 @@
 
 /* clock second hand */
 
-.second {
+.clock .second {
 	position: absolute;
 	left: 49.5%;
 	bottom: 50%;
@@ -83,7 +83,7 @@
 
 /* open & closed sign */
 
-.sign {
+.sign-012 {
 	font-family: 'Dancing Script';
 	font-size: 25px;
 	font-weight: bold;
@@ -151,6 +151,12 @@
 	outline: none !important;
 }
 
+/* cart table body span */
+
+.cart-table .table tbody span.btn {
+	cursor: default;
+}
+
 /* cart table product name */
 
 .cart-table .table tbody tr td:nth-child(3) {
@@ -209,6 +215,12 @@
 
 /* modal map */
 
-#modal1 .modal-body {
+#mapmodal .modal-body {
 	height: 65vmin;
+}
+
+/* modal map content */
+
+#mapmodal .modal-content {
+	background: #fdf4e6;
 }
