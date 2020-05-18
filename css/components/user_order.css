@@ -206,3 +206,9 @@
 .delivery-form .dropdown-menu .active {
 	background-color: burlywood;
 }
+
+/* modal map */
+
+#modal1 .modal-body {
+	height: 65vmin;
+}
