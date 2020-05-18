@@ -1,14 +1,12 @@
-<!-- Login page -->
-
 <?php
 
     session_start();
 
     require_once('db_connect.php');
 
-    if (isset($_POST['login']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $email = $_POST['email'];
-        $pass = $_POST['pass'];
+        $pass = $_POST['password'];
     
         $stmt = $conn->prepare("SELECT id, name, surname, password, verified, prof_img, mobile, admin
             FROM `User` WHERE email = ?");
@@ -40,18 +38,16 @@
                 $conn->close();
                 header('Location: ../pages/profile.html');
             } else {
-                echo "<p>Ju lutem kontrolloni emailin per te bere verifikimin. </p>";
+                echo "Ju lutem kontrolloni emailin per te bere verifikimin.";
 
                 $stmt->close();
                 $conn->close();
-                exit(1);
             }
         } else {
-            echo "<p>Email ose password i gabuar</p>";
+            echo "Email ose password i gabuar";
 
             $stmt->close();
             $conn->close();
-            exit(1);
         }
     }
 
