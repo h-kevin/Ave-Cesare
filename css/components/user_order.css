@@ -98,12 +98,12 @@
 
 /* sign */
 
-.usro .sign {
+.usro .sign-012 {
 	font-size: x-large;
 }
 
 @media (max-width: 576px) {
-	.usro .sign {
+	.usro .sign-012 {
 		font-size: large;
 	}
 }
@@ -133,13 +133,15 @@
 	border-top: none;
 	border-bottom: 1px solid black;
 	font-size: small;
+	font-family: 'Electrolize';
 }
 
 /* cart table body */
 
 .cart-table .table tbody tr td {
 	border-bottom: 1px solid black;
-	font-size: smaller;
+	font-size: medium;
+	font-family: 'Economica';
 	text-align: center;
 	vertical-align: middle;
 }
@@ -199,6 +201,7 @@
 .delivery-form .dropdown-menu .dropdown-item {
 	background-color: #F8C986;
 	color: #343a40;
+	font-family: 'Economica';
 }
 
 /* delivery form type dropdown item on hover */
@@ -213,6 +216,24 @@
 	background-color: burlywood;
 }
 
+/* delivery form type dropdown selected item */
+
+.delivery-form .dropdown-toggle {
+	font-family: 'Economica';
+}
+
+/* mobile number */
+
+.usro .order-mnum {
+	font-family: 'Economica';
+}
+
+/* location input */
+
+.usro .order-location {
+	font-family: 'Economica';
+}
+
 /* modal map */
 
 #mapmodal .modal-body {
@@ -223,4 +244,83 @@
 
 #mapmodal .modal-content {
 	background: #fdf4e6;
+	font-family: 'Economica';
+}
+
+/* order summary */
+
+.order-summary div {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+
+/* order summary text */
+
+.order-summary div h4 {
+	font-family: 'Iceland';
+	text-align: right;
+	font-size: larger;
+}
+
+.order-summary div h4 b {
+	font-size: x-large;
+}
+
+@media (max-width: 576px) {
+	.order-summary div h4 {
+		font-size: medium;
+	}
+	.order-summary div h4 b {
+		font-size: larger;
+	}
+}
+
+/* checkbox style */
+
+.payment-method input[type=checkbox] {
+	display: none;
+}
+
+.payment-method label {
+	margin-bottom: 0;
+	display: grid;
+	grid-template-columns: 1fr 10fr;
+	align-items: center;
+	cursor: pointer;
+	font-family: 'Economica';
+}
+
+.payment-method input[type=checkbox] + label::before {
+	font-family: 'Material Icons';
+	content: "radio_button_unchecked";
+	font-size: larger;
+	transition: 0.3s ease-out;
+}
+
+.payment-method input[type=checkbox]:active + label::before {
+	transform: scale(0.6);
+}
+
+.payment-method input[type=checkbox]:checked + label::before {
+	content: "check_circle_outline";
+}
+
+/* send order button */
+
+.usro .send-order button {
+	width: 45%;
+	font-size: larger;
+	font-family: 'Economica';
+}
+
+.usro .send-order button:focus {
+	outline: none;
+	box-shadow: none !important;
+}
+
+@media (max-width: 576px) {
+	.usro .send-order button {
+		width: 100%;
+		font-size: medium;
+	}
 }

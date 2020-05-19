@@ -32,7 +32,7 @@
           <h1>Shporta</h1>
           <hr class="border-dark">
           <!-- cart table -->
-          <div class="container px-0 cart">
+          <div class="container px-0 cart mb-4">
             <div class="cart-table">
               <table class="table table-hover table-responsive-lg">
                 <thead>
@@ -90,6 +90,25 @@
               </table>
             </div>
           </div>
+          <!-- order summary -->
+          <div class="order-summary mb-4 container-fluid p-0">
+            <div class="subtotal">
+              <h4>SUBTOTAL</h4>
+              <h4>1800</h4>
+            </div>
+            <div class="transport">
+              <h4>TRANSPORT</h4>
+              <h4>50</h4>
+            </div>
+            <div class="discount">
+              <h4>ULJE</h4>
+              <h4>100</h4>
+            </div>
+            <div class="total">
+              <h4><b>TOTAL</b></h4>
+              <h4><b>15000</b></h4>
+            </div>
+          </div>
         </div>
         <div class="col-12 col-md-4">
           <h1>Dorezimi</h1>
@@ -103,12 +122,12 @@
               <option>Take Away</option>
             </select>
             <!-- mobile number -->
-            <div class="w-100 mb-4">
+            <div class="w-100 mb-4 order-mnum">
               <small id="telHelp" class="form-text text-body mb-2">Telefon</small>
               <input type="tel" class="form-control bg-transparent border-dark text-body">
             </div>
             <!-- input for location -->
-            <div class="container-fluid p-0 mb-3">
+            <div class="container-fluid p-0 mb-4 order-location">
               <small id="locHelp" class="form-text text-body mb-2">Vendndodhja</small>
               <div class="input-group mb-3 row m-0">
                 <input id="locname" type="text"
@@ -141,7 +160,17 @@
                 </div>
               </div>
             </div>
+            <!-- check for payment method -->
+            <div class="payment-method mb-4 container-fluid p-0">
+              <span class="check-payment">
+                <input type="checkbox" id="pmcheck">
+                <label for="pmcheck">Pagese Cash</label>
+              </span>
+            </div>
           </div>
+        </div>
+        <div class="col-12 send-order text-center mb-3">
+          <button class="btn border-dark">DERGO POROSINE</button>
         </div>
       </div>
 
