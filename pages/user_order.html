@@ -24,7 +24,7 @@
           <div id="second" class="second"></div>
         </div>
         <!-- sign -->
-        <span class="text-center sign align-self-center mt-2">&nbsp;</span>
+        <span class="text-center sign-012 align-self-center mt-2">&nbsp;</span>
       </div>
       <hr class="border-dark">
       <div class="row">
@@ -32,7 +32,7 @@
           <h1>Shporta</h1>
           <hr class="border-dark">
           <!-- cart table -->
-          <div class="container px-0 cart">
+          <div class="container px-0 cart mb-4">
             <div class="cart-table">
               <table class="table table-hover table-responsive-lg">
                 <thead>
@@ -46,7 +46,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                  <!-- <tr>
                     <td>
                       <span class="material-icons">highlight_off</span>
                     </td>
@@ -59,9 +59,9 @@
                     <td>670</td>
                     <td>
                       <div class="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-outline-dark">-</button>
+                        <button type="button" class="btn border-dark">-</button>
                         <span class="btn border-dark">1</span>
-                        <button type="button" class="btn btn-outline-dark">+</button>
+                        <button type="button" class="btn border-dark">+</button>
                       </div>
                     </td>
                     <td>670</td>
@@ -79,16 +79,40 @@
                     <td>670</td>
                     <td>
                       <div class="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-outline-dark">-</button>
+                        <button type="button" class="btn border-dark">-</button>
                         <span class="btn border-dark">1</span>
-                        <button type="button" class="btn btn-outline-dark">+</button>
+                        <button type="button" class="btn border-dark">+</button>
                       </div>
                     </td>
                     <td>670</td>
-                  </tr>
+                  </tr> -->
                 </tbody>
               </table>
             </div>
+          </div>
+          <!-- order summary -->
+          <div class="order-summary mb-4 container-fluid p-0">
+            <div class="subtotal">
+              <h4>SUBTOTAL</h4>
+              <!-- <h4>1800</h4> -->
+            </div>
+            <div class="transport">
+              <h4>TRANSPORT</h4>
+              <!-- <h4>50</h4> -->
+            </div>
+            <div class="discount">
+              <h4>ULJE</h4>
+              <!-- <h4>100</h4> -->
+            </div>
+            <div class="total">
+              <h4><b>TOTAL</b></h4>
+              <!-- <h4><b>15000</b></h4> -->
+            </div>
+          </div>
+          <!-- when cart is empty -->
+          <div class="cart-empty mb-4 container-fluid p-0 text-center d-none">
+            <h3 class="mb-3">Ju nuk keni asnje produkt ne shporte..</h3>
+            <img src="../img/empty-cart.png" class="img-fluid">
           </div>
         </div>
         <div class="col-12 col-md-4">
@@ -103,23 +127,26 @@
               <option>Take Away</option>
             </select>
             <!-- mobile number -->
-            <div class="w-100 mb-3">
-              <small id="telHelp" class="form-text text-body my-2">Telefon</small>
+            <div class="w-100 mb-4 order-mnum">
+              <small id="telHelp" class="form-text text-body mb-2">Telefon</small>
               <input type="tel" class="form-control bg-transparent border-dark text-body">
             </div>
             <!-- input for location -->
-            <!-- <div class="container-fluid p-0">
-              <div class="input-group row m-0">
-                <input class="form-control col mr-1 bg-transparent border-dark text-body"
-                  type="text" id="event-address-val">
-                <button type="button" class="btn btn-sm btn-warning col ml-1 p-1"
-                  data-toggle="modal" data-target="#modal1">
-                  Shto Adresen
-                </button>
+            <div class="container-fluid p-0 mb-4 order-location">
+              <small id="locHelp" class="form-text text-body mb-2">Vendndodhja</small>
+              <div class="input-group mb-3 row m-0">
+                <input id="locname" type="text"
+                  class="form-control bg-transparent border-dark text-body" disabled>
+                <div class="input-group-append">
+                  <button id="mbut" type="button" class="btn border-dark btn-sm" data-toggle="modal"
+                    data-target="#mapmodal">
+                    Shto Adresen
+                  </button>
+                </div>
               </div>
-            </div> -->
+            </div>
             <!-- modal map -->
-            <!-- <div class="modal fade" id="modal1" tabindex="-1" role="dialog" data-backdrop="static"
+            <div class="modal fade" id="mapmodal" tabindex="-1" role="dialog" data-backdrop="static"
               aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -129,18 +156,26 @@
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
-                  <div class="modal-body">
-                    ...
-                  </div>
+                  <div class="modal-body w-100"></div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary"
-                      data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn border-dark btn-sm"
+                      data-dismiss="modal">Mbyll</button>
+                    <button id="savemap" type="button" class="btn border-dark btn-sm">Ruaj</button>
                   </div>
                 </div>
               </div>
-            </div> -->
+            </div>
+            <!-- check for payment method -->
+            <div class="payment-method mb-4 container-fluid p-0">
+              <span class="check-payment">
+                <input type="checkbox" id="pmcheck">
+                <label for="pmcheck">Pagese Cash</label>
+              </span>
+            </div>
           </div>
+        </div>
+        <div class="col-12 send-order text-center mb-3">
+          <button class="btn border-dark">DERGO POROSINE</button>
         </div>
       </div>
 
@@ -149,6 +184,9 @@
       <script src="../vendors/bootstrap/js/bootstrap.min.js"></script>
       <script src="../vendors/boostrap-select/js/bootstrap-select.min.js"></script>
       <script src="../vendors/jquery/notify.min.js"></script>
+      <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhY7g1BhBDAxaiFz9myaZm5yWvLkTanNI&libraries=places">
+        </script>
       <script type="text/javascript" src="../js/user_order.js"></script>
   </body>
 

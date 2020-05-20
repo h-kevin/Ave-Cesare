@@ -14,8 +14,9 @@
 
 /* Components */
 
-@import "./components/register.css";
 @import "./components/login.css";
 @import "./components/user_order.css";
 @import "./components/homepage.css";
 @import "./components/profile.css";
+@import "./components/signup.css";
+@import "./components/admin_panel.css";
