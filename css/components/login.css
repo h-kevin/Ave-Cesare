@@ -1,17 +1,36 @@
 .login-page {
-    margin-top: 180px;
+    margin-top: 150px;
     font-family: 'Barlow Condensed', serif;
 }
 
-h1 {
+#login-h1 {
     font-size: 60px;
     color: white;
 }
 
-body {
-    background-color:  rgb(242,92,42);
-}
-
-.btn{
+#kycje {
     width: 30%;
 }
+
+#login-body {
+    background-color: #d98582;
+    background-image: url("https://www.transparenttextures.com/patterns/food.png");
+}
+
+#login-body ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: white;
+    opacity: 1; /* Firefox */
+  }
+
+ #login-body .form-group {
+    position: relative;
+  }
+
+#login-body .form-group span {
+    position: absolute;
+    right: 0;
+    top: 8px;
+    padding-right: 8px;
+    color:white;
+    transition: 0.3s;
+  }
