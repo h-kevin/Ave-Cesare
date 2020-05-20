@@ -8,7 +8,7 @@
     color: white;
 }
 
-.btn{
+#kycje {
     width: 30%;
 }
 
@@ -22,11 +22,11 @@
     opacity: 1; /* Firefox */
   }
 
-  .form-group {
+ #login-body .form-group {
     position: relative;
   }
 
-  .form-group span {
+#login-body .form-group span {
     position: absolute;
     right: 0;
     top: 8px;
