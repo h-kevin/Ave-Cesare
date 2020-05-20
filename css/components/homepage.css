@@ -7,8 +7,8 @@
 /* Navigation Bar padding */
 
 .navigationbar {
-  padding: 20px 10px 20px 10px ;
-  transition: background-color 0.3;
+  padding: 20px 10px 20px 10px;
+  transition: background-color 0.5s;
 }
    
 /* Brand */
@@ -133,6 +133,19 @@
     border: none;
   }
 }
+
+/* carousel shade */
+
+#mycarousel .carousel-inner .carousel-item::after {
+  content: '';
+  background-color: rgba(0, 0, 0, .5);
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 /* first slide */
 
 .carousel-inner .carousel-item .fst {
@@ -200,9 +213,6 @@
 .mycards img {
   width: 100%;
   height: 250px;
-}
-
-.mycards .oferta {
   border-radius: 2em;
   border: 1px solid rgba(0, 0, 0, 0.5);
 }
@@ -217,7 +227,8 @@
 	color:#ffffff;
 	font-family: 'Francois One', sans-serif;
   font-size:17px;
-  letter-spacing: 1.5px;
+  letter-spacing: 1px;
+  width: 75%;
 	padding:10px 20px;
 	text-decoration:none;
 }
@@ -236,14 +247,14 @@
 
 @media (max-width: 1200px) {
   .mycards img {
-    width: 288px;
+    width: 100%;
     height: 192px;
   }
 }
 
 @media (max-width: 992px) {
   .mycards img {
-    width: 258px;
+    width: 100%;
     height: 162px;
   }
 }
