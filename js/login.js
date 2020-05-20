@@ -11,9 +11,10 @@ $(document).on('click', '#kycje', function(e){
     success:function(data){
         $('#error-p').addClass('alert alert-primary');
         $('#error-p').text(data);
-        //setTimeout(function(){ 
-            //$('#error-p').text('');
-            //$('#error-p').removeClass('alert alert-primary'); }, 3000);
+        window.location.href = '../pages/profile.html';
+        setTimeout(function(){ 
+            $('#error-p').text('');
+            $('#error-p').removeClass('alert alert-primary'); }, 3000);
     }
     });
 });

@@ -36,7 +36,6 @@
 
                 $stmt->close();
                 $conn->close();
-                header('Location: ../pages/profile.html');
             } else {
                 echo "Ju lutem kontrolloni emailin per te bere verifikimin.";
 
