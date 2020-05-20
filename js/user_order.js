@@ -313,3 +313,59 @@ $('#mbut').on('click', function () {
 $('#savemap').on('click', function () {
 	$('#mapmodal').modal('hide');
 });
+
+
+/**
+ * fetch list of ordered products and mobile phone
+ * for current user on page load
+ */
+
+$(document).on('load', function () {
+	$.ajax({
+		type: "post",
+		url: "../php/fetch_order.php",
+		dataType: "json",
+		success: function (response) {
+			updateOrder(response);
+		},
+		error: function (xhr, ajaxOptions, thrownError) {
+			$.notify(xhr.responseText, "error");
+		}
+	});
+});
+
+
+/**
+ * insert data into cart and mobile number input
+ */
+
+function updateOrder (order) {
+	if (order['pinfo'].length == 0) {
+		// if cart empty, hide and display message
+		$('.usro .cart').addClass('d-none');
+		$('.usro .order-summary').addClass('d-none');
+		$('.usro .cart-empty').removeClass('d-none');
+		$('.usro .sent-order').attr('disabled', true);
+	} else {
+		// set up the cart table rows
+		let rnum = order['pinfo'].length;
+		let dbutton = `<td><span class="material-icons">highlight_off</span></td>`;
+		let total = `<td></td>`;
+		let image, name, price, quantity;
+		for (let i = 0; i < rnum; i++) {
+			// initialize variables
+			image = `<td><img src="${order['pinfo'][i]['image']}" 
+				class="img-fluid rounded" alt="Responsive image"></td>`;
+			name = `<td>${order['pinfo'][i]['name']}</td>`;
+			price = `<td>${order['pinfo'][i]['price']}</td>`;
+			quantity = `<td><div class="btn-group" role="group" aria-label="Basic example">
+				<button type="button" class="btn border-dark">-</button>
+				<span class="btn border-dark">${order['pinfo'][i]['quantity']}</span>
+				<button type="button" class="btn border-dark">+</button></div></td>`;
+
+			// build row
+			$('.cart-table tbody').append(`<tr>${dbutton} ${image} ${name}
+				${price} ${quantity} ${total}</tr>`);
+		}
+	}
+};
