@@ -378,6 +378,10 @@
   grid-template-columns: 0fr 1fr 1fr 1fr 1fr 0fr;
 }
 
+.footer-item .socmed li a {
+  font-family: 'FontAwesome';
+}
+
 /* media query for social media icons */
 
 @media (max-width: 768px ) {
