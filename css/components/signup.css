@@ -1,17 +1,17 @@
-.signup-page {
+#signup .signup-page {
     margin-top: 10%;
     font-family: 'Barlow Condensed', serif;
 }
 
-body {
+#signup {
     background-color:  rgb(242,92,42);
 }
 
-h1 {
+#signup .signup-page h1 {
     font-size: 50px;
     color: white;
 }
 
-.btn {
+#signup .btn {
     width: 30%;
 }

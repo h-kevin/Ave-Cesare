@@ -1,20 +1,19 @@
-
-body {
+#admp body {
     background-color: rgb(248, 231, 185);
 }
 
 #user_data {
     border-collapse: collapse;
-  }
-  
- #user_data th {
+}
+
+#user_data th {
     border: 1px solid rgb(218, 108, 68);
     background-color: rgb(218, 108, 68);
     font-family: 'Barlow Condensed', serif;
     color: black;
     font-size: x-large;
     text-align: center;
-  }
+}
 
 #user_data td {
     border: 1px solid rgb(218, 108, 68);
@@ -23,7 +22,9 @@ body {
     text-align: center;
 }
 
-#user_data tr:hover {background-color: #f1bf73;}
+#user_data tr:hover {
+    background-color: #f1bf73;
+}
 
 #titulli {
     padding-top: 30px;
@@ -38,15 +39,15 @@ body {
     font-family: 'Barlow Condensed', serif;
 }
 
-.modal-content {
+#admp .modal-content {
     background-color: #fcf5e8;
 }
 
-#add, #update_mod, #delete_mod{
+#add, #update_mod, #delete_mod {
     font-family: 'Barlow Condensed', serif;
 }
 
-.modal-title {
+#admp .modal-title {
     font-family: 'Barlow Condensed', serif;
     font-size: 40px;
 }
@@ -56,12 +57,12 @@ body {
     font-family: 'Barlow Condensed', serif;
 }
 
-.form-control {
-    border-color:  #f1bf73;
+#admp .form-control {
+    border-color: #f1bf73;
     font-family: 'Barlow Condensed', serif;
 }
 
-.radio {
+#admp .radio {
     font-family: 'Barlow Condensed', serif;
     font-size: large;
     text-align: center;
