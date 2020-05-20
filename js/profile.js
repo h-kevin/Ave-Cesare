@@ -158,8 +158,10 @@ $('.logout').click(function () {
     },
     success: function (response) {
       if (response == 'loggedOut') {
-        $('.logout .spinner-border').addClass('d-none');
-        window.location.replace('login.html?logout=ok');
+        setTimeout(function () {
+          $('.logout .spinner-border').addClass('d-none');
+          window.location.replace('login.html?logout=ok');
+        }, 1000);
       }
     },
     error: function (xhr, ajaxOptions, thrownError) {

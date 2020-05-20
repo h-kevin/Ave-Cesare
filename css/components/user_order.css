@@ -226,12 +226,14 @@
 
 .usro .order-mnum {
 	font-family: 'Economica';
+	font-size: large;
 }
 
 /* location input */
 
 .usro .order-location {
 	font-family: 'Economica';
+	font-size: large;
 }
 
 /* modal map */
@@ -273,6 +275,26 @@
 	.order-summary div h4 b {
 		font-size: larger;
 	}
+}
+
+/* cart empty text */
+
+.cart-empty h3 {
+	font-size: x-large;
+	font-family: 'Economica';
+	letter-spacing: 1px;
+}
+
+@media (max-width: 576px) {
+	.cart-empty h3 {
+		font-size: larger;
+	}
+}
+
+/* card empty image */
+
+.cart-empty img {
+	opacity: 0.8;
 }
 
 /* checkbox style */
