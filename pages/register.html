@@ -11,6 +11,9 @@
         <link rel="stylesheet" type="text/css" href="../css/signup.css" />
         <link rel="stylesheet" type="text/css" href="../css/index.css" /> 
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Barlow+Condensed">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+        <div class = "signup-page">
+        
     </head>
 
     <body id="signup">
@@ -20,22 +23,34 @@
         <form class="form-container container" id="register-form">
             <p id="errBox" class="text-center"></p>
             <div class="form-group">
-                <input type="text" class="form-control"
-                    id="name" name="name" placeholder="Emri" required>
+                <input type="text" class="form-control bg-transparent"
+                    id="name" name="name" placeholder="Emri" required><span class="material-icons">
+                        perm_identity
+                        </span>
             </div>
             <div class="form-group">
-                <input type="text" class="form-control"
-                    id="surname" name="surname" placeholder="Mbiemri" required>
+                <input type="text" class="form-control bg-transparent"
+                    id="surname" name="surname" placeholder="Mbiemri" required><span class="material-icons">
+                        perm_identity
+                        </span>
             </div>
             <div class="form-group">
-                <input type="email" class="form-control"
-                    id="email" name="email" placeholder="E-mail" required>
+                <input type="email" class="form-control bg-transparent"
+                    id="email" name="email" placeholder="E-mail" required><span class="material-icons">
+                        mail
+                        </span>
             </div>
-            <div class="form-group row m-0">
-                <input type="password" class="form-control col-12 col-md mr-md-2 mb-3"
-                    id="password1" name="pass1" placeholder="Fjalekalimi" required>
-                <input type="password" class="form-control col-12 col-md ml-md-2 mb-3"
-                    id="password2" name="pass2" placeholder="Konfirmo Fjalekalimin" required>
+            <div class="form-group row m-0 p-0 col-12">
+                <div class="form-group col-6 px-0 my-0">
+                <input type="password" class="form-control bg-transparent col-6 col-md mr-md-2 mb-3"
+                    id="password1" name="pass1" placeholder="Fjalekalimi" required><span class="material-icons">
+                        lock_open
+                        </span>
+                    </div>
+                <input type="password" class="form-control bg-transparent col-6 col-md ml-md-2 mb-3"
+                    id="password2" name="pass2" placeholder="Konfirmo Fjalekalimin" required><span class="material-icons">
+                        lock
+                        </span>
             </div>
             <div class="form-group form-check">
               <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
