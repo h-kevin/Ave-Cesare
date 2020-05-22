@@ -41,6 +41,7 @@ function setTime () {
 			sign.text(textcls);
 		});
 		sign.fadeIn();
+		$('.usro .send-order button').attr('disabled', true);
 	}
 
 	if (h >= 8 && h < 23 && sign.text() != textopn && !sign.hasClass('isopen')) {
@@ -50,6 +51,7 @@ function setTime () {
 			sign.text(textopn);
 		});
 		sign.fadeIn();
+		$('.usro .send-order button').removeAttr('disabled');
 	}
 }
 
@@ -320,7 +322,7 @@ $('#savemap').on('click', function () {
  * for current user on page load
  */
 
-$(document).on('load', function () {
+$(document).ready(function () {
 	$.ajax({
 		type: "post",
 		url: "../php/fetch_order.php",
@@ -345,15 +347,16 @@ function updateOrder (order) {
 		$('.usro .cart').addClass('d-none');
 		$('.usro .order-summary').addClass('d-none');
 		$('.usro .cart-empty').removeClass('d-none');
-		$('.usro .sent-order').attr('disabled', true);
+		$('.usro .send-order button').attr('disabled', true);
 	} else {
 		// set up the cart table rows
 		let rnum = order['pinfo'].length;
 		let dbutton = `<td><span class="material-icons">highlight_off</span></td>`;
 		let total = `<td></td>`;
 		let image, name, price, quantity;
+
 		for (let i = 0; i < rnum; i++) {
-			// initialize variables
+			// set up table data
 			image = `<td><img src="${order['pinfo'][i]['image']}" 
 				class="img-fluid rounded" alt="Responsive image"></td>`;
 			name = `<td>${order['pinfo'][i]['name']}</td>`;
@@ -363,9 +366,49 @@ function updateOrder (order) {
 				<span class="btn border-dark">${order['pinfo'][i]['quantity']}</span>
 				<button type="button" class="btn border-dark">+</button></div></td>`;
 
-			// build row
-			$('.cart-table tbody').append(`<tr>${dbutton} ${image} ${name}
-				${price} ${quantity} ${total}</tr>`);
+				// get subtotal
+				let subt = order['pinfo'][i]['price'] * order['pinfo'][i]['quantity'];
+				total = `<td>${subt}</td>`;
+				
+				// build row
+				$('.cart-table tbody').append(`<tr>${dbutton} ${image} ${name}
+					${price} ${quantity} ${total}</tr>`);
 		}
+
+		// get discount
+		let discount = 0;
+
+		if (order['discount'])
+			discount = order['discount'];
+		
+		// set up mobile number
+		let mobile = order['mobile'];
+
+		if (mobile != '') {
+			$('.order-mnum input').val(mobile);
+		}
+
+		// set up order summary
+		let subval, transval, tval;
+
+		subval = 0;
+
+		for (let i = 0; i < rnum; i++) {
+			subval += order['pinfo'][i]['price'] * order['pinfo'][i]['quantity'];
+		}
+
+		transval = $('.delivery-form .selectpicker option:selected').val();
+
+		if (transval == 'Ne Shtepi (50 Lek)')
+			transval = 50;
+		else
+			transval = 0;
+
+		tval = subval + transval - discount;
+
+		$('.order-summary .subtotal h4:nth-child(2)').text(subval);
+		$('.order-summary .transport h4:nth-child(2)').text(transval);
+		$('.order-summary .discount h4:nth-child(2)').text(discount);
+		$('.order-summary .total h4:nth-child(2) b').text(tval);
 	}
 };

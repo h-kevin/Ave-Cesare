@@ -291,12 +291,6 @@
 	}
 }
 
-/* card empty image */
-
-.cart-empty img {
-	opacity: 0.8;
-}
-
 /* checkbox style */
 
 .payment-method input[type=checkbox] {
