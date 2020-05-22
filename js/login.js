@@ -11,7 +11,7 @@ $(document).on('click', '#kycje', function(e){
     success:function(data){
         $('#error-p').addClass('alert alert-primary');
         $('#error-p').text(data);
-        window.location.href = '../pages/profile.html';
+        window.location.href = '../index.html';
         setTimeout(function(){ 
             $('#error-p').text('');
             $('#error-p').removeClass('alert alert-primary'); }, 3000);
