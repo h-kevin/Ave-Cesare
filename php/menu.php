@@ -18,7 +18,7 @@
     echo '<div class="row justify-content-center">';
     
     while ($row = mysqli_fetch_array($res_prod)) {
-        echo '<div class="card col-lg-3 col-md-4 col-sm-12 ml-3 mb-3">';
+        echo '<div class="card col-lg-3 col-md-4 col-sm-12 ml-2 mr-2 mb-3 px-0">';
         echo '<img src="' . $row['image'] . '" class="card-img-top h-50">';
         echo '<div class="card-body text-center d-flex flex-column">';
         echo '<h5 class="card-title">' . $row['name'] . '</h5>';
@@ -39,7 +39,7 @@
             echo substr($ing_list ,0,-2);
 
         echo '</small></p>';
-        echo '<button type="button" class="btn btn-success mt-auto">' . $row['price'] . 'Lek</button>';
+        echo '<button type="button" data-target="#menuModalAdd" data-toggle="modal" class="btn btn-success mt-auto">' . $row['price'] . ' Leke</button>';
         echo '</div>';
         echo '</div>';
     }
