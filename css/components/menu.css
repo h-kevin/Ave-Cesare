@@ -33,3 +33,8 @@
 #menu .kumba {
     margin-top: 20px;
 }
+
+#menu #sado {
+    font-size: small;
+    color: gray;
+}

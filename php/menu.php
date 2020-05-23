@@ -39,7 +39,7 @@
             echo substr($ing_list ,0,-2);
 
         echo '</small></p>';
-        echo '<button type="button" class="btn btn-success mt-auto">' . $row['price'] . ' Leke</button>';
+        echo '<button type="button" data-target="#menuModalAdd" data-toggle="modal" class="btn btn-success mt-auto">' . $row['price'] . ' Leke</button>';
         echo '</div>';
         echo '</div>';
     }

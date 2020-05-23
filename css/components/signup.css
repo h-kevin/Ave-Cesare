@@ -28,6 +28,17 @@ background-image: url("https://www.transparenttextures.com/patterns/food.png");
 
 #signup input.form-control {
     color: white;
+    
+}
+
+#signup .form-control:focus {
+  border-color: white;
+  box-shadow: none;
+}
+
+#signup .btn:focus {
+  border-color: white;
+  box-shadow: none;
 }
 
 #signup ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */

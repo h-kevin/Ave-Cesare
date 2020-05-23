@@ -15,6 +15,7 @@ $(document).ready(function getAll(){
                 }
               });
 
+var user_id; 
 //on success fill table with results
 function getAllFormat (response) {
 
@@ -30,7 +31,7 @@ function getAllFormat (response) {
 
     for (i in response) {
         tblVar += '<tr>';
-        tblVar += '<td><img src="' + response[i].prof_img + '" class="rounded-circle" width="50" height="50"</td>';
+        tblVar += '<td><img src="' + response[i].prof_img + '" class="rounded-circle" width="50" height="50"></td>';
         tblVar += '<td>' + response[i].name + '</td>';
         tblVar += '<td>' + response[i].surname + '</td>';
         tblVar += '<td>' + response[i].admin + '</td>';
@@ -56,8 +57,10 @@ $('.modal').on('hidden.bs.modal', function() {
 });
 
 
-$(document).on('click', '.delete', function(){
-    var user_id = $(this).attr("id");
+$(document).on('click', '.delete', function(e){
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    user_id = $(this).attr("id");
     $("#delete_mod").show();
 
     $(document).on('click', '#delete_mod', function(e){
@@ -67,7 +70,11 @@ $(document).on('click', '.delete', function(){
       url:"../php/delete_user.php",
       method:"POST",
       data:{user_id:user_id},
+      beforeSend: function () {
+        $('#admp .spinner-border').removeClass('d-none');
+      },
       success:function(data){
+        $('#admp .spinner-border').addClass('d-none');
         $("#delete_mod").hide();
         $('#modal_msgDel').addClass('alert alert-primary');
         $('#modal_msgDel').html(data);
@@ -76,6 +83,9 @@ $(document).on('click', '.delete', function(){
             $('#modal_msgDel').html('');
             $('#modal_msgDel').removeClass('alert alert-primary');
             $('#userModalDelete').modal('hide'); }, 2000);
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+          $.notify(xhr.responseText, "error");
         }   
      });
     });
@@ -115,7 +125,11 @@ $(document).on('click', '#add', function(e){
             url:"../php/add_user.php",
             method:"POST",
             data:{name:name,surname:surname,email:email,pass:pass},
+            beforeSend: function () {
+                $('#admp .spinner-border').removeClass('d-none');
+            },
             success:function(data){
+                $('#admp .spinner-border').addClass('d-none');
                 $('#modal_msgAd').addClass('alert alert-primary');
                 $('#modal_msgAd').html(data);
                 getAll();
@@ -124,6 +138,9 @@ $(document).on('click', '#add', function(e){
                     $('#modal_msgAd').html('');
                     $('#modal_msgAd').removeClass('alert alert-primary');
                     $('#userModalAdd').modal('hide'); }, 1800);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+              $.notify(xhr.responseText, "error");
             }
             });
     }
@@ -133,7 +150,7 @@ $(document).on('click', '#add', function(e){
    $(document).on('click', '.update', function(e){
     e.preventDefault();
     e.stopImmediatePropagation();
-    var user_id = $(this).attr("id");
+    user_id = $(this).attr("id");
 
     $(document).on('click', '#update_mod', function(){
     const regex1 = new RegExp(/^[A-Za-z]+$/);
@@ -159,7 +176,11 @@ $(document).on('click', '#add', function(e){
              url:"../php/update_user.php",
              method:"POST",
              data:{user_id:user_id,name:name,surname:surname,type_user:type_user},
+             beforeSend: function () {
+                $('#admp .spinner-border').removeClass('d-none');
+             },
              success:function(data){
+                $('#admp .spinner-border').addClass('d-none');
                 $('#modal_msgUp').html(data);
                 $('#modal_msgUp').addClass('alert alert-primary');
                 getAll();
@@ -168,6 +189,9 @@ $(document).on('click', '#add', function(e){
                     $('#modal_msgUp').html('');
                     $('#modal_msgUp').removeClass('alert alert-primary');
                     $('#userModalUpdate').modal('hide'); }, 1800);
+             },
+             error: function (xhr, ajaxOptions, thrownError) {
+               $.notify(xhr.responseText, "error");
              }
             });
     }
