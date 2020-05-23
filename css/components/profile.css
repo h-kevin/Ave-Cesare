@@ -164,7 +164,7 @@
 
 /* warning message text */
 
-.piw, .ns-warn, .tel-warn, .pass-warn, .rem-warn {
+.piw, .ns-warn, .tel-warn, .pass-warn, .rem-warn, .loc-warn {
   display: none;
 }
 

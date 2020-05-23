@@ -291,12 +291,6 @@
 	}
 }
 
-/* card empty image */
-
-.cart-empty img {
-	opacity: 0.8;
-}
-
 /* checkbox style */
 
 .payment-method input[type=checkbox] {
@@ -316,7 +310,7 @@
 	font-family: 'Material Icons';
 	content: "radio_button_unchecked";
 	font-size: larger;
-	transition: 0.3s ease-out;
+	transition: transform 0.3s ease-out;
 }
 
 .payment-method input[type=checkbox]:active + label::before {
@@ -345,4 +339,11 @@
 		width: 100%;
 		font-size: medium;
 	}
+}
+
+/* spinner for send order */
+
+.usro .send-order .spinner-border {
+	height: 20px;
+	width: 20px;
 }
