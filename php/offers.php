@@ -10,7 +10,7 @@
     echo '<div class="row justify-content-center">';
 
     while ($row = mysqli_fetch_array($result)) {
-        echo '<div class="card col-lg-3 col-md-4 col-sm-12 ml-3 mb-3 px-0 mr-3 karta">';
+        echo '<div class="card col-lg-3 col-md-4 col-sm-12 ml-3 mb-3 px-0 mr-3">';
         echo '<img class="card-img-top h-50 oferta" src="' . $row['image'] . '" alt="Foto oferta">';
         echo '<div class="card-body permbajtja">';
         echo '<h4 class="card-title">' . $row['name'] . '</h4>';

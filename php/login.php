@@ -36,6 +36,7 @@
 
                 $stmt->close();
                 $conn->close();
+                echo 'Success';
             } else {
                 echo "Ju lutem kontrolloni emailin per te bere verifikimin.";
 
