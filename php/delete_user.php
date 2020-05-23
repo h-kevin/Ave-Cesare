@@ -13,22 +13,28 @@
         $result = $stmt->get_result();
         $row = $result->fetch_row();
         
-        if($row[0] == 1){
-            echo 'Nuk mund te fshini nje perdorues admin!';
-        }
+        
+        if($result->num_rows > 0){
+            if($row[0] == 1){
+                echo 'Nuk mund te fshini nje perdorues admin!';
+            }
 
-        else{
+            else{
 
-        $stmt = $conn->prepare("DELETE FROM User WHERE id=" . $_POST["user_id"]);
-        $result = $stmt->execute();
+                $stmt = $conn->prepare("DELETE FROM User WHERE id=" . $_POST["user_id"]);
+                $result = $stmt->execute();
 
-        if($result){
-        echo 'Perdoruesi u fshi me sukses!';
+                if($result){
+                echo 'Perdoruesi u fshi me sukses!';
+                }
+                else{
+                    header('HTTP/1.1 404 Not Found');
+                    echo 'Perdoruesi nuk u gjet. Mund te jete fshire me pare';
+                }
+            }
+        } else {
+            echo 'Ky perdorues nuk u gjet. Mund te jete duke u modifikuar ne databaze ose eshte fshire me pare';
         }
-        else{
-            echo 'Perdoruesi nuk u gjet. Mund te jete fshire me pare';
-        }
-    }
     } else {
         header('HTTP/1.1 400 Bad Request');
         exit("Kerkesa u refuzua!");

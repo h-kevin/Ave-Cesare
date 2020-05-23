@@ -1,0 +1,40 @@
+#menu {
+    background-color: rgb(225,128,90);
+}
+
+#menu .jumbotron{
+    text-align: center;
+    color: white;
+    width: 100%;
+    background-image: url("../../img/menubg.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 60vh;
+    margin-bottom: 0;
+    
+  }
+
+#menu .card-body {
+    background-color: rgba(253, 241, 214, 0.904);
+}
+
+#menu .jumbotron h1 {
+    font-size: 80px;
+    margin-top: 6%;
+    margin-bottom: 4%;
+    font-family: 'Righteous', serif;
+    text-shadow: 4px 4px 4px rgb(0, 0, 0);
+}
+
+#menu #search {
+    float: right;
+}
+
+#menu .kumba {
+    margin-top: 20px;
+}
+
+#menu #sado {
+    font-size: small;
+    color: gray;
+}

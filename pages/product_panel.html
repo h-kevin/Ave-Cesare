@@ -1,4 +1,4 @@
-<!-- Admin Panel Page -->
+<!-- Product Panel Page -->
 
 <!DOCTYPE html>
 
@@ -10,14 +10,14 @@
         <link rel="icon" type="image/png" href="../img/favicon.png" />
         <link rel="stylesheet" type="text/css" href="../css/index.css" /> 
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-        <link rel="stylesheet" type="text/css" href="../css/components/admin_panel.css" />
+        <link rel="stylesheet" type="text/css" href="../css/components/product_panel.css" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Barlow+Condensed">
     </head>
 
-    <body id="admp">
+    <body id="prodPan">
 
     <div class="container box justify-content-center" id="kuti">
-        <h1 id="titulli" class="container text-center mb-5">PANELI I PERDORUESVE</h1>
+        <h1 id="titulli" class="container text-center mb-5">PANELI I PRODUKTEVE</h1>
 
         <div id="tblHolder" class="table-responsive">
 
@@ -32,7 +32,7 @@
            <div class="modal-dialog" id="userModalDialog">
              <div class="modal-content">
                 <div class="modal-header">
-                <h4 class="modal-title">SHTO PERDORUES</h4>
+                <h4 class="modal-title">SHTO PRODUKT</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
@@ -40,23 +40,38 @@
                     <p id="modal_msgAd"></p>
                     <form>
                         <div class="input-group">
-                            <input type="text" name="name" id="name_add" class="form-control" placeholder="Emri" />
-                            <input type="text" name="surname" id="surname_add" class="form-control" placeholder="Mbiemri" />
+                            <input type="text" name="name" id="name_add" class="form-control mr-1" placeholder="Emri" />
+                            <input type="number" name="cmimi" id="cmimi_add" class="form-control ml-1" placeholder="Cmimi" />
                         </div>
                     <br>
-                        <input type="email" name="email" id="email_add" class="form-control" placeholder="Emaili" />
-                    <br>
-                        <div class="input-group">
-                            <input type="password" name="pass1" id="pass1_add" class="form-control" placeholder="Fjalekalimi" />
-                            <input type="password" name="pass2" id="pass2_add" class="form-control" placeholder="Rishkruani fjalekalimin" />
+                        <div class="input-group row">
+                        
+                          <div class="custom-file col-6">
+                            <input type="file" class="custom-file-input" name="profimg" id="imgin">
+                            <label class="custom-file-label" for="inputGroupFile02">
+                              Choose file
+                            </label>
+                            <small class="piw text-center text-danger mt-1">
+                            Fotoja e re nuk eshte perzgjedhur!
+                            </small>
+                          </div>
+                          <div class="dropdown col-6">
+                            <button class="btn btn-secondary dropdown-toggle btn-block" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Dropdown button
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                              <a class="dropdown-item" href="#">Action</a>
+                              <a class="dropdown-item" href="#">Another action</a>
+                              <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                          </div>
                         </div>
                         
                     </form>
                     </div>
 
                 <div class="modal-footer">
-                <button type="button" name="add" id="add" class="btn btn-block btn-lg btn-primary">Shto <span class="spinner-border spinner-border-sm d-none" role="status"
-                    aria-hidden="true"></span></button>
+                <button type="button" name="add" id="add" class="btn btn-block btn-lg btn-primary">Shto</button>
                 </div>
              </div>
            </div>
@@ -66,7 +81,7 @@
             <div class="modal-dialog">
               <div class="modal-content">
                  <div class="modal-header">
-                 <h4 class="modal-title">MODIFIKO PERDORUESIN</h4>
+                 <h4 class="modal-title">MODIFIKO PRODUKTIN</h4>
                  <button type="button" class="close" data-dismiss="modal">&times;</button>
                  </div>
  
@@ -75,24 +90,14 @@
                      <form>
                         <div class="input-group">
                             <input type="text" name="name" id="name_up" class="form-control" placeholder="Emri" />
-                            <input type="text" name="surname" id="surname_up" class="form-control" placeholder="Mbiemri" />
+                            <input type="number" name="cmimi" id="cmimi_add" class="form-control ml-1" placeholder="Cmimi" />
                         </div>
                         <br>
-                        <label style="font-family: 'Barlow Condensed', serif;">Lloji i perdoruesit:</label>
-                        <div class="radio btn-group btn-block btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-primary col-6">
-                          <input type="radio" name="user_type" id="user" autocomplete="off" value="user">User
-                        </label>
-                        <label class="btn btn-primary col-6">
-                          <input type="radio" name="user_type" id="admin" autocomplete="off" value="admin">Admin
-                        </label>
-                      </div>
                      </form>
                      </div>
  
                  <div class="modal-footer">
-                 <button type="button" name="update" id="update_mod" class="btn btn-block btn-lg btn-success">Modifiko <span class="spinner-border spinner-border-sm d-none" role="status"
-                    aria-hidden="true"></span></button>
+                 <button type="button" name="update" id="update_mod" class="btn btn-block btn-lg btn-success">Modifiko</button>
                  </div>
               </div>
             </div>
@@ -107,8 +112,7 @@
                  </div>
                     <div class="modal-body">
                         <p id="modal_msgDel"></p>
-                        <button type="button" name="delete" id="delete_mod" class="btn btn-block btn-lg btn-danger">Fshi perfundimisht <span class="spinner-border spinner-border-sm d-none" role="status"
-                            aria-hidden="true"></span></button>
+                        <button type="button" name="delete" id="delete_mod" class="btn btn-block btn-lg btn-danger">Fshi perfundimisht</button>
                     </div>
               </div>
             </div>
@@ -118,7 +122,7 @@
         <script src="../vendors/popper/popper.min.js"></script>
         <script src="../vendors/bootstrap/js/bootstrap.min.js"></script>
         <script src="../vendors/jquery/notify.min.js"></script>
-        <script type="text/javascript" src="../js/admin_panel.js"></script>
+        <script type="text/javascript" src="../js/product_panel.js"></script>
 
     </body>
 </html>

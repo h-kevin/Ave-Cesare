@@ -52,6 +52,7 @@
         }
 
     } else {
+        header('HTTP/1.1 404 Not Found');
         echo 'Ky perdorues nuk ekziston. Mund te jete fshire!';
     }
     }

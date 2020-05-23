@@ -1,17 +1,60 @@
 #signup .signup-page {
-    margin-top: 10%;
+    margin-top: 70px;
     font-family: 'Barlow Condensed', serif;
+    margin-bottom: 50px;
 }
 
 #signup {
-    background-color:  rgb(242,92,42);
+    background-color: #d98582;
+background-image: url("https://www.transparenttextures.com/patterns/food.png");
+/* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 }
 
 #signup .signup-page h1 {
     font-size: 50px;
     color: white;
 }
+@media (max-width: 367px) {
+    
+#signup .signup-page h1 {
+    font-size: 40px;
+    color: white;
+}
+  }
 
 #signup .btn {
     width: 30%;
 }
+
+#signup input.form-control {
+    color: white;
+    
+}
+
+#signup .form-control:focus {
+  border-color: white;
+  box-shadow: none;
+}
+
+#signup .btn:focus {
+  border-color: white;
+  box-shadow: none;
+}
+
+#signup ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: white;
+    opacity: 1; /* Firefox */
+  }
+
+  #signup .form-group {
+    position: relative;
+  }
+
+  #signup .form-group span {
+    position: absolute;
+    right: 0;
+    top: 8px;
+    padding-right: 8px;
+    color:white;
+    transition: 0.3s;
+  }

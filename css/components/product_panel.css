@@ -1,32 +1,32 @@
-#admp {
-    background-color: rgb(248, 231, 185);
+#prodPan {
+    background-color: rgb(185, 236, 248);
 }
 
-#admp #user_data {
+#prodPan #user_data {
     border-collapse: collapse;
 }
 
-#admp #user_data th {
-    border: 1px solid rgb(218, 108, 68);
-    background-color: rgb(218, 108, 68);
+#prodPan #user_data th {
+    border: 1px solid rgb(68, 151, 219);
+    background-color: rgb(68, 151, 219);
     font-family: 'Barlow Condensed', serif;
     color: black;
     font-size: x-large;
     text-align: center;
 }
 
-#admp #user_data td {
-    border: 1px solid rgb(218, 108, 68);
+#prodPan #user_data td {
+    border: 1px solid rgb(68, 151, 219);
     font-family: 'Barlow Condensed', serif;
     font-size: x-large;
     text-align: center;
 }
 
-#admp #user_data tr:hover {
-    background-color: #f1bf73;
+#prodPan #user_data tr:hover {
+    background-color: rgb(165, 220, 236);
 }
 
-#admp #titulli {
+#prodPan #titulli {
     padding-top: 30px;
     justify-content: center;
     color: black;
@@ -35,39 +35,39 @@
     font-family: 'Barlow Condensed', serif;
 }
 
-#admp #add_button {
+#prodPan #add_button {
     font-family: 'Barlow Condensed', serif;
 }
 
-#admp .modal-content {
-    background-color: #fcf5e8;
+#prodPan .modal-content {
+    background-color: rgb(229, 240, 250);
 }
 
-#admp #add, #update_mod, #delete_mod {
+#prodPan #add, #update_mod, #delete_mod {
     font-family: 'Barlow Condensed', serif;
 }
 
-#admp .modal-title {
+#prodPan .modal-title {
     font-family: 'Barlow Condensed', serif;
     font-size: 40px;
 }
 
-#admp #modal_msgAd, #modal_msgUp, #modal_msgDel {
+#prodPan #modal_msgAd, #modal_msgUp, #modal_msgDel {
     text-align: center;
     font-family: 'Barlow Condensed', serif;
 }
 
-#admp .form-control {
+#prodPan .form-control {
     border-color: #f1bf73;
     font-family: 'Barlow Condensed', serif;
 }
 
-#admp .radio {
+#prodPan .radio {
     font-family: 'Barlow Condensed', serif;
     font-size: large;
     text-align: center;
 }
 
-#admp #kuti {
+#prodPan #kuti {
     margin-bottom: 30px;
 }

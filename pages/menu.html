@@ -8,21 +8,55 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <link rel="icon" type="image/png" href="../img/favicon.png" />
+        <link rel="stylesheet" type="text/css" href="../css/components/menu.css" /> 
         <link rel="stylesheet" type="text/css" href="../css/index.css" /> 
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     </head>
 
-    <body>
-        <h1 class="container text-center mb-5">Menu</h1>
+    <body id="menu">
+      <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-md fixed-top navigationbar">
+      <div class="container d-flex">
+        <a class="navbar-brand py-0 align-self-center"
+          href="../index.html"><b><span>Ave</span>Cesare!</b></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse"
+          data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+          aria-label="Toggle navigation">
+          <i class="material-icons">menu</i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav py-0 ml-auto">
+            <li class="nav-item mr-4">
+              <a class="nav-link" href="../pages/menu.html">MENU</a>
+            </li>
+            <li class="nav-item mr-4">
+              <a class="nav-link" href="../pages/offers.html">OFERTA</a>
+            </li>
+            <li class="nav-item mr-4">
+              <a class="nav-link" href="../pages/login.html">KYCU</a>
+            </li>
+            <li class="nav-item mr-4 porosit">
+              <a class="nav-link porosit" href="../pages/user_order.html">POROSIT</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+        <div class="jumbotron px-0 d-inline-block">
+          <h1>Menu</h1>
+          <div class="col-12 rounded text-center mb-5 align-self-end">
+            <div id="category-buttons" class="container-fluid d-flex flex-column">
+              
+            </div>
+          </div>
+        </div>
+        <!-- <h1 class="container text-center mb-5">Menu</h1> -->
+        <!-- <div><input type="text" id="search" class="row" placeholder="Kerko..."/></div> -->
         <div class="container-fluid">
             <div class="row justify-content-center">
-              <div class="col-12 rounded text-center mb-5">
-                <div id="category-buttons" class="row d-flex flex-column">
-                  
-                </div>
-              </div>
+              
 
-              <div class="col-12 rounded text-center mb-5 border-top border-secondary">
+              <div class="col-12 rounded text-center mb-5">
                 <br>
                 <div id="menu-cards">
 
@@ -30,6 +64,32 @@
               </div>
             </div>
           </div>
+
+          <div class="modal fade" id="menuModalAdd">
+            <div class="modal-dialog modal-sm" id="menuModalDialog">
+              <div class="modal-content">
+                 <div class="modal-header py-1 px-3">
+                 <h4 class="modal-title">SHTO NE SHPORTE</h4>
+                 <button type="button" class="close" data-dismiss="modal">&times;</button>
+                 </div>
+ 
+                     <div class="modal-body pt-0">
+                     <p id="modal_msgAd"></p>
+                     <p id="chosenPizza" class="px-0 py-0 mx-0 my-0"><img src="https://assets.biggreenegg.eu/app/uploads/2018/06/28115815/topimage-pizza-special17-800x500.jpg" class="rounded" width="30" height="30"> Pica Margarita</p>
+                     <form>
+                         <label class="mb-0" id="sado">Caktoni sasine qe doni te porosisni: </label>
+                         <div class="input-group mb-2 mt-0">
+                             <input type="number" name="sasi" id="sasi_add" class="form-control form-control-sm" placeholder="Sasia" required min="1" value="1"/>
+                             <input type="number" name="cmimi" id="cmimi_add" class="form-control form-control-sm" placeholder="Totali" />
+                         </div>
+                         <button type="button" name="shto" id="shto" class="btn btn-block btn-sm btn-primary">Shto <span class="spinner-border spinner-border-sm d-none" role="status"
+                          aria-hidden="true"></span></button>
+                     </form>
+                     </div>
+                   </div>
+                 </div>
+                </div>
+
         <script src="../vendors/jquery/jquery-3.4.1.min.js"></script>
         <script src="../vendors/popper/popper.min.js"></script>
         <script src="../vendors/bootstrap/js/bootstrap.min.js"></script>
