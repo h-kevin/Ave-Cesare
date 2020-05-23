@@ -14,12 +14,17 @@ $(document).on('load', function () {
  * implementation of setTime function
  */
 
+let datetime;
+
 function setTime () {
 	let d = new Date();
 	let h = d.getHours();
 	let m = d.getMinutes();
 	let s = d.getSeconds();
 	let ms = d.getMilliseconds();
+
+	datetime = d;
+	datetime.setHours(d.getHours() + (d.getHours() - d.getUTCHours()));
 
 	let hour = 360 * ((h + m / 60) / 12);
 	let minute = 360 * (m / 60);
@@ -41,6 +46,7 @@ function setTime () {
 			sign.text(textcls);
 		});
 		sign.fadeIn();
+		$('.usro .send-order button').attr('disabled', true);
 	}
 
 	if (h >= 8 && h < 23 && sign.text() != textopn && !sign.hasClass('isopen')) {
@@ -50,6 +56,7 @@ function setTime () {
 			sign.text(textopn);
 		});
 		sign.fadeIn();
+		$('.usro .send-order button').removeAttr('disabled');
 	}
 }
 
@@ -320,7 +327,7 @@ $('#savemap').on('click', function () {
  * for current user on page load
  */
 
-$(document).on('load', function () {
+$(document).ready(function () {
 	$.ajax({
 		type: "post",
 		url: "../php/fetch_order.php",
@@ -345,27 +352,391 @@ function updateOrder (order) {
 		$('.usro .cart').addClass('d-none');
 		$('.usro .order-summary').addClass('d-none');
 		$('.usro .cart-empty').removeClass('d-none');
-		$('.usro .sent-order').attr('disabled', true);
+		$('.usro .send-order button').attr('disabled', true);
 	} else {
 		// set up the cart table rows
 		let rnum = order['pinfo'].length;
-		let dbutton = `<td><span class="material-icons">highlight_off</span></td>`;
+		let dbutton = `<td><span class="delb material-icons">highlight_off</span></td>`;
 		let total = `<td></td>`;
 		let image, name, price, quantity;
+
 		for (let i = 0; i < rnum; i++) {
-			// initialize variables
+			// set up table data
 			image = `<td><img src="${order['pinfo'][i]['image']}" 
 				class="img-fluid rounded" alt="Responsive image"></td>`;
 			name = `<td>${order['pinfo'][i]['name']}</td>`;
 			price = `<td>${order['pinfo'][i]['price']}</td>`;
 			quantity = `<td><div class="btn-group" role="group" aria-label="Basic example">
-				<button type="button" class="btn border-dark">-</button>
-				<span class="btn border-dark">${order['pinfo'][i]['quantity']}</span>
-				<button type="button" class="btn border-dark">+</button></div></td>`;
+				<button type="button" class="btn border-dark minusb">-</button>
+				<span class="btn border-dark showqt">${order['pinfo'][i]['quantity']}</span>
+				<button type="button" class="btn border-dark plusb">+</button></div></td>`;
+
+			// get subtotal
+			let subt = order['pinfo'][i]['price'] * order['pinfo'][i]['quantity'];
+			total = `<td>${subt}</td>`;
 
 			// build row
-			$('.cart-table tbody').append(`<tr>${dbutton} ${image} ${name}
+			$('.cart-table tbody').append(`<tr>${dbutton} ${image} ${name} 
 				${price} ${quantity} ${total}</tr>`);
 		}
+
+		// get discount
+		let discount = 0;
+
+		if (order['discount'])
+			discount = order['discount'];
+
+		// set up mobile number
+		let mobile = order['mobile'];
+
+		if (mobile != '') {
+			$('.order-mnum input').val(mobile);
+		}
+
+		// set up order summary
+		let subval, transval, tval;
+
+		subval = 0;
+
+		for (let i = 0; i < rnum; i++) {
+			subval += order['pinfo'][i]['price'] * order['pinfo'][i]['quantity'];
+		}
+
+		transval = $('.delivery-form .selectpicker option:selected').val();
+
+		if (transval == 'Ne Shtepi (50 Lek)')
+			transval = 50;
+		else
+			transval = 0;
+
+		tval = subval + transval - discount;
+
+		$('.order-summary .subtotal h4:nth-child(2)').text(subval);
+		$('.order-summary .transport h4:nth-child(2)').text(transval);
+		$('.order-summary .discount h4:nth-child(2)').text(discount);
+		$('.order-summary .total h4:nth-child(2) b').text(tval);
 	}
 };
+
+
+/**
+ * order summary on change
+ */
+
+$(".order-summary div h4:nth-child(2)").on('change', function () {
+	// update total
+	let subtotal = parseInt($('.order-summary .subtotal h4:nth-child(2)').text());
+	let transport = parseInt($('.order-summary .transport h4:nth-child(2)').text());
+	let discount = parseInt($('.order-summary .discount h4:nth-child(2)').text());
+
+	$('.order-summary .total h4:nth-child(2) b').text(subtotal + transport - discount);
+});
+
+
+/**
+ * detect change on select
+ */
+
+$('.delivery-form .selectpicker').on('change', function () {
+	if ($('.delivery-form .selectpicker option:selected').val() == 'Ne Shtepi (50 Lek)') {
+		$('.usro .order-location').removeClass('d-none');
+		$('.order-summary .transport h4:nth-child(2)').text(50);
+		$('.order-summary div h4:nth-child(2)').change();
+	} else {
+		$('.usro .order-location').addClass('d-none');
+		$('.order-summary .transport h4:nth-child(2)').text(0);
+		$('.order-summary div h4:nth-child(2)').change();
+	}
+});
+
+
+/**
+ * handle changes of quantity (+)
+ */
+
+$('.cart-table tbody').on('click', '.plusb', function () {
+	// get the row
+	let trnum = parseInt($(this).closest('tr').index()) + 1;
+
+	// get name of product
+	let pname = $(this).closest('tr').find('td:nth-child(3)').text();
+
+	// get quantity
+	let qt = $(this).closest('div').find('.showqt');
+
+	// increment
+	qt = parseInt(qt.text()) + 1;
+
+	// create data object
+	let data = {
+		'trnum': trnum,
+		'pname': pname,
+		'quantity': qt
+	};
+
+	data = JSON.stringify(data);
+
+	// send request for database update
+	$.ajax({
+		type: "post",
+		url: "../php/orderqt.php",
+		data: { qt: data },
+		dataType: "json",
+		success: function (response) {
+			incrementQt(response);
+		},
+		error: function (xhr, ajaxOptions, thrownError) {
+			$.notify(xhr.responseText, 'error');
+		}
+	});
+});
+
+
+/**
+ * increment quantity
+ */
+
+function incrementQt (upinfo) {
+	// update value of showqt
+	let trnum = upinfo['trnum'];
+	$(`.cart-table tbody tr:nth-child(${trnum}) .showqt`).text(upinfo['quantity']);
+
+	// update product subtotal
+	let oldst = parseInt($(`.cart-table tbody tr:nth-child(${trnum}) td:nth-child(6)`).text());
+	let newst = upinfo['price'] * upinfo['quantity'];
+	let diff = newst - oldst;
+	$(`.cart-table tbody tr:nth-child(${trnum}) td:nth-child(6)`).text(newst);
+
+	// update order summary
+	let curr_subtotal = parseInt($('.order-summary .subtotal h4:nth-child(2)').text());
+	let new_subtotal = curr_subtotal + diff;
+	$('.order-summary .subtotal h4:nth-child(2)').text(new_subtotal);
+	$('.order-summary div h4:nth-child(2)').change();
+};
+
+
+/**
+ * handle changes of quantity (-)
+ */
+
+$('.cart-table tbody').on('click', '.minusb', function () {
+	// get the row
+	let trnum = parseInt($(this).closest('tr').index()) + 1;
+
+	// get name of product
+	let pname = $(this).closest('tr').find('td:nth-child(3)').text();
+
+	// get quantity
+	let qt = $(this).closest('div').find('.showqt');
+
+	// decrement
+	if (parseInt(qt.text()) > 1) {
+		qt = parseInt(qt.text()) - 1;
+
+		// create data object
+		let data = {
+			'trnum': trnum,
+			'pname': pname,
+			'quantity': qt
+		};
+
+		data = JSON.stringify(data);
+
+		// send request for database update
+		$.ajax({
+			type: "post",
+			url: "../php/orderqt.php",
+			data: { qt: data },
+			dataType: "json",
+			success: function (response) {
+				decrementQt(response);
+			},
+			error: function (xhr, ajaxOptions, thrownError) {
+				$.notify(xhr.responseText, 'error');
+			}
+		});
+	}
+});
+
+
+/**
+ * decrement quantity
+ */
+
+function decrementQt (upinfo) {
+	// update value of showqt
+	let trnum = upinfo['trnum'];
+	$(`.cart-table tbody tr:nth-child(${trnum}) .showqt`).text(upinfo['quantity']);
+
+	// update product subtotal
+	let oldst = parseInt($(`.cart-table tbody tr:nth-child(${trnum}) td:nth-child(6)`).text());
+	let newst = upinfo['price'] * upinfo['quantity'];
+	let diff = newst - oldst;
+	$(`.cart-table tbody tr:nth-child(${trnum}) td:nth-child(6)`).text(newst);
+
+	// update order summary
+	let curr_subtotal = parseInt($('.order-summary .subtotal h4:nth-child(2)').text());
+	let new_subtotal = curr_subtotal + diff;
+	$('.order-summary .subtotal h4:nth-child(2)').text(new_subtotal);
+	$('.order-summary div h4:nth-child(2)').change();
+};
+
+
+/**
+ * delete item from cart
+ */
+
+$('.cart-table tbody').on('click', '.delb', function () {
+	// get the row
+	let trnum = parseInt($(this).closest('tr').index()) + 1;
+
+	// get name of product
+	let pname = $(this).closest('tr').find('td:nth-child(3)').text();
+
+	// create data object
+	let rown = {
+		'trnum': trnum,
+		'pname': pname
+	};
+
+	rown = JSON.stringify(rown);
+
+	// send request to delete item from order in the database
+	$.ajax({
+		type: "post",
+		url: "../php/delfromorder.php",
+		data: { rowd: rown },
+		dataType: "json",
+		success: function (response) {
+			delItemFromOrder(response);
+		},
+		error: function (xhr, ajaxOptions, thrownError) {
+			$.notify(xhr.responseText, 'error');
+		}
+	});
+});
+
+
+/**
+ * function to delete item from order
+ */
+
+function delItemFromOrder (rowd) {
+	// get the row
+	let rown = rowd['rownum'];
+
+	// remove the row
+	$(`.cart-table tbody tr:nth-child(${rown})`).remove();
+
+	// if cart is empty
+	if ($('.cart-table tbody').children().length == 0) {
+		$('.usro .cart').addClass('d-none');
+		$('.usro .order-summary').addClass('d-none');
+		$('.usro .cart-empty').removeClass('d-none');
+		$('.usro .send-order button').attr('disabled', true);
+	}
+};
+
+
+/**
+ * send order
+ */
+
+$('.usro .send-order button').on('click', function () {
+	// set up variables for input
+	let tel, location, pmethod;
+
+	// get sum
+	let sum = $('.order-summary .total h4:nth-child(2) b').text();
+
+	// validate mobile number
+	let regex = new RegExp(/^[0-9]+$/);
+
+	if ($('.delivery-form .order-mnum input').val() == '') {
+			$('.usro .tel-warn').text('Ju lutem vendosni numrin!');
+			$('.usro .tel-warn').fadeIn();
+	} else {
+		if (!regex.test($('.delivery-form .order-mnum input').val())) {
+			$('.usro .tel-warn').text('Numri nuk ka formatin e duhur!');
+			$('.usro .tel-warn').fadeIn();
+		} else {
+			if ($('.delivery-form .order-mnum input').val().length != 9) {
+				$('.usro .tel-warn').text('Numri nuk ka gjatesine e duhur!');
+				$('.usro .tel-warn').fadeIn();
+			} else {
+				$('.usro .tel-warn').fadeOut();
+				tel = $('.delivery-form .order-mnum input').val();
+
+			}
+		}
+	}
+
+	// validate location if order type is home delivery
+	if (!$('.delivery-form .order-location').hasClass('d-none')) {
+		if ($('.delivery-form .order-location input').val() == '') {
+			$('.usro .loc-warn').text('Ju lutem perzgjidhni vendndodhjen!');
+			$('.usro .loc-warn').fadeIn();
+		} else {
+			$('.usro .loc-warn').fadeOut();
+			location = $('.delivery-form .order-location input').val();
+		}
+	} else {
+		$('.usro .loc-warn').fadeOut();
+	}
+
+	// validate payment method
+	if (!$('.usro .payment-method input').is(':checked')) {
+		$('.usro .payment-method label').css('color', '#dc3545');
+		$('.usro .payment-method label').effect('shake', { distance: 10 });
+		pmethod = false;
+	} else {
+		$('.usro .payment-method label').css('color', '#212529');
+		pmethod = true;
+	}
+
+	// set up json object
+	let dataObj;
+
+	if (location == '') {
+		dataObj = {
+			tel: tel,
+			datetime: datetime.toISOString().slice(0, 19).replace('T', ' '),
+			sum: sum
+		}
+	} else {
+		dataObj = {
+			tel: tel,
+			location: location,
+			datetime: datetime.toISOString().slice(0, 19).replace('T', ' '),
+			sum: sum
+		}
+	}
+
+	dataObj = JSON.stringify(dataObj);
+
+	// send request
+	if (pmethod) {
+		$.ajax({
+			type: "post",
+			url: "../php/sendorder.php",
+			data: { dataObj: dataObj },
+			beforeSend: function () {
+				$('.usro .send-order .spinner-border').removeClass('d-none');
+			},
+			success: function (response) {
+				$('.usro .send-order .spinner-border').addClass('d-none');
+				if (response == 'success') {
+					$.notify('Porosia u dergua me sukses!', 'success');
+					$('.usro .cart').addClass('d-none');
+					$('.usro .order-summary').addClass('d-none');
+					$('.usro .cart-empty').removeClass('d-none');
+					$('.usro .send-order button').attr('disabled', true);
+				}
+			},
+			error: function (xhr, ajaxOptions, thrownError) {
+				$('.usro .send-order .spinner-border').addClass('d-none');
+				$.notify(xhr.responseText, "error");
+			}
+		});
+	}
+});

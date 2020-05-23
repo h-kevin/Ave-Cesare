@@ -45,48 +45,7 @@
                     <th scope="col" class="text-center">TOTAL</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <!-- <tr>
-                    <td>
-                      <span class="material-icons">highlight_off</span>
-                    </td>
-                    <td>
-                      <img
-                        src="https://media-cdn.tripadvisor.com/media/photo-s/14/7d/2a/cf/img-20180906-181850-01.jpg"
-                        class="img-fluid rounded" alt="Responsive image">
-                    </td>
-                    <td>BIG MAC</td>
-                    <td>670</td>
-                    <td>
-                      <div class="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" class="btn border-dark">-</button>
-                        <span class="btn border-dark">1</span>
-                        <button type="button" class="btn border-dark">+</button>
-                      </div>
-                    </td>
-                    <td>670</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <span class="material-icons">highlight_off</span>
-                    </td>
-                    <td>
-                      <img
-                        src="https://assets.biggreenegg.eu/app/uploads/2018/06/28115815/topimage-pizza-special17-800x500.jpg"
-                        class="img-fluid rounded" alt="Responsive image">
-                    </td>
-                    <td>BIG MAC VERY OMG SO FUCKING BIG</td>
-                    <td>670</td>
-                    <td>
-                      <div class="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" class="btn border-dark">-</button>
-                        <span class="btn border-dark">1</span>
-                        <button type="button" class="btn border-dark">+</button>
-                      </div>
-                    </td>
-                    <td>670</td>
-                  </tr> -->
-                </tbody>
+                <tbody></tbody>
               </table>
             </div>
           </div>
@@ -94,19 +53,19 @@
           <div class="order-summary mb-4 container-fluid p-0">
             <div class="subtotal">
               <h4>SUBTOTAL</h4>
-              <!-- <h4>1800</h4> -->
+              <h4></h4>
             </div>
             <div class="transport">
               <h4>TRANSPORT</h4>
-              <!-- <h4>50</h4> -->
+              <h4></h4>
             </div>
             <div class="discount">
               <h4>ULJE</h4>
-              <!-- <h4>100</h4> -->
+              <h4></h4>
             </div>
             <div class="total">
               <h4><b>TOTAL</b></h4>
-              <!-- <h4><b>15000</b></h4> -->
+              <h4><b></b></h4>
             </div>
           </div>
           <!-- when cart is empty -->
@@ -128,13 +87,14 @@
             </select>
             <!-- mobile number -->
             <div class="w-100 mb-4 order-mnum">
-              <small id="telHelp" class="form-text text-body mb-2">Telefon</small>
+              <small id="telHelp" class="form-text text-body mb-2">Telefon (+355)</small>
               <input type="tel" class="form-control bg-transparent border-dark text-body">
+              <small class="tel-warn text-center text-danger mt-1"></small>
             </div>
             <!-- input for location -->
             <div class="container-fluid p-0 mb-4 order-location">
               <small id="locHelp" class="form-text text-body mb-2">Vendndodhja</small>
-              <div class="input-group mb-3 row m-0">
+              <div class="input-group row m-0">
                 <input id="locname" type="text"
                   class="form-control bg-transparent border-dark text-body" disabled>
                 <div class="input-group-append">
@@ -144,6 +104,7 @@
                   </button>
                 </div>
               </div>
+              <small class="loc-warn text-center text-danger mt-1"></small>
             </div>
             <!-- modal map -->
             <div class="modal fade" id="mapmodal" tabindex="-1" role="dialog" data-backdrop="static"
@@ -175,7 +136,11 @@
           </div>
         </div>
         <div class="col-12 send-order text-center mb-3">
-          <button class="btn border-dark">DERGO POROSINE</button>
+          <button class="btn border-dark">
+            <span class="spinner-border spinner-border-sm mr-1 d-none" role="status"
+              aria-hidden="true"></span>
+            DERGO POROSINE
+          </button>
         </div>
       </div>
 
@@ -184,6 +149,7 @@
       <script src="../vendors/bootstrap/js/bootstrap.min.js"></script>
       <script src="../vendors/boostrap-select/js/bootstrap-select.min.js"></script>
       <script src="../vendors/jquery/notify.min.js"></script>
+      <script src="../vendors/jquery/jquery-ui.js"></script>
       <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhY7g1BhBDAxaiFz9myaZm5yWvLkTanNI&libraries=places">
         </script>
