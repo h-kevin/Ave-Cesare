@@ -1,5 +1,17 @@
 /* Menu js functions */
 
+function navBarBackgroundScrollEffect () {
+	$(window).scroll(function () {
+		if ($(window).scrollTop() > 0) {
+			$('.navigationbar').css('background-color', 'rgba(30, 30, 30, 0.8)');
+		} else {
+			$('.navigationbar').css('background-color', 'transparent');
+		}
+	});
+};
+
+navBarBackgroundScrollEffect();
+
 //Function to fill the products section of the menu page from the db
 $(document).ready(function(){  
     $.ajax({
