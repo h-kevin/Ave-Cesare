@@ -351,7 +351,7 @@ function updateOrder (order) {
 	} else {
 		// set up the cart table rows
 		let rnum = order['pinfo'].length;
-		let dbutton = `<td><span class="material-icons">highlight_off</span></td>`;
+		let dbutton = `<td><span class="delb material-icons">highlight_off</span></td>`;
 		let total = `<td></td>`;
 		let image, name, price, quantity;
 
@@ -434,9 +434,11 @@ $(".order-summary div h4:nth-child(2)").on('change', function () {
 
 $('.delivery-form .selectpicker').on('change', function () {
 	if ($('.delivery-form .selectpicker option:selected').val() == 'Ne Shtepi (50 Lek)') {
+		$('.usro .order-location').removeClass('d-none');
 		$('.order-summary .transport h4:nth-child(2)').text(50);
 		$('.order-summary div h4:nth-child(2)').change();
 	} else {
+		$('.usro .order-location').addClass('d-none');
 		$('.order-summary .transport h4:nth-child(2)').text(0);
 		$('.order-summary div h4:nth-child(2)').change();
 	}
@@ -450,7 +452,7 @@ $('.delivery-form .selectpicker').on('change', function () {
 $('.cart-table tbody').on('click', '.plusb', function () {
 	// get the row
 	let trnum = parseInt($(this).closest('tr').index()) + 1;
-	
+
 	// get name of product
 	let pname = $(this).closest('tr').find('td:nth-child(3)').text();
 
@@ -493,7 +495,7 @@ function incrementQt (upinfo) {
 	// update value of showqt
 	let trnum = upinfo['trnum'];
 	$(`.cart-table tbody tr:nth-child(${trnum}) .showqt`).text(upinfo['quantity']);
-	
+
 	// update product subtotal
 	let oldst = parseInt($(`.cart-table tbody tr:nth-child(${trnum}) td:nth-child(6)`).text());
 	let newst = upinfo['price'] * upinfo['quantity'];
@@ -515,7 +517,7 @@ function incrementQt (upinfo) {
 $('.cart-table tbody').on('click', '.minusb', function () {
 	// get the row
 	let trnum = parseInt($(this).closest('tr').index()) + 1;
-	
+
 	// get name of product
 	let pname = $(this).closest('tr').find('td:nth-child(3)').text();
 
@@ -525,7 +527,7 @@ $('.cart-table tbody').on('click', '.minusb', function () {
 	// decrement
 	if (parseInt(qt.text()) > 1) {
 		qt = parseInt(qt.text()) - 1;
-		
+
 		// create data object
 		let data = {
 			'trnum': trnum,
@@ -560,7 +562,7 @@ function decrementQt (upinfo) {
 	// update value of showqt
 	let trnum = upinfo['trnum'];
 	$(`.cart-table tbody tr:nth-child(${trnum}) .showqt`).text(upinfo['quantity']);
-	
+
 	// update product subtotal
 	let oldst = parseInt($(`.cart-table tbody tr:nth-child(${trnum}) td:nth-child(6)`).text());
 	let newst = upinfo['price'] * upinfo['quantity'];
@@ -572,4 +574,60 @@ function decrementQt (upinfo) {
 	let new_subtotal = curr_subtotal + diff;
 	$('.order-summary .subtotal h4:nth-child(2)').text(new_subtotal);
 	$('.order-summary div h4:nth-child(2)').change();
+};
+
+
+/**
+ * delete item from cart
+ */
+
+$('.cart-table tbody').on('click', '.delb', function () {
+	// get the row
+	let trnum = parseInt($(this).closest('tr').index()) + 1;
+
+	// get name of product
+	let pname = $(this).closest('tr').find('td:nth-child(3)').text();
+
+	// create data object
+	let rown = {
+		'trnum': trnum,
+		'pname': pname
+	};
+
+	rown = JSON.stringify(rown);
+
+	// send request to delete item from order in the database
+	$.ajax({
+		type: "post",
+		url: "../php/delfromorder.php",
+		data: { rowd: rown },
+		dataType: "json",
+		success: function (response) {
+			delItemFromOrder(response);
+		},
+		error: function (xhr, ajaxOptions, thrownError) {
+			$.notify(xhr.responseText, 'error');
+		}
+	});
+});
+
+
+/**
+ * function to delete item from order
+ */
+
+function delItemFromOrder (rowd) {
+	// get the row
+	let rown = rowd['rownum'];
+
+	// remove the row
+	$(`.cart-table tbody tr:nth-child(${rown})`).remove();
+
+	// if cart is empty
+	if ($('.cart-table tbody').children().length == 0) {
+		$('.usro .cart').addClass('d-none');
+		$('.usro .order-summary').addClass('d-none');
+		$('.usro .cart-empty').removeClass('d-none');
+		$('.usro .send-order button').attr('disabled', true);
+	}
 };
