@@ -89,11 +89,12 @@
             <div class="w-100 mb-4 order-mnum">
               <small id="telHelp" class="form-text text-body mb-2">Telefon (+355)</small>
               <input type="tel" class="form-control bg-transparent border-dark text-body">
+              <small class="tel-warn text-center text-danger mt-1"></small>
             </div>
             <!-- input for location -->
             <div class="container-fluid p-0 mb-4 order-location">
               <small id="locHelp" class="form-text text-body mb-2">Vendndodhja</small>
-              <div class="input-group mb-3 row m-0">
+              <div class="input-group row m-0">
                 <input id="locname" type="text"
                   class="form-control bg-transparent border-dark text-body" disabled>
                 <div class="input-group-append">
@@ -103,6 +104,7 @@
                   </button>
                 </div>
               </div>
+              <small class="loc-warn text-center text-danger mt-1"></small>
             </div>
             <!-- modal map -->
             <div class="modal fade" id="mapmodal" tabindex="-1" role="dialog" data-backdrop="static"
@@ -134,7 +136,11 @@
           </div>
         </div>
         <div class="col-12 send-order text-center mb-3">
-          <button class="btn border-dark">DERGO POROSINE</button>
+          <button class="btn border-dark">
+            <span class="spinner-border spinner-border-sm mr-1 d-none" role="status"
+              aria-hidden="true"></span>
+            DERGO POROSINE
+          </button>
         </div>
       </div>
 
@@ -143,6 +149,7 @@
       <script src="../vendors/bootstrap/js/bootstrap.min.js"></script>
       <script src="../vendors/boostrap-select/js/bootstrap-select.min.js"></script>
       <script src="../vendors/jquery/notify.min.js"></script>
+      <script src="../vendors/jquery/jquery-ui.js"></script>
       <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhY7g1BhBDAxaiFz9myaZm5yWvLkTanNI&libraries=places">
         </script>

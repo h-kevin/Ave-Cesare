@@ -14,12 +14,17 @@ $(document).on('load', function () {
  * implementation of setTime function
  */
 
+let datetime;
+
 function setTime () {
 	let d = new Date();
 	let h = d.getHours();
 	let m = d.getMinutes();
 	let s = d.getSeconds();
 	let ms = d.getMilliseconds();
+
+	datetime = d;
+	datetime.setHours(d.getHours() + (d.getHours() - d.getUTCHours()));
 
 	let hour = 360 * ((h + m / 60) / 12);
 	let minute = 360 * (m / 60);
@@ -631,3 +636,107 @@ function delItemFromOrder (rowd) {
 		$('.usro .send-order button').attr('disabled', true);
 	}
 };
+
+
+/**
+ * send order
+ */
+
+$('.usro .send-order button').on('click', function () {
+	// set up variables for input
+	let tel, location, pmethod;
+
+	// get sum
+	let sum = $('.order-summary .total h4:nth-child(2) b').text();
+
+	// validate mobile number
+	let regex = new RegExp(/^[0-9]+$/);
+
+	if ($('.delivery-form .order-mnum input').val() == '') {
+			$('.usro .tel-warn').text('Ju lutem vendosni numrin!');
+			$('.usro .tel-warn').fadeIn();
+	} else {
+		if (!regex.test($('.delivery-form .order-mnum input').val())) {
+			$('.usro .tel-warn').text('Numri nuk ka formatin e duhur!');
+			$('.usro .tel-warn').fadeIn();
+		} else {
+			if ($('.delivery-form .order-mnum input').val().length != 9) {
+				$('.usro .tel-warn').text('Numri nuk ka gjatesine e duhur!');
+				$('.usro .tel-warn').fadeIn();
+			} else {
+				$('.usro .tel-warn').fadeOut();
+				tel = $('.delivery-form .order-mnum input').val();
+
+			}
+		}
+	}
+
+	// validate location if order type is home delivery
+	if (!$('.delivery-form .order-location').hasClass('d-none')) {
+		if ($('.delivery-form .order-location input').val() == '') {
+			$('.usro .loc-warn').text('Ju lutem perzgjidhni vendndodhjen!');
+			$('.usro .loc-warn').fadeIn();
+		} else {
+			$('.usro .loc-warn').fadeOut();
+			location = $('.delivery-form .order-location input').val();
+		}
+	} else {
+		$('.usro .loc-warn').fadeOut();
+	}
+
+	// validate payment method
+	if (!$('.usro .payment-method input').is(':checked')) {
+		$('.usro .payment-method label').css('color', '#dc3545');
+		$('.usro .payment-method label').effect('shake', { distance: 10 });
+		pmethod = false;
+	} else {
+		$('.usro .payment-method label').css('color', '#212529');
+		pmethod = true;
+	}
+
+	// set up json object
+	let dataObj;
+
+	if (location == '') {
+		dataObj = {
+			tel: tel,
+			datetime: datetime.toISOString().slice(0, 19).replace('T', ' '),
+			sum: sum
+		}
+	} else {
+		dataObj = {
+			tel: tel,
+			location: location,
+			datetime: datetime.toISOString().slice(0, 19).replace('T', ' '),
+			sum: sum
+		}
+	}
+
+	dataObj = JSON.stringify(dataObj);
+
+	// send request
+	if (pmethod) {
+		$.ajax({
+			type: "post",
+			url: "../php/sendorder.php",
+			data: { dataObj: dataObj },
+			beforeSend: function () {
+				$('.usro .send-order .spinner-border').removeClass('d-none');
+			},
+			success: function (response) {
+				$('.usro .send-order .spinner-border').addClass('d-none');
+				if (response == 'success') {
+					$.notify('Porosia u dergua me sukses!', 'success');
+					$('.usro .cart').addClass('d-none');
+					$('.usro .order-summary').addClass('d-none');
+					$('.usro .cart-empty').removeClass('d-none');
+					$('.usro .send-order button').attr('disabled', true);
+				}
+			},
+			error: function (xhr, ajaxOptions, thrownError) {
+				$('.usro .send-order .spinner-border').addClass('d-none');
+				$.notify(xhr.responseText, "error");
+			}
+		});
+	}
+});
