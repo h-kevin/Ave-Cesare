@@ -25,24 +25,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   try {
     // attempt to execute query
-    $stmt->execute();
-    $stmt->store_result();
-    $stmt->bind_result($pid, $pname, $pimage, $pprice, $pquantity);
+    if (!$stmt->execute()) {
+      throw new PDOException();
+    } else {
+      $stmt->store_result();
+      $stmt->bind_result($pid, $pname, $pimage, $pprice, $pquantity);
+      
+      // save each row of data in an array
+      while ($stmt->fetch()) {
+        $tmp = array();
+        $tmp['id'] = $pid;
+        $tmp['name'] = $pname;
+        $tmp['image'] = $pimage;
+        $tmp['price'] = $pprice;
+        $tmp['quantity'] = $pquantity;
+  
+        $order[] = $tmp;
+      }
 
-    // save each row of data in an array
-    while ($stmt->fetch()) {
-      $tmp = array();
-      $tmp['id'] = $pid;
-      $tmp['name'] = $pname;
-      $tmp['image'] = $pimage;
-      $tmp['price'] = $pprice;
-      $tmp['quantity'] = $pquantity;
-
-      $order[] = $tmp;
+      // close stmt
+      $stmt->close();
     }
-
-    // close stmt and conn
-    $stmt->close();
   } catch (PDOException $e) {
     // on failure
     header('HTTP/1.1 500 Internal Server Error');
@@ -62,45 +65,48 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   try {
     // try to execute query
-    $stmt->execute();
-    $stmt->store_result();
-    $stmt->bind_result($offer, $product, $discount);
-
-    // save each row of data in the array without key duplicates
-    while($stmt->fetch()) {
-      if ($prod_offer[$offer]) {
-        array_push($prod_offer[$offer], $product);
-      } else {
-        $tmp = array();
-        $tmp[] = $product;
-        $prod_offer[$offer] = $tmp;
-      }
-      if (!$discount_arr[$offer]) {
-        $discount_arr[$offer] = $discount;
-      }
-    }
-
-    // create counter
-    $c = 0;
-
-    // check if any of the offers has a combination of the products in our order
-    foreach ($prod_offer as $offer => $prod_array) {
-      for ($i = 0; $i < count($order); $i++) {
-        if (in_array($order[$i]['id'], $prod_array)) {
-          $c++;
+    if (!$stmt->execute()) {
+      throw new PDOException();
+    } else {
+      $stmt->store_result();
+      $stmt->bind_result($offer, $product, $discount);
+  
+      // save each row of data in the array without key duplicates
+      while($stmt->fetch()) {
+        if ($prod_offer[$offer]) {
+          array_push($prod_offer[$offer], $product);
+        } else {
+          $tmp = array();
+          $tmp[] = $product;
+          $prod_offer[$offer] = $tmp;
+        }
+        if (!$discount_arr[$offer]) {
+          $discount_arr[$offer] = $discount;
         }
       }
-      
-      if ($c == count($prod_array)) {
-        $ohit[] = $offer;
-      }
-
+  
+      // create counter
       $c = 0;
+  
+      // check if any of the offers has a combination of the products in our order
+      foreach ($prod_offer as $offer => $prod_array) {
+        for ($i = 0; $i < count($order); $i++) {
+          if (in_array($order[$i]['id'], $prod_array)) {
+            $c++;
+          }
+        }
+        
+        if ($c == count($prod_array)) {
+          $ohit[] = $offer;
+        }
+  
+        $c = 0;
+      }
+  
+      // close stmt and conn
+      $stmt->close();
+      $conn->close();
     }
-
-    // close stmt and conn
-    $stmt->close();
-    $conn->close();
   } catch (PDOException $e) {
     // on failure
     header('HTTP/1.1 500 Internal Server Error');

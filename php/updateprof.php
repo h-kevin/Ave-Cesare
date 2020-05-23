@@ -22,13 +22,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     try {
       // try to execute statement
-      $stmt->execute();
-      $_SESSION['name'] = $newprof->name;
-      $_SESSION['surname'] = $newprof->surname;
+      if (!$stmt->execute() || $stmt->affected_rows == 0) {
+        throw new PDOException();
+      } else {
+        $_SESSION['name'] = $newprof->name;
+        $_SESSION['surname'] = $newprof->surname;
+      }
     } catch (PDOException $e) {
       // if error happens
       header('HTTP/1.1 500 Internal Server Error');
-      exit("Kerkesa nuk u ekzekutua me sukses, problem ne server!");
+      exit("Kerkesa deshtoi, te dhenat mund te jene dublikate!");
     }
   }
 
@@ -38,12 +41,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     try {
       // try to execute statement
-      $stmt->execute();
-      $_SESSION['mobile'] = $newprof->mobile;
+      if (!$stmt->execute() || $stmt->affected_rows == 0) {
+        throw new PDOException();
+      } else {
+        $_SESSION['mobile'] = $newprof->mobile;
+      }
     } catch (PDOException $e) {
       // if error happens
       header('HTTP/1.1 500 Internal Server Error');
-      exit("Kerkesa nuk u ekzekutua me sukses, problem ne server!");
+      exit("Kerkesa deshtoi, te dhenat mund te jene dublikate!");
     }
   }
 
@@ -54,12 +60,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     try {
       // try to execute statement
-      $stmt->execute();
-      $_SESSION['password'] = $newprof->password;
+      if(!$stmt->execute() || $stmt->affected_rows == 0) {
+        throw new PDOException();
+      } else {
+        $_SESSION['password'] = $newprof->password;
+      }
     } catch (PDOException $e) {
       // if error happens
       header('HTTP/1.1 500 Internal Server Error');
-      exit("Kerkesa nuk u ekzekutua me sukses, problem ne server!");
+      exit("Kerkesa deshtoi, te dhenat mund te jene dublikate!");
     }
   }
 

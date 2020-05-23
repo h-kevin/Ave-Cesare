@@ -18,9 +18,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
   try {
     // try to execute statement
-    $stmt->execute();
-    $stmt->close();
-    $conn->close();
+    if (!$stmt->execute()) {
+      throw new PDOException();
+    } else {
+      $stmt->close();
+      $conn->close();
+    }
 
     // destroy session
     session_destroy();

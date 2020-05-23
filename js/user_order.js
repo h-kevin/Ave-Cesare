@@ -362,17 +362,17 @@ function updateOrder (order) {
 			name = `<td>${order['pinfo'][i]['name']}</td>`;
 			price = `<td>${order['pinfo'][i]['price']}</td>`;
 			quantity = `<td><div class="btn-group" role="group" aria-label="Basic example">
-				<button type="button" class="btn border-dark">-</button>
-				<span class="btn border-dark">${order['pinfo'][i]['quantity']}</span>
-				<button type="button" class="btn border-dark">+</button></div></td>`;
+				<button type="button" class="btn border-dark minusb">-</button>
+				<span class="btn border-dark showqt">${order['pinfo'][i]['quantity']}</span>
+				<button type="button" class="btn border-dark plusb">+</button></div></td>`;
 
-				// get subtotal
-				let subt = order['pinfo'][i]['price'] * order['pinfo'][i]['quantity'];
-				total = `<td>${subt}</td>`;
-				
-				// build row
-				$('.cart-table tbody').append(`<tr>${dbutton} ${image} ${name}
-					${price} ${quantity} ${total}</tr>`);
+			// get subtotal
+			let subt = order['pinfo'][i]['price'] * order['pinfo'][i]['quantity'];
+			total = `<td>${subt}</td>`;
+
+			// build row
+			$('.cart-table tbody').append(`<tr>${dbutton} ${image} ${name} 
+				${price} ${quantity} ${total}</tr>`);
 		}
 
 		// get discount
@@ -380,7 +380,7 @@ function updateOrder (order) {
 
 		if (order['discount'])
 			discount = order['discount'];
-		
+
 		// set up mobile number
 		let mobile = order['mobile'];
 
@@ -411,4 +411,165 @@ function updateOrder (order) {
 		$('.order-summary .discount h4:nth-child(2)').text(discount);
 		$('.order-summary .total h4:nth-child(2) b').text(tval);
 	}
+};
+
+
+/**
+ * order summary on change
+ */
+
+$(".order-summary div h4:nth-child(2)").on('change', function () {
+	// update total
+	let subtotal = parseInt($('.order-summary .subtotal h4:nth-child(2)').text());
+	let transport = parseInt($('.order-summary .transport h4:nth-child(2)').text());
+	let discount = parseInt($('.order-summary .discount h4:nth-child(2)').text());
+
+	$('.order-summary .total h4:nth-child(2) b').text(subtotal + transport - discount);
+});
+
+
+/**
+ * detect change on select
+ */
+
+$('.delivery-form .selectpicker').on('change', function () {
+	if ($('.delivery-form .selectpicker option:selected').val() == 'Ne Shtepi (50 Lek)') {
+		$('.order-summary .transport h4:nth-child(2)').text(50);
+		$('.order-summary div h4:nth-child(2)').change();
+	} else {
+		$('.order-summary .transport h4:nth-child(2)').text(0);
+		$('.order-summary div h4:nth-child(2)').change();
+	}
+});
+
+
+/**
+ * handle changes of quantity (+)
+ */
+
+$('.cart-table tbody').on('click', '.plusb', function () {
+	// get the row
+	let trnum = parseInt($(this).closest('tr').index()) + 1;
+	
+	// get name of product
+	let pname = $(this).closest('tr').find('td:nth-child(3)').text();
+
+	// get quantity
+	let qt = $(this).closest('div').find('.showqt');
+
+	// increment
+	qt = parseInt(qt.text()) + 1;
+
+	// create data object
+	let data = {
+		'trnum': trnum,
+		'pname': pname,
+		'quantity': qt
+	};
+
+	data = JSON.stringify(data);
+
+	// send request for database update
+	$.ajax({
+		type: "post",
+		url: "../php/orderqt.php",
+		data: { qt: data },
+		dataType: "json",
+		success: function (response) {
+			incrementQt(response);
+		},
+		error: function (xhr, ajaxOptions, thrownError) {
+			$.notify(xhr.responseText, 'error');
+		}
+	});
+});
+
+
+/**
+ * increment quantity
+ */
+
+function incrementQt (upinfo) {
+	// update value of showqt
+	let trnum = upinfo['trnum'];
+	$(`.cart-table tbody tr:nth-child(${trnum}) .showqt`).text(upinfo['quantity']);
+	
+	// update product subtotal
+	let oldst = parseInt($(`.cart-table tbody tr:nth-child(${trnum}) td:nth-child(6)`).text());
+	let newst = upinfo['price'] * upinfo['quantity'];
+	let diff = newst - oldst;
+	$(`.cart-table tbody tr:nth-child(${trnum}) td:nth-child(6)`).text(newst);
+
+	// update order summary
+	let curr_subtotal = parseInt($('.order-summary .subtotal h4:nth-child(2)').text());
+	let new_subtotal = curr_subtotal + diff;
+	$('.order-summary .subtotal h4:nth-child(2)').text(new_subtotal);
+	$('.order-summary div h4:nth-child(2)').change();
+};
+
+
+/**
+ * handle changes of quantity (-)
+ */
+
+$('.cart-table tbody').on('click', '.minusb', function () {
+	// get the row
+	let trnum = parseInt($(this).closest('tr').index()) + 1;
+	
+	// get name of product
+	let pname = $(this).closest('tr').find('td:nth-child(3)').text();
+
+	// get quantity
+	let qt = $(this).closest('div').find('.showqt');
+
+	// decrement
+	if (parseInt(qt.text()) > 1) {
+		qt = parseInt(qt.text()) - 1;
+		
+		// create data object
+		let data = {
+			'trnum': trnum,
+			'pname': pname,
+			'quantity': qt
+		};
+
+		data = JSON.stringify(data);
+
+		// send request for database update
+		$.ajax({
+			type: "post",
+			url: "../php/orderqt.php",
+			data: { qt: data },
+			dataType: "json",
+			success: function (response) {
+				decrementQt(response);
+			},
+			error: function (xhr, ajaxOptions, thrownError) {
+				$.notify(xhr.responseText, 'error');
+			}
+		});
+	}
+});
+
+
+/**
+ * decrement quantity
+ */
+
+function decrementQt (upinfo) {
+	// update value of showqt
+	let trnum = upinfo['trnum'];
+	$(`.cart-table tbody tr:nth-child(${trnum}) .showqt`).text(upinfo['quantity']);
+	
+	// update product subtotal
+	let oldst = parseInt($(`.cart-table tbody tr:nth-child(${trnum}) td:nth-child(6)`).text());
+	let newst = upinfo['price'] * upinfo['quantity'];
+	let diff = newst - oldst;
+	$(`.cart-table tbody tr:nth-child(${trnum}) td:nth-child(6)`).text(newst);
+
+	// update order summary
+	let curr_subtotal = parseInt($('.order-summary .subtotal h4:nth-child(2)').text());
+	let new_subtotal = curr_subtotal + diff;
+	$('.order-summary .subtotal h4:nth-child(2)').text(new_subtotal);
+	$('.order-summary div h4:nth-child(2)').change();
 };
