@@ -1,0 +1,73 @@
+#prodPan {
+    background-color: rgb(185, 236, 248);
+}
+
+#prodPan #user_data {
+    border-collapse: collapse;
+}
+
+#prodPan #user_data th {
+    border: 1px solid rgb(68, 151, 219);
+    background-color: rgb(68, 151, 219);
+    font-family: 'Barlow Condensed', serif;
+    color: black;
+    font-size: x-large;
+    text-align: center;
+}
+
+#prodPan #user_data td {
+    border: 1px solid rgb(68, 151, 219);
+    font-family: 'Barlow Condensed', serif;
+    font-size: x-large;
+    text-align: center;
+}
+
+#prodPan #user_data tr:hover {
+    background-color: rgb(165, 220, 236);
+}
+
+#prodPan #titulli {
+    padding-top: 30px;
+    justify-content: center;
+    color: black;
+    letter-spacing: 2px;
+    font-size: 50px;
+    font-family: 'Barlow Condensed', serif;
+}
+
+#prodPan #add_button {
+    font-family: 'Barlow Condensed', serif;
+}
+
+#prodPan .modal-content {
+    background-color: rgb(229, 240, 250);
+}
+
+#prodPan #add, #update_mod, #delete_mod {
+    font-family: 'Barlow Condensed', serif;
+}
+
+#prodPan .modal-title {
+    font-family: 'Barlow Condensed', serif;
+    font-size: 40px;
+}
+
+#prodPan #modal_msgAd, #modal_msgUp, #modal_msgDel {
+    text-align: center;
+    font-family: 'Barlow Condensed', serif;
+}
+
+#prodPan .form-control {
+    border-color: #f1bf73;
+    font-family: 'Barlow Condensed', serif;
+}
+
+#prodPan .radio {
+    font-family: 'Barlow Condensed', serif;
+    font-size: large;
+    text-align: center;
+}
+
+#prodPan #kuti {
+    margin-bottom: 30px;
+}

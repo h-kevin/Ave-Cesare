@@ -2,6 +2,32 @@
 
 $(document).ready(function(){  
 
+    // $('#password1').keyup(function() {
+    //     let pass1 = $('#password1').val();
+
+    //     if(pass1.length < 4){
+    //         $('#errBox').addClass('alert alert-primary');
+    //         $('#errBox').html('Fjalekalimi duhet te kete te pakten 4 karaktere');
+    //     }
+    //     else{
+    //         $('#errBox').html('');
+    //         $('#errBox').removeClass('alert alert-primary');
+    //     }
+    // });
+    $('#password2').keyup(function() {
+        let pass1 = $('#password1').val();
+        let pass2 = $('#password2').val();
+        
+        if(pass1 != pass2){
+            $('#errBox').addClass('alert alert-primary');
+            $('#errBox').html('Rishkruani te njejtin fjalekalim');
+        }
+        else{
+            $('#errBox').html('');
+            $('#errBox').removeClass('alert alert-primary');
+        }
+    });
+
     $('#register-form').on('submit', function(e) {
         e.preventDefault();
         const regex1 = new RegExp(/^[A-Za-z]+$/);
