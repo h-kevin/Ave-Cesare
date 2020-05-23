@@ -1,5 +1,21 @@
 /* Javascript & jQuery for user_order page. */
 
+/**
+ * change navbar background color and transparency on scroll
+ */
+
+function navBarBackgroundScrollEffect () {
+	$(window).scroll(function () {
+		if ($(window).scrollTop() > 0) {
+			$('.navigationbar').css('background-color', 'rgba(30, 30, 30, 0.8)');
+		} else {
+			$('.navigationbar').css('background-color', 'transparent');
+		}
+	});
+};
+
+navBarBackgroundScrollEffect();
+
 
 /**
  * call to function setTime on document load
@@ -653,8 +669,8 @@ $('.usro .send-order button').on('click', function () {
 	let regex = new RegExp(/^[0-9]+$/);
 
 	if ($('.delivery-form .order-mnum input').val() == '') {
-			$('.usro .tel-warn').text('Ju lutem vendosni numrin!');
-			$('.usro .tel-warn').fadeIn();
+		$('.usro .tel-warn').text('Ju lutem vendosni numrin!');
+		$('.usro .tel-warn').fadeIn();
 	} else {
 		if (!regex.test($('.delivery-form .order-mnum input').val())) {
 			$('.usro .tel-warn').text('Numri nuk ka formatin e duhur!');
