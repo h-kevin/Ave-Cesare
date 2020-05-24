@@ -8,13 +8,21 @@ $(document).on('click', '#kycje', function(e){
     url:"../php/login.php",
     method:"POST",
     data:{email:email,password:password},
+    beforeSend: function () {
+        $('#login-body .spinner-border').removeClass('d-none');
+      },
     success:function(data){
-        $('#error-p').addClass('alert alert-primary');
-        $('#error-p').text(data);
-        window.location.href = '../index.html';
-        setTimeout(function(){ 
-            $('#error-p').text('');
-            $('#error-p').removeClass('alert alert-primary'); }, 3000);
+        $('#login-body .spinner-border').addClass('d-none');
+        if (data == 'Success') {
+            window.location.href = '../index.html';
+        }
+        else {
+            $('#error-p').addClass('alert alert-primary');
+            $('#error-p').text(data); 
+            setTimeout(function(){ 
+                $('#error-p').text('');
+                $('#error-p').removeClass('alert alert-primary'); }, 3000);
+        }
     }
     });
 });
