@@ -5,3 +5,7 @@
     width: 50%;
   }
 }
+
+html {
+  scroll-behavior: smooth;
+}
