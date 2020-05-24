@@ -2,10 +2,6 @@
 
     require_once('db_connect.php');
     require_once('../vendors/PHPMailer/PHPMailerAutoload.php');
-
-    if (session_status() == PHP_SESSION_NONE) {
-        session_start();
-    }
         
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     
@@ -37,7 +33,7 @@
     
         if ($result) {
             $mail = new PHPMailer(true);
-            //$mail->isSMTP();
+            $mail->isSMTP();
             $mail->SMTPAuth = true;
             $mail->SMTPSecure = 'ssl';
             $mail->Host = 'smtp.gmail.com';
