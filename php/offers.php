@@ -18,7 +18,7 @@
 
         echo 'Kurse: ' . $row['discount'] . ' Lek';
         echo '</p>';
-        echo '<a class="btn buton-karte">Përfito!</a>';
+        echo '<a class="btn buton-karte" id = "' . $row["id"] . '">Përfito!</a>';
         echo '</div>';
         echo '</div>';
     }
