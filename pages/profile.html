@@ -16,7 +16,7 @@
   <body class="profile-body vh-100">
     <div class="container d-flex flex-column h-25 pt-4">
       <!-- welcome ribbon -->
-      <div class="ribbon w-75 w-md-50 align-self-center">
+      <div class="ribbon w-75 align-self-center">
         <div class="ribbon-stitches-top"></div>
         <div class="ribbon-content">
           <p><b>Pershendetje&nbsp;</b></p>
@@ -24,48 +24,48 @@
         <div class="ribbon-stitches-bottom"></div>
       </div>
     </div>
-    <div class="container h-75 d-flex flex-column justify-content-start">
+    <div class="container h-75 d-flex justify-content-center">
       <!-- profile section -->
-      <div
-        class="profile-container rounded row align-self-center d-flex w-75 h-100 justify-content-center">
+      <div class="profile-container rounded h-100">
         <!-- profile image -->
-        <div class="row col-12 col-md-5 d-flex justify-content-center mb-md-0 mb-4">
-          <div class="prof-img rounded-circle align-self-center mb-2">
+        <div class="profimg-con m-0">
+          <div class="prof-img rounded-circle m-0">
             <i class="material-icons">add_a_photo</i>
           </div>
         </div>
         <!-- profile info -->
-        <div class="col-12 col-md-7 d-flex justify-content-center">
-          <ul
-            class="info-list align-self-center d-flex p-0 flex-column justify-content-center w-100 m-0">
-            <li class="liname list-group-item list-group-item mb-2 w-100">
+        <div class="prof-info">
+          <ul class="info-list p-0 m-0">
+            <li class="liname list-group-item list-group-item mb-1 mb-md-2 w-100">
               Emri:
             </li>
-            <li class="lisur list-group-item list-group-item mb-2 w-100">
+            <li class="lisur list-group-item list-group-item mb-1 mb-md-2 w-100">
               Mbiemri:
             </li>
-            <li class="limail list-group-item list-group-item mb-2 w-100">
+            <li class="limail list-group-item list-group-item mb-1 mb-md-2 w-100">
               E-mail:
             </li>
-            <li class="litel list-group-item list-group-item mb-2 w-100">
+            <li class="litel list-group-item list-group-item w-100">
               Telefon:
             </li>
           </ul>
         </div>
-        <div class="d-flex flex-column w-100 mt-md-3 justify-content-start">
-          <!-- change info button -->
-          <button type="button"
-            class="change-info btn w-25 rounded-pill btn-success btn-sm align-self-center"
-            data-toggle="modal" data-target="#modal1">Ndrysho te dhenat
+        <!-- change info and home button -->
+        <div class="first-group btn-group" role="group">
+          <button type="button" class="home-b btn btn-success material-icons">home</button>
+          <button type="button" class="btn btn-success change-info" data-toggle="modal"
+            data-target="#modal1">Ndrysho te dhenat
           </button>
-          <!-- logout button -->
-          <button type="button"
-            class="logout btn mt-2 mt-md-3 rounded-pill btn-dark btn-sm align-self-center">
-            <span class="spinner-border spinner-border-sm d-none" role="status"
-              aria-hidden="true"></span>
-            Dil
-          </button>
+          <button type="button" class="btn btn-success material-icons adm-e d-none"
+            data-toggle="modal" data-target="#modal1">edit</button>
+          <button type="button" class="btn btn-success material-icons adm-b d-none">domain</button>
         </div>
+        <!-- logout button -->
+        <button type="button" class="logout btn btn-dark">
+          <span class="spinner-border spinner-border-sm d-none" role="status"
+            aria-hidden="true"></span>
+          Dil
+        </button>
       </div>
       <!-- modal for profile edit -->
       <div class="modal fade" id="modal1" tabindex="-1" role="dialog" data-backdrop="static"
