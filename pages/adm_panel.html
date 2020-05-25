@@ -52,21 +52,63 @@
     <!-- section 2 / order list -->
     <section id="list-section">
       <div class="order-list">
-
+        <div class="container my-3">
+          <h1>LISTA E POROSIVE</h1>
+          <hr class="border-dark">
+          <div class="container px-0 olist">
+            <div class="olist-table">
+              <table class="table table-hover table-responsive-sm">
+                <thead>
+                  <tr>
+                    <th scope="col" class="text-center">KLIENTI</th>
+                    <th scope="col" class="text-center">DATA</th>
+                    <th scope="col" class="text-center">PRODUKTET</th>
+                    <th scope="col" class="text-center">TOTAL</th>
+                    <th scope="col" class="text-center">STATUSI</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td colspan="5">
+                      <div class="progress bg-transparent border border-dark">
+                        <div
+                          class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+                          role="progressbar" style="width: 20%"></div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- section 3 / manage users -->
     <section id="mgu-section">
       <div class="manage-users">
-        <div id="admp">
-          <div class="container box justify-content-center" id="kuti">
-            <h1 id="titulli" class="container text-center mb-5">PANELI I PERDORUESVE</h1>
-            <div id="tblHolder" class="table-responsive"></div>
-            <div class="table-responsive text-right">
-              <button type="button" id="add_button" data-target="#userModalAdd" data-toggle="modal"
-                class="btn btn-primary btn-lg btn-block justify-content-center">Shto</button>
-            </div>
+        <div id="admp" class="container my-3">
+          <h1 id="titulli" class="text-center p-0 mb-3">PANELI I PERDORUESVE</h1>
+          <div class="" id="kuti">
+            <table id="user_data" class="table-responsive-md table table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col" class="text-center">IMAZH</th>
+                  <th scope="col" class="text-center">EMER</th>
+                  <th scope="col" class="text-center">MBIEMER</th>
+                  <th scope="col" class="text-center">ADMIN</th>
+                  <th scope="col" class="text-center">MODIFIKO</th>
+                  <th scope="col" class="text-center">FSHI</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </div>
+          <div class="container p-0">
+            <button type="button" id="add_button" data-target="#userModalAdd" data-toggle="modal"
+              class="btn btn-block btn-primary btn-lg">Shto</button>
           </div>
           <div class="modal fade" id="userModalAdd">
             <div class="modal-dialog" id="userModalDialog">

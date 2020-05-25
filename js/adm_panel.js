@@ -52,15 +52,7 @@ $(document).ready(function getAll () {
   //on success fill table with results
   function getAllFormat (response) {
 
-    var tblVar = '<table id="user_data" class="table table-bordered table-responsive">';
-    tblVar += '<thead>';
-    tblVar += '<tr>';
-    tblVar += '<th width="10%">IMAZH</th>';
-    tblVar += '<th width="30%">EMER</th>';
-    tblVar += '<th width="30%">MBIEMER</th>';
-    tblVar += '<th width="10%">ADMIN</th>';
-    tblVar += '<th width="10%">MODIFIKO</th>';
-    tblVar += '<th width="10%">FSHI</th>';
+    var tblVar;
 
     for (i in response) {
       tblVar += '<tr>';
@@ -73,11 +65,7 @@ $(document).ready(function getAll () {
       tblVar += '</tr>';
     }
 
-    tblVar += '</tr>';
-    tblVar += '</thead>';
-    tblVar += '</table>';
-
-    $('#tblHolder').html(tblVar);
+    $('#kuti table tbody').html(tblVar);
   }
 
   //ne klikimin jashte modalit i bejm reset cdo inputi
