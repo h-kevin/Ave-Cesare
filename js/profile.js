@@ -44,9 +44,50 @@ function updateProf (pinfo) {
   else
     $('.litel').text(`Telefon: (+355) ${pinfo['mobile']}`);
 
+  console.log(pinfo['admin']);
+
+  if (pinfo['admin'] == 1) {
+    $('.profile-body .first-group .change-info').addClass('d-none');
+    $('.profile-body .first-group .adm-e').removeClass('d-none');
+    $('.profile-body .first-group .adm-b').removeClass('d-none');
+  }
+
   // initialize password
   p = pinfo['password'];
 };
+
+
+/**
+ * launch admin panel
+ */
+
+$('.profile-body .first-group .adm-b').click(function () {
+  window.location.replace('./admin_panel.html');
+});
+
+
+/**
+ * image height same as width
+ */
+
+$(document).ready(function () {
+  let width = $('.profile-body .profimg-con').width();
+  $('.profile-body .prof-img').css('height', `${width}px`);
+});
+
+$(window).on('resize', function () {
+  let width = $('.profile-body .profimg-con').width();
+  $('.profile-body .prof-img').css('height', `${width}px`);
+});
+
+
+/**
+ * go home on home-b click
+ */
+
+$('.profile-body .first-group .home-b').click(function () {
+  window.location.replace('../index.html');
+});
 
 
 /**

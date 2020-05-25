@@ -34,3 +34,18 @@
     color:white;
     transition: 0.3s;
   }
+
+  #login-body input.form-control {
+    color: white;
+    
+}
+
+#login-body .form-control:focus {
+  border-color: white;
+  box-shadow: none;
+}
+
+#login-body .btn:focus {
+  border-color: white;
+  box-shadow: none;
+}
