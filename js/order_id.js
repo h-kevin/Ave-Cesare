@@ -7,12 +7,8 @@ $(document).ready(function(){
             url: "../php/order_id.php",
             data: {offer_id: ofertaid},
             success: function (response) {
-                $('#notif').addClass('alert alert-primary');
-                $('#notif').text(response); 
-                setTimeout(function(){ 
-                    $('#notif').text('');
-                    $('#notif').removeClass('alert alert-primary'); }, 3000);
-                },
+                window.location.replace('./user_order.html');
+            },
             error: function (xhr, ajaxOptions, thrownError) {
                 $.notify(xhr.responseText, "error");
             }
