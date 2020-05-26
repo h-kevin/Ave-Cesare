@@ -11,6 +11,7 @@
     background-position: center;
     height: 60vh;
     margin-bottom: 0;
+    padding-bottom: 0px;
     
   }
 
@@ -37,4 +38,8 @@
 #menu #sado {
     font-size: small;
     color: gray;
+}
+
+#menu #modal_msgAd {
+    font-size: small;
 }

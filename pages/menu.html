@@ -42,7 +42,7 @@
         </div>
       </div>
     </nav>
-        <div class="jumbotron px-0 d-inline-block">
+        <div class="container-fluid jumbotron px-0 d-inline-block">
           <h1>Menu</h1>
           <div class="col-12 rounded text-center mb-5 align-self-end">
             <div id="category-buttons" class="container-fluid d-flex flex-column">
@@ -74,13 +74,13 @@
                  </div>
  
                      <div class="modal-body pt-0">
-                     <p id="modal_msgAd"></p>
-                     <p id="chosenPizza" class="px-0 py-0 mx-0 my-0"><img src="https://assets.biggreenegg.eu/app/uploads/2018/06/28115815/topimage-pizza-special17-800x500.jpg" class="rounded" width="30" height="30"> Pica Margarita</p>
+                     <p id="modal_msgAd" class="text-center py-1 mx-0 my-1"></p>
+                     <div id="chosenPizza" class="px-0 py-0 mx-0 my-0"></div>
                      <form>
                          <label class="mb-0" id="sado">Caktoni sasine qe doni te porosisni: </label>
                          <div class="input-group mb-2 mt-0">
                              <input type="number" name="sasi" id="sasi_add" class="form-control form-control-sm" placeholder="Sasia" required min="1" value="1"/>
-                             <input type="number" name="cmimi" id="cmimi_add" class="form-control form-control-sm" placeholder="Totali" />
+                             <input type="number" name="cmimi" id="cmimi_add" class="form-control form-control-sm" placeholder="Totali" readonly/>
                          </div>
                          <button type="button" name="shto" id="shto" class="btn btn-block btn-sm btn-primary">Shto <span class="spinner-border spinner-border-sm d-none" role="status"
                           aria-hidden="true"></span></button>
@@ -93,6 +93,7 @@
         <script src="../vendors/jquery/jquery-3.4.1.min.js"></script>
         <script src="../vendors/popper/popper.min.js"></script>
         <script src="../vendors/bootstrap/js/bootstrap.min.js"></script>
+        <script src="../vendors/jquery/notify.min.js"></script>
         <script type="text/javascript" src="../js/menu.js"></script>
     </body>
 </html>
