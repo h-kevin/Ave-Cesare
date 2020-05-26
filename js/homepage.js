@@ -161,6 +161,30 @@ $.ajax({
   $('#mbajtesi').html(karusel);
                   
 }
-})
+});
+
+// shto porosi duke perzgjedhur oferten
+$(document).ready(function(){
+  $(document).on('click', '.buton-karte', function(){
+      var o_id = $(this).closest(".karta").attr('id');
+      console.log(o_id);
+      $.ajax({
+          type: "post",
+          url: "./php/order_id.php",
+          data: {offer_id: o_id},
+          success: function (response) {
+              if (response != 'success' ){
+                  $.notify(response, "error");
+              }
+              else {
+                  window.location.replace('./pages/user_order.html');
+              }
+          },
+          error: function (xhr, ajaxOptions, thrownError) {
+              $.notify(xhr.responseText, "error");
+          }
+      });
+  });
+});
 
           
