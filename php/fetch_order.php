@@ -73,14 +73,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   
       // save each row of data in the array without key duplicates
       while($stmt->fetch()) {
-        if ($prod_offer[$offer]) {
+        if (array_key_exists($offer, $prod_offer)) {
           array_push($prod_offer[$offer], $product);
         } else {
           $tmp = array();
           $tmp[] = $product;
           $prod_offer[$offer] = $tmp;
         }
-        if (!$discount_arr[$offer]) {
+        if (!array_key_exists($offer, $discount_arr)) {
           $discount_arr[$offer] = $discount;
         }
       }

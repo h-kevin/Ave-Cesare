@@ -14,21 +14,22 @@
     </head>
 
     <body id="login-body">
+        <div class="shading"></div>
         <div class="login-page">
-            <h1 id="login-h1" class="container text-center mb-5">Hyrje ne llogari</h1>
+            <h1 id="login-h1" class="text-center mb-5">Hyrje ne llogari</h1>
             <form class="form-container container" action="../php/login.php" method="POST">
                 <p id="error-p"></p>
                 <div class="form-group">
-                    <input type="email" class="form-control bg-transparent"
+                    <input autocomplete="off" type="email" class="form-control bg-transparent email"
                         id="email" name="email" placeholder="E-mail" required><span class="material-icons">mail</span>
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control bg-transparent"
+                    <input autocomplete="off" type="password" class="form-control bg-transparent pass"
                         id="password" name="pass" placeholder="Fjalekalimi" required><span class="material-icons">
                             lock
                             </span>
                 </div>
-                <p class="text-center">Nuk ke nje llogari? <a href="../pages/register.html">Rregjistrohu.</a></p>
+                <p class="text-center no-acc">Nuk ke nje llogari? <a href="../pages/register.html">Regjistrohu.</a></p>
                 <div class="d-flex justify-content-center">
                     <button type="submit" name="login" id="kycje" class="btn btn-primary">Kycu <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>
                 </div>
