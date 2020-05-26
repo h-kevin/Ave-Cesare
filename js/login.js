@@ -17,11 +17,11 @@ $(document).on('click', '#kycje', function(e){
             window.location.href = '../index.html';
         }
         else {
-            $('#error-p').addClass('alert alert-primary');
+            $('#error-p').addClass('alert alert-light');
             $('#error-p').text(data); 
             setTimeout(function(){ 
                 $('#error-p').text('');
-                $('#error-p').removeClass('alert alert-primary'); }, 3000);
+                $('#error-p').removeClass('alert alert-light'); }, 3000);
         }
     }
     });
