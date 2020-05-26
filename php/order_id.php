@@ -7,10 +7,10 @@
         session_start();
     }
   
-    $order_id;
+    
     // check request method
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["offer_id"])) {
-
+        $order_id;
         // check if user has a session id
         if(isset($_SESSION['id'])){
             $stmt = $conn->prepare("SELECT number FROM `Order` WHERE usr_id = ? AND status = 'new'");
@@ -37,25 +37,44 @@
                 }
 
             }
+            $stmt->close();
             
             $stmt = $conn->prepare('DELETE FROM Prod_Order WHERE order_num = ?');
             $stmt->bind_param('d', $order_id);
             $stmt->execute();
 
+            $stmt->close();
+
             //fetch products from offer
             $stmt = $conn->prepare('SELECT id FROM 
-                            (Product INNER JOIN Prod_Offer ON Prod_Offer.prod_id=Product.id) 
+                            Product INNER JOIN Prod_Offer ON Prod_Offer.prod_id=Product.id 
                             WHERE Prod_Offer.offer_id=?');
             $stmt->bind_param('d', $_POST['offer_id']);
 
-            $stmt->execute();
-            $result = $stmt->fetchAll();
             
-            foreach($result as $prod_id) {
-                $stmt = $conn->prepare('INSERT INTO Prod_Order VALUES (?, ?, 1)');
-                $stmt->bind_param('dd', $prod_id, $order_id);
-                $stmt->execute();
+            $stmt->execute();
+            $prod_arr = $stmt->get_result();
+            $stmt->close();
+            
+            while ($row = $prod_arr->fetch_array())
+            {
+                foreach ($row as $prod_id)
+                {
+                    $stmt = $conn->prepare('INSERT INTO Prod_Order VALUES (?, ?, 1)');
+                    $stmt->bind_param('dd', $prod_id, $order_id);
+                    $stmt->execute();
+                    $stmt->close();
+                }
             }
+            // foreach ($prod_arr as $prod_id) {
+                // $stmt = $conn->prepare('INSERT INTO Prod_Order VALUES (?, ?, 1)');
+                // $stmt->bind_param('dd', $prod_id[0], $order_id);
+                // $stmt->execute();
+                // $stmt->close();
+                // echo "produkti $prod_id[0]";
+            // }
+            $conn->close();
+
             echo 'Oferta u shtua me sukses.';
             
         } else {
