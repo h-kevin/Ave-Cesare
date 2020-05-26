@@ -37,6 +37,16 @@ $(document).ready(function getOfferCards(){
    }
  });
 
+// nqs faqja referohet nga veprimi logout ne profil
+if (parseURL(window.location.href).logout == 'ok') {
+  $.notify('Profili u mbyll me sukses!', 'success');
+}
+
+// nqs faqja referohet nga veprimi fshi llogari ne profil
+if (parseURL(window.location.href).remaccount == 'done') {
+  $.notify('Llogaria u fshi me sukses!', 'success');
+}
+
 // produktet
  $.ajax({
   type: 'POST',
@@ -87,7 +97,21 @@ $.ajax({
       $(".homepage a.check_ulog").text('Profili');
       $(".homepage a.check_ulog").attr('href','./pages/profile.html');
     }
-}
+};
+
+  // url parser
+  function parseURL (url) {
+    var params = {};
+    var parser = document.createElement('a');
+    parser.href = url;
+    var query = parser.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      params[pair[0]] = decodeURIComponent(pair[1]);
+    }
+    return params;
+  };
 
 // func per ofertat ne seksionin e kartave
  function formCards(response){

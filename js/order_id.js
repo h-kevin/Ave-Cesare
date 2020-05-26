@@ -7,7 +7,12 @@ $(document).ready(function(){
             url: "../php/order_id.php",
             data: {offer_id: ofertaid},
             success: function (response) {
-                window.location.replace('./user_order.html');
+                if (response != 'success' ){
+                    $.notify(response, "error");
+                }
+                else {
+                    window.location.replace('./user_order.html');
+                }
             },
             error: function (xhr, ajaxOptions, thrownError) {
                 $.notify(xhr.responseText, "error");
