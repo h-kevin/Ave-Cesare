@@ -62,7 +62,7 @@ function updateProf (pinfo) {
  */
 
 $('.profile-body .first-group .adm-b').click(function () {
-  window.location.replace('./admin_panel.html');
+  window.location.replace('./adm_panel.html');
 });
 
 
