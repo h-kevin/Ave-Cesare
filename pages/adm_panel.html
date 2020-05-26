@@ -90,7 +90,7 @@
       <div class="manage-users">
         <div id="admp" class="container my-3">
           <h1 id="titulli" class="text-center p-0 mb-3">PANELI I PERDORUESVE</h1>
-          <div class="" id="kuti">
+          <div id="kuti">
             <table id="user_data" class="table-responsive-md table table-bordered">
               <thead>
                 <tr>
@@ -211,7 +211,103 @@
     <!-- section 4 / manage products -->
     <section id="mgp-section">
       <div class="manage-products">
+        <div id="admp" class="container my-3">
+          <h1 id="titulli" class="text-center p-0 mb-3">PANELI I PRODUKTEVE</h1>
+          <div id="kuti_p">
+            <table id="prod_data" class="table-responsive-md table table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col" class="text-center">IMAZH</th>
+                  <th scope="col" class="text-center">EMER</th>
+                  <th scope="col" class="text-center">KATEGORI</th>
+                  <th scope="col" class="text-center">CMIM</th>
+                  <th scope="col" class="text-center">MODIFIKO</th>
+                  <th scope="col" class="text-center">FSHI</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </div>
+          <div class="container p-0">
+            <button type="button" id="prod_add_button" data-target="#prodModalAdd" data-toggle="modal"
+              class="btn btn-block btn-primary btn-lg">Shto</button>
+          </div>
+          <div class="modal fade" id="prodModalAdd">
+            <div class="modal-dialog" id="prodModalDialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">SHTO PRODUKT</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                  <p id="modal_prod_msgAd"></p>
+                  <form>
+                    <div class="input-group">
+                      <input type="text" name="prod_name" id="prod_name_add" class="form-control"
+                        placeholder="Emri" />
+                      <input type="number" min="0" value="300" max="2000" step="50" name="prod_price" id="prod_price_ad" class="form-control" placeholder="Cmimi">
 
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" name="prod_add" id="prod_add"
+                    class="btn btn-block btn-lg btn-primary">Shto <span
+                      class="spinner-border spinner-border-sm d-none" role="status"
+                      aria-hidden="true"></span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal fade" id="prodModalUpdate">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">MODIFIKO PRODUKTIN</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                  <p id="modal_prod_msgUp"></p>
+                  <form>
+                    <div class="input-group">
+                      <input type="text" name="prod_name" id="prod_name_up" class="form-control"
+                        placeholder="Emri" />
+                      <input type="number" type="number" min="0" value="300" max="2000" step="50"  name="prod_price" id="prod_price_up" class="form-control" placeholder="Cmimi">
+                      <input type="TextBox" ID="datebox" Class="form-control"></input>
+                      <div class="input-group-btn">
+                          
+                      </div>
+                      <br>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" name="prod_update" id="prod_update_mod"
+                    class="btn btn-block btn-lg btn-success">Modifiko <span
+                      class="spinner-border spinner-border-sm d-none" role="status"
+                      aria-hidden="true"></span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal fade" id="prodModalDelete">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">JENI TE SIGURTE?</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                  <p id="modal_prod_msgDel"></p>
+                  <button type="button" name="delete" id="prod_delete_mod"
+                    class="btn btn-block btn-lg btn-danger">Fshi perfundimisht <span
+                      class="spinner-border spinner-border-sm d-none" role="status"
+                      aria-hidden="true"></span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -225,7 +321,9 @@
     <script src="../vendors/jquery/jquery-3.4.1.min.js"></script>
     <script src="../vendors/popper/popper.min.js"></script>
     <script src="../vendors/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../vendors/boostrap-select/js/bootstrap-select.min.js"></script>
     <script src="../vendors/jquery/notify.min.js"></script>
+    <script src="../vendors/jquery/jquery-ui.js"></script>
     <script type="text/javascript" src="../js/adm_panel.js"></script>
   </body>
 

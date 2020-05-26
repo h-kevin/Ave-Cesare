@@ -7,7 +7,7 @@
 
 $('.admin_panel .nav div').click(function () {
   let link = $(this).find('a').attr('href');
-  window.location.replace(link);
+  window.location.href = link;
 });
 
 
@@ -229,7 +229,99 @@ $(document).ready(function getAll () {
 /**
  * SECTION 4
  */
+$(document).ready(function getAllProds (e) {
 
+  //  function to fetch all products
+  $.ajax({
+    type: 'POST',
+    url: '../php/get_prods.php',
+    dataType: "json",
+    success: function (response) {
+      getAllProdsFormat(response);
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+      alert(xhr.responseText);
+      //$.notify(xhr.responseText, "error");
+    }
+  });
+
+  //  function to get all products categories into dropdown lists
+  $.ajax({
+    type: 'POST',
+    url: '../php/get_prodCat.php',
+    success: function (response) {
+      alert(response);
+      $('.input-group-btn').html('<button type="button" class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button><ul id="demolist" class="dropdown-menu"><li><a href="#">A</a></li><li><a href="#">B</a></li><li><a href="#">C</a></li></ul>')
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+      $.notify(xhr.responseText, "error");
+    }
+  });
+
+  //on success fill table with results
+  function getAllProdsFormat (response) {
+
+    var tblVar;
+
+    for (i in response) {
+      tblVar += '<tr>';
+      tblVar += '<td><img src="' + response[i].prof_img + '" class="rounded-circle" width="50" height="50"></td>';
+      tblVar += '<td>' + response[i].name + '</td>';
+      tblVar += '<td>' + response[i].cat + '</td>';
+      tblVar += '<td>' + response[i].price + '</td>';
+      tblVar += '<td><button type="button" name="update" id="' + response[i].id + '" data-target="#prodModalUpdate" data-toggle="modal" class="btn btn-success btn-lg update_prod">Modifiko</button></td>';
+      tblVar += '<td><button type="button" name="delete" id="' + response[i].id + '" data-target="#prodModalDelete" data-toggle="modal" class="btn btn-danger btn-lg delete_prod">Fshi</button></td>';
+      tblVar += '</tr>';
+    }
+
+    $('#kuti_p table tbody').html(tblVar);
+  }
+
+  var prod_id;
+  //ne klikimin jashte modalit i bejm reset cdo inputi
+  $('.modal').on('hidden.bs.modal', function () {
+    $(this).find('form')[0].reset();
+    $('[data-toggle="buttons"] :radio').prop('checked', false);
+    $('[data-toggle="buttons"] label').removeClass('active');
+    $(this).find('.collapse').collapse('hide');
+    $(this).find('small').fadeOut();
+  });
+
+$(document).on('click', '.delete_prod', function (e) {
+  e.preventDefault();
+  e.stopImmediatePropagation();
+  prod_id = $(this).attr("id");
+  $("#prod_delete_mod").show();
+
+  $(document).on('click', '#prod_delete_mod', function (e) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    $.ajax({
+      url: "../php/delete_prod.php",
+      method: "POST",
+      data: { prod_id: prod_id },
+      beforeSend: function () {
+        $('.manage-products .spinner-border').removeClass('d-none');
+      },
+      success: function (data) {
+        $('.manage-products .spinner-border').addClass('d-none');
+        $("#prod_delete_mod").hide();
+        $('#modal_prod_msgDel').addClass('alert alert-primary');
+        $('#modal_prod_msgDel').html(data);
+        getAllProds();
+        setTimeout(function () {
+          $('#modal_prod_msgDel').html('');
+          $('#modal_prod_msgDel').removeClass('alert alert-primary');
+          $('#prodModalDelete').modal('hide');
+        }, 2000);
+      },
+      error: function (xhr, ajaxOptions, thrownError) {
+        $.notify(xhr.responseText, "error");
+      }
+    });
+  });
+});
+});
 /**
  * END SECTION 4
  */
