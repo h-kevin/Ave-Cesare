@@ -149,7 +149,7 @@
 /* first slide */
 
 .carousel-inner .carousel-item .fst {
-  background: url("../../img/p2.jpg");
+  /* background: url("../../img/p2.jpg"); */
   background-size: cover;
   background-position: center;
   width: 100%;
@@ -171,7 +171,7 @@
 /* second slide */
 
 .carousel-inner .carousel-item .scnd {
-  background: url("../../img/p3.jpg");
+  /* background: url("../../img/p3.jpg"); */
   background-size: cover;
   background-position: center;
   width: 100%;
@@ -181,7 +181,7 @@
 /* third slide */
 
 .carousel-inner .carousel-item .third {
-  background: url("../../img/p4.jpg");
+  /* background: url("../../img/p4.jpg"); */
   background-size: cover;
   background-position: center;
   width: 100%;

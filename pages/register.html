@@ -8,55 +8,56 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <link rel="icon" type="image/png" href="../img/favicon.png" />
-        <link rel="stylesheet" type="text/css" href="../css/signup.css" />
         <link rel="stylesheet" type="text/css" href="../css/index.css" /> 
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Barlow+Condensed">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-        <div class = "signup-page">
+        
         
     </head>
 
     <body id="signup">
+        <div class="shading"></div>
         <div class = "signup-page">
         <h1 class="container text-center mb-5">Krijo Llogarine Tende</h1>
         
         <form class="form-container container" id="register-form">
             <p id="errBox" class="text-center"></p>
             <div class="form-group">
-                <input type="text" class="form-control bg-transparent"
+                <input autocomplete="off" type="text" class="form-control bg-transparent"
                     id="name" name="name" placeholder="Emri" required><span class="material-icons">
                         perm_identity
                         </span>
             </div>
             <div class="form-group">
-                <input type="text" class="form-control bg-transparent"
+                <input autocomplete="off" type="text" class="form-control bg-transparent"
                     id="surname" name="surname" placeholder="Mbiemri" required><span class="material-icons">
                         perm_identity
                         </span>
             </div>
             <div class="form-group">
-                <input type="email" class="form-control bg-transparent"
+                <input autocomplete="off" type="email" class="form-control bg-transparent"
                     id="email" name="email" placeholder="E-mail" required><span class="material-icons">
                         mail
                         </span>
             </div>
-            <div class="form-group row m-0 p-0 col-12">
-                <div class="form-group col-6 col-md mr-md-2 mb-3 px-0 my-0">
-                <input type="password" class="form-control bg-transparent"
+            <div class="form-group row m-0 p-0 col-12 px-0">
+                <div class="col-12 col-md mr-md-1 mb-3 px-0">
+                <input autocomplete="off" type="password" class="form-control bg-transparent"
                     id="password1" name="pass1" placeholder="Fjalekalimi" required><span class="material-icons">
                         lock_open
                         </span>
                     </div>
-                <input type="password" class="form-control bg-transparent col-6 col-md ml-md-2 mb-3"
+                <div class="col-12 col-md ml-md-1 mb-3 px-0">
+                <input autocomplete="off" type="password" class="form-control bg-transparent"
                     id="password2" name="pass2" placeholder="Konfirmo Fjalekalimin" required><span class="material-icons">
                         lock
                         </span>
+                </div>
             </div>
             <div class="form-group form-check">
               <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
               <label class="form-check-label" for="exampleCheck1">Prano kushtet e perdorimit.</label>
             </div>
-            <p class="text-center">Keni nje llogari? <a href="../pages/login.html">Kycuni.</a></p>
+            <p class="text-center acc">Keni nje llogari? <a href="../pages/login.html">Kycuni.</a></p>
             <div class="d-flex justify-content-center">
                 <button type="submit" name="register" id="regjistrohu" class="btn btn-primary">Regjistrohu  <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span></button>
             </div>
