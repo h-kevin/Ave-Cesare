@@ -26,4 +26,26 @@ $(document).ready(function(){
             $('#offer-cards').html(response);
         }
     });
+
+    $.ajax({
+		type: 'POST',
+		url: '../php/check_ulog.php',
+		dataType: "json",
+		success: function (response) {
+			check_ulog(response);
+		},
+		error: function (xhr, ajaxOptions, thrownError) {
+			$.notify(xhr.responseText, "error");
+		}
+	});
 });
+
+//  func check_ulog
+function check_ulog(obj) {
+    var s_id=obj['id'];
+    // nqs ka perdorues te loguar 
+    if(s_id){
+       $("a.check_ulog").text('Profili');
+       $("a.check_ulog").attr('href','./profile.html');
+     }
+ }

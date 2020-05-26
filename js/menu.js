@@ -13,7 +13,19 @@ function navBarBackgroundScrollEffect () {
 navBarBackgroundScrollEffect();
 
 //Function to fill the products section of the menu page from the db
-$(document).ready(function(){  
+$(document).ready(function(){
+
+    $.ajax({
+		type: 'POST',
+		url: '../php/check_ulog.php',
+		dataType: "json",
+		success: function (response) {
+			check_ulog(response);
+		},
+		error: function (xhr, ajaxOptions, thrownError) {
+			$.notify(xhr.responseText, "error");
+		}
+	});
 
     $('.modal').on('hidden.bs.modal', function() {
         $(this).find('form')[0].reset();
@@ -134,3 +146,14 @@ function display(cat_id){
 $(document).ready(function(){  
     
 });
+
+
+//  func check_ulog
+function check_ulog(obj) {
+    var s_id=obj['id'];
+    // nqs ka perdorues te loguar 
+    if(s_id){
+       $("a.check_ulog").text('Profili');
+       $("a.check_ulog").attr('href','./profile.html');
+     }
+ }
