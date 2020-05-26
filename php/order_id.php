@@ -66,16 +66,9 @@
                     $stmt->close();
                 }
             }
-            // foreach ($prod_arr as $prod_id) {
-                // $stmt = $conn->prepare('INSERT INTO Prod_Order VALUES (?, ?, 1)');
-                // $stmt->bind_param('dd', $prod_id[0], $order_id);
-                // $stmt->execute();
-                // $stmt->close();
-                // echo "produkti $prod_id[0]";
-            // }
             $conn->close();
 
-            echo 'Oferta u shtua me sukses.';
+            echo 'success';
             
         } else {
             echo 'Nuk mund te shtoni produkte ne shporte pa hyre ne llogari! Kycuni dhe provoni serish.';
