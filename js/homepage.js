@@ -36,6 +36,7 @@ $(document).ready(function getOfferCards(){
        $.notify(xhr.responseText, "error");
    }
  });
+
 // produktet
  $.ajax({
   type: 'POST',
@@ -47,6 +48,19 @@ $(document).ready(function getOfferCards(){
    error: function (xhr, ajaxOptions, thrownError) {
      $.notify(xhr.responseText, "error");
      alert(xhr.responseText, "error");
+ }
+});
+
+// check_ulog
+$.ajax({
+  type: 'POST',
+  url:  '../php/check_ulog.php',
+  dataType: "json",
+  success: function(response) {
+     check_ulog(response);
+   },
+   error: function (xhr, ajaxOptions, thrownError) {
+     $.notify(xhr.responseText, "error");
  }
 });
 
@@ -64,6 +78,16 @@ $(document).ready(function getOfferCards(){
   document.getElementsByClassName("scnd")[0].style.backgroundImage = fotoja2;
   document.getElementsByClassName("third")[0].style.backgroundImage = fotoja3; 
 };
+
+ //  func check_ulog
+ function check_ulog(obj) {
+   var s_id=obj['id'];
+   // nqs ka perdorues te loguar 
+   if(s_id){
+      $(".homepage a.check_ulog").text('Profili');
+      $(".homepage a.check_ulog").attr('href','./pages/profile.html');
+    }
+}
 
 // func per ofertat ne seksionin e kartave
  function formCards(response){

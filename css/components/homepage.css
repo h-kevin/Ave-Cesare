@@ -68,6 +68,7 @@
 
 .navigationbar .container .navbar-collapse .navbar-nav .nav-item a {
   font-family: 'Righteous', serif;
+  text-transform: uppercase;
   color: rgb(255, 255, 255);
   font-size: medium;
   letter-spacing: 1px;
