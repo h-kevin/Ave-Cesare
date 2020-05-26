@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   
       // save each row of data in the array without key duplicates
       while($stmt->fetch()) {
-        if (array_key_exists($offer,$prod_offer)) {
+        if (array_key_exists($offer, $prod_offer)) {
           array_push($prod_offer[$offer], $product);
         } else {
           $tmp = array();
