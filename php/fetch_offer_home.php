@@ -2,48 +2,45 @@
  // bejm lidhjen me db 
  require_once('db_connect.php');
  
-//  startojm sesion nqs nk kemi
+
+// check if session is active
  if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
+// check request method
 if ( $_SERVER['REQUEST_METHOD'] == 'POST'){
-    $query="SELECT name, description, image FROM Offer";
-    // pergatitet query. ekzekutimi.rezultatet qe kthen db
+    // set up query to collect information on cart products
+    $query="SELECT id, name, description, image FROM Offer";
     $stmt = $conn->prepare($query);
     $stmt->execute();
-    $result = $stmt->get_result();
-    if ($result->num_rows == 0) {
-        $query="SELECT name, description, image FROM Product";
-        $stmt = $conn->prepare($query);
-        $stmt->execute();
-        $result = $stmt->get_result();
-    }
+    $stmt->store_result();
+    $stmt->bind_result($id,$name,$description,$image);
 
-    // deklarojme array
+     // array to save info
     $oferta=array();
 
-    // tn do e mbushim
-    foreach($result as $i) {
-        // krijojme objektin ku do ruajm te dhenat per nje ofert te marre nga query
-        $objekti=new stdClass();
-        // merr kolonen name,description dhe image dhe e ruan si nje variabel
-        $objekti->emri=$i["name"];
-        $objekti->pershkrimi=$i["description"];
-        $objekti->foto=$i["image"];
-        array_push($oferta,$objekti);
+    while($stmt->fetch()) {
+        // merr kolonen id,name,description dhe image dhe e ruan si nje variabel
+        $tmp=array();
+        $tmp[]=$id;
+        $tmp[]=$name;
+        $tmp[]=$description;
+        $tmp[]=$image;
+
+        $oferta[]=$tmp;     
     }
-    // kthen ne json te dhenat qe duam te kalojme ne js
-    echo json_encode($oferta);
+
+    $obj=new stdClass();
+    $obj->oferta=$oferta;
+    $obj=json_encode($obj);
+
+    echo $obj;
 }
 
 else {
     header('HTTP/1.1 400 Bad Request');
     exit("Kerkesa u refuzua!");
 }
-
-
-
-
 
 ?>
