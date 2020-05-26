@@ -24,6 +24,34 @@ $('.admin_panel .nav div').click(function () {
  * SECTION 2
  */
 
+$(document).ready(function () {
+  // on document ready fetch open orders
+  fetch_open_orders();
+});
+
+// function to fetch open orders
+function fetch_open_orders () {
+  $.ajax({
+    type: "post",
+    url: "../php/fetch_open_orders.php",
+    dataType: "json",
+    success: function (response) {
+      fill_orders_table(response);
+    }
+  });
+}
+
+// function to fill orders table
+function fill_orders_table (orders_obj) {
+
+};
+
+// set interval to update orders table
+setInterval(function () {
+	fetch_open_orders();
+}, 300000);
+
+
 /**
  * END SECTION 2
  */
