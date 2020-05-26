@@ -257,7 +257,7 @@ $(document).ready(function getAll () {
 /**
  * SECTION 4
  */
-$(document).ready(function getAllProds (e) {
+$(document).ready(function getAllProds () {
 
   //  function to fetch all products
   $.ajax({
@@ -268,23 +268,21 @@ $(document).ready(function getAllProds (e) {
       getAllProdsFormat(response);
     },
     error: function (xhr, ajaxOptions, thrownError) {
-      alert(xhr.responseText);
-      //$.notify(xhr.responseText, "error");
-    }
-  });
-
-  //  function to get all products categories into dropdown lists
-  $.ajax({
-    type: 'POST',
-    url: '../php/get_prodCat.php',
-    success: function (response) {
-      alert(response);
-      $('.input-group-btn').html('<button type="button" class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button><ul id="demolist" class="dropdown-menu"><li><a href="#">A</a></li><li><a href="#">B</a></li><li><a href="#">C</a></li></ul>')
-    },
-    error: function (xhr, ajaxOptions, thrownError) {
       $.notify(xhr.responseText, "error");
     }
   });
+
+  // //  function to get all products categories into dropdown lists
+  // $.ajax({
+  //   type: 'POST',
+  //   url: '../php/get_prodCat.php',
+  //   success: function (response) {
+  //     $('.input-group-btn').html('<button type="button" class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button><ul id="demolist" class="dropdown-menu"><li><a href="#">A</a></li><li><a href="#">B</a></li><li><a href="#">C</a></li></ul>')
+  //   },
+  //   error: function (xhr, ajaxOptions, thrownError) {
+  //     $.notify(xhr.responseText, "error");
+  //   }
+  // });
 
   //on success fill table with results
   function getAllProdsFormat (response) {
@@ -315,15 +313,11 @@ $(document).ready(function getAllProds (e) {
     $(this).find('small').fadeOut();
   });
 
-$(document).on('click', '.delete_prod', function (e) {
-  e.preventDefault();
-  e.stopImmediatePropagation();
+$(document).on('click', '.delete_prod', function () {
   prod_id = $(this).attr("id");
   $("#prod_delete_mod").show();
 
-  $(document).on('click', '#prod_delete_mod', function (e) {
-    e.preventDefault();
-    e.stopImmediatePropagation();
+  $(document).on('click', '#prod_delete_mod', function () {
     $.ajax({
       url: "../php/delete_prod.php",
       method: "POST",
