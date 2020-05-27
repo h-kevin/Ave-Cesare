@@ -45,40 +45,93 @@
     <!-- section 1 / status for admin -->
     <section id="stats-section">
       <div class="admin-stats">
+          <div class="container wrap-stat">
+           <hr>
+           <h1 id="tit_stat"> STATISTIKAT E PERDORIMIT TE FAQES</h1>
+           <hr>
+           <div class="row card-group">
+             <div class="col-lg 3 col-md-3 col-sm-12 col-xs-12 d-flex justify-content-center">
+               <div class="card mb-2 mb-md-0">
+                 <img class="card-img-top" src="../img/user_icon_stat.jpg" alt="Card image cap">
+                 <div class="card-body">
+                   <h4 class="card-title">Perdoruesit</h4>
+                   <div id="nr_perdoruesish"></div>
+                 </div>
+              </div>
+            </div>
+            <div class="col-lg 3 col-md-3 col-sm-12 col-xs-12 d-flex justify-content-center">
+                <div class="card mb-2 mb-md-0">
+                  <img class="card-img-top" src="../img/products_icon_stat.jpg" alt="Card image cap">
+                  <div class="card-body">
+                    <h4 class="card-title">Produktet</h4>
+                    <div id="nr_produktesh"></div>
+                  </div>
+                </div>
+            </div>
+            <div class="col-lg 3 col-md-3 col-sm-12 col-xs-12 d-flex justify-content-center">
+                <div class="card mb-2 mb-md-0">
+                  <img class="card-img-top" src="../img/offer_icon_stat.png" alt="Card image cap">
+                  <div class="card-body">
+                    <h4 class="card-title">Ofertat</h4>
+                    <div id="nr_ofertash"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg 3 col-md-3 col-sm-12 col-xs-12 d-flex justify-content-center">
+                <div class="card mb-2 mb-md-0">
+                  <img class="card-img-top" src="../img/delivered_icon_stat.png" alt="Card image cap">
+                  <div class="card-body">
+                    <h4 class="card-title">Porositë</h4>
+                    <div id="nr_porosish"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg 3 col-md-3 col-sm-12 col-xs-12 d-flex justify-content-center">
+                <div class="card">
+                  <img class="card-img-top" src="../img/earnings_icon_stat.png" alt="Card image cap">
+                  <div class="card-body">
+                    <h4 class="card-title">Fitimi</h4>
+                    <div id="fitimi"></div>
+                  </div>
+                </div>
+            </div>
+            </div>
+          </div>
 
-      </div>
-    </section id>
+        </div>
+      </section>
 
-    <!-- section 2 / order list -->
-    <section id="list-section">
-      <div class="order-list">
-        <div class="container my-3">
-          <h1>LISTA E POROSIVE</h1>
-          <hr class="border-dark">
-          <div class="container px-0 olist">
-            <div class="olist-table">
-              <table class="table table-hover table-responsive-sm">
-                <thead>
-                  <tr>
-                    <th scope="col" class="text-center">KLIENTI</th>
-                    <th scope="col" class="text-center">DATA</th>
-                    <th scope="col" class="text-center">PRODUKTET</th>
-                    <th scope="col" class="text-center">TOTAL</th>
-                    <th scope="col" class="text-center">STATUSI</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td colspan="5">
-                      <div class="progress bg-transparent border border-dark">
-                        <div
-                          class="progress-bar progress-bar-striped progress-bar-animated bg-success"
-                          role="progressbar" style="width: 20%"></div>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+      <!-- section 2 / order list -->
+      <section id="list-section">
+        <div class="order-list">
+          <div class="container my-3">
+            <h1>LISTA E POROSIVE</h1>
+            <hr class="border-dark">
+            <div class="container px-0 olist">
+              <div class="olist-table">
+                <table class="table table-hover table-responsive-sm">
+                  <thead>
+                    <tr>
+                      <th scope="col" class="text-center">KLIENTI</th>
+                      <th scope="col" class="text-center">DATA</th>
+                      <th scope="col" class="text-center">PRODUKTET</th>
+                      <th scope="col" class="text-center">TOTAL</th>
+                      <th scope="col" class="text-center">STATUSI</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td colspan="5">
+                        <div class="progress bg-transparent border border-dark">
+                          <div
+                            class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+                            role="progressbar" style="width: 20%"></div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
