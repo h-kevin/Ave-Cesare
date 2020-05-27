@@ -100,35 +100,43 @@
 /* media query per titullin e statistikave */
 
 @media (max-width: 853px) {
-	#tit_stat {
-		font-size: 40px;
-	}
+  #tit_stat {
+    font-size: 40px;
+  }
 }
 
 /* titulli i kartes */
+
 #stats-section .admin-stats .card .card-body h4 {
   text-align: center;
   font-family: 'Righteous', serif;
 }
 
-.card-img-top{
-  width:100%;
-  height:auto;
+.card-img-top {
+  width: 100%;
+  height: auto;
 }
 
 /* media query for cards */
 
-@media(max-width: 767px){
+@media (max-width: 767px) {
   #stats-section .admin-stats .card {
     width: 60%;
   }
 }
 
-#nr_perdoruesish , #nr_produktesh , #nr_ofertash, #nr_porosish, #fitimi {
+@media (max-width: 576px) {
+  #stats-section .admin-stats .card {
+    width: 100%;
+  }
+}
+
+#nr_perdoruesish, #nr_produktesh, #nr_ofertash, #nr_porosish, #fitimi {
   text-align: center;
   font-weight: bolder;
   font-size: xx-large;
 }
+
 /* END SECTION 1 */
 
 /* SECTION 2 */
@@ -142,20 +150,20 @@
 /* hr */
 
 #list-section hr {
-	border-width: medium;
+  border-width: medium;
 }
 
 /* h1 */
 
 #list-section h1 {
-	font-family: 'Bree Serif';
+  font-family: 'Bree Serif';
   font-size: xx-large;
 }
 
 @media (max-width: 576px) {
-	#list-section h1 {
-		font-size: x-large;
-	}
+  #list-section h1 {
+    font-size: x-large;
+  }
 }
 
 /* order list table */
@@ -172,20 +180,27 @@
 /* order table head */
 
 .olist-table thead tr th {
-	border-top: none;
-	border-bottom: 1px solid black;
-	font-size: small;
-	font-family: 'Electrolize';
+  border-top: none;
+  border-bottom: 1px solid black;
+  font-size: small;
+  font-family: 'Electrolize';
 }
 
 /* order table body */
 
 .olist-table .table tbody tr td {
-	border-bottom: 1px solid black;
-	font-size: medium;
-	font-family: 'Economica';
-	text-align: center;
+  border-bottom: 1px solid black;
+  font-size: medium;
+  font-family: 'Economica';
+  text-align: center;
   vertical-align: middle;
+}
+
+/* order status */
+
+#list-section .status:focus {
+  box-shadow: none;
+  outline: none !important;
 }
 
 /* END SECTION 2 */
@@ -238,7 +253,7 @@
 }
 
 @media (max-width: 576px) {
-	#admp #titulli {
+  #admp #titulli {
     font-size: xx-large;
   }
   #kuti {
