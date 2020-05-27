@@ -96,13 +96,22 @@ $(document).ready(function getAll () {
     $('#kuti table tbody').html(tblVar);
   }
 
-  //ne klikimin jashte modalit i bejm reset cdo inputi
+  //ne klikimin jashte modalit i bejm reset cdo inputi ose alerti
   $('.modal').on('hidden.bs.modal', function () {
     $(this).find('form')[0].reset();
     $('[data-toggle="buttons"] :radio').prop('checked', false);
     $('[data-toggle="buttons"] label').removeClass('active');
     $(this).find('.collapse').collapse('hide');
     $(this).find('small').fadeOut();
+    $('#modal_msgDel').html('');
+    $('#modal_msgDel').removeClass('alert alert-primary');
+    $('#userModalDelete').modal('hide');
+    $('#modal_msgAd').html('');
+    $('#modal_msgAd').removeClass('alert alert-primary');
+    $('#userModalAdd').modal('hide');
+    $('#modal_msgUp').html('');
+    $('#modal_msgUp').removeClass('alert alert-primary');
+    $('#userModalUpdate').modal('hide');
   });
 
   $(document).on('click', '.delete', function (e) {
@@ -254,6 +263,8 @@ $(document).ready(function getAll () {
  */
 
 
+
+
 /**
  * SECTION 4
  */
@@ -318,6 +329,25 @@ $(document).ready(function getAllProds () {
     $('#kuti_p table tbody').html(tblVar);
   }
 
+
+  //ne klikimin jashte modalit i bejm reset cdo inputi ose alerti
+  $('.modal').on('hidden.bs.modal', function () {
+    $(this).find('form')[0].reset();
+    $('[data-toggle="buttons"] :radio').prop('checked', false);
+    $('[data-toggle="buttons"] label').removeClass('active');
+    $(this).find('.collapse').collapse('hide');
+    $(this).find('small').fadeOut();
+    $('#modal_prod_msgDel').html('');
+    $('#modal_prod_msgDel').removeClass('alert alert-primary');
+    $('#prodModalDelete').modal('hide');
+    $('#modal_prod_msgAd').html('');
+    $('#modal_prod_msgAd').removeClass('alert alert-primary');
+    $('#prodModalAdd').modal('hide');
+    $('#modal_prod_msgUp').html('');
+    $('#modal_prod_msgUp').removeClass('alert alert-primary');
+    $('#prodModalUpdate').modal('hide');
+  });
+
   var prod_id;
   //ne klikimin jashte modalit i bejm reset cdo inputi
   $('.modal').on('hidden.bs.modal', function () {
@@ -328,6 +358,7 @@ $(document).ready(function getAllProds () {
     $(this).find('small').fadeOut();
   });
 
+  //function to delete selected product
 $(document).on('click', '.delete_prod', function (e) {
   e.preventDefault();
   e.stopImmediatePropagation();
@@ -346,11 +377,11 @@ $(document).on('click', '.delete_prod', function (e) {
         $('.manage-products .spinner-border').removeClass('d-none');
       },
       success: function (data) {
+        getAllProds();
         $('.manage-products .spinner-border').addClass('d-none');
         $("#prod_delete_mod").hide();
         $('#modal_prod_msgDel').addClass('alert alert-primary');
         $('#modal_prod_msgDel').html(data);
-        getAllProds();
         setTimeout(function () {
           $('#modal_prod_msgDel').html('');
           $('#modal_prod_msgDel').removeClass('alert alert-primary');
@@ -359,11 +390,13 @@ $(document).on('click', '.delete_prod', function (e) {
       },
       error: function (xhr, ajaxOptions, thrownError) {
         $.notify(xhr.responseText, "error");
+        $('.manage-products .spinner-border').addClass('d-none');
       }
     });
   });
 });
 
+//function to add product
 $(document).on('click', '#prod_add', function (e) {
   e.preventDefault();
   e.stopImmediatePropagation();
@@ -391,10 +424,10 @@ $(document).on('click', '#prod_add', function (e) {
         $('#admp .spinner-border').removeClass('d-none');
       },
       success: function (data) {
+        getAllProds();
         $('#admp .spinner-border').addClass('d-none');
         $('#modal_prod_msgAd').addClass('alert alert-primary');
         $('#modal_prod_msgAd').html(data);
-        getAllProds();
         $('form').trigger('reset');
         setTimeout(function () {
           $('#modal_prod_msgAd').html('');
@@ -404,12 +437,13 @@ $(document).on('click', '#prod_add', function (e) {
       },
       error: function (xhr, ajaxOptions, thrownError) {
         $.notify(xhr.responseText, "error");
+        $('#admp .spinner-border').addClass('d-none');
       }
     });
   }
 });
 
-
+//function to update product
 $(document).on('click', '.update_prod', function (e) {
   e.preventDefault();
   e.stopImmediatePropagation();
@@ -429,7 +463,9 @@ $(document).on('click', '.update_prod', function (e) {
     if (name == "" && price == "" && category == "" && jQuery.isEmptyObject(ingredients)) {
       $('#modal_prod_msgUp').html('Ju nuk keni modifikuar asnje te dhene!');
       $('#modal_prod_msgUp').addClass('alert alert-primary');
-    }
+    } 
+    
+    else {
       $.ajax({
         url: "../php/update_prod.php",
         method: "POST",
@@ -438,10 +474,10 @@ $(document).on('click', '.update_prod', function (e) {
           $('#admp .spinner-border').removeClass('d-none');
         },
         success: function (data) {
+          getAllProds();
           $('#admp .spinner-border').addClass('d-none');
           $('#modal_prod_msgUp').html(data);
           $('#modal_prod_msgUp').addClass('alert alert-primary');
-          getAllProds();
           $('form').trigger('reset');
           setTimeout(function () {
             $('#modal_prod_msgUp').html('');
@@ -451,8 +487,10 @@ $(document).on('click', '.update_prod', function (e) {
         },
         error: function (xhr, ajaxOptions, thrownError) {
           $.notify(xhr.responseText, "error");
+          $('#admp .spinner-border').addClass('d-none');
         }
       });
+    }
     });
   });
 

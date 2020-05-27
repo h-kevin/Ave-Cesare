@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * PHP file signup
+ */
     require_once('db_connect.php');
     require_once('../vendors/PHPMailer/PHPMailerAutoload.php');
         
@@ -10,9 +13,11 @@
         $email = $_POST['email'];
         $pass1 = $_POST['pass1'];
 
+        //prepare hashed password
         $vkey = md5(time() . $email);
         $password = password_hash($pass1, PASSWORD_DEFAULT);
     
+        //check if user already exists using email
         $stmt = $conn->prepare("SELECT * FROM User WHERE email = ?");
         $stmt->bind_param('s', $email);
     
@@ -25,12 +30,14 @@
             exit ("Kjo adrese i perket nje perdoruesi tjeter.");
         }
     
+        //if user doesnt exist, insert him
         $stmt = $conn->prepare("INSERT INTO User 
             SET email = ?, name = ?, surname = ?, password = ?, vkey = ?");
         $stmt->bind_param('sssss', $email, $name, $surname, $password, $vkey);
         
         $result = $stmt->execute();
     
+        //send a verification email
         if ($result) {
             $mail = new PHPMailer(true);
             $mail->isSMTP();

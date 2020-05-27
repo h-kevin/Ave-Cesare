@@ -27,6 +27,7 @@ $(document).ready(function(){
 		}
 	});
 
+    //function to hide and reset modal values after clicking outside of it
     $('.modal').on('hidden.bs.modal', function() {
         $(this).find('form')[0].reset();
         $('[data-toggle="buttons"] label').removeClass('active');
@@ -44,6 +45,7 @@ $(document).ready(function(){
 
     var id, sasia=1;
 
+    //add to cart function
         $(document).on('click', '.shto', function(e){
         e.preventDefault();
         e.stopImmediatePropagation();
@@ -68,7 +70,7 @@ $(document).ready(function(){
                 $('form').trigger('reset');
             },
             error: function (xhr, ajaxOptions, thrownError) {
-                alert(xhr.responseText, "error");
+                $.notify(xhr.responseText, "error");
             }
             });
 
@@ -112,6 +114,7 @@ $(document).ready(function(){
                   }
               });
 
+//deprecated: search option in menu
     $("#search").keyup(function() {
     var search = $("#search").val();
     console.log(search);
@@ -142,10 +145,6 @@ function display(cat_id){
               }  
          });  
         }
-
-$(document).ready(function(){  
-    
-});
 
 
 //  func check_ulog
