@@ -15,50 +15,50 @@ $('.admin_panel .nav div').click(function () {
  * SECTION 1
  */
 
-$(document).ready(function(){ 
+$(document).ready(function () {
   statistika();
 });
 
-function statistika() {
+function statistika () {
   $.ajax({
-      type: 'GET',
-      url:  '../php/nr_perdoruesish.php',
-      success: function(response) {
-          $('#nr_perdoruesish').html(response);
-      }
-    });
-
-  $.ajax({
-      type: 'GET',
-      url:  '../php/nr_produktesh.php',
-      success: function(response) {
-          $('#nr_produktesh').html(response);
-      }
+    type: 'GET',
+    url: '../php/nr_perdoruesish.php',
+    success: function (response) {
+      $('#nr_perdoruesish').html(response);
+    }
   });
 
   $.ajax({
-      type: 'GET',
-      url:  '../php/nr_ofertash.php',
-      success: function(response) {
-          $('#nr_ofertash').html(response);
-      }
+    type: 'GET',
+    url: '../php/nr_produktesh.php',
+    success: function (response) {
+      $('#nr_produktesh').html(response);
+    }
   });
 
   $.ajax({
-      type: 'GET',
-      url:  '../php/nr_porosish.php',
-      success: function(response) {
-          $('#nr_porosish').html(response);
-      }
+    type: 'GET',
+    url: '../php/nr_ofertash.php',
+    success: function (response) {
+      $('#nr_ofertash').html(response);
+    }
   });
 
   $.ajax({
-      type: 'GET',
-      url:  '../php/fitimi.php',
-      success: function(response) {
-          $('#fitimi').html(response);
-          
-      }
+    type: 'GET',
+    url: '../php/nr_porosish.php',
+    success: function (response) {
+      $('#nr_porosish').html(response);
+    }
+  });
+
+  $.ajax({
+    type: 'GET',
+    url: '../php/fitimi.php',
+    success: function (response) {
+      $('#fitimi').html(response);
+
+    }
   });
 }
 
@@ -107,7 +107,7 @@ function fill_orders_table (orders_obj) {
 
   // reset table data
   $('#list-section .olist-table tbody').html('');
-  
+
   // if there are no orders placed
   if (orders.length == 0) {
     $('#list-section .olist-table tbody').append(
@@ -133,7 +133,7 @@ function fill_orders_table (orders_obj) {
     for (let i = 0; i < orders.length; i++) {
       // order client
       client = `<td>${orders[i]['name']}</td>`;
-      
+
       // order date
       date = `<td>${orders[i]['time']}</td>`;
 
