@@ -15,6 +15,59 @@ $('.admin_panel .nav div').click(function () {
  * SECTION 1
  */
 
+$(document).ready(function () {
+  statistika();
+});
+
+function statistika () {
+  $.ajax({
+    type: 'GET',
+    url: '../php/nr_perdoruesish.php',
+    success: function (response) {
+      $('#nr_perdoruesish').html(response);
+    }
+  });
+
+  $.ajax({
+    type: 'GET',
+    url: '../php/nr_produktesh.php',
+    success: function (response) {
+      $('#nr_produktesh').html(response);
+    }
+  });
+
+  $.ajax({
+    type: 'GET',
+    url: '../php/nr_ofertash.php',
+    success: function (response) {
+      $('#nr_ofertash').html(response);
+    }
+  });
+
+  $.ajax({
+    type: 'GET',
+    url: '../php/nr_porosish.php',
+    success: function (response) {
+      $('#nr_porosish').html(response);
+    }
+  });
+
+  $.ajax({
+    type: 'GET',
+    url: '../php/fitimi.php',
+    success: function (response) {
+      $('#fitimi').html(response);
+
+    }
+  });
+}
+
+// set interval to update stats
+setInterval(function () {
+  statistika();
+}, 10000);
+
+
 /**
  * END SECTION 1
  */
@@ -37,19 +90,96 @@ function fetch_open_orders () {
     dataType: "json",
     success: function (response) {
       fill_orders_table(response);
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+      $.notify(xhr.responseText, 'error');
     }
   });
-}
+};
 
 // function to fill orders table
 function fill_orders_table (orders_obj) {
+  // orders
+  let orders = orders_obj['orders'];
 
+  // products
+  let products = orders_obj['products'];
+
+  // reset table data
+  $('#list-section .olist-table tbody').html('');
+
+  // if there are no orders placed
+  if (orders.length == 0) {
+    $('#list-section .olist-table tbody').append(
+      `<tr>
+        <td colspan="5">
+          Nuk ka porosi te hapura per momentin.
+        </td>
+      </tr>`
+    );
+  } else {
+    // progress bar for top order
+    let progressbar = `<tr><td colspan="6">
+      <div class="progress bg-transparent border border-dark">
+      <div class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+      role="progressbar" style="width: 25%">25%</div></div></td></tr>`;
+
+    // insert progressbar
+    $('#list-section .olist-table tbody').append(progressbar);
+
+    // table columns
+    let client, date, destination, prod, total, status;
+
+    for (let i = 0; i < orders.length; i++) {
+      // order client
+      client = `<td>${orders[i]['name']}</td>`;
+
+      // order date
+      date = `<td>${orders[i]['time']}</td>`;
+
+      // order destination
+      if (orders[i]['o_loc'])
+        destination = `<td>${orders[i]['o_loc']}</td>`;
+      else
+        destination = `<td>Take Away</td>`;
+
+      // order total
+      total = `<td>${orders[i]['total']}</td>`;
+
+      // order status
+      status = `<td><select
+        class="bg-transparent border-dark text-body custom-select custom-select-sm status">
+        <option selected vlaue="open">Vendosur</option>
+        <option value="cooking">Duke pergatitur</option>
+        <option value="delivering">Duke shperndare</option>
+        <option value="delivered">Perfunduar</option></select></td>`;
+
+      // order products
+      prod = `<td>`;
+
+      for (let j = 0; j < products[i].length; j++) {
+        prod += `(${products[i][j]['pquantity']})&nbsp;${products[i][j]['pname']}`;
+
+        if (j != products[i].length - 1) {
+          prod += `, `;
+        }
+      }
+
+      prod += `</td>`;
+
+      // create table row
+      let row = `<tr>${client} ${date} ${destination} ${prod} ${total} ${status}</tr>`;
+
+      // insert rows
+      $('#list-section .olist-table tbody').append(row);
+    }
+  }
 };
 
 // set interval to update orders table
 setInterval(function () {
-	fetch_open_orders();
-}, 300000);
+  fetch_open_orders();
+}, 10000);
 
 
 /**

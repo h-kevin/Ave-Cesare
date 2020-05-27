@@ -22,7 +22,7 @@ if ( $_SERVER['REQUEST_METHOD'] == 'POST'){
     foreach($result as $i) {
         // krijojme objektin ku do ruajm te dhenat per nje ofert te marre nga query
         $objekti=new stdClass();
-        // merr kolonen name,description dhe image dhe e ruan si nje variabel
+        // merr image dhe e ruan si nje variabel
         $objekti->foto=$i["image"];
         array_push($produkt,$objekti);
     }
