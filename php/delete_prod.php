@@ -8,6 +8,8 @@
     
     if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["prod_id"])){
 
+        $stmt = $conn->prepare("DELETE FROM `Prod_Ingredient` WHERE prod_id = " . $_POST["prod_id"]);
+        $stmt->execute();
         $stmt = $conn->prepare("DELETE FROM Product WHERE id=" . $_POST["prod_id"]);
         $result = $stmt->execute();
 

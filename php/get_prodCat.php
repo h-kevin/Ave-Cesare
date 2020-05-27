@@ -14,9 +14,9 @@
         $stmt->execute();
         $result = $stmt->get_result();
 
-        $res = '';
+        $res = '<option value="" selected disabled hidden>Kategoria</option>';
         foreach($result as $row){
-            $res = $res . '<option value="' . $row['id'] . '">' . $row['name'] . '</option>';
+            $res .= '<option value="' . $row['id'] . '">' . $row['name'] . '</option>';
         }
         echo $res;
     }

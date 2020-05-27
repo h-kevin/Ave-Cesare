@@ -272,17 +272,32 @@ $(document).ready(function getAllProds () {
     }
   });
 
-  // //  function to get all products categories into dropdown lists
-  // $.ajax({
-  //   type: 'POST',
-  //   url: '../php/get_prodCat.php',
-  //   success: function (response) {
-  //     $('.input-group-btn').html('<button type="button" class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button><ul id="demolist" class="dropdown-menu"><li><a href="#">A</a></li><li><a href="#">B</a></li><li><a href="#">C</a></li></ul>')
-  //   },
-  //   error: function (xhr, ajaxOptions, thrownError) {
-  //     $.notify(xhr.responseText, "error");
-  //   }
-  // });
+  //  function to get all products categories into dropdown lists
+  $.ajax({
+    type: 'POST',
+    url: '../php/get_prodCat.php',
+    success: function (response) {
+      $('#kategAdd').html(response);
+      $('#kategUp').html(response);
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+      $.notify(xhr.responseText, "error");
+    }
+  });
+
+    //  function to get all products ingredients into checkbox
+    $.ajax({
+      type: 'POST',
+      url: '../php/get_prodIngredients.php',
+      success: function (response) {
+        $('#checkIngredientAdd').html(response);
+        $('#checkIngredientUp').html(response);
+      },
+      error: function (xhr, ajaxOptions, thrownError) {
+        $.notify(xhr.responseText, "error");
+      }
+    });
+
 
   //on success fill table with results
   function getAllProdsFormat (response) {
@@ -313,11 +328,16 @@ $(document).ready(function getAllProds () {
     $(this).find('small').fadeOut();
   });
 
-$(document).on('click', '.delete_prod', function () {
+$(document).on('click', '.delete_prod', function (e) {
+  e.preventDefault();
+  e.stopImmediatePropagation();
   prod_id = $(this).attr("id");
   $("#prod_delete_mod").show();
 
-  $(document).on('click', '#prod_delete_mod', function () {
+  $(document).on('click', '#prod_delete_mod', function (e) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+
     $.ajax({
       url: "../php/delete_prod.php",
       method: "POST",
@@ -343,6 +363,99 @@ $(document).on('click', '.delete_prod', function () {
     });
   });
 });
+
+$(document).on('click', '#prod_add', function (e) {
+  e.preventDefault();
+  e.stopImmediatePropagation();
+  
+  var i=0;
+  let name = $('#prod_name_add').val();
+  let price = $('#prod_price_add').val();
+  let category = $('#kategAdd').children("option:selected").val();
+  let ingredients = [];
+  $('.form-check-input:checked').each(function () {
+      ingredients[i++] = $(this).val();
+  });  
+
+  if (name == "" || price == "" || category == "") {
+    $('#modal_prod_msgAd').html('Duhen shtuar te gjitha te dhenat e domosdoshme! (Emri, cmimi dhe kategoria)');
+    $('#modal_prod_msgAd').addClass('alert alert-primary');
+  }
+
+  else  {
+    $.ajax({
+      url: "../php/add_prod.php",
+      method: "POST",
+      data: { name: name, price: price, category: category, ingredients: ingredients },
+      beforeSend: function () {
+        $('#admp .spinner-border').removeClass('d-none');
+      },
+      success: function (data) {
+        $('#admp .spinner-border').addClass('d-none');
+        $('#modal_prod_msgAd').addClass('alert alert-primary');
+        $('#modal_prod_msgAd').html(data);
+        getAllProds();
+        $('form').trigger('reset');
+        setTimeout(function () {
+          $('#modal_prod_msgAd').html('');
+          $('#modal_prod_msgAd').removeClass('alert alert-primary');
+          $('#prodModalAdd').modal('hide');
+        }, 1800);
+      },
+      error: function (xhr, ajaxOptions, thrownError) {
+        $.notify(xhr.responseText, "error");
+      }
+    });
+  }
+});
+
+
+$(document).on('click', '.update_prod', function (e) {
+  e.preventDefault();
+  e.stopImmediatePropagation();
+  prod_id = $(this).attr("id");
+
+  $(document).on('click', '#prod_update_mod', function () {
+
+    var i=0;
+    let name = $('#prod_name_up').val();
+    let price = $('#prod_price_up').val();
+    let category = $('#kategUp').children("option:selected").val();
+    let ingredients = [];
+    $('.form-check-input:checked').each(function () {
+        ingredients[i++] = $(this).val();
+    });  
+
+    if (name == "" && price == "" && category == "" && jQuery.isEmptyObject(ingredients)) {
+      $('#modal_prod_msgUp').html('Ju nuk keni modifikuar asnje te dhene!');
+      $('#modal_prod_msgUp').addClass('alert alert-primary');
+    }
+      $.ajax({
+        url: "../php/update_prod.php",
+        method: "POST",
+        data: { prod_id: prod_id, name: name, price: price, category: category, ingredients: ingredients },
+        beforeSend: function () {
+          $('#admp .spinner-border').removeClass('d-none');
+        },
+        success: function (data) {
+          $('#admp .spinner-border').addClass('d-none');
+          $('#modal_prod_msgUp').html(data);
+          $('#modal_prod_msgUp').addClass('alert alert-primary');
+          getAllProds();
+          $('form').trigger('reset');
+          setTimeout(function () {
+            $('#modal_prod_msgUp').html('');
+            $('#modal_prod_msgUp').removeClass('alert alert-primary');
+            $('#prodModalUpdate').modal('hide');
+          }, 1800);
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+          $.notify(xhr.responseText, "error");
+        }
+      });
+    });
+  });
+
 });
 /**
  * END SECTION 4

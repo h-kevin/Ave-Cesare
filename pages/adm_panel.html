@@ -246,9 +246,20 @@
                     <div class="input-group">
                       <input type="text" name="prod_name" id="prod_name_add" class="form-control"
                         placeholder="Emri" />
-                      <input type="number" min="0" value="300" max="2000" step="50" name="prod_price" id="prod_price_ad" class="form-control" placeholder="Cmimi">
-
+                      <input type="number" type="number" min="0" max="2000" step="50"  name="prod_price" id="prod_price_add" class="form-control" placeholder="Cmimi">
                     </div>
+                    <div class="input-group custom-file mt-2">
+                      <input type="file" class="custom-file-input" name="profimg" id="imgin">
+                        <label style="font-family: 'Barlow Condensed', serif;" class="custom-file-label" for="inputGroupFile02">
+                          Zgjidh imazhin
+                        </label>
+    
+                        <select class="form-control mt-2 mb-2" id="kategAdd">
+                        </select>
+
+                        <div id="checkIngredientAdd">
+                        </div>
+                      </div>
                   </form>
                 </div>
                 <div class="modal-footer">
@@ -273,7 +284,19 @@
                     <div class="input-group">
                       <input type="text" name="prod_name" id="prod_name_up" class="form-control"
                         placeholder="Emri" />
-                      <input type="number" type="number" min="0" value="300" max="2000" step="50"  name="prod_price" id="prod_price_up" class="form-control" placeholder="Cmimi">
+                      <input type="number" type="number" min="0" max="2000" step="50"  name="prod_price" id="prod_price_up" class="form-control" placeholder="Cmimi">
+                    </div>
+                    <div class="input-group custom-file mt-2">
+                      <input type="file" class="custom-file-input" name="profimg" id="imgin">
+                        <label style="font-family: 'Barlow Condensed', serif;" class="custom-file-label" for="inputGroupFile02">
+                          Zgjidh imazhin
+                        </label>
+    
+                        <select class="form-control mt-2 mb-2" id="kategUp">
+                        </select>
+
+                        <div id="checkIngredientUp">
+                        </div>
                       </div>
                   </form>
                 </div>
@@ -317,6 +340,7 @@
     <script src="../vendors/jquery/jquery-3.4.1.min.js"></script>
     <script src="../vendors/popper/popper.min.js"></script>
     <script src="../vendors/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../vendors/boostrap-select/js/bootstrap-select.min.js"></script>
     <script src="../vendors/jquery/notify.min.js"></script>
     <script src="../vendors/jquery/jquery-ui.js"></script>
     <script type="text/javascript" src="../js/adm_panel.js"></script>

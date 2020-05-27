@@ -232,6 +232,11 @@
   text-align: center;
 }
 
+#admp .form-check-label {
+  font-family: 'Barlow Condensed', serif;
+
+}
+
 /* END SECTION 3 */
 
 /* SECTION 4 */
@@ -321,6 +326,11 @@
   font-family: 'Barlow Condensed', serif;
   font-size: large;
   text-align: center;
+}
+
+#admp .form-check-label {
+  font-family: 'Barlow Condensed', serif;
+
 }
 /* END SECTION 4 */
 
