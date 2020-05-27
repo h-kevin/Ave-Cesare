@@ -82,6 +82,53 @@
   overflow: hidden;
 }
 
+#stats-section .admin-stats .wrap-stat {
+  opacity: 0.9;
+  max-height: 95vh;
+  overflow: auto;
+}
+
+/* titulli i faqes se statistikave */
+
+#tit_stat {
+  font-family: 'Barlow Condensed', serif;
+  text-align: center;
+  font-size: 60px;
+  color: rgb(0, 0, 0);
+}
+
+/* media query per titullin e statistikave */
+
+@media (max-width: 853px) {
+	#tit_stat {
+		font-size: 40px;
+	}
+}
+
+/* titulli i kartes */
+#stats-section .admin-stats .card .card-body h4 {
+  text-align: center;
+  font-family: 'Righteous', serif;
+}
+
+.card-img-top{
+  width:100%;
+  height:auto;
+}
+
+/* media query for cards */
+
+@media(max-width: 767px){
+  #stats-section .admin-stats .card {
+    width: 60%;
+  }
+}
+
+#nr_perdoruesish , #nr_produktesh , #nr_ofertash, #nr_porosish, #fitimi {
+  text-align: center;
+  font-weight: bolder;
+  font-size: xx-large;
+}
 /* END SECTION 1 */
 
 /* SECTION 2 */

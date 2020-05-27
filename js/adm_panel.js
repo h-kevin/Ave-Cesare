@@ -15,6 +15,59 @@ $('.admin_panel .nav div').click(function () {
  * SECTION 1
  */
 
+$(document).ready(function(){ 
+  statistika();
+});
+
+function statistika() {
+  $.ajax({
+      type: 'GET',
+      url:  '../php/nr_perdoruesish.php',
+      success: function(response) {
+          $('#nr_perdoruesish').html(response);
+      }
+    });
+
+  $.ajax({
+      type: 'GET',
+      url:  '../php/nr_produktesh.php',
+      success: function(response) {
+          $('#nr_produktesh').html(response);
+      }
+  });
+
+  $.ajax({
+      type: 'GET',
+      url:  '../php/nr_ofertash.php',
+      success: function(response) {
+          $('#nr_ofertash').html(response);
+      }
+  });
+
+  $.ajax({
+      type: 'GET',
+      url:  '../php/nr_porosish.php',
+      success: function(response) {
+          $('#nr_porosish').html(response);
+      }
+  });
+
+  $.ajax({
+      type: 'GET',
+      url:  '../php/fitimi.php',
+      success: function(response) {
+          $('#fitimi').html(response);
+          
+      }
+  });
+}
+
+// set interval to update stats
+setInterval(function () {
+  statistika();
+}, 10000);
+
+
 /**
  * END SECTION 1
  */
