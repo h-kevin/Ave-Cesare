@@ -119,9 +119,15 @@
 
 /* media query for cards */
 
-@media(max-width: 767px) {
+@media (max-width: 767px) {
   #stats-section .admin-stats .card {
     width: 60%;
+  }
+}
+
+@media (max-width: 576px) {
+  #stats-section .admin-stats .card {
+    width: 100%;
   }
 }
 
