@@ -126,7 +126,7 @@ function fill_orders_table (orders_obj) {
 // set interval to update orders table
 setInterval(function () {
   fetch_open_orders();
-}, 300000);
+}, 10000);
 
 
 /**
