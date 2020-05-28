@@ -321,12 +321,12 @@ function getAll () {
   });
 };
 
-var user_id;
+let user_id;
 
 //on success fill table with results
 function getAllFormat (response) {
 
-  var tblVar;
+  let tblVar;
 
   for (i in response) {
     tblVar += '<tr>';
@@ -444,9 +444,9 @@ $(document).on('click', '.update', function () {
 
   $(document).on('click', '#update_mod', function () {
     const regex1 = new RegExp(/^[A-Za-z]+$/);
-    var name = $('#name_up').val();
-    var surname = $('#surname_up').val();
-    var type_user = $("input[name='user_type']:checked").val()
+    let name = $('#name_up').val();
+    let surname = $('#surname_up').val();
+    let type_user = $("input[name='user_type']:checked").val()
 
     if (name != "" && !regex1.test(name)) {
       $('#modal_msgUp').html('Vendosni emrin ne formatin e kerkuar!');
@@ -584,7 +584,7 @@ function getAllProds () {
 //on success fill table with results
 function getAllProdsFormat (response) {
 
-  var tblVar;
+  let tblVar;
 
   for (i in response) {
     tblVar += '<tr>';
@@ -619,7 +619,7 @@ $('#mgp-section').on('hidden.bs.modal', '.modal', function () {
   }
 });
 
-var prod_id;
+let prod_id;
 
 //function to delete selected product
 $(document).on('click', '.delete_prod', function (e) {
@@ -657,11 +657,8 @@ $(document).on('click', '.delete_prod', function (e) {
 });
 
 //function to add product
-$(document).on('click', '#prod_add', function (e) {
-  e.preventDefault();
-  e.stopImmediatePropagation();
-
-  var i = 0;
+$(document).on('click', '#prod_add', function () {
+  let i = 0;
   let name = $('#prod_name_add').val();
   let price = $('#prod_price_add').val();
   let category = $('#kategAdd').children("option:selected").val();
@@ -734,140 +731,118 @@ $(document).on('click', '#prod_add', function (e) {
 });
 
 //function to update product
-$(document).on('click', '.update_prod', function (e) {
+$(document).on('click', '.update_prod', function () {
   prod_id = $(this).attr("data-id");
+});
 
-  $(document).on('click', '#prod_update_mod', function () {
+$(document).on('click', '#prod_update_mod', function () {
+  let i = 0;
+  let name = $('#prod_name_up').val();
+  let price = $('#prod_price_up').val();
+  let category = $('#kategUp').children("option:selected").val();
+  let ingredients = [];
 
-    var i = 0;
-    let name = $('#prod_name_up').val();
-    let price = $('#prod_price_up').val();
-    let category = $('#kategUp').children("option:selected").val();
-    let ingredients = [];
-    $('.form-check-input:checked').each(function () {
-      ingredients[i++] = $(this).val();
-    });
-
-    let imgfile = document.getElementById('prodimgin').files[0];
-
-    if (name == "" && price == "" && category == "" && !imgfile && ingredients.length == 0) {
-      $('#modal_prod_msgUp').html('Ju nuk keni modifikuar asnje te dhene!');
-      $('#modal_prod_msgUp').addClass('alert alert-primary');
-    } else {
-      // if file was selected
-      if (imgfile) {
-        let extensions = ['jpg', 'jpeg', 'png', 'gif'];
-        let filename = imgfile.name;
-        let filesize = imgfile.size;
-
-        // if not allowed file type or above allowed size
-        if (!extensions.includes(filename.split('.').pop())) {
-          $('#modal_prod_msgUp').text('Formati i gabuar!');
-          $('#modal_prod_msgUp').addClass('alert alert-primary');
-        } else if (filesize > 5000000) {
-          $('#modal_prod_msgUp').text('Imazhi nuk mund te jete me shume se 5MB!');
-          $('#modal_prod_msgUp').addClass('alert alert-primary');
-        } else {
-          let inputData = new FormData();
-          inputData.append('prodimg', imgfile);
-          inputData.append('prod_id', prod_id);
-
-          // send data and receive url
-          $.ajax({
-            type: "post",
-            url: "../php/prod_img.php",
-            data: inputData,
-            contentType: false,
-            cache: false,
-            processData: false,
-            beforeSend: function () {
-              $('#admp .spinner-border').removeClass('d-none');
-            },
-            success: function (response) {
-              $('#admp .spinner-border').addClass('d-none');
-              $('#modal_prod_msgUp').html(response);
-              $('#modal_prod_msgUp').addClass('alert alert-primary');
-              getAllProds();
-              setTimeout(function () {
-                $('#prodModalUpdate').modal('hide');
-              }, 1000);
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
-              $('#admp .spinner-border').addClass('d-none');
-              $.notify(xhr.responseText, 'error');
-            }
-          });
-        }
-      } else {
-        if (name != "" || price != "" || category != "" || ingredients.length != 0 && !imgfile) {
-          $.ajax({
-            url: "../php/update_prod.php",
-            method: "POST",
-            data: { prod_id: prod_id, name: name, price: price, category: category, ingredients: ingredients },
-            beforeSend: function () {
-              $('#admp .spinner-border').removeClass('d-none');
-            },
-            success: function (data) {
-              $('#admp .spinner-border').addClass('d-none');
-              $('#modal_prod_msgUp').html(data);
-              $('#modal_prod_msgUp').addClass('alert alert-primary');
-              getAllProds();
-              setTimeout(function () {
-                $('#prodModalUpdate').modal('hide');
-              }, 1000);
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
-              $.notify(xhr.responseText, "error");
-              $('#admp .spinner-border').addClass('d-none');
-            }
-          });
-        } else {
-          let extensions = ['jpg', 'jpeg', 'png', 'gif'];
-          let filename = imgfile.name;
-          let filesize = imgfile.size;
-
-          // if not allowed file type or above allowed size
-          if (!extensions.includes(filename.split('.').pop())) {
-            $('#modal_prod_msgUp').text('Formati i gabuar!');
-            $('#modal_prod_msgUp').addClass('alert alert-primary');
-          } else if (filesize > 5000000) {
-            $('#modal_prod_msgUp').text('Imazhi nuk mund te jete me shume se 5MB!');
-            $('#modal_prod_msgUp').addClass('alert alert-primary');
-          } else {
-            let inputData = new FormData();
-            inputData.append('prodimg', imgfile);
-            inputData.append('prod_id', prod_id);
-            inputData.append('name', name);
-            inputData.append('price', price);
-            inputData.append('category', category);
-            inputData.append('ingredients', ingredients);
-
-            $.ajax({
-              url: "../php/update_prod.php",
-              method: "POST",
-              data: inputData,
-              beforeSend: function () {
-                $('#admp .spinner-border').removeClass('d-none');
-              },
-              success: function (data) {
-                $('#admp .spinner-border').addClass('d-none');
-                $('#modal_prod_msgUp').html(data);
-                $('#modal_prod_msgUp').addClass('alert alert-primary');
-                getAllProds();
-                setTimeout(function () {
-                  $('#prodModalUpdate').modal('hide');
-                }, 1000);
-              },
-              error: function (xhr, ajaxOptions, thrownError) {
-                $.notify(xhr.responseText, "error");
-                $('#admp .spinner-border').addClass('d-none');
-              }
-            });
-          }
-        }
-      }
-    }
+  $('.form-check-input:checked').each(function () {
+    ingredients[i++] = $(this).val();
   });
+
+  let imgfile = document.getElementById('prodimgin').files[0];
+
+  if (name == "" && price == "" && category == "" && !imgfile && ingredients.length == 0) {
+    $('#modal_prod_msgUp').html('Ju nuk keni modifikuar asnje te dhene!');
+    $('#modal_prod_msgUp').addClass('alert alert-primary');
+  } else {
+    if (imgfile || name != "" || price != "" || category != "" || ingredients.length != 0) {
+      let extensions = ['jpg', 'jpeg', 'png', 'gif'];
+      let filename = imgfile.name;
+      let filesize = imgfile.size;
+
+      // if not allowed file type or above allowed size
+      if (!extensions.includes(filename.split('.').pop())) {
+        $('#modal_prod_msgUp').text('Formati i gabuar!');
+        $('#modal_prod_msgUp').addClass('alert alert-primary');
+      } else if (filesize > 5000000) {
+        $('#modal_prod_msgUp').text('Imazhi nuk mund te jete me shume se 5MB!');
+        $('#modal_prod_msgUp').addClass('alert alert-primary');
+      } else {
+        let inputData = new FormData();
+        inputData.append('prodimg', imgfile);
+        inputData.append('prod_id', prod_id);
+        inputData.append('name', name);
+        inputData.append('price', price);
+        inputData.append('category', category);
+        inputData.append('ingredients', JSON.stringify(ingredients));
+
+        $.ajax({
+          url: "../php/update_prod.php",
+          method: "post",
+          data: inputData,
+          contentType: false,
+          cache: false,
+          processData: false,
+          beforeSend: function () {
+            $('#admp .spinner-border').removeClass('d-none');
+          },
+          success: function (data) {
+            $('#admp .spinner-border').addClass('d-none');
+            $('#modal_prod_msgUp').html(data);
+            $('#modal_prod_msgUp').addClass('alert alert-primary');
+            getAllProds();
+            setTimeout(function () {
+              $('#prodModalUpdate').modal('hide');
+            }, 1000);
+          },
+          error: function (xhr, ajaxOptions, thrownError) {
+            $.notify(xhr.responseText, "error");
+            $('#admp .spinner-border').addClass('d-none');
+          }
+        });
+      }
+    } else if (imgfile && (name == "" && price == "" && category == "" && ingredients.length == 0)) {
+      let extensions = ['jpg', 'jpeg', 'png', 'gif'];
+      let filename = imgfile.name;
+      let filesize = imgfile.size;
+
+      // if not allowed file type or above allowed size
+      if (!extensions.includes(filename.split('.').pop())) {
+        $('#modal_prod_msgUp').text('Formati i gabuar!');
+        $('#modal_prod_msgUp').addClass('alert alert-primary');
+      } else if (filesize > 5000000) {
+        $('#modal_prod_msgUp').text('Imazhi nuk mund te jete me shume se 5MB!');
+        $('#modal_prod_msgUp').addClass('alert alert-primary');
+      } else {
+        let inputData = new FormData();
+        inputData.append('prodimg', imgfile);
+        inputData.append('prod_id', prod_id);
+      }
+
+      // send data and receive url
+      $.ajax({
+        type: "post",
+        url: "../php/prod_img.php",
+        data: inputData,
+        contentType: false,
+        cache: false,
+        processData: false,
+        beforeSend: function () {
+          $('#admp .spinner-border').removeClass('d-none');
+        },
+        success: function (response) {
+          $('#admp .spinner-border').addClass('d-none');
+          $('#modal_prod_msgUp').html(response);
+          $('#modal_prod_msgUp').addClass('alert alert-primary');
+          getAllProds();
+          setTimeout(function () {
+            $('#prodModalUpdate').modal('hide');
+          }, 1000);
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+          $('#admp .spinner-border').addClass('d-none');
+          $.notify(xhr.responseText, 'error');
+        }
+      });
+    }
+  }
 });
 
 /**
@@ -905,12 +880,12 @@ function getAllOffers () {
   });
 };
 
-var offer_id;
+let offer_id;
 
 //on success fill table with results
 function getAllFormatOffer (response) {
 
-  var tblVar;
+  let tblVar;
 
   for (i in response) {
     tblVar += '<tr>';
