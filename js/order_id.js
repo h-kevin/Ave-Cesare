@@ -1,3 +1,7 @@
+/**
+ * offer-order javascript page
+ */
+
 $(document).ready(function(){
     $(document).on('click', '.buton-karte', function(){
         var ofertaid = $(this).attr('id');

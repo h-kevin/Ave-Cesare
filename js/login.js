@@ -1,3 +1,7 @@
+
+/**
+ * login javascript page
+ */
 $(document).on('click', '#kycje', function(e){
     e.preventDefault();
     e.stopImmediatePropagation();
