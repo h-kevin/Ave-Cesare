@@ -1,7 +1,7 @@
-<!-- Faqja e ofertave -->
-
 <?php
-
+/**
+ * php offers handler page
+ */
     require_once('db_connect.php');
 
     $query = "SELECT * FROM Offer";  

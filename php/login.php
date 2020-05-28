@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * php login page
+ */
     session_start();
 
     require_once('db_connect.php');

@@ -1,4 +1,8 @@
 <?php
+
+/**
+ * php offer orders page
+ */
     require_once('db_connect.php');
 
 

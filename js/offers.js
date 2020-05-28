@@ -15,7 +15,7 @@ function navBarBackgroundScrollEffect () {
 navBarBackgroundScrollEffect();
 
 /**
- * koment
+ * offers page javascript page
  */
 
 $(document).ready(function(){  
