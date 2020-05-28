@@ -5,6 +5,11 @@
  */
     require_once('db_connect.php');
 
+    // check if session is active
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["name"]) && isset($_POST["surname"]) && isset($_POST["email"]) && isset($_POST["pass"])) {
         //data visible only to admins
         if ($_SESSION['admin'] == 1) {

@@ -343,8 +343,8 @@ function getAllFormat (response) {
 };
 
 //ne klikimin jashte modalit i bejm reset cdo inputi ose alerti
-$('.modal').on('hidden.bs.modal', function () {
-  if (!$(this).find('button').text() == 'Fshi') {
+$('#mgu-section').on('hidden.bs.modal', '.modal', function () {
+  if ($(this).attr('id') != 'userModalDelete') {
     $(this).find('form')[0].reset();
     $('#modal_msgAd').html('');
     $('#modal_msgAd').removeClass('alert alert-primary');
@@ -359,15 +359,11 @@ $('.modal').on('hidden.bs.modal', function () {
   }
 });
 
-$(document).on('click', '.delete', function (e) {
-  e.preventDefault();
-  e.stopImmediatePropagation();
+$(document).on('click', '.delete', function () {
   user_id = $(this).attr("data-id");
   $("#delete_mod").show();
 
-  $(document).on('click', '#delete_mod', function (e) {
-    e.preventDefault();
-    e.stopImmediatePropagation();
+  $(document).on('click', '#delete_mod', function () {
     $.ajax({
       url: "../php/delete_user.php",
       method: "POST",
@@ -381,7 +377,9 @@ $(document).on('click', '.delete', function (e) {
         $('#modal_msgDel').addClass('alert alert-primary');
         $('#modal_msgDel').html(data);
         getAll();
-        $('#userModalDelete').modal('hide');
+        setTimeout(function () {
+          $('#userModalDelete').modal('hide');
+        }, 1000);
       },
       error: function (xhr, ajaxOptions, thrownError) {
         $.notify(xhr.responseText, "error");
@@ -390,9 +388,7 @@ $(document).on('click', '.delete', function (e) {
   });
 });
 
-$(document).on('click', '#add', function (e) {
-  e.preventDefault();
-  e.stopImmediatePropagation();
+$(document).on('click', '#add', function () {
   const regex1 = new RegExp(/^[A-Za-z]+$/);
   let name = $('#name_add').val();
   let surname = $('#surname_add').val();
@@ -431,18 +427,19 @@ $(document).on('click', '#add', function (e) {
         $('#modal_msgAd').addClass('alert alert-primary');
         $('#modal_msgAd').html(data);
         getAll();
-        $('#userModalAdd').modal('hide');
+        setTimeout(function () {
+          $('#userModalAdd').modal('hide');
+        }, 1000);
       },
       error: function (xhr, ajaxOptions, thrownError) {
         $.notify(xhr.responseText, "error");
+        $('#modal_msgAd').addClass('alert alert-primary');
       }
     });
   }
 });
 
-$(document).on('click', '.update', function (e) {
-  e.preventDefault();
-  e.stopImmediatePropagation();
+$(document).on('click', '.update', function () {
   user_id = $(this).attr("data-id");
 
   $(document).on('click', '#update_mod', function () {
@@ -477,7 +474,9 @@ $(document).on('click', '.update', function (e) {
           $('#modal_msgUp').html(data);
           $('#modal_msgUp').addClass('alert alert-primary');
           getAll();
-          $('#userModalUpdate').modal('hide');
+          setTimeout(function () {
+            $('#userModalUpdate').modal('hide');
+          }, 1000);
         },
         error: function (xhr, ajaxOptions, thrownError) {
           $.notify(xhr.responseText, "error");
@@ -602,8 +601,8 @@ function getAllProdsFormat (response) {
 }
 
 //ne klikimin jashte modalit i bejm reset cdo inputi ose alerti
-$('.modal').on('hidden.bs.modal', function () {
-  if (!$(this).find('button').text() == 'Fshi') {
+$('#mgp-section').on('hidden.bs.modal', '.modal', function () {
+  if ($(this).attr('id') != 'prodModalDelete') {
     $(this).find('form')[0].reset();
     $('[data-toggle="buttons"] :radio').prop('checked', false);
     $('[data-toggle="buttons"] label').removeClass('active');
@@ -641,11 +640,13 @@ $(document).on('click', '.delete_prod', function (e) {
         $('.manage-products .spinner-border').removeClass('d-none');
       },
       success: function (data) {
-        getAllProds();
         $('.manage-products .spinner-border').addClass('d-none');
         $('#modal_prod_msgDel').addClass('alert alert-primary');
         $('#modal_prod_msgDel').html(data);
-        $('#prodModalDelete').modal('hide');
+        getAllProds();
+        setTimeout(function () {
+          $('#prodModalDelete').modal('hide');
+        }, 1000);
       },
       error: function (xhr, ajaxOptions, thrownError) {
         $.notify(xhr.responseText, "error");
@@ -715,7 +716,9 @@ $(document).on('click', '#prod_add', function (e) {
             $('#prodModalAdd .custom-file-input').val('');
             $('#prodModalAdd .custom-file-label').text('Zgjidh imazhin');
             getAllProds();
-            $('#prodModalAdd').modal('hide');
+            setTimeout(function () {
+              $('#prodModalAdd').modal('hide');
+            }, 1000);
           },
           error: function (xhr, ajaxOptions, thrownError) {
             $.notify(xhr.responseText, "error");
@@ -785,7 +788,9 @@ $(document).on('click', '.update_prod', function (e) {
               $('#modal_prod_msgUp').html(response);
               $('#modal_prod_msgUp').addClass('alert alert-primary');
               getAllProds();
-              $('#prodModalUpdate').modal('hide');
+              setTimeout(function () {
+                $('#prodModalUpdate').modal('hide');
+              }, 1000);
             },
             error: function (xhr, ajaxOptions, thrownError) {
               $('#admp .spinner-border').addClass('d-none');
@@ -807,7 +812,9 @@ $(document).on('click', '.update_prod', function (e) {
               $('#modal_prod_msgUp').html(data);
               $('#modal_prod_msgUp').addClass('alert alert-primary');
               getAllProds();
-              $('#prodModalUpdate').modal('hide');
+              setTimeout(function () {
+                $('#prodModalUpdate').modal('hide');
+              }, 1000);
             },
             error: function (xhr, ajaxOptions, thrownError) {
               $.notify(xhr.responseText, "error");
@@ -847,7 +854,9 @@ $(document).on('click', '.update_prod', function (e) {
                 $('#modal_prod_msgUp').html(data);
                 $('#modal_prod_msgUp').addClass('alert alert-primary');
                 getAllProds();
-                $('#prodModalUpdate').modal('hide');
+                setTimeout(function () {
+                  $('#prodModalUpdate').modal('hide');
+                }, 1000);
               },
               error: function (xhr, ajaxOptions, thrownError) {
                 $.notify(xhr.responseText, "error");
@@ -952,8 +961,8 @@ $('#offerModalDelete').on('hidden.bs.modal', function () {
 });
 
 //ne klikimin jashte modalit i bejm reset cdo inputi
-$('.modal').on('hidden.bs.modal', function () {
-  if (!$(this).find('button').text() == 'Fshi') {
+$('#mgo-section').on('hidden.bs.modal', '.modal', function () {
+  if ($(this).attr('id') != 'offerModalDelete') {
     $(this).find('form')[0].reset();
     $('#modal_offer_msgAd').html('');
     $('#modal_offer_msgAd').removeClass('alert alert-primary');
@@ -961,6 +970,7 @@ $('.modal').on('hidden.bs.modal', function () {
     $('#modal_offer_msgUp').html('');
     $('#modal_offer_msgUp').removeClass('alert alert-primary');
     $('#offerModalUpdate').modal('hide');
+    console.log('pwor');
   } else {
     $('#modal_offer_msgDel').html('');
     $('#modal_offer_msgDel').removeClass('alert alert-primary');
@@ -990,7 +1000,9 @@ $(document).on('click', '.deleteo', function (e) {
         $('#modal_offer_msgDel').addClass('alert alert-primary');
         $('#modal_offer_msgDel').html(data);
         getAllOffers();
-        $('#offerModalDelete').modal('hide');
+        setTimeout(function () {
+          $('#offerModalDelete').modal('hide');
+        }, 1000);
       },
       error: function (xhr, ajaxOptions, thrownError) {
         $.notify(xhr.responseText, "error");
@@ -1040,15 +1052,13 @@ $(document).on('click', '#add_offer', function (e) {
           $('#add_offer .spinner-border').removeClass('d-none');
         },
         success: function (response) {
-          $('#offerModalUpdate .custom-file-input').val('');
-          $('#offerModalUpdate .custom-file-label').text('Zgjidh imazhin');
           $('#add_offer .spinner-border').addClass('d-none');
           $('#modal_offer_msgAd').addClass('alert alert-primary');
           $('#modal_offer_msgAd').html(response);
           getAllOffers();
-          $('#modal_offer_msgAd').html('');
-          $('#modal_offer_msgAd').removeClass('alert alert-primary');
-          $('#offerModalAdd').modal('hide');
+          setTimeout(function () {
+            $('#offerModalAdd').modal('hide');
+          }, 1000);
         },
         error: function (xhr, ajaxOptions, thrownError) {
           $('#add_offer .spinner-border').addClass('d-none');
@@ -1107,8 +1117,10 @@ $(document).on('click', '.updateo', function (e) {
             $('#modal_offer_msgUp').addClass('alert alert-primary');
             $('#modal_offer_msgUp').addClass('alert alert-primary');
             getAllOffers();
-            $('#offerModalUpdate .custom-file-input').val('');
-            $('#offerModalUpdate .custom-file-label').text('Zgjidh imazhin');
+            setTimeout(function () {
+              $('#offerModalUpdate').modal('hide');
+            }, 1000);
+
           },
           error: function (xhr, ajaxOptions, thrownError) {
             $('#update_offer_mod .spinner-border').addClass('d-none');
@@ -1127,15 +1139,13 @@ $(document).on('click', '.updateo', function (e) {
         $('#update_offer_mod .spinner-border').removeClass('d-none');
       },
       success: function (data) {
-        $('#offerModalUpdate .custom-file-input').val('');
-        $('#offerModalUpdate .custom-file-label').text('Zgjidh imazhin');
         $('#kuti_offer .spinner-border').addClass('d-none');
         $('#modal_offer_msgUp').html(data);
         $('#modal_offer_msgUp').addClass('alert alert-primary');
         getAllOffers();
-        $('#modal_offer_msgUp').html('');
-        $('#modal_offer_msgUp').removeClass('alert alert-primary');
-        $('#offerModalUpdate').modal('hide');
+        setTimeout(function () {
+          $('#offerModalUpdate').modal('hide');
+        }, 1000);
       },
       error: function (xhr, ajaxOptions, thrownError) {
         $.notify(xhr.responseText, "error");
