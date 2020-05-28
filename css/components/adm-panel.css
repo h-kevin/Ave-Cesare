@@ -296,7 +296,6 @@
 
 #admp .form-check-label {
   font-family: 'Barlow Condensed', serif;
-
 }
 
 /* END SECTION 3 */
@@ -349,7 +348,7 @@
 }
 
 @media (max-width: 576px) {
-	#admp #titulli {
+  #admp #titulli {
     font-size: xx-large;
   }
   #kuti_p {
@@ -392,8 +391,8 @@
 
 #admp .form-check-label {
   font-family: 'Barlow Condensed', serif;
-
 }
+
 /* END SECTION 4 */
 
 /* SECTION 5 */
@@ -444,7 +443,7 @@
 }
 
 @media (max-width: 576px) {
-	#admp #titulli {
+  #admp #titulli {
     font-size: xx-large;
   }
   #kuti_offer {
@@ -483,16 +482,6 @@
   font-family: 'Barlow Condensed', serif;
   font-size: large;
   text-align: center;
-}
-
-/* END SECTION 3 */
-
-/* SECTION 4 */
-
-#mgp-section .manage-products {
-  height: 100vh;
-  margin-left: 52px;
-  overflow: hidden;
 }
 
 /* END SECTION 5 */
