@@ -654,10 +654,10 @@ $(document).ready(function getAllProds () {
             $('#admp .spinner-border').addClass('d-none');
             $('#modal_prod_msgAd').addClass('alert alert-primary');
             $('#modal_prod_msgAd').html(data);
-            getAllProds();
             $('form').trigger('reset');
             $('#prodModalAdd .custom-file-input').val('');
             $('#prodModalAdd .custom-file-label').text('Zgjidh imazhin');
+            getAllProds();
             setTimeout(function () {
               $('#modal_prod_msgAd').html('');
               $('#modal_prod_msgAd').removeClass('alert alert-primary');
@@ -720,10 +720,10 @@ $(document).ready(function getAllProds () {
             cache: false,
             processData: false,
             beforeSend: function () {
-              $('#kuti_p .spinner-border').removeClass('d-none');
+              $('#prod_update_mod .spinner-border').removeClass('d-none');
             },
             success: function (response) {
-              $('#kuti_p .spinner-border').addClass('d-none');
+              $('#prod_update_mod .spinner-border').addClass('d-none');
               $('#modal_prod_msgUp').html(response);
               $('#modal_prod_msgUp').addClass('alert alert-primary');
               $('form').trigger('reset');
@@ -731,9 +731,10 @@ $(document).ready(function getAllProds () {
               getAllProds();
               $('#prodModalUpdate .custom-file-input').val('');
               $('#prodModalUpdate .custom-file-label').text('Zgjidh imazhin');
+              $('#prodModalAdd').modal('hide');
             },
             error: function (xhr, ajaxOptions, thrownError) {
-              $('#kuti_p .spinner-border').addClass('d-none');
+              $('#prod_update_mod .spinner-border').addClass('d-none');
               $.notify(xhr.responseText, 'error');
             }
           });
@@ -754,11 +755,11 @@ $(document).ready(function getAllProds () {
             $('#admp .spinner-border').removeClass('d-none');
           },
           success: function (data) {
-            getAllProds();
             $('#admp .spinner-border').addClass('d-none');
             $('#modal_prod_msgUp').html(data);
             $('#modal_prod_msgUp').addClass('alert alert-primary');
             $('form').trigger('reset');
+            getAllProds();
             setTimeout(function () {
               $('#modal_prod_msgUp').html('');
               $('#modal_prod_msgUp').removeClass('alert alert-primary');
@@ -973,7 +974,7 @@ $(document).ready(function getAllOffers () {
             },
             success: function (response) {
               $('#update_offer_mod .spinner-border').addClass('d-none');
-              $('#modal_offer_msgUp').html(response);
+              $('#modal_offer_msgUp').html('Perditesimi u krye me sukses!');
               $('#modal_offer_msgUp').addClass('alert alert-primary');
               $('form').trigger('reset');
               $('#modal_offer_msgUp').addClass('alert alert-primary');
