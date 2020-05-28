@@ -45,9 +45,61 @@
     <!-- section 1 / status for admin -->
     <section id="stats-section">
       <div class="admin-stats">
+        <div class="container wrap-stat">
+          <hr>
+          <h1 id="tit_stat"> STATISTIKAT E PERDORIMIT TE FAQES</h1>
+          <hr>
+          <div class="row card-group">
+            <div class="col-lg 3 col-md-3 col-sm-12 col-xs-12 d-flex justify-content-center">
+              <div class="card mb-2 mb-md-0">
+                <img class="card-img-top" src="../img/user_icon_stat.jpg" alt="Card image cap">
+                <div class="card-body">
+                  <h4 class="card-title">Perdoruesit</h4>
+                  <div id="nr_perdoruesish"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg 3 col-md-3 col-sm-12 col-xs-12 d-flex justify-content-center">
+              <div class="card mb-2 mb-md-0">
+                <img class="card-img-top" src="../img/products_icon_stat.jpg" alt="Card image cap">
+                <div class="card-body">
+                  <h4 class="card-title">Produktet</h4>
+                  <div id="nr_produktesh"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg 3 col-md-3 col-sm-12 col-xs-12 d-flex justify-content-center">
+              <div class="card mb-2 mb-md-0">
+                <img class="card-img-top" src="../img/offer_icon_stat.png" alt="Card image cap">
+                <div class="card-body">
+                  <h4 class="card-title">Ofertat</h4>
+                  <div id="nr_ofertash"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg 3 col-md-3 col-sm-12 col-xs-12 d-flex justify-content-center">
+              <div class="card mb-2 mb-md-0">
+                <img class="card-img-top" src="../img/delivered_icon_stat.png" alt="Card image cap">
+                <div class="card-body">
+                  <h4 class="card-title">Porositë</h4>
+                  <div id="nr_porosish"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg 3 col-md-3 col-sm-12 col-xs-12 d-flex justify-content-center">
+              <div class="card">
+                <img class="card-img-top" src="../img/earnings_icon_stat.png" alt="Card image cap">
+                <div class="card-body">
+                  <h4 class="card-title">Fitimi</h4>
+                  <div id="fitimi"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
       </div>
-    </section id>
+    </section>
 
     <!-- section 2 / order list -->
     <section id="list-section">
@@ -62,22 +114,13 @@
                   <tr>
                     <th scope="col" class="text-center">KLIENTI</th>
                     <th scope="col" class="text-center">DATA</th>
+                    <th scope="col" class="text-center">DESTINACIONI</th>
                     <th scope="col" class="text-center">PRODUKTET</th>
                     <th scope="col" class="text-center">TOTAL</th>
                     <th scope="col" class="text-center">STATUSI</th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td colspan="5">
-                      <div class="progress bg-transparent border border-dark">
-                        <div
-                          class="progress-bar progress-bar-striped progress-bar-animated bg-success"
-                          role="progressbar" style="width: 20%"></div>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
+                <tbody></tbody>
               </table>
             </div>
           </div>
@@ -90,7 +133,7 @@
       <div class="manage-users">
         <div id="admp" class="container my-3">
           <h1 id="titulli" class="text-center p-0 mb-3">PANELI I PERDORUESVE</h1>
-          <div class="" id="kuti">
+          <div id="kuti">
             <table id="user_data" class="table-responsive-md table table-bordered">
               <thead>
                 <tr>
@@ -211,7 +254,122 @@
     <!-- section 4 / manage products -->
     <section id="mgp-section">
       <div class="manage-products">
+        <div id="admp" class="container my-3">
+          <h1 id="titulli" class="text-center p-0 mb-3">PANELI I PRODUKTEVE</h1>
+          <div id="kuti_p">
+            <table id="prod_data" class="table-responsive-md table table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col" class="text-center">IMAZH</th>
+                  <th scope="col" class="text-center">EMER</th>
+                  <th scope="col" class="text-center">KATEGORI</th>
+                  <th scope="col" class="text-center">CMIM</th>
+                  <th scope="col" class="text-center">MODIFIKO</th>
+                  <th scope="col" class="text-center">FSHI</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </div>
+          <div class="container p-0">
+            <button type="button" id="prod_add_button" data-target="#prodModalAdd" data-toggle="modal"
+              class="btn btn-block btn-primary btn-lg">Shto</button>
+          </div>
+          <div class="modal fade" id="prodModalAdd">
+            <div class="modal-dialog" id="prodModalDialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">SHTO PRODUKT</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                  <p id="modal_prod_msgAd"></p>
+                  <form>
+                    <div class="input-group">
+                      <input type="text" name="prod_name" id="prod_name_add" class="form-control"
+                        placeholder="Emri" />
+                      <input type="number" type="number" min="0" max="2000" step="50"  name="prod_price" id="prod_price_add" class="form-control" placeholder="Cmimi">
+                    </div>
+                    <div class="input-group custom-file mt-2">
+                      <input type="file" class="custom-file-input" name="prodimg" id="prodimgin2">
+                        <label style="font-family: 'Barlow Condensed', serif;" class="custom-file-label" for="inputGroupFile02">
+                          Zgjidh imazhin
+                        </label>
+    
+                        <select class="form-control mt-2 mb-2" id="kategAdd">
+                        </select>
 
+                        <div id="checkIngredientAdd">
+                        </div>
+                      </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" name="prod_add" id="prod_add"
+                    class="btn btn-block btn-lg btn-primary">Shto <span
+                      class="spinner-border spinner-border-sm d-none" role="status"
+                      aria-hidden="true"></span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal fade" id="prodModalUpdate">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">MODIFIKO PRODUKTIN</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                  <p id="modal_prod_msgUp"></p>
+                  <form>
+                    <div class="input-group">
+                      <input type="text" name="prod_name" id="prod_name_up" class="form-control"
+                        placeholder="Emri" />
+                      <input type="number" type="number" min="0" max="2000" step="50"  name="prod_price" id="prod_price_up" class="form-control" placeholder="Cmimi">
+                    </div>
+                    <div class="input-group custom-file mt-2">
+                      <input type="file" class="custom-file-input" name="prodimg" id="prodimgin">
+                        <label style="font-family: 'Barlow Condensed', serif;" class="custom-file-label" for="inputGroupFile02">
+                          Zgjidh imazhin
+                        </label>
+    
+                        <select class="form-control mt-2 mb-2" id="kategUp">
+                        </select>
+
+                        <div id="checkIngredientUp">
+                        </div>
+                      </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" name="prod_update" id="prod_update_mod"
+                    class="btn btn-block btn-lg btn-success">Modifiko <span
+                      class="spinner-border spinner-border-sm d-none" role="status"
+                      aria-hidden="true"></span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal fade" id="prodModalDelete">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">JENI TE SIGURTE?</h4>
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                  <p id="modal_prod_msgDel"></p>
+                  <button type="button" name="delete" id="prod_delete_mod"
+                    class="btn btn-block btn-lg btn-danger">Fshi perfundimisht <span
+                      class="spinner-border spinner-border-sm d-none" role="status"
+                      aria-hidden="true"></span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -374,7 +532,9 @@
     <script src="../vendors/jquery/jquery-3.4.1.min.js"></script>
     <script src="../vendors/popper/popper.min.js"></script>
     <script src="../vendors/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../vendors/boostrap-select/js/bootstrap-select.min.js"></script>
     <script src="../vendors/jquery/notify.min.js"></script>
+    <script src="../vendors/jquery/jquery-ui.js"></script>
     <script type="text/javascript" src="../js/adm_panel.js"></script>
   </body>
 

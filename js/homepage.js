@@ -24,67 +24,167 @@ navBarBackgroundScrollEffect();
 
 
 $(document).ready(function getOfferCards(){
-  // deklarimi i func ne ajax
-  
+  // ofertat
   $.ajax({
     type: 'POST',
     url:  '../php/fetch_offer_home.php',
     dataType: "json",
     success: function(response) {
-       console.log(response);
        formCards(response);
      },
      error: function (xhr, ajaxOptions, thrownError) {
        $.notify(xhr.responseText, "error");
    }
  });
- function formCards(response){
-  var i, karusel='';
-  for (i=0;i<response.length;i++){
-    console.log(i);
-    if(i%3==0){
-      console.log('un plotpjestohem me tre');
-      if(i==0){
-        console.log('un jam i pari');
-        karusel+='<div class="carousel-item active">';
-      }
-      else {
-        console.log('nuk jam')
-        karusel+='<div class="carousel-item">';
-      }
-      karusel+='<div class="row">'; 
-      karusel+='<div class="col-md-4">';
-    }  
-    else {
-      karusel+='<div class="col-md-4 clearfix d-none d-md-block">';
-    }
-    karusel+='<div class="card mb-2 karta">';
-    karusel+=' <img class="card-img-top oferta" src="' + response[i].foto + '" alt="Foto oferta">';
-    karusel+='<div class="card-body permbajtja">';
-    karusel+='<h4 class="card-title">' + response[i].emri + '!</h4>';
-    karusel+='<p class="card-text">' + response[i].pershkrimi + '</p>';
-    karusel+='<a class="btn buton-karte">Përfito!</a>';
-    karusel+='</div>';
-    karusel+='</div>';
-    karusel+='</div>';
-    if(i%3==2){
-      karusel+='</div>';
-      karusel+='</div>';
-    }  
-  }
-  // karusel+='</div>';
-  // karusel+='</div>';
 
-  console.log(karusel); 
+// nqs faqja referohet nga veprimi logout ne profil
+if (parseURL(window.location.href).logout == 'ok') {
+  $.notify('Profili u mbyll me sukses!', 'success');
+}
+
+// nqs faqja referohet nga veprimi fshi llogari ne profil
+if (parseURL(window.location.href).remaccount == 'done') {
+  $.notify('Llogaria u fshi me sukses!', 'success');
+}
+
+// produktet
+ $.ajax({
+  type: 'POST',
+  url:  '../php/fetch_product_home.php',
+  dataType: "json",
+  success: function(response) {
+     formcarousel(response);
+   },
+   error: function (xhr, ajaxOptions, thrownError) {
+     $.notify(xhr.responseText, "error");
+     alert(xhr.responseText, "error");
+ }
+});
+
+// check_ulog
+$.ajax({
+  type: 'POST',
+  url:  '../php/check_ulog.php',
+  dataType: "json",
+  success: function(response) {
+     check_ulog(response);
+   },
+   error: function (xhr, ajaxOptions, thrownError) {
+     $.notify(xhr.responseText, "error");
+ }
+});
+
+// func per produktet ne karusel
+ function formcarousel(response){
+   var fotoja1="url('" + response[Math.floor(Math.random() * (response.length))].foto +"')";
+   var fotoja2="url('" + response[Math.floor(Math.random() * (response.length))].foto +"')";
+   var fotoja3="url('" + response[Math.floor(Math.random() * (response.length))].foto +"')";
+   while((fotoja1==fotoja2) || (fotoja1==fotoja3) || (fotoja2==fotoja3)) {
+    fotoja1="url('" + response[Math.floor(Math.random() * (response.length))].foto +"')";
+    fotoja2="url('" + response[Math.floor(Math.random() * (response.length))].foto +"')";
+    fotoja3="url('" + response[Math.floor(Math.random() * (response.length))].foto +"')";
+   }
+  document.getElementsByClassName("fst")[0].style.backgroundImage = fotoja1;
+  document.getElementsByClassName("scnd")[0].style.backgroundImage = fotoja2;
+  document.getElementsByClassName("third")[0].style.backgroundImage = fotoja3; 
+};
+
+ //  func check_ulog
+ function check_ulog(obj) {
+   var s_id=obj['id'];
+   // nqs ka perdorues te loguar 
+   if(s_id){
+      $(".homepage a.check_ulog").text('Profili');
+      $(".homepage a.check_ulog").attr('href','./pages/profile.html');
+    }
+};
+
+  // url parser
+  function parseURL (url) {
+    var params = {};
+    var parser = document.createElement('a');
+    parser.href = url;
+    var query = parser.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      params[pair[0]] = decodeURIComponent(pair[1]);
+    }
+    return params;
+  };
+
+// func per ofertat ne seksionin e kartave
+ function formCards(response){
+  
+  var i, karusel='';
+  var n=response["oferta"].length;
+  var m=n-(n%3);
+
+  // nqs ka 3 ose me sh oferta , shfaqen ne karusel
+  if(response["oferta"].length>=3){
+    response["oferta"].length=m;
+    
+    let i=0;
+    for (let offer of response["oferta"]){
+        if(i%3==0){
+          if(i==0){
+            karusel+='<div class="carousel-item active">';
+          }
+          else {
+            karusel+='<div class="carousel-item">';
+          }
+          karusel+='<div class="row">'; 
+          karusel+='<div class="col-md-4">';
+        }  
+        else {
+          karusel+='<div class="col-md-4 clearfix d-none d-md-block">';
+        }
+        karusel+='<div class="card mb-2 karta" id="' + offer[0] + '">';
+        karusel+=' <img class="card-img-top oferta" src="'+ offer[3] + '" alt="Foto oferta">';
+        karusel+='<div class="card-body permbajtja">';
+        karusel+='<h4 class="card-title">' + offer[1] + '!</h4>';
+        karusel+='<p class="card-text">' + offer[2] + '</p>';
+        karusel+='<a class="btn buton-karte">Përfito!</a>';
+        karusel+='</div>';
+        karusel+='</div>';
+        karusel+='</div>';
+        if(i%3==2){
+          karusel+='</div>';
+          karusel+='</div>';
+        }
+      i++;
+    }
+    
+  }
+
   // fut brenda mbajtesit tgjitha tdhenat qe kemi te karusel
   $('#mbajtesi').html(karusel);
                   
 }
-})
+});
 
-// func shuffle cdo 30min
-var today=new Date();
-if(today.getMinutes()==0 || today.getMinutes()==30){
-response = shuffle(response);
-}
+// shto porosi duke perzgjedhur oferten
+$(document).ready(function(){
+  $(document).on('click', '.buton-karte', function(){
+      var o_id = $(this).closest(".karta").attr('id');
+      console.log(o_id);
+      $.ajax({
+          type: "post",
+          url: "./php/order_id.php",
+          data: {offer_id: o_id},
+          success: function (response) {
+              if (response != 'success' ){
+                  $.notify(response, "error");
+              }
+              else {
+                  window.location.replace('./pages/user_order.html');
+              }
+          },
+          error: function (xhr, ajaxOptions, thrownError) {
+              $.notify(xhr.responseText, "error");
+          }
+      });
+  });
+});
+
           

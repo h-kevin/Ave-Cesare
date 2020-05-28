@@ -756,3 +756,36 @@ $('.usro .send-order button').on('click', function () {
 		});
 	}
 });
+
+
+/**
+ * on document ready check for user session and update navbar
+ */
+
+$(document).ready(function () {
+	$.ajax({
+		type: 'POST',
+		url: '../php/check_ulog.php',
+		dataType: "json",
+		success: function (response) {
+			check_ulog(response);
+		},
+		error: function (xhr, ajaxOptions, thrownError) {
+			$.notify(xhr.responseText, "error");
+		}
+	});
+});
+
+
+/**
+ * function check_ulog
+ */
+
+function check_ulog (obj) {
+	var s_id = obj['id'];
+	// if no users in current session 
+	if (s_id) {
+		$("a.check_ulog").text('Profili');
+		$("a.check_ulog").attr('href', './profile.html');
+	}
+}

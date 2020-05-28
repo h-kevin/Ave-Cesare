@@ -2,20 +2,23 @@
 
 $(document).ready(function(){ 
 
+    //regex to only accept alphabetic characters, 1+ char
     const regex1 = new RegExp(/^[A-Za-z]+$/);
 
+    //real time check if name is fitting to the formatting
     $('#name').keyup(function() {
         let name = $('#name').val();
 
+        //if not disable button until correct
         if (name != "" && !regex1.test(name)) {
             $('#errBox').html('Vendosni emrin ne formatin e kerkuar! Vetem karaktere alfabetike, pa hapesira ose simbole');
-            $('#errBox').addClass('alert alert-primary');
+            $('#errBox').addClass('alert alert-light');
             $('#regjistrohu').addClass('disabled');
             $('#regjistrohu').attr('disabled',true);
         }
         else{
             $('#errBox').html('');
-            $('#errBox').removeClass('alert alert-primary');
+            $('#errBox').removeClass('alert alert-light');
             $('#regjistrohu').removeClass('disabled');
             $('#regjistrohu').attr('disabled',false);
         }
@@ -26,30 +29,31 @@ $(document).ready(function(){
 
         if (surname != "" && !regex1.test(surname)) {
             $('#errBox').html('Vendosni mbiemrin ne formatin e kerkuar! Vetem karaktere alfabetike, pa hapesira ose simbole');
-            $('#errBox').addClass('alert alert-primary');
+            $('#errBox').addClass('alert alert-light');
             $('#regjistrohu').addClass('disabled');
             $('#regjistrohu').attr('disabled',true);
         }
         else{
             $('#errBox').html('');
-            $('#errBox').removeClass('alert alert-primary');
+            $('#errBox').removeClass('alert alert-light');
             $('#regjistrohu').removeClass('disabled');
             $('#regjistrohu').attr('disabled',false);
         }
     });
 
+    //check if password is at least 4 characters long and its written the same both times
     $('#password1').keyup(function() {
         let pass1 = $('#password1').val();
 
         if(pass1.length < 4){
-            $('#errBox').addClass('alert alert-primary');
+            $('#errBox').addClass('alert alert-light');
             $('#errBox').html('Fjalekalimi duhet te kete te pakten 4 karaktere');
             $('#regjistrohu').addClass('disabled');
             $('#regjistrohu').attr('disabled',true);
         }
         else{
             $('#errBox').html('');
-            $('#errBox').removeClass('alert alert-primary');
+            $('#errBox').removeClass('alert alert-light');
             $('#regjistrohu').removeClass('disabled');
             $('#regjistrohu').attr('disabled',false);
         }
@@ -59,19 +63,20 @@ $(document).ready(function(){
         let pass2 = $('#password2').val();
         
         if(pass1 != pass2){
-            $('#errBox').addClass('alert alert-primary');
+            $('#errBox').addClass('alert alert-light');
             $('#errBox').html('Rishkruani te njejtin fjalekalim');
             $('#regjistrohu').addClass('disabled');
             $('#regjistrohu').attr('disabled',true);
         }
         else{
             $('#errBox').html('');
-            $('#errBox').removeClass('alert alert-primary');
+            $('#errBox').removeClass('alert alert-light');
             $('#regjistrohu').removeClass('disabled');
             $('#regjistrohu').attr('disabled',false);
         }
     });
 
+    //if all is correct, do php request
     $('#register-form').on('submit', function(e) {
         e.preventDefault();
         let name = $('#name').val();
@@ -79,29 +84,7 @@ $(document).ready(function(){
         let email = $('#email').val();
         let pass1 = $('#password1').val();
         let pass2 = $('#password2').val();
-        
-        // if(pass1 != pass2){
-        //     $('#errBox').addClass('alert alert-primary');
-        //     $('#errBox').html('Fjalekalimet nuk perputhen. Provoni serish! <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>');
-        //     setTimeout(function(){ 
-        //         $('#errBox').html('');
-        //         $('#errBox').removeClass('alert alert-primary');}, 3000);
-        // // }
-        // if (name != "" && !regex1.test(name)) {
-        //     $('#errBox').html('Vendosni emrin ne formatin e kerkuar! Vetem karaktere alfabetike, pa hapesira ose simbole');
-        //     $('#errBox').addClass('alert alert-primary');
-        //     setTimeout(function(){ 
-        //         $('#errBox').html('');
-        //         $('#errBox').removeClass('alert alert-primary');}, 3000);
-        // }
-        // if (surname != "" && !regex1.test(surname)) {
-        //     $('#errBox').html('Vendosni mbiemrin ne formatin e kerkuar! Vetem karaktere alfabetike, pa hapesira ose simbole');
-        //     $('#errBox').addClass('alert alert-primary');
-        //     setTimeout(function(){ 
-        //         $('#errBox').html('');
-        //         $('#errBox').removeClass('alert alert-primary');}, 3000);
-        // }
-            $('#errBox').addClass('alert alert-primary');
+            $('#errBox').addClass('alert alert-light');
             $('#errBox').html('Duke shtuar perdoruesin...  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>');
             $.ajax({
                 url:"../php/signup.php",
@@ -116,7 +99,7 @@ $(document).ready(function(){
                     $('#signup .spinner-border').addClass('d-none');
                     setTimeout(function(){ 
                         $('#errBox').html('');
-                        $('#errBox').removeClass('alert alert-primary');}, 5000);
+                        $('#errBox').removeClass('alert alert-light');}, 5000);
                     setTimeout(function(){ 
                         window.location.replace('login.html?register=ok');}, 5000);
                 },

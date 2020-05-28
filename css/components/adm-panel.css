@@ -82,6 +82,61 @@
   overflow: hidden;
 }
 
+#stats-section .admin-stats .wrap-stat {
+  opacity: 0.9;
+  max-height: 95vh;
+  overflow: auto;
+}
+
+/* titulli i faqes se statistikave */
+
+#tit_stat {
+  font-family: 'Barlow Condensed', serif;
+  text-align: center;
+  font-size: 60px;
+  color: rgb(0, 0, 0);
+}
+
+/* media query per titullin e statistikave */
+
+@media (max-width: 853px) {
+  #tit_stat {
+    font-size: 40px;
+  }
+}
+
+/* titulli i kartes */
+
+#stats-section .admin-stats .card .card-body h4 {
+  text-align: center;
+  font-family: 'Righteous', serif;
+}
+
+.card-img-top {
+  width: 100%;
+  height: auto;
+}
+
+/* media query for cards */
+
+@media (max-width: 767px) {
+  #stats-section .admin-stats .card {
+    width: 60%;
+  }
+}
+
+@media (max-width: 576px) {
+  #stats-section .admin-stats .card {
+    width: 100%;
+  }
+}
+
+#nr_perdoruesish, #nr_produktesh, #nr_ofertash, #nr_porosish, #fitimi {
+  text-align: center;
+  font-weight: bolder;
+  font-size: xx-large;
+}
+
 /* END SECTION 1 */
 
 /* SECTION 2 */
@@ -95,20 +150,20 @@
 /* hr */
 
 #list-section hr {
-	border-width: medium;
+  border-width: medium;
 }
 
 /* h1 */
 
 #list-section h1 {
-	font-family: 'Bree Serif';
+  font-family: 'Bree Serif';
   font-size: xx-large;
 }
 
 @media (max-width: 576px) {
-	#list-section h1 {
-		font-size: x-large;
-	}
+  #list-section h1 {
+    font-size: x-large;
+  }
 }
 
 /* order list table */
@@ -125,20 +180,27 @@
 /* order table head */
 
 .olist-table thead tr th {
-	border-top: none;
-	border-bottom: 1px solid black;
-	font-size: small;
-	font-family: 'Electrolize';
+  border-top: none;
+  border-bottom: 1px solid black;
+  font-size: small;
+  font-family: 'Electrolize';
 }
 
 /* order table body */
 
 .olist-table .table tbody tr td {
-	border-bottom: 1px solid black;
-	font-size: medium;
-	font-family: 'Economica';
-	text-align: center;
+  border-bottom: 1px solid black;
+  font-size: medium;
+  font-family: 'Economica';
+  text-align: center;
   vertical-align: middle;
+}
+
+/* order status */
+
+#list-section .status:focus {
+  box-shadow: none;
+  outline: none !important;
 }
 
 /* END SECTION 2 */
@@ -191,7 +253,7 @@
 }
 
 @media (max-width: 576px) {
-	#admp #titulli {
+  #admp #titulli {
     font-size: xx-large;
   }
   #kuti {
@@ -232,6 +294,11 @@
   text-align: center;
 }
 
+#admp .form-check-label {
+  font-family: 'Barlow Condensed', serif;
+
+}
+
 /* END SECTION 3 */
 
 /* SECTION 4 */
@@ -242,6 +309,91 @@
   overflow: hidden;
 }
 
+#kuti_p {
+  max-height: 75vh;
+  overflow: auto;
+}
+
+#kuti_p #prod_data {
+  margin-bottom: 0;
+  border: none;
+}
+
+#admp #prod_data th {
+  border: 1px solid rgb(218, 108, 68);
+  background-color: rgb(218, 108, 68);
+  font-family: 'Barlow Condensed', serif;
+  color: black;
+  font-size: x-large;
+  text-align: center;
+}
+
+#admp #prod_data td {
+  border: 1px solid rgb(218, 108, 68);
+  font-family: 'Barlow Condensed', serif;
+  font-size: x-large;
+  text-align: center;
+}
+
+#admp #prod_data tr:hover {
+  background-color: #f1bf73;
+}
+
+#admp #titulli {
+  padding-top: 30px;
+  justify-content: center;
+  color: black;
+  letter-spacing: 2px;
+  font-size: xxx-large;
+  font-family: 'Barlow Condensed', serif;
+}
+
+@media (max-width: 576px) {
+	#admp #titulli {
+    font-size: xx-large;
+  }
+  #kuti_p {
+    max-height: 78vh;
+  }
+}
+
+#admp #prod_add_button {
+  font-family: 'Barlow Condensed', serif;
+}
+
+#admp .modal-content {
+  background-color: #fcf5e8;
+}
+
+#admp #prod_add, #prod_update_mod, #prod_delete_mod {
+  font-family: 'Barlow Condensed', serif;
+}
+
+#admp .modal-title {
+  font-family: 'Barlow Condensed', serif;
+  font-size: 40px;
+}
+
+#admp #modal_prod_msgAd, #modal_prod_msgUp, #modal_prod_msgDel {
+  text-align: center;
+  font-family: 'Barlow Condensed', serif;
+}
+
+#admp .form-control {
+  border-color: #f1bf73;
+  font-family: 'Barlow Condensed', serif;
+}
+
+#admp .radio {
+  font-family: 'Barlow Condensed', serif;
+  font-size: large;
+  text-align: center;
+}
+
+#admp .form-check-label {
+  font-family: 'Barlow Condensed', serif;
+
+}
 /* END SECTION 4 */
 
 /* SECTION 5 */

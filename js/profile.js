@@ -62,7 +62,7 @@ function updateProf (pinfo) {
  */
 
 $('.profile-body .first-group .adm-b').click(function () {
-  window.location.replace('./admin_panel.html');
+  window.location.replace('./adm_panel.html');
 });
 
 
@@ -201,7 +201,7 @@ $('.logout').click(function () {
       if (response == 'loggedOut') {
         setTimeout(function () {
           $('.logout .spinner-border').addClass('d-none');
-          window.location.replace('login.html?logout=ok');
+          window.location.replace('../index.html?logout=ok');
         }, 1000);
       }
     },
@@ -427,7 +427,7 @@ $('.rem-coll input').on('keyup', function () {
       success: function (response) {
         if (response == 'removedAccount') {
           $('.rem-coll button .spinner-border').addClass('d-none');
-          window.location.replace('login.html?remaccount=done');
+          window.location.replace('../index.html?remaccount=done');
         }
       },
       error: function (xhr, ajaxOptions, thrownError) {
