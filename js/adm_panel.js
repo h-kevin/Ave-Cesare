@@ -124,11 +124,8 @@ function fill_orders_table (orders_obj) {
       <div class="progress-bar progress-bar-striped progress-bar-animated bg-success"
       role="progressbar" style="width: 25%">25%</div></div></td></tr>`;
 
-    // insert progressbar
-    $('#list-section .olist-table tbody').append(progressbar);
-
     // table columns
-    let client, date, destination, prod, total, status;
+    let oid, client, date, destination, prod, total, status;
 
     for (let i = 0; i < orders.length; i++) {
       // order client
@@ -149,7 +146,7 @@ function fill_orders_table (orders_obj) {
       // order status
       status = `<td><select
         class="bg-transparent border-dark text-body custom-select custom-select-sm status">
-        <option selected vlaue="open">Vendosur</option>
+        <option selected value="open">Vendosur</option>
         <option value="cooking">Duke pergatitur</option>
         <option value="delivering">Duke shperndare</option>
         <option value="delivered">Perfunduar</option></select></td>`;
@@ -167,11 +164,28 @@ function fill_orders_table (orders_obj) {
 
       prod += `</td>`;
 
+      // order id
+      oid = orders[i]['o_id'];
+
       // create table row
-      let row = `<tr>${client} ${date} ${destination} ${prod} ${total} ${status}</tr>`;
+      let row = `<tr data-id="${oid}">${client} ${date} ${destination} ${prod} ${total} ${status}</tr>`;
 
       // insert rows
       $('#list-section .olist-table tbody').append(row);
+
+      // update selected
+      $('#list-section .olist-table tbody tr:last-child .status').val(orders[i]['status']);
+
+      // insert row progressbar
+      $('#list-section .olist-table tbody').append(progressbar);
+
+      // update progressbar
+      let stat_v = orders[i]['status'];
+      let progress = stat_v == 'open' ? '25' : stat_v == 'cooking' ? '50'
+        : stat_v == 'delivering' ? '75' : '100';
+
+      $('#list-section .olist-table tbody tr:last-child .progress-bar').css('width', `${progress}%`);
+      $('#list-section .olist-table tbody tr:last-child .progress-bar').text(`${progress}%`);
     }
   }
 };
@@ -180,6 +194,38 @@ function fill_orders_table (orders_obj) {
 setInterval(function () {
   fetch_open_orders();
 }, 10000);
+
+// handle status change
+$('#list-section .olist-table').on('change', '.status', function () {
+  // get value
+  let status = $(this).val();
+
+  // get order id
+  let oid = $(this).closest('tr').attr('data-id');
+
+  // set up data object
+  let data = {
+    oid: oid,
+    status: status
+  }
+
+  data = JSON.stringify(data);
+
+  // update database
+  $.ajax({
+    type: "POST",
+    url: "../php/update_order_status.php",
+    data: { statusObj: data },
+    success: function (response) {
+      if (response == 'success') {
+        fetch_open_orders();
+      }
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+      $.notify(xhr.responseText, 'error');
+    }
+  });
+});
 
 
 /**
