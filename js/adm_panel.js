@@ -400,6 +400,34 @@ $(document).ready(function getAll () {
  */
 $(document).ready(function getAllProds () {
 
+  $('.custom-file-input').on('change', function () {
+    if ($('#modal_prod_msgUp').is(':visible'))
+      $('#modal_prod_msgUp').fadeOut();
+  
+    let filen = '';
+  
+    if ($(this).get(0).files[0])
+      filen = $(this).get(0).files[0].name;
+  
+    if (filen.length != 0)
+      $(this).next().text(filen);
+    else
+      $(this).next().text('Zgjidh imazhin');
+  });
+
+  $('#prodModalUpdate').on('hidden.bs.modal', function () {
+    $('#prodModalUpdate .custom-file-input').val('');
+    $('#prodModalUpdate .custom-file-label').text('Zgjidh imazhin');
+    $('#modal_prod_msgUp').fadeOut();
+  });
+
+
+  $('#prod_update_mod').click(function () {
+    // create a file variable
+
+  });
+
+
   //  function to fetch all products
   $.ajax({
     type: 'POST',
@@ -540,8 +568,30 @@ $(document).on('click', '#prod_add', function (e) {
       ingredients[i++] = $(this).val();
   });  
 
-  if (name == "" || price == "" || category == "") {
-    $('#modal_prod_msgAd').html('Duhen shtuar te gjitha te dhenat e domosdoshme! (Emri, cmimi dhe kategoria)');
+  let imgfile = document.getElementById('prodimgin2').files[0];
+  let extensions = ['jpg', 'jpeg', 'png', 'gif'];
+      let filename = imgfile.name;
+      let filesize = imgfile.size;
+      
+      // if not allowed file type or above allowed size
+      if (!extensions.includes(filename.split('.').pop())) {
+        $('#modal_prod_msgAd').text('Formati i gabuar!');
+        $('#modal_prod_msgAd').addClass('alert alert-primary');
+      } else if (filesize > 5000000) {
+        $('#modal_prod_msgAd').text('Imazhi nuk mund te jete me shume se 5MB!');
+        $('#modal_prod_msgAd').addClass('alert alert-primary');
+      } else{
+
+        let inputData = new FormData();
+        inputData.append('prodimg', imgfile);
+        inputData.append('name', name);
+        inputData.append('price', price);
+        inputData.append('category', category);
+        inputData.append('ingredients', JSON.stringify(ingredients));
+
+
+  if (name == "" || price == "" || category == "" || !imgfile) {
+    $('#modal_prod_msgAd').html('Duhen shtuar te gjitha te dhenat e domosdoshme! (Emri, cmimi, imazhi dhe kategoria)');
     $('#modal_prod_msgAd').addClass('alert alert-primary');
   }
 
@@ -549,16 +599,21 @@ $(document).on('click', '#prod_add', function (e) {
     $.ajax({
       url: "../php/add_prod.php",
       method: "POST",
-      data: { name: name, price: price, category: category, ingredients: ingredients },
+      data: inputData,
+      contentType: false,
+      cache: false,
+      processData: false,
       beforeSend: function () {
         $('#admp .spinner-border').removeClass('d-none');
       },
       success: function (data) {
-        getAllProds();
         $('#admp .spinner-border').addClass('d-none');
         $('#modal_prod_msgAd').addClass('alert alert-primary');
         $('#modal_prod_msgAd').html(data);
+        getAllProds();
         $('form').trigger('reset');
+        $('#prodModalAdd .custom-file-input').val('');
+        $('#prodModalAdd .custom-file-label').text('Zgjidh imazhin');
         setTimeout(function () {
           $('#modal_prod_msgAd').html('');
           $('#modal_prod_msgAd').removeClass('alert alert-primary');
@@ -570,6 +625,8 @@ $(document).on('click', '#prod_add', function (e) {
         $('#admp .spinner-border').addClass('d-none');
       }
     });
+
+    }
   }
 });
 
@@ -579,6 +636,7 @@ $(document).on('click', '.update_prod', function (e) {
   e.stopImmediatePropagation();
   prod_id = $(this).attr("id");
 
+  
   $(document).on('click', '#prod_update_mod', function () {
 
     var i=0;
@@ -590,7 +648,55 @@ $(document).on('click', '.update_prod', function (e) {
         ingredients[i++] = $(this).val();
     });  
 
-    if (name == "" && price == "" && category == "" && jQuery.isEmptyObject(ingredients)) {
+    let imgfile = document.getElementById('prodimgin').files[0];
+    
+    // if file was selected
+    if (imgfile) {
+      let extensions = ['jpg', 'jpeg', 'png', 'gif'];
+      let filename = imgfile.name;
+      let filesize = imgfile.size;
+      
+      // if not allowed file type or above allowed size
+      if (!extensions.includes(filename.split('.').pop())) {
+        $('#modal_prod_msgUp').text('Formati i gabuar!');
+        $('#modal_prod_msgUp').addClass('alert alert-primary');
+      } else if (filesize > 5000000) {
+        $('#modal_prod_msgUp').text('Imazhi nuk mund te jete me shume se 5MB!');
+        $('#modal_prod_msgUp').addClass('alert alert-primary');
+      } else {
+        let inputData = new FormData();
+        inputData.append('prodimg', imgfile);
+        inputData.append('prod_id', prod_id);
+        // send data and receive url
+        $.ajax({
+          type: "post",
+          url: "../php/prod_img.php",
+          data: inputData,
+          contentType: false,
+          cache: false,
+          processData: false,
+          beforeSend: function () {
+            $('#kuti_p .spinner-border').removeClass('d-none');
+          },
+          success: function (response) {
+            $('#kuti_p .spinner-border').addClass('d-none');
+            $('#modal_prod_msgUp').html(response);
+            $('#modal_prod_msgUp').addClass('alert alert-primary');
+            $('form').trigger('reset');
+            $('#modal_prod_msgUp').addClass('alert alert-primary');
+            getAllProds();
+            $('#prodModalUpdate .custom-file-input').val('');
+            $('#prodModalUpdate .custom-file-label').text('Zgjidh imazhin');
+          },
+          error: function (xhr, ajaxOptions, thrownError) {
+            $('#kuti_p .spinner-border').addClass('d-none');
+            $.notify(xhr.responseText, 'error');
+          }
+        });
+      }
+    }
+
+    else if (name == "" && price == "" && category == "" && jQuery.isEmptyObject(ingredients) && imgfile == "") {
       $('#modal_prod_msgUp').html('Ju nuk keni modifikuar asnje te dhene!');
       $('#modal_prod_msgUp').addClass('alert alert-primary');
     } 
@@ -599,7 +705,7 @@ $(document).on('click', '.update_prod', function (e) {
       $.ajax({
         url: "../php/update_prod.php",
         method: "POST",
-        data: { prod_id: prod_id, name: name, price: price, category: category, ingredients: ingredients },
+        data: { prod_id: prod_id, name: name, price: price, category: category, ingredients: ingredients},
         beforeSend: function () {
           $('#admp .spinner-border').removeClass('d-none');
         },
