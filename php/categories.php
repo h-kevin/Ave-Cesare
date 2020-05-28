@@ -1,14 +1,15 @@
-<!-- Get Categories -->
-
 <?php
+
+/**
+ * PHP file to dynamically get menu categories
+ */
 
     require_once('db_connect.php');
 
     $stmt = $conn->prepare("SELECT * FROM P_Category");
     $stmt->execute();
     $result = $stmt->get_result();
-    
-                
+      
     echo '<div class="row justify-content-center" data-toggle="buttons">';
 
     while ($row = mysqli_fetch_array($result)) {

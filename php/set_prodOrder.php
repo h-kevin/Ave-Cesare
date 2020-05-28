@@ -1,7 +1,7 @@
 <?php
 
 /**
- * fetch order info for user with ip in the active session
+ * PHP file to place order with product
  */
 
 require_once('db_connect.php');

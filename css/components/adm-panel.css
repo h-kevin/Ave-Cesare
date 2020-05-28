@@ -294,6 +294,11 @@
   text-align: center;
 }
 
+#admp .form-check-label {
+  font-family: 'Barlow Condensed', serif;
+
+}
+
 /* END SECTION 3 */
 
 /* SECTION 4 */
@@ -304,6 +309,91 @@
   overflow: hidden;
 }
 
+#kuti_p {
+  max-height: 75vh;
+  overflow: auto;
+}
+
+#kuti_p #prod_data {
+  margin-bottom: 0;
+  border: none;
+}
+
+#admp #prod_data th {
+  border: 1px solid rgb(218, 108, 68);
+  background-color: rgb(218, 108, 68);
+  font-family: 'Barlow Condensed', serif;
+  color: black;
+  font-size: x-large;
+  text-align: center;
+}
+
+#admp #prod_data td {
+  border: 1px solid rgb(218, 108, 68);
+  font-family: 'Barlow Condensed', serif;
+  font-size: x-large;
+  text-align: center;
+}
+
+#admp #prod_data tr:hover {
+  background-color: #f1bf73;
+}
+
+#admp #titulli {
+  padding-top: 30px;
+  justify-content: center;
+  color: black;
+  letter-spacing: 2px;
+  font-size: xxx-large;
+  font-family: 'Barlow Condensed', serif;
+}
+
+@media (max-width: 576px) {
+	#admp #titulli {
+    font-size: xx-large;
+  }
+  #kuti_p {
+    max-height: 78vh;
+  }
+}
+
+#admp #prod_add_button {
+  font-family: 'Barlow Condensed', serif;
+}
+
+#admp .modal-content {
+  background-color: #fcf5e8;
+}
+
+#admp #prod_add, #prod_update_mod, #prod_delete_mod {
+  font-family: 'Barlow Condensed', serif;
+}
+
+#admp .modal-title {
+  font-family: 'Barlow Condensed', serif;
+  font-size: 40px;
+}
+
+#admp #modal_prod_msgAd, #modal_prod_msgUp, #modal_prod_msgDel {
+  text-align: center;
+  font-family: 'Barlow Condensed', serif;
+}
+
+#admp .form-control {
+  border-color: #f1bf73;
+  font-family: 'Barlow Condensed', serif;
+}
+
+#admp .radio {
+  font-family: 'Barlow Condensed', serif;
+  font-size: large;
+  text-align: center;
+}
+
+#admp .form-check-label {
+  font-family: 'Barlow Condensed', serif;
+
+}
 /* END SECTION 4 */
 
 /* SECTION 5 */

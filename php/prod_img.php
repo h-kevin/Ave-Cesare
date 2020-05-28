@@ -15,17 +15,16 @@ if (session_status() == PHP_SESSION_NONE) {
 // receive data
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-  $url = uploadImage('profimg');
+    $url = uploadImage('prodimg');
 
   if ($url != '') {
     // store in db
-    $stmt = $conn->prepare("UPDATE `User` SET prof_img = ? WHERE id = ?");
-    $stmt->bind_param('sd', $url, $_SESSION['id']);
+    $stmt = $conn->prepare("UPDATE `Product` SET image = ? WHERE id = ?");
+    $stmt->bind_param('sd', $url, $_POST['prod_id']);
     $stmt->execute();
     $stmt->close();
     $conn->close();
-    $_SESSION['prof_img'] = $url;
-    echo $url;
+    echo 'Imazhi u vendos me sukses';
   } else {
     header('HTTP/1.1 500 Internal Server Error');
     exit("Problem ne ngarkimin e fotos..");

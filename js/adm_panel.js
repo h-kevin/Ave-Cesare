@@ -7,7 +7,7 @@
 
 $('.admin_panel .nav div').click(function () {
   let link = $(this).find('a').attr('href');
-  window.location.replace(link);
+  window.location.href = link;
 });
 
 
@@ -272,13 +272,22 @@ $(document).ready(function getAll () {
     $('#kuti table tbody').html(tblVar);
   }
 
-  //ne klikimin jashte modalit i bejm reset cdo inputi
+  //ne klikimin jashte modalit i bejm reset cdo inputi ose alerti
   $('.modal').on('hidden.bs.modal', function () {
     $(this).find('form')[0].reset();
     $('[data-toggle="buttons"] :radio').prop('checked', false);
     $('[data-toggle="buttons"] label').removeClass('active');
     $(this).find('.collapse').collapse('hide');
     $(this).find('small').fadeOut();
+    $('#modal_msgDel').html('');
+    $('#modal_msgDel').removeClass('alert alert-primary');
+    $('#userModalDelete').modal('hide');
+    $('#modal_msgAd').html('');
+    $('#modal_msgAd').removeClass('alert alert-primary');
+    $('#userModalAdd').modal('hide');
+    $('#modal_msgUp').html('');
+    $('#modal_msgUp').removeClass('alert alert-primary');
+    $('#userModalUpdate').modal('hide');
   });
 
   $(document).on('click', '.delete', function (e) {
@@ -430,10 +439,344 @@ $(document).ready(function getAll () {
  */
 
 
+
+
 /**
  * SECTION 4
  */
+$(document).ready(function getAllProds () {
 
+  $('.custom-file-input').on('change', function () {
+    if ($('#modal_prod_msgUp').is(':visible'))
+      $('#modal_prod_msgUp').fadeOut();
+  
+    let filen = '';
+  
+    if ($(this).get(0).files[0])
+      filen = $(this).get(0).files[0].name;
+  
+    if (filen.length != 0)
+      $(this).next().text(filen);
+    else
+      $(this).next().text('Zgjidh imazhin');
+  });
+
+  $('#prodModalUpdate').on('hidden.bs.modal', function () {
+    $('#prodModalUpdate .custom-file-input').val('');
+    $('#prodModalUpdate .custom-file-label').text('Zgjidh imazhin');
+    $('#modal_prod_msgUp').fadeOut();
+  });
+
+
+  $('#prod_update_mod').click(function () {
+    // create a file variable
+
+  });
+
+
+  //  function to fetch all products
+  $.ajax({
+    type: 'POST',
+    url: '../php/get_prods.php',
+    dataType: "json",
+    success: function (response) {
+      getAllProdsFormat(response);
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+      $.notify(xhr.responseText, "error");
+    }
+  });
+
+  //  function to get all products categories into dropdown lists
+  $.ajax({
+    type: 'POST',
+    url: '../php/get_prodCat.php',
+    success: function (response) {
+      $('#kategAdd').html(response);
+      $('#kategUp').html(response);
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+      $.notify(xhr.responseText, "error");
+    }
+  });
+
+    //  function to get all products ingredients into checkbox
+    $.ajax({
+      type: 'POST',
+      url: '../php/get_prodIngredients.php',
+      success: function (response) {
+        $('#checkIngredientAdd').html(response);
+        $('#checkIngredientUp').html(response);
+      },
+      error: function (xhr, ajaxOptions, thrownError) {
+        $.notify(xhr.responseText, "error");
+      }
+    });
+
+
+  //on success fill table with results
+  function getAllProdsFormat (response) {
+
+    var tblVar;
+
+    for (i in response) {
+      tblVar += '<tr>';
+      tblVar += '<td><img src="' + response[i].prof_img + '" class="rounded-circle" width="50" height="50"></td>';
+      tblVar += '<td>' + response[i].name + '</td>';
+      tblVar += '<td>' + response[i].cat + '</td>';
+      tblVar += '<td>' + response[i].price + '</td>';
+      tblVar += '<td><button type="button" name="update" id="' + response[i].id + '" data-target="#prodModalUpdate" data-toggle="modal" class="btn btn-success btn-lg update_prod">Modifiko</button></td>';
+      tblVar += '<td><button type="button" name="delete" id="' + response[i].id + '" data-target="#prodModalDelete" data-toggle="modal" class="btn btn-danger btn-lg delete_prod">Fshi</button></td>';
+      tblVar += '</tr>';
+    }
+
+    $('#kuti_p table tbody').html(tblVar);
+  }
+
+
+  //ne klikimin jashte modalit i bejm reset cdo inputi ose alerti
+  $('.modal').on('hidden.bs.modal', function () {
+    $(this).find('form')[0].reset();
+    $('[data-toggle="buttons"] :radio').prop('checked', false);
+    $('[data-toggle="buttons"] label').removeClass('active');
+    $(this).find('.collapse').collapse('hide');
+    $(this).find('small').fadeOut();
+    $('#modal_prod_msgDel').html('');
+    $('#modal_prod_msgDel').removeClass('alert alert-primary');
+    $('#prodModalDelete').modal('hide');
+    $('#modal_prod_msgAd').html('');
+    $('#modal_prod_msgAd').removeClass('alert alert-primary');
+    $('#prodModalAdd').modal('hide');
+    $('#modal_prod_msgUp').html('');
+    $('#modal_prod_msgUp').removeClass('alert alert-primary');
+    $('#prodModalUpdate').modal('hide');
+  });
+
+  var prod_id;
+  //ne klikimin jashte modalit i bejm reset cdo inputi
+  $('.modal').on('hidden.bs.modal', function () {
+    $(this).find('form')[0].reset();
+    $('[data-toggle="buttons"] :radio').prop('checked', false);
+    $('[data-toggle="buttons"] label').removeClass('active');
+    $(this).find('.collapse').collapse('hide');
+    $(this).find('small').fadeOut();
+  });
+
+  //function to delete selected product
+$(document).on('click', '.delete_prod', function (e) {
+  e.preventDefault();
+  e.stopImmediatePropagation();
+  prod_id = $(this).attr("id");
+  $("#prod_delete_mod").show();
+
+  $(document).on('click', '#prod_delete_mod', function (e) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+
+    $.ajax({
+      url: "../php/delete_prod.php",
+      method: "POST",
+      data: { prod_id: prod_id },
+      beforeSend: function () {
+        $('.manage-products .spinner-border').removeClass('d-none');
+      },
+      success: function (data) {
+        getAllProds();
+        $('.manage-products .spinner-border').addClass('d-none');
+        $("#prod_delete_mod").hide();
+        $('#modal_prod_msgDel').addClass('alert alert-primary');
+        $('#modal_prod_msgDel').html(data);
+        setTimeout(function () {
+          $('#modal_prod_msgDel').html('');
+          $('#modal_prod_msgDel').removeClass('alert alert-primary');
+          $('#prodModalDelete').modal('hide');
+        }, 2000);
+      },
+      error: function (xhr, ajaxOptions, thrownError) {
+        $.notify(xhr.responseText, "error");
+        $('.manage-products .spinner-border').addClass('d-none');
+      }
+    });
+  });
+});
+
+//function to add product
+$(document).on('click', '#prod_add', function (e) {
+  e.preventDefault();
+  e.stopImmediatePropagation();
+  
+  var i=0;
+  let name = $('#prod_name_add').val();
+  let price = $('#prod_price_add').val();
+  let category = $('#kategAdd').children("option:selected").val();
+  let ingredients = [];
+  $('.form-check-input:checked').each(function () {
+      ingredients[i++] = $(this).val();
+  });  
+
+  let imgfile = document.getElementById('prodimgin2').files[0];
+  let extensions = ['jpg', 'jpeg', 'png', 'gif'];
+      let filename = imgfile.name;
+      let filesize = imgfile.size;
+      
+      // if not allowed file type or above allowed size
+      if (!extensions.includes(filename.split('.').pop())) {
+        $('#modal_prod_msgAd').text('Formati i gabuar!');
+        $('#modal_prod_msgAd').addClass('alert alert-primary');
+      } else if (filesize > 5000000) {
+        $('#modal_prod_msgAd').text('Imazhi nuk mund te jete me shume se 5MB!');
+        $('#modal_prod_msgAd').addClass('alert alert-primary');
+      } else{
+
+        let inputData = new FormData();
+        inputData.append('prodimg', imgfile);
+        inputData.append('name', name);
+        inputData.append('price', price);
+        inputData.append('category', category);
+        inputData.append('ingredients', JSON.stringify(ingredients));
+
+
+  if (name == "" || price == "" || category == "" || !imgfile) {
+    $('#modal_prod_msgAd').html('Duhen shtuar te gjitha te dhenat e domosdoshme! (Emri, cmimi, imazhi dhe kategoria)');
+    $('#modal_prod_msgAd').addClass('alert alert-primary');
+  }
+
+  else  {
+    $.ajax({
+      url: "../php/add_prod.php",
+      method: "POST",
+      data: inputData,
+      contentType: false,
+      cache: false,
+      processData: false,
+      beforeSend: function () {
+        $('#admp .spinner-border').removeClass('d-none');
+      },
+      success: function (data) {
+        $('#admp .spinner-border').addClass('d-none');
+        $('#modal_prod_msgAd').addClass('alert alert-primary');
+        $('#modal_prod_msgAd').html(data);
+        getAllProds();
+        $('form').trigger('reset');
+        $('#prodModalAdd .custom-file-input').val('');
+        $('#prodModalAdd .custom-file-label').text('Zgjidh imazhin');
+        setTimeout(function () {
+          $('#modal_prod_msgAd').html('');
+          $('#modal_prod_msgAd').removeClass('alert alert-primary');
+          $('#prodModalAdd').modal('hide');
+        }, 1800);
+      },
+      error: function (xhr, ajaxOptions, thrownError) {
+        $.notify(xhr.responseText, "error");
+        $('#admp .spinner-border').addClass('d-none');
+      }
+    });
+
+    }
+  }
+});
+
+//function to update product
+$(document).on('click', '.update_prod', function (e) {
+  e.preventDefault();
+  e.stopImmediatePropagation();
+  prod_id = $(this).attr("id");
+
+  
+  $(document).on('click', '#prod_update_mod', function () {
+
+    var i=0;
+    let name = $('#prod_name_up').val();
+    let price = $('#prod_price_up').val();
+    let category = $('#kategUp').children("option:selected").val();
+    let ingredients = [];
+    $('.form-check-input:checked').each(function () {
+        ingredients[i++] = $(this).val();
+    });  
+
+    let imgfile = document.getElementById('prodimgin').files[0];
+    
+    // if file was selected
+    if (imgfile) {
+      let extensions = ['jpg', 'jpeg', 'png', 'gif'];
+      let filename = imgfile.name;
+      let filesize = imgfile.size;
+      
+      // if not allowed file type or above allowed size
+      if (!extensions.includes(filename.split('.').pop())) {
+        $('#modal_prod_msgUp').text('Formati i gabuar!');
+        $('#modal_prod_msgUp').addClass('alert alert-primary');
+      } else if (filesize > 5000000) {
+        $('#modal_prod_msgUp').text('Imazhi nuk mund te jete me shume se 5MB!');
+        $('#modal_prod_msgUp').addClass('alert alert-primary');
+      } else {
+        let inputData = new FormData();
+        inputData.append('prodimg', imgfile);
+        inputData.append('prod_id', prod_id);
+        // send data and receive url
+        $.ajax({
+          type: "post",
+          url: "../php/prod_img.php",
+          data: inputData,
+          contentType: false,
+          cache: false,
+          processData: false,
+          beforeSend: function () {
+            $('#kuti_p .spinner-border').removeClass('d-none');
+          },
+          success: function (response) {
+            $('#kuti_p .spinner-border').addClass('d-none');
+            $('#modal_prod_msgUp').html(response);
+            $('#modal_prod_msgUp').addClass('alert alert-primary');
+            $('form').trigger('reset');
+            $('#modal_prod_msgUp').addClass('alert alert-primary');
+            getAllProds();
+            $('#prodModalUpdate .custom-file-input').val('');
+            $('#prodModalUpdate .custom-file-label').text('Zgjidh imazhin');
+          },
+          error: function (xhr, ajaxOptions, thrownError) {
+            $('#kuti_p .spinner-border').addClass('d-none');
+            $.notify(xhr.responseText, 'error');
+          }
+        });
+      }
+    }
+
+    else if (name == "" && price == "" && category == "" && jQuery.isEmptyObject(ingredients) && imgfile == "") {
+      $('#modal_prod_msgUp').html('Ju nuk keni modifikuar asnje te dhene!');
+      $('#modal_prod_msgUp').addClass('alert alert-primary');
+    } 
+    
+    else {
+      $.ajax({
+        url: "../php/update_prod.php",
+        method: "POST",
+        data: { prod_id: prod_id, name: name, price: price, category: category, ingredients: ingredients},
+        beforeSend: function () {
+          $('#admp .spinner-border').removeClass('d-none');
+        },
+        success: function (data) {
+          getAllProds();
+          $('#admp .spinner-border').addClass('d-none');
+          $('#modal_prod_msgUp').html(data);
+          $('#modal_prod_msgUp').addClass('alert alert-primary');
+          $('form').trigger('reset');
+          setTimeout(function () {
+            $('#modal_prod_msgUp').html('');
+            $('#modal_prod_msgUp').removeClass('alert alert-primary');
+            $('#prodModalUpdate').modal('hide');
+          }, 1800);
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+          $.notify(xhr.responseText, "error");
+          $('#admp .spinner-border').addClass('d-none');
+        }
+      });
+    }
+    });
+  });
+
+});
 /**
  * END SECTION 4
  */

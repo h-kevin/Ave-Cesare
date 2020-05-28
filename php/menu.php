@@ -1,12 +1,13 @@
-<!-- Menu page -->
-
 <?php
 
+/**
+ * PHP file to pass cards of products from db to html page
+ */
     require_once('db_connect.php');
 
-    //Get all products from db display in a card deck
     $query = "SELECT * FROM Product";
 
+    //if a category is selected, do query by category
     if(isset($_POST["cat_id"])) { 
         $query .= " WHERE cat_id='" . $_POST["cat_id"] . "'";
     }
