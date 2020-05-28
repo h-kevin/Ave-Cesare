@@ -19,7 +19,7 @@
             $res = '';
             foreach($result as $row){
                 $res .= '<div class="form-check form-check-inline">';
-                $res .= '<input class="form-check-input" type="checkbox" id="inlineCheckbox' . $row["id"] . '" value="' . $row["id"] . '">';
+                $res .= '<input class="form-check-input" type="checkbox" data-id="inlineCheckbox' . $row["id"] . '" value="' . $row["id"] . '">';
                 $res .= '<label class="form-check-label" for="inlineCheckbox' . $row["id"] . '">' . $row["name"] . '</label>';
                 $res .= '</div>';
             }

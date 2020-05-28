@@ -44,8 +44,6 @@ function updateProf (pinfo) {
   else
     $('.litel').text(`Telefon: (+355) ${pinfo['mobile']}`);
 
-  console.log(pinfo['admin']);
-
   if (pinfo['admin'] == 1) {
     $('.profile-body .first-group .change-info').addClass('d-none');
     $('.profile-body .first-group .adm-e').removeClass('d-none');

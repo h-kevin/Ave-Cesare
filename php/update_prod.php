@@ -17,10 +17,14 @@
             $name = $_POST["name"];
             $price = $_POST["price"];
             $category = $_POST["category"];
+            
+            if ($_FILES) {
+                $url = uploadImage('prodimg');
+            }
 
             //get product by id
             $stmt = $conn->prepare("SELECT * FROM Product WHERE id = ?");
-            $stmt->bind_param('s', $prod_id);
+            $stmt->bind_param('d', $prod_id);
             $stmt->execute();
             $stmt->store_result();
             
@@ -30,7 +34,7 @@
                 if($name != ""){
 
                     $stmt = $conn->prepare("UPDATE Product SET name = ? where id = ?");
-                    $stmt->bind_param('ss', $name, $prod_id);
+                    $stmt->bind_param('sd', $name, $prod_id);
                     $result = $stmt->execute();
                     if(!$result){
                         header('HTTP/1.1 500 Internal Server Error');
@@ -40,7 +44,7 @@
                 if($price != ""){
                     
                     $stmt = $conn->prepare("UPDATE Product SET price = ? where id = ?");
-                    $stmt->bind_param('ss', $price, $prod_id);
+                    $stmt->bind_param('sd', $price, $prod_id);
                     $result = $stmt->execute();
                     if(!$result){
                         header('HTTP/1.1 500 Internal Server Error');
@@ -51,7 +55,7 @@
                 if($category != ""){
 
                     $stmt = $conn->prepare("UPDATE Product SET cat_id = ? where id = ?");
-                    $stmt->bind_param('ss', $category, $prod_id);
+                    $stmt->bind_param('sd', $category, $prod_id);
                     $result = $stmt->execute();
                     if(!$result){
                         header('HTTP/1.1 500 Internal Server Error');
@@ -78,6 +82,16 @@
                             header('HTTP/1.1 500 Internal Server Error');
                             exit("Problem ne server! Ingredienti " . $i . " nuk u modifikua");
                         }
+                    }
+                }
+
+                if ($url) {
+                    $stmt = $conn->prepare("UPDATE Product SET image = ? where id = ?");
+                    $stmt->bind_param('sd', $url, $prod_id);
+                    $result = $stmt->execute();
+                    if(!$result){
+                        header('HTTP/1.1 500 Internal Server Error');
+                        exit("Problem ne modifikimin e produktit! Modifikimi i imazhit deshtoi!");
                     }
                 }
 
