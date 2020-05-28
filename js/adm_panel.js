@@ -936,7 +936,6 @@ $('#mgo-section').on('hidden.bs.modal', '.modal', function () {
     $('#modal_offer_msgUp').html('');
     $('#modal_offer_msgUp').removeClass('alert alert-primary');
     $('#offerModalUpdate').modal('hide');
-    console.log('pwor');
   } else {
     $('#modal_offer_msgDel').html('');
     $('#modal_offer_msgDel').removeClass('alert alert-primary');
@@ -944,39 +943,37 @@ $('#mgo-section').on('hidden.bs.modal', '.modal', function () {
   }
 });
 
-$(document).on('click', '.deleteo', function (e) {
-  e.preventDefault();
-  e.stopImmediatePropagation();
+// delete
+$(document).on('click', '.deleteo', function () {
   offer_id = $(this).attr("data-id");
-  $("#delete_offer_mod").show();
+});
 
-  $(document).on('click', '#delete_offer_mod', function (e) {
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    $.ajax({
-      url: "../php/delete_offer.php",
-      method: "POST",
-      data: { offer_id: offer_id },
-      beforeSend: function () {
-        $('#kuti_offer .spinner-border').removeClass('d-none');
-      },
-      success: function (data) {
-        $('#kuti_offer .spinner-border').addClass('d-none');
-        $("#delete_offer_mod").hide();
-        $('#modal_offer_msgDel').addClass('alert alert-primary');
-        $('#modal_offer_msgDel').html(data);
-        getAllOffers();
-        setTimeout(function () {
-          $('#offerModalDelete').modal('hide');
-        }, 1000);
-      },
-      error: function (xhr, ajaxOptions, thrownError) {
-        $.notify(xhr.responseText, "error");
-      }
-    });
+$(document).on('click', '#delete_offer_mod', function () {
+  $.ajax({
+    url: "../php/delete_offer.php",
+    method: "POST",
+    data: { offer_id: offer_id },
+    beforeSend: function () {
+      $('#delete_offer_mod .spinner-border').removeClass('d-none');
+    },
+    success: function (data) {
+      $('#delete_offer_mod .spinner-border').addClass('d-none');
+      $("#delete_offer_mod").hide();
+      $('#modal_offer_msgDel').addClass('alert alert-primary');
+      $('#modal_offer_msgDel').html(data);
+      getAllOffers();
+      setTimeout(function () {
+        $('#offerModalDelete').modal('hide');
+      }, 1000);
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+      $('#delete_offer_mod .spinner-border').addClass('d-none');
+      $.notify(xhr.responseText, "error");
+    }
   });
 });
 
+// add
 $(document).on('click', '#add_offer', function (e) {
   let name = $('#name_addo').val();
   let discount = $('#discount_addo').val();
@@ -1035,9 +1032,8 @@ $(document).on('click', '#add_offer', function (e) {
   }
 });
 
-$(document).on('click', '.updateo', function (e) {
-  e.preventDefault();
-  e.stopImmediatePropagation();
+// modify
+$(document).on('click', '.updateo', function () {
   offer_id = $(this).attr("data-id");
 
   $(document).on('click', '#update_offer_mod', function (e) {
@@ -1105,7 +1101,7 @@ $(document).on('click', '.updateo', function (e) {
         $('#update_offer_mod .spinner-border').removeClass('d-none');
       },
       success: function (data) {
-        $('#kuti_offer .spinner-border').addClass('d-none');
+        $('#update_offer_mod .spinner-border').addClass('d-none');
         $('#modal_offer_msgUp').html(data);
         $('#modal_offer_msgUp').addClass('alert alert-primary');
         getAllOffers();
@@ -1115,6 +1111,7 @@ $(document).on('click', '.updateo', function (e) {
       },
       error: function (xhr, ajaxOptions, thrownError) {
         $.notify(xhr.responseText, "error");
+        $('#update_offer_mod .spinner-border').addClass('d-none');
       }
     });
   });

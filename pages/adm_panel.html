@@ -439,7 +439,7 @@
                         class="form-control" placeholder="Pershkrimi" />
                     </div>
                     <div class="input-group mt-2">
-                      <input type="file" class="custom-file-input" name="prodimg" id="offerimg1">
+                      <input type="file" class="custom-file-input" name="offerimg" id="offerimg1">
                       <label style="font-family: 'Barlow Condensed', serif;"
                         class="custom-file-label" for="inputGroupFile02">
                         Zgjidh imazhin
@@ -467,37 +467,33 @@
                 <div class="modal-body">
                   <p id="modal_offer_msgUp"></p>
                   <form>
-                    <div class="input-group">
-                      <input type="file" class="custom-file-input" name="prodimg" id="offerimg2">
+                    <div class="input-group mt-0">
+                      <input type="text" name="name" id="name_upo" class="form-control"
+                        placeholder="Emri" />
+                    </div>
+                    <div class="input-group mt-2">
+                      <input type="number" name="discount" id="discount_upo" class="form-control"
+                        min="0" placeholder="Ulja" />
+                    </div>
+                    <div class="input-group mt-1 d-flex flex-column">
+                      <small class="mt-0 form-text text-muted">Data e fillimit</small>
+                      <input type="date" name="start_date" class="form-control"
+                        id="start_date_upo">
+                    </div>
+                    <div class="input-group mt-1 d-flex flex-column">
+                      <small class="mt-0 form-text text-muted">Data e mbarimit</small>
+                      <input type="date" name="end_date" class="form-control" id="end_date_upo">
+                    </div>
+                    <div class="input-group mt-2">
+                      <input type="text" name="description" id="description_upo"
+                        class="form-control" placeholder="Pershkrimi" />
+                    </div>
+                    <div class="input-group mt-2">
+                      <input type="file" class="custom-file-input" name="offerimg" id="offerimg2">
                       <label style="font-family: 'Barlow Condensed', serif;"
                         class="custom-file-label" for="inputGroupFile02">
                         Zgjidh imazhin
                       </label>
-                    </div>
-                    <div class="input-group">
-                      <input type="text" name="name" id="name_upo" class="form-control"
-                        placeholder="Emri" />
-                    </div>
-                    <div class="input-group">
-                      <input type="number" name="discount" id="discount_upo" class="form-control"
-                        placeholder="Ulja" />
-                    </div>
-                    <div class="input-group">
-                      <label>Data e fillimit</label><br>
-                      <input type="date" name="start_date" id="start_date_upo" class="form-control"
-                        placeholder="Data e fillimit" />
-                    </div>
-                    <div class="input-group">
-                      <label>Data e mbarimit</label><br>
-                      <input type="date" name="end_date" id="end_date_upo" class="form-control"
-                        placeholder="Data e mbarimit" />
-                    </div>
-                    <div class="input-group">
-                      <input type="text" name="description" id="description_upo"
-                        class="form-control" placeholder="Pershkrimi" />
-                    </div>
-                    <div class="input-group">
-
                     </div>
                   </form>
                 </div>
