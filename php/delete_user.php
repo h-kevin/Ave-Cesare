@@ -26,6 +26,7 @@
                 //if user is admin, you cant delete him
                 if($row[0] == 1){
                     echo 'Nuk mund te fshini nje perdorues admin!';
+                    exit;
                 }
 
                 //if not, continue
@@ -35,14 +36,14 @@
 
                     if($result){
                     echo 'Perdoruesi u fshi me sukses!';
+                    exit;
                     }
                     else{
                         header('HTTP/1.1 404 Not Found');
                         echo 'Perdoruesi nuk u gjet. Mund te jete fshire me pare';
+                        exit;
                     }
                 }
-            } else {
-                echo 'Ky perdorues nuk u gjet. Mund te jete duke u modifikuar ne databaze ose eshte fshire me pare';
             }
         }
     } else {

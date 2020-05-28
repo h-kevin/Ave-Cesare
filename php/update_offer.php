@@ -29,17 +29,18 @@
                 if($name != ""){
 
                     $stmt = $conn->prepare("UPDATE Offer SET name = ? where id = ?");
-                    $stmt->bind_param('ss', $name, $offer_id);
+                    $stmt->bind_param('sd', $name, $offer_id);
                     $result = $stmt->execute();
                     if(!$result){
                         header('HTTP/1.1 500 Internal Server Error');
                         exit("Problem ne modifikimin e ofertes! Modifikimi i emrit deshtoi!");
                     }
                 }
+
                 if($discount != ""){
                     
-                    $stmt = $conn->prepare("UPDATE Product SET discount = ? where id = ?");
-                    $stmt->bind_param('ss', $discount, $offer_id);
+                    $stmt = $conn->prepare("UPDATE Offer SET discount = ? where id = ?");
+                    $stmt->bind_param('dd', $discount, $offer_id);
                     $result = $stmt->execute();
                     if(!$result){
                         header('HTTP/1.1 500 Internal Server Error');
@@ -49,8 +50,8 @@
 
                 if($start_date != ""){
 
-                    $stmt = $conn->prepare("UPDATE Product SET start_date = ? where id = ?");
-                    $stmt->bind_param('ss', $start_date, $offer_id);
+                    $stmt = $conn->prepare("UPDATE Offer SET start_date = ? where id = ?");
+                    $stmt->bind_param('sd', $start_date, $offer_id);
                     $result = $stmt->execute();
                     if(!$result){
                         header('HTTP/1.1 500 Internal Server Error');
@@ -60,8 +61,8 @@
 
                 if($end_date != ""){
 
-                    $stmt = $conn->prepare("UPDATE Product SET end_date = ? where id = ?");
-                    $stmt->bind_param('ss', $end_date, $offer_id);
+                    $stmt = $conn->prepare("UPDATE Offer SET end_date = ? where id = ?");
+                    $stmt->bind_param('sd', $end_date, $offer_id);
                     $result = $stmt->execute();
                     if(!$result){
                         header('HTTP/1.1 500 Internal Server Error');
@@ -71,8 +72,8 @@
 
                 if($description != ""){
 
-                    $stmt = $conn->prepare("UPDATE Product SET description = ? where id = ?");
-                    $stmt->bind_param('ss', $description, $offer_id);
+                    $stmt = $conn->prepare("UPDATE Offer SET description = ? where id = ?");
+                    $stmt->bind_param('sd', $description, $offer_id);
                     $result = $stmt->execute();
                     if(!$result){
                         header('HTTP/1.1 500 Internal Server Error');

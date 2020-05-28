@@ -12,11 +12,59 @@ $('.admin_panel .nav div').click(function () {
 
 
 /**
+ * control section update
+ */
+
+let switchExecution = -1;
+
+$(document).ready(function () {
+  // get link
+  let link = document.location.href;
+  // get section
+  if (link.search('#') == -1 || link.search('#stats-section') != -1) {
+    switchExecution = 1;
+  } else if (link.search('#list-section') != -1) {
+    switchExecution = 2;
+  } else if (link.search('#mgu-section') != -1) {
+    switchExecution = 3;
+  } else if (link.search('#mgp-section') != -1) {
+    switchExecution = 4;
+  } else {
+    switchExecution = 5;
+  }
+});
+
+$('nav').click(function () {
+  // get link
+  let link = document.location.href;
+  // get section
+  if (link.search('#') == -1 || link.search('#stats-section') != -1) {
+    switchExecution = 1;
+  } else if (link.search('#list-section') != -1) {
+    switchExecution = 2;
+  } else if (link.search('#mgu-section') != -1) {
+    switchExecution = 3;
+  } else if (link.search('#mgp-section') != -1) {
+    switchExecution = 4;
+  } else {
+    switchExecution = 5;
+  }
+});
+
+
+/**
  * SECTION 1
  */
 
 $(document).ready(function () {
-  statistika();
+  if (switchExecution == 1) {
+    statistika();
+  }
+});
+
+$('nav').click(function () {
+  if (switchExecution == 1)
+    statistika();
 });
 
 function statistika () {
@@ -64,7 +112,9 @@ function statistika () {
 
 // set interval to update stats
 setInterval(function () {
-  statistika();
+  if (switchExecution == 1) {
+    statistika();
+  }
 }, 10000);
 
 
@@ -79,7 +129,14 @@ setInterval(function () {
 
 $(document).ready(function () {
   // on document ready fetch open orders
-  fetch_open_orders();
+  if (switchExecution == 2) {
+    fetch_open_orders();
+  }
+});
+
+$('nav').click(function () {
+  if (switchExecution == 2)
+    fetch_open_orders();
 });
 
 // function to fetch open orders
@@ -192,7 +249,9 @@ function fill_orders_table (orders_obj) {
 
 // set interval to update orders table
 setInterval(function () {
-  fetch_open_orders();
+  if (switchExecution == 2) {
+    fetch_open_orders();
+  }
 }, 10000);
 
 // handle status change
@@ -227,7 +286,6 @@ $('#list-section .olist-table').on('change', '.status', function () {
   });
 });
 
-
 /**
  * END SECTION 2
  */
@@ -237,7 +295,18 @@ $('#list-section .olist-table').on('change', '.status', function () {
  * SECTION 3
  */
 
-$(document).ready(function getAll () {
+$(document).ready(function () {
+  if (switchExecution == 3)
+    getAll();
+});
+
+$('nav').click(function () {
+  if (switchExecution == 3) {
+    getAll();
+  }
+});
+
+function getAll () {
   //  function to fetch all users
   $.ajax({
     type: 'POST',
@@ -250,187 +319,170 @@ $(document).ready(function getAll () {
       $.notify(xhr.responseText, "error");
     }
   });
+};
 
-  var user_id;
+let user_id;
 
-  //on success fill table with results
-  function getAllFormat (response) {
+//on success fill table with results
+function getAllFormat (response) {
 
-    var tblVar;
+  let tblVar;
 
-    for (i in response) {
-      tblVar += '<tr>';
-      tblVar += '<td><img src="' + response[i].prof_img + '" class="rounded-circle" width="50" height="50"></td>';
-      tblVar += '<td>' + response[i].name + '</td>';
-      tblVar += '<td>' + response[i].surname + '</td>';
-      tblVar += '<td>' + response[i].admin + '</td>';
-      tblVar += '<td><button type="button" name="update" id="' + response[i].id + '" data-target="#userModalUpdate" data-toggle="modal" class="btn btn-success btn-lg update">Modifiko</button></td>';
-      tblVar += '<td><button type="button" name="delete" id="' + response[i].id + '" data-target="#userModalDelete" data-toggle="modal" class="btn btn-danger btn-lg delete">Fshi</button></td>';
-      tblVar += '</tr>';
-    }
-
-    $('#kuti table tbody').html(tblVar);
+  for (i in response) {
+    tblVar += '<tr>';
+    tblVar += '<td><img src="' + response[i].prof_img + '" class="rounded-circle" width="50" height="50"></td>';
+    tblVar += '<td>' + response[i].name + '</td>';
+    tblVar += '<td>' + response[i].surname + '</td>';
+    tblVar += '<td>' + response[i].admin + '</td>';
+    tblVar += '<td><button type="button" name="update" data-id="' + response[i].id + '" data-target="#userModalUpdate" data-toggle="modal" class="btn btn-success btn-lg update">Modifiko</button></td>';
+    tblVar += '<td><button type="button" name="delete" data-id="' + response[i].id + '" data-target="#userModalDelete" data-toggle="modal" class="btn btn-danger btn-lg delete">Fshi</button></td>';
+    tblVar += '</tr>';
   }
 
-  //ne klikimin jashte modalit i bejm reset cdo inputi ose alerti
-  $('.modal').on('hidden.bs.modal', function () {
+  $('#kuti table tbody').html(tblVar);
+};
+
+//ne klikimin jashte modalit i bejm reset cdo inputi ose alerti
+$('#mgu-section').on('hidden.bs.modal', '.modal', function () {
+  if ($(this).attr('id') != 'userModalDelete') {
     $(this).find('form')[0].reset();
-    $('[data-toggle="buttons"] :radio').prop('checked', false);
-    $('[data-toggle="buttons"] label').removeClass('active');
-    $(this).find('.collapse').collapse('hide');
-    $(this).find('small').fadeOut();
-    $('#modal_msgDel').html('');
-    $('#modal_msgDel').removeClass('alert alert-primary');
-    $('#userModalDelete').modal('hide');
     $('#modal_msgAd').html('');
     $('#modal_msgAd').removeClass('alert alert-primary');
     $('#userModalAdd').modal('hide');
     $('#modal_msgUp').html('');
     $('#modal_msgUp').removeClass('alert alert-primary');
     $('#userModalUpdate').modal('hide');
-  });
+  } else {
+    $('#modal_msgDel').html('');
+    $('#modal_msgDel').removeClass('alert alert-primary');
+    $('#userModalDelete').modal('hide');
+  }
+});
 
-  $(document).on('click', '.delete', function (e) {
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    user_id = $(this).attr("id");
-    $("#delete_mod").show();
+$(document).on('click', '.delete', function () {
+  user_id = $(this).attr("data-id");
+  $("#delete_mod").show();
 
-    $(document).on('click', '#delete_mod', function (e) {
-      e.preventDefault();
-      e.stopImmediatePropagation();
-      $.ajax({
-        url: "../php/delete_user.php",
-        method: "POST",
-        data: { user_id: user_id },
-        beforeSend: function () {
-          $('#admp .spinner-border').removeClass('d-none');
-        },
-        success: function (data) {
-          $('#admp .spinner-border').addClass('d-none');
-          $("#delete_mod").hide();
-          $('#modal_msgDel').addClass('alert alert-primary');
-          $('#modal_msgDel').html(data);
-          getAll();
-          setTimeout(function () {
-            $('#modal_msgDel').html('');
-            $('#modal_msgDel').removeClass('alert alert-primary');
-            $('#userModalDelete').modal('hide');
-          }, 2000);
-        },
-        error: function (xhr, ajaxOptions, thrownError) {
-          $.notify(xhr.responseText, "error");
-        }
-      });
+  $(document).on('click', '#delete_mod', function () {
+    $.ajax({
+      url: "../php/delete_user.php",
+      method: "POST",
+      data: { user_id: user_id },
+      beforeSend: function () {
+        $('#admp .spinner-border').removeClass('d-none');
+      },
+      success: function (data) {
+        $('#admp .spinner-border').addClass('d-none');
+        $("#delete_mod").hide();
+        $('#modal_msgDel').addClass('alert alert-primary');
+        $('#modal_msgDel').html(data);
+        getAll();
+        setTimeout(function () {
+          $('#userModalDelete').modal('hide');
+        }, 1000);
+      },
+      error: function (xhr, ajaxOptions, thrownError) {
+        $.notify(xhr.responseText, "error");
+      }
     });
   });
+});
 
-  $(document).on('click', '#add', function (e) {
-    e.preventDefault();
-    e.stopImmediatePropagation();
+$(document).on('click', '#add', function () {
+  const regex1 = new RegExp(/^[A-Za-z]+$/);
+  let name = $('#name_add').val();
+  let surname = $('#surname_add').val();
+  let email = $('#email_add').val();
+  let pass = $('#pass1_add').val();
+  let pass2 = $('#pass2_add').val();
+
+  if (name != "" && !regex1.test(name)) {
+    $('#modal_msgAd').html('Vendosni emrin ne formatin e kerkuar!');
+    $('#modal_msgAd').addClass('alert alert-primary');
+  }
+  else if (surname != "" && !regex1.test(surname)) {
+    $('#modal_msgAd').html('Vendosni mbiemrin ne formatin e kerkuar!');
+    $('#modal_msgAd').addClass('alert alert-primary');
+  }
+  else if (name == "" || surname == "" || email == "" || pass == "" || pass2 == "") {
+    $('#modal_msgAd').html('Duhen shtuar te gjitha te dhenat e kerkuara!');
+    $('#modal_msgAd').addClass('alert alert-primary');
+  }
+
+  else if (pass != pass2) {
+    $('#modal_msgAd').html('Fjalekalimet nuk perputhen!');
+    $('#modal_msgAd').addClass('alert alert-primary');
+  }
+
+  else {
+    $.ajax({
+      url: "../php/add_user.php",
+      method: "POST",
+      data: { name: name, surname: surname, email: email, pass: pass },
+      beforeSend: function () {
+        $('#admp .spinner-border').removeClass('d-none');
+      },
+      success: function (data) {
+        $('#admp .spinner-border').addClass('d-none');
+        $('#modal_msgAd').addClass('alert alert-primary');
+        $('#modal_msgAd').html(data);
+        getAll();
+        setTimeout(function () {
+          $('#userModalAdd').modal('hide');
+        }, 1000);
+      },
+      error: function (xhr, ajaxOptions, thrownError) {
+        $.notify(xhr.responseText, "error");
+        $('#modal_msgAd').addClass('alert alert-primary');
+      }
+    });
+  }
+});
+
+$(document).on('click', '.update', function () {
+  user_id = $(this).attr("data-id");
+
+  $(document).on('click', '#update_mod', function () {
     const regex1 = new RegExp(/^[A-Za-z]+$/);
-    let name = $('#name_add').val();
-    let surname = $('#surname_add').val();
-    let email = $('#email_add').val();
-    let pass = $('#pass1_add').val();
-    let pass2 = $('#pass2_add').val();
+    let name = $('#name_up').val();
+    let surname = $('#surname_up').val();
+    let type_user = $("input[name='user_type']:checked").val()
 
     if (name != "" && !regex1.test(name)) {
-      $('#modal_msgAd').html('Vendosni emrin ne formatin e kerkuar!');
-      $('#modal_msgAd').addClass('alert alert-primary');
+      $('#modal_msgUp').html('Vendosni emrin ne formatin e kerkuar!');
+      $('#modal_msgUp').addClass('alert alert-primary');
     }
     else if (surname != "" && !regex1.test(surname)) {
-      $('#modal_msgAd').html('Vendosni mbiemrin ne formatin e kerkuar!');
-      $('#modal_msgAd').addClass('alert alert-primary');
+      $('#modal_msgUp').html('Vendosni mbiemrin ne formatin e kerkuar!');
+      $('#modal_msgUp').addClass('alert alert-primary');
     }
-    else if (name == "" || surname == "" || email == "" || pass == "" || pass2 == "") {
-      $('#modal_msgAd').html('Duhen shtuar te gjitha te dhenat e kerkuara!');
-      $('#modal_msgAd').addClass('alert alert-primary');
+    else if (name == "" && surname == "" && type_user == undefined) {
+      $('#modal_msgUp').html('Ju nuk keni modifikuar asnje te dhene!');
+      $('#modal_msgUp').addClass('alert alert-primary');
     }
-
-    else if (pass != pass2) {
-      $('#modal_msgAd').html('Fjalekalimet nuk perputhen!');
-      $('#modal_msgAd').addClass('alert alert-primary');
-    }
-
     else {
+
       $.ajax({
-        url: "../php/add_user.php",
+        url: "../php/update_user.php",
         method: "POST",
-        data: { name: name, surname: surname, email: email, pass: pass },
+        data: { user_id: user_id, name: name, surname: surname, type_user: type_user },
         beforeSend: function () {
           $('#admp .spinner-border').removeClass('d-none');
         },
         success: function (data) {
           $('#admp .spinner-border').addClass('d-none');
-          $('#modal_msgAd').addClass('alert alert-primary');
-          $('#modal_msgAd').html(data);
+          $('#modal_msgUp').html(data);
+          $('#modal_msgUp').addClass('alert alert-primary');
           getAll();
-          $('form').trigger('reset');
           setTimeout(function () {
-            $('#modal_msgAd').html('');
-            $('#modal_msgAd').removeClass('alert alert-primary');
-            $('#userModalAdd').modal('hide');
-          }, 1800);
+            $('#userModalUpdate').modal('hide');
+          }, 1000);
         },
         error: function (xhr, ajaxOptions, thrownError) {
           $.notify(xhr.responseText, "error");
         }
       });
     }
-  });
-
-
-  $(document).on('click', '.update', function (e) {
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    user_id = $(this).attr("id");
-
-    $(document).on('click', '#update_mod', function () {
-      const regex1 = new RegExp(/^[A-Za-z]+$/);
-      var name = $('#name_up').val();
-      var surname = $('#surname_up').val();
-      var type_user = $("input[name='user_type']:checked").val()
-
-      if (name != "" && !regex1.test(name)) {
-        $('#modal_msgUp').html('Vendosni emrin ne formatin e kerkuar!');
-        $('#modal_msgUp').addClass('alert alert-primary');
-      }
-      else if (surname != "" && !regex1.test(surname)) {
-        $('#modal_msgUp').html('Vendosni mbiemrin ne formatin e kerkuar!');
-        $('#modal_msgUp').addClass('alert alert-primary');
-      }
-      else if (name == "" && surname == "" && type_user == undefined) {
-        $('#modal_msgUp').html('Ju nuk keni modifikuar asnje te dhene!');
-        $('#modal_msgUp').addClass('alert alert-primary');
-      }
-      else {
-
-        $.ajax({
-          url: "../php/update_user.php",
-          method: "POST",
-          data: { user_id: user_id, name: name, surname: surname, type_user: type_user },
-          beforeSend: function () {
-            $('#admp .spinner-border').removeClass('d-none');
-          },
-          success: function (data) {
-            $('#admp .spinner-border').addClass('d-none');
-            $('#modal_msgUp').html(data);
-            $('#modal_msgUp').addClass('alert alert-primary');
-            getAll();
-            $('form').trigger('reset');
-            setTimeout(function () {
-              $('#modal_msgUp').html('');
-              $('#modal_msgUp').removeClass('alert alert-primary');
-              $('#userModalUpdate').modal('hide');
-            }, 1800);
-          },
-          error: function (xhr, ajaxOptions, thrownError) {
-            $.notify(xhr.responseText, "error");
-          }
-        });
-      }
-    });
   });
 });
 
@@ -442,36 +494,53 @@ $(document).ready(function getAll () {
 /**
  * SECTION 4
  */
-$(document).ready(function getAllProds () {
 
-  $('.custom-file-input').on('change', function () {
-    if ($('#modal_prod_msgUp').is(':visible'))
-      $('#modal_prod_msgUp').fadeOut();
+$('nav').click(function () {
+  if (switchExecution == 4) {
+    getAllProds();
+  }
+});
 
-    let filen = '';
+$(document).ready(function () {
+  if (switchExecution == 4) {
+    getAllProds();
+  }
+});
 
-    if ($(this).get(0).files[0])
-      filen = $(this).get(0).files[0].name;
-
-    if (filen.length != 0)
-      $(this).next().text(filen);
-    else
-      $(this).next().text('Zgjidh imazhin');
-  });
-
-  $('#prodModalUpdate').on('hidden.bs.modal', function () {
-    $('#prodModalUpdate .custom-file-input').val('');
-    $('#prodModalUpdate .custom-file-label').text('Zgjidh imazhin');
+$('.custom-file-input').on('change', function () {
+  if ($('#modal_prod_msgUp').is(':visible'))
     $('#modal_prod_msgUp').fadeOut();
-  });
 
+  let filen = '';
 
-  $('#prod_update_mod').click(function () {
-    // create a file variable
+  if ($(this).get(0).files[0])
+    filen = $(this).get(0).files[0].name;
 
-  });
+  if (filen.length != 0)
+    $(this).next().text(filen);
+  else
+    $(this).next().text('Zgjidh imazhin');
+});
 
+$('#prodModalAdd').on('hidden.bs.modal', function () {
+  $('#prodModalAdd .custom-file-input').val('');
+  $('#prodModalAdd .custom-file-label').text('Zgjidh imazhin');
+  $('#modal_prod_msgUp').fadeOut();
+});
 
+$('#prodModalUpdate').on('hidden.bs.modal', function () {
+  $('#prodModalUpdate .custom-file-input').val('');
+  $('#prodModalUpdate .custom-file-label').text('Zgjidh imazhin');
+  $('#modal_prod_msgUp').fadeOut();
+});
+
+$('#prodModalDelete').on('hidden.bs.modal', function () {
+  $('#prodModalDelete .custom-file-input').val('');
+  $('#prodModalDelete .custom-file-label').text('Zgjidh imazhin');
+  $('#modal_prod_msgUp').fadeOut();
+});
+
+function getAllProds () {
   //  function to fetch all products
   $.ajax({
     type: 'POST',
@@ -510,109 +579,97 @@ $(document).ready(function getAllProds () {
       $.notify(xhr.responseText, "error");
     }
   });
+};
 
+//on success fill table with results
+function getAllProdsFormat (response) {
 
-  //on success fill table with results
-  function getAllProdsFormat (response) {
+  let tblVar;
 
-    var tblVar;
-
-    for (i in response) {
-      tblVar += '<tr>';
-      tblVar += '<td><img src="' + response[i].prof_img + '" class="rounded-circle" width="50" height="50"></td>';
-      tblVar += '<td>' + response[i].name + '</td>';
-      tblVar += '<td>' + response[i].cat + '</td>';
-      tblVar += '<td>' + response[i].price + '</td>';
-      tblVar += '<td><button type="button" name="update" id="' + response[i].id + '" data-target="#prodModalUpdate" data-toggle="modal" class="btn btn-success btn-lg update_prod">Modifiko</button></td>';
-      tblVar += '<td><button type="button" name="delete" id="' + response[i].id + '" data-target="#prodModalDelete" data-toggle="modal" class="btn btn-danger btn-lg delete_prod">Fshi</button></td>';
-      tblVar += '</tr>';
-    }
-
-    $('#kuti_p table tbody').html(tblVar);
+  for (i in response) {
+    tblVar += '<tr>';
+    tblVar += '<td><img src="' + response[i].prof_img + '" class="rounded-circle" width="50" height="50"></td>';
+    tblVar += '<td>' + response[i].name + '</td>';
+    tblVar += '<td>' + response[i].cat + '</td>';
+    tblVar += '<td>' + response[i].price + '</td>';
+    tblVar += '<td><button type="button" name="update" data-id="' + response[i].id + '" data-target="#prodModalUpdate" data-toggle="modal" class="btn btn-success btn-lg update_prod">Modifiko</button></td>';
+    tblVar += '<td><button type="button" name="delete" data-id="' + response[i].id + '" data-target="#prodModalDelete" data-toggle="modal" class="btn btn-danger btn-lg delete_prod">Fshi</button></td>';
+    tblVar += '</tr>';
   }
 
+  $('#kuti_p table tbody').html(tblVar);
+}
 
-  //ne klikimin jashte modalit i bejm reset cdo inputi ose alerti
-  $('.modal').on('hidden.bs.modal', function () {
+//ne klikimin jashte modalit i bejm reset cdo inputi ose alerti
+$('#mgp-section').on('hidden.bs.modal', '.modal', function () {
+  if ($(this).attr('id') != 'prodModalDelete') {
     $(this).find('form')[0].reset();
     $('[data-toggle="buttons"] :radio').prop('checked', false);
     $('[data-toggle="buttons"] label').removeClass('active');
-    $(this).find('.collapse').collapse('hide');
-    $(this).find('small').fadeOut();
-    $('#modal_prod_msgDel').html('');
-    $('#modal_prod_msgDel').removeClass('alert alert-primary');
-    $('#prodModalDelete').modal('hide');
     $('#modal_prod_msgAd').html('');
     $('#modal_prod_msgAd').removeClass('alert alert-primary');
     $('#prodModalAdd').modal('hide');
     $('#modal_prod_msgUp').html('');
     $('#modal_prod_msgUp').removeClass('alert alert-primary');
     $('#prodModalUpdate').modal('hide');
-  });
+  } else {
+    $('#prodModalDelete').modal('hide');
+    $('#modal_prod_msgDel').html('');
+    $('#modal_prod_msgDel').removeClass('alert alert-primary');
+  }
+});
 
-  var prod_id;
-  //ne klikimin jashte modalit i bejm reset cdo inputi
-  $('.modal').on('hidden.bs.modal', function () {
-    $(this).find('form')[0].reset();
-    $('[data-toggle="buttons"] :radio').prop('checked', false);
-    $('[data-toggle="buttons"] label').removeClass('active');
-    $(this).find('.collapse').collapse('hide');
-    $(this).find('small').fadeOut();
-  });
+let prod_id;
 
-  //function to delete selected product
-  $(document).on('click', '.delete_prod', function (e) {
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    prod_id = $(this).attr("id");
-    $("#prod_delete_mod").show();
+//function to delete selected product
+$(document).on('click', '.delete_prod', function (e) {
+  e.preventDefault();
+  e.stopImmediatePropagation();
+  prod_id = $(this).attr("data-id");
+  $("#prod_delete_mod").show();
 
-    $(document).on('click', '#prod_delete_mod', function (e) {
-      e.preventDefault();
-      e.stopImmediatePropagation();
-
-      $.ajax({
-        url: "../php/delete_prod.php",
-        method: "POST",
-        data: { prod_id: prod_id },
-        beforeSend: function () {
-          $('.manage-products .spinner-border').removeClass('d-none');
-        },
-        success: function (data) {
-          getAllProds();
-          $('.manage-products .spinner-border').addClass('d-none');
-          $("#prod_delete_mod").hide();
-          $('#modal_prod_msgDel').addClass('alert alert-primary');
-          $('#modal_prod_msgDel').html(data);
-          setTimeout(function () {
-            $('#modal_prod_msgDel').html('');
-            $('#modal_prod_msgDel').removeClass('alert alert-primary');
-            $('#prodModalDelete').modal('hide');
-          }, 2000);
-        },
-        error: function (xhr, ajaxOptions, thrownError) {
-          $.notify(xhr.responseText, "error");
-          $('.manage-products .spinner-border').addClass('d-none');
-        }
-      });
-    });
-  });
-
-  //function to add product
-  $(document).on('click', '#prod_add', function (e) {
+  $(document).on('click', '#prod_delete_mod', function (e) {
     e.preventDefault();
     e.stopImmediatePropagation();
 
-    var i = 0;
-    let name = $('#prod_name_add').val();
-    let price = $('#prod_price_add').val();
-    let category = $('#kategAdd').children("option:selected").val();
-    let ingredients = [];
-    $('.form-check-input:checked').each(function () {
-      ingredients[i++] = $(this).val();
+    $.ajax({
+      url: "../php/delete_prod.php",
+      method: "POST",
+      data: { prod_id: prod_id },
+      beforeSend: function () {
+        $('.manage-products .spinner-border').removeClass('d-none');
+      },
+      success: function (data) {
+        $('.manage-products .spinner-border').addClass('d-none');
+        $('#modal_prod_msgDel').addClass('alert alert-primary');
+        $('#modal_prod_msgDel').html(data);
+        getAllProds();
+        setTimeout(function () {
+          $('#prodModalDelete').modal('hide');
+        }, 1000);
+      },
+      error: function (xhr, ajaxOptions, thrownError) {
+        $.notify(xhr.responseText, "error");
+        $('.manage-products .spinner-border').addClass('d-none');
+      }
     });
+  });
+});
 
-    let imgfile = document.getElementById('prodimgin2').files[0];
+//function to add product
+$(document).on('click', '#prod_add', function () {
+  let i = 0;
+  let name = $('#prod_name_add').val();
+  let price = $('#prod_price_add').val();
+  let category = $('#kategAdd').children("option:selected").val();
+  let ingredients = [];
+  $('.form-check-input:checked').each(function () {
+    ingredients[i++] = $(this).val();
+  });
+
+  let imgfile = document.getElementById('prodimgin2').files[0];
+
+  if (imgfile) {
     let extensions = ['jpg', 'jpeg', 'png', 'gif'];
     let filename = imgfile.name;
     let filesize = imgfile.size;
@@ -631,8 +688,7 @@ $(document).ready(function getAllProds () {
       inputData.append('name', name);
       inputData.append('price', price);
       inputData.append('category', category);
-      inputData.append('ingredients', JSON.stringify(ingredients));
-
+      inputData.append('ingredients', ingredients);
 
       if (name == "" || price == "" || category == "" || !imgfile) {
         $('#modal_prod_msgAd').html('Duhen shtuar te gjitha te dhenat e domosdoshme! (Emri, cmimi, imazhi dhe kategoria)');
@@ -654,47 +710,49 @@ $(document).ready(function getAllProds () {
             $('#admp .spinner-border').addClass('d-none');
             $('#modal_prod_msgAd').addClass('alert alert-primary');
             $('#modal_prod_msgAd').html(data);
-            $('form').trigger('reset');
             $('#prodModalAdd .custom-file-input').val('');
             $('#prodModalAdd .custom-file-label').text('Zgjidh imazhin');
             getAllProds();
             setTimeout(function () {
-              $('#modal_prod_msgAd').html('');
-              $('#modal_prod_msgAd').removeClass('alert alert-primary');
               $('#prodModalAdd').modal('hide');
-            }, 1800);
+            }, 1000);
           },
           error: function (xhr, ajaxOptions, thrownError) {
             $.notify(xhr.responseText, "error");
             $('#admp .spinner-border').addClass('d-none');
           }
         });
-
       }
     }
+  } else {
+    $('#modal_prod_msgAd').html('Duhen plotesuar te gjitha fushat.');
+    $('#modal_prod_msgAd').addClass('alert alert-primary');
+  }
+});
+
+//function to update product
+$(document).on('click', '.update_prod', function () {
+  prod_id = $(this).attr("data-id");
+});
+
+$(document).on('click', '#prod_update_mod', function () {
+  let i = 0;
+  let name = $('#prod_name_up').val();
+  let price = $('#prod_price_up').val();
+  let category = $('#kategUp').children("option:selected").val();
+  let ingredients = [];
+
+  $('.form-check-input:checked').each(function () {
+    ingredients[i++] = $(this).val();
   });
 
-  //function to update product
-  $(document).on('click', '.update_prod', function (e) {
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    prod_id = $(this).attr("id");
+  let imgfile = document.getElementById('prodimgin').files[0];
 
-
-    $(document).on('click', '#prod_update_mod', function () {
-
-      var i = 0;
-      let name = $('#prod_name_up').val();
-      let price = $('#prod_price_up').val();
-      let category = $('#kategUp').children("option:selected").val();
-      let ingredients = [];
-      $('.form-check-input:checked').each(function () {
-        ingredients[i++] = $(this).val();
-      });
-
-      let imgfile = document.getElementById('prodimgin').files[0];
-
-      // if file was selected
+  if (name == "" && price == "" && category == "" && !imgfile && ingredients.length == 0) {
+    $('#modal_prod_msgUp').html('Ju nuk keni modifikuar asnje te dhene!');
+    $('#modal_prod_msgUp').addClass('alert alert-primary');
+  } else {
+    if (imgfile || name != "" || price != "" || category != "" || ingredients.length != 0) {
       if (imgfile) {
         let extensions = ['jpg', 'jpeg', 'png', 'gif'];
         let filename = imgfile.name;
@@ -711,46 +769,51 @@ $(document).ready(function getAllProds () {
           let inputData = new FormData();
           inputData.append('prodimg', imgfile);
           inputData.append('prod_id', prod_id);
-          // send data and receive url
+          inputData.append('name', name);
+          inputData.append('price', price);
+          inputData.append('category', category);
+          inputData.append('ingredients', JSON.stringify(ingredients));
+
           $.ajax({
-            type: "post",
-            url: "../php/prod_img.php",
+            url: "../php/update_prod.php",
+            method: "post",
             data: inputData,
             contentType: false,
             cache: false,
             processData: false,
             beforeSend: function () {
-              $('#prod_update_mod .spinner-border').removeClass('d-none');
+              $('#admp .spinner-border').removeClass('d-none');
             },
-            success: function (response) {
-              $('#prod_update_mod .spinner-border').addClass('d-none');
-              $('#modal_prod_msgUp').html(response);
-              $('#modal_prod_msgUp').addClass('alert alert-primary');
-              $('form').trigger('reset');
+            success: function (data) {
+              $('#admp .spinner-border').addClass('d-none');
+              $('#modal_prod_msgUp').html(data);
               $('#modal_prod_msgUp').addClass('alert alert-primary');
               getAllProds();
-              $('#prodModalUpdate .custom-file-input').val('');
-              $('#prodModalUpdate .custom-file-label').text('Zgjidh imazhin');
-              $('#prodModalAdd').modal('hide');
+              setTimeout(function () {
+                $('#prodModalUpdate').modal('hide');
+              }, 1000);
             },
             error: function (xhr, ajaxOptions, thrownError) {
-              $('#prod_update_mod .spinner-border').addClass('d-none');
-              $.notify(xhr.responseText, 'error');
+              $.notify(xhr.responseText, "error");
+              $('#admp .spinner-border').addClass('d-none');
             }
           });
         }
-      }
+      } else {
+        let inputData = new FormData();
+        inputData.append('prod_id', prod_id);
+        inputData.append('name', name);
+        inputData.append('price', price);
+        inputData.append('category', category);
+        inputData.append('ingredients', JSON.stringify(ingredients));
 
-      else if (name == "" && price == "" && category == "" && jQuery.isEmptyObject(ingredients) && imgfile == "") {
-        $('#modal_prod_msgUp').html('Ju nuk keni modifikuar asnje te dhene!');
-        $('#modal_prod_msgUp').addClass('alert alert-primary');
-      }
-
-      else {
         $.ajax({
           url: "../php/update_prod.php",
-          method: "POST",
-          data: { prod_id: prod_id, name: name, price: price, category: category, ingredients: ingredients },
+          method: "post",
+          data: inputData,
+          contentType: false,
+          cache: false,
+          processData: false,
           beforeSend: function () {
             $('#admp .spinner-border').removeClass('d-none');
           },
@@ -758,13 +821,10 @@ $(document).ready(function getAllProds () {
             $('#admp .spinner-border').addClass('d-none');
             $('#modal_prod_msgUp').html(data);
             $('#modal_prod_msgUp').addClass('alert alert-primary');
-            $('form').trigger('reset');
             getAllProds();
             setTimeout(function () {
-              $('#modal_prod_msgUp').html('');
-              $('#modal_prod_msgUp').removeClass('alert alert-primary');
               $('#prodModalUpdate').modal('hide');
-            }, 1800);
+            }, 1000);
           },
           error: function (xhr, ajaxOptions, thrownError) {
             $.notify(xhr.responseText, "error");
@@ -772,9 +832,8 @@ $(document).ready(function getAllProds () {
           }
         });
       }
-    });
-  });
-
+    }
+  }
 });
 
 /**
@@ -786,7 +845,18 @@ $(document).ready(function getAllProds () {
  * SECTION 5
  */
 
-$(document).ready(function getAllOffers () {
+$(document).ready(function () {
+  if (switchExecution == 5)
+    getAllOffers();
+});
+
+$('nav').click(function () {
+  if (switchExecution == 5) {
+    getAllOffers();
+  }
+});
+
+function getAllOffers () {
   //  function to fetch all offers
   $.ajax({
     type: 'POST',
@@ -799,82 +869,182 @@ $(document).ready(function getAllOffers () {
       $.notify(xhr.responseText, "error");
     }
   });
+};
 
-  var offer_id;
+let offer_id;
 
-  //on success fill table with results
-  function getAllFormatOffer (response) {
+//on success fill table with results
+function getAllFormatOffer (response) {
 
-    var tblVar;
+  let tblVar;
 
-    for (i in response) {
-      tblVar += '<tr>';
-      tblVar += '<td><img src="' + response[i].image + '" class="rounded-circle" width="50" height="50"></td>';
-      tblVar += '<td>' + response[i].name + '</td>';
-      tblVar += '<td>' + response[i].discount + '</td>';
-      tblVar += '<td>' + response[i].description + '</td>';
-      tblVar += '<td><button type="button" name="update" id="' + response[i].id + '" data-target="#offerModalUpdate" data-toggle="modal" class="btn btn-success btn-lg updateo">Modifiko</button></td>';
-      tblVar += '<td><button type="button" name="delete" id="' + response[i].id + '" data-target="#offerModalDelete" data-toggle="modal" class="btn btn-danger btn-lg deleteo">Fshi</button></td>';
-      tblVar += '</tr>';
-    }
-
-    $('#kuti_offer table tbody').html(tblVar);
+  for (i in response) {
+    tblVar += '<tr>';
+    tblVar += '<td><img src="' + response[i].image + '" class="rounded-circle" width="50" height="50"></td>';
+    tblVar += '<td>' + response[i].name + '</td>';
+    tblVar += '<td>' + response[i].discount + '</td>';
+    tblVar += '<td>' + response[i].description + '</td>';
+    tblVar += '<td><button type="button" name="update" data-id="' + response[i].id + '" data-target="#offerModalUpdate" data-toggle="modal" class="btn btn-success btn-lg updateo">Modifiko</button></td>';
+    tblVar += '<td><button type="button" name="delete" data-id="' + response[i].id + '" data-target="#offerModalDelete" data-toggle="modal" class="btn btn-danger btn-lg deleteo">Fshi</button></td>';
+    tblVar += '</tr>';
   }
 
-  //ne klikimin jashte modalit i bejm reset cdo inputi
-  $('.modal').on('hidden.bs.modal', function () {
+  $('#kuti_offer table tbody').html(tblVar);
+}
+
+// ne zgjedhje te imazhit
+$('.custom-file-input').on('change', function () {
+  if ($('#modal_offer_msgUp').is(':visible'))
+    $('#modal_offer_msgUp').fadeOut();
+
+  let filen = '';
+
+  if ($(this).get(0).files[0])
+    filen = $(this).get(0).files[0].name;
+
+  if (filen.length != 0)
+    $(this).next().text(filen);
+  else
+    $(this).next().text('Zgjidh imazhin');
+});
+
+$('#offerModalAdd').on('hidden.bs.modal', function () {
+  $('#offerModalAdd .custom-file-input').val('');
+  $('#offerModalAdd .custom-file-label').text('Zgjidh imazhin');
+  $('#modal_offer_msgUp').fadeOut();
+});
+
+$('#offerModalUpdate').on('hidden.bs.modal', function () {
+  $('#offerModalUpdate .custom-file-input').val('');
+  $('#offerModalUpdate .custom-file-label').text('Zgjidh imazhin');
+  $('#modal_offer_msgUp').fadeOut();
+});
+
+$('#offerModalDelete').on('hidden.bs.modal', function () {
+  $('#offerModalDelete .custom-file-input').val('');
+  $('#offerModalDelete .custom-file-label').text('Zgjidh imazhin');
+  $('#modal_offer_msgUp').fadeOut();
+});
+
+//ne klikimin jashte modalit i bejm reset cdo inputi
+$('#mgo-section').on('hidden.bs.modal', '.modal', function () {
+  if ($(this).attr('id') != 'offerModalDelete') {
     $(this).find('form')[0].reset();
-    $('[data-toggle="buttons"] :radio').prop('checked', false);
-    $('[data-toggle="buttons"] label').removeClass('active');
-    $(this).find('.collapse').collapse('hide');
-    $(this).find('small').fadeOut();
-    $('#offerModalUpdate .custom-file-input').val('');
-    $('#offerModalUpdate .custom-file-label').text('Zgjidh imazhin');
+    $('#modal_offer_msgAd').html('');
+    $('#modal_offer_msgAd').removeClass('alert alert-primary');
+    $('#offerModalAdd').modal('hide');
+    $('#modal_offer_msgUp').html('');
+    $('#modal_offer_msgUp').removeClass('alert alert-primary');
+    $('#offerModalUpdate').modal('hide');
+  } else {
+    $('#modal_offer_msgDel').html('');
+    $('#modal_offer_msgDel').removeClass('alert alert-primary');
+    $('#offerModalDelete').modal('hide');
+  }
+});
+
+// delete
+$(document).on('click', '.deleteo', function () {
+  offer_id = $(this).attr("data-id");
+});
+
+$(document).on('click', '#delete_offer_mod', function () {
+  $.ajax({
+    url: "../php/delete_offer.php",
+    method: "POST",
+    data: { offer_id: offer_id },
+    beforeSend: function () {
+      $('#delete_offer_mod .spinner-border').removeClass('d-none');
+    },
+    success: function (data) {
+      $('#delete_offer_mod .spinner-border').addClass('d-none');
+      $("#delete_offer_mod").hide();
+      $('#modal_offer_msgDel').addClass('alert alert-primary');
+      $('#modal_offer_msgDel').html(data);
+      getAllOffers();
+      setTimeout(function () {
+        $('#offerModalDelete').modal('hide');
+      }, 1000);
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+      $('#delete_offer_mod .spinner-border').addClass('d-none');
+      $.notify(xhr.responseText, "error");
+    }
   });
+});
 
-  $(document).on('click', '.deleteo', function (e) {
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    offer_id = $(this).attr("id");
-    $("#delete_offer_mod").show();
+// add
+$(document).on('click', '#add_offer', function (e) {
+  let name = $('#name_addo').val();
+  let discount = $('#discount_addo').val();
+  let start_date = $('#start_date_addo').val();
+  let end_date = $('#end_date_addo').val();
+  let description = $('#description_addo').val();
+  let imgfile = document.getElementById('offerimg1').files[0];
 
-    $(document).on('click', '#delete_offer_mod', function (e) {
-      e.preventDefault();
-      e.stopImmediatePropagation();
+  if (imgfile) {
+    let extensions = ['jpg', 'jpeg', 'png', 'gif'];
+    let filename = imgfile.name;
+    let filesize = imgfile.size;
+
+    // if not allowed file type or above allowed size
+    if (!extensions.includes(filename.split('.').pop())) {
+      $('#modal_offer_msgUp').text('Formati i gabuar!');
+      $('#modal_offer_msgUp').addClass('alert alert-primary');
+    } else if (filesize > 5000000) {
+      $('#modal_offer_msgUp').text('Imazhi nuk mund te jete me shume se 5MB!');
+      $('#modal_offer_msgUp').addClass('alert alert-primary');
+    } else {
+      let inputData = new FormData();
+      inputData.append('offerimg', imgfile);
+      inputData.append('name', name);
+      inputData.append('discount', discount);
+      inputData.append('start_date', start_date);
+      inputData.append('end_date', end_date);
+      inputData.append('description', description);
+
+      // send data and receive url
       $.ajax({
-        url: "../php/delete_offer.php",
-        method: "POST",
-        data: { offer_id: offer_id },
+        type: "post",
+        url: "../php/add_offers.php",
+        data: inputData,
+        contentType: false,
+        cache: false,
+        processData: false,
         beforeSend: function () {
-          $('#kuti_offer .spinner-border').removeClass('d-none');
+          $('#add_offer .spinner-border').removeClass('d-none');
         },
-        success: function (data) {
-          $('#kuti_offer .spinner-border').addClass('d-none');
-          $("#delete_offer_mod").hide();
-          $('#modal_offer_msgDel').addClass('alert alert-primary');
-          $('#modal_offer_msgDel').html(data);
+        success: function (response) {
+          $('#add_offer .spinner-border').addClass('d-none');
+          $('#modal_offer_msgAd').addClass('alert alert-primary');
+          $('#modal_offer_msgAd').html(response);
           getAllOffers();
           setTimeout(function () {
-            $('#modal_offer_msgDel').html('');
-            $('#modal_offer_msgDel').removeClass('alert alert-primary');
-            $('#offerModalDelete').modal('hide');
-          }, 2000);
+            $('#offerModalAdd').modal('hide');
+          }, 1000);
         },
         error: function (xhr, ajaxOptions, thrownError) {
-          $.notify(xhr.responseText, "error");
+          $('#add_offer .spinner-border').addClass('d-none');
+          $.notify(xhr.responseText, 'error');
         }
       });
-    });
-  });
+    }
+  }
+});
 
-  $(document).on('click', '#add_offer', function (e) {
-    let name = $('#name_addo').val();
-    let discount = $('#discount_addo').val();
-    let start_date = $('#start_date_addo').val();
-    let end_date = $('#end_date_addo').val();
-    let description = $('#description_addo').val();
-    let imgfile = document.getElementById('offerimg1').files[0];
+// modify
+$(document).on('click', '.updateo', function () {
+  offer_id = $(this).attr("data-id");
 
+  $(document).on('click', '#update_offer_mod', function (e) {
+    let name = $('#name_upo').val();
+    let discount = $('#discount_upo').val();
+    let start_date = $('#start_date_upo').val();
+    let end_date = $('#end_date_upo').val();
+    let description = $('#description_upo').val();
+    let imgfile = document.getElementById('offerimg2').files[0];
+
+    // if file was selected
     if (imgfile) {
       let extensions = ['jpg', 'jpeg', 'png', 'gif'];
       let filename = imgfile.name;
@@ -882,139 +1052,67 @@ $(document).ready(function getAllOffers () {
 
       // if not allowed file type or above allowed size
       if (!extensions.includes(filename.split('.').pop())) {
-        $('#modal_offer_msgUp').text('Formati i gabuar!');
-        $('#modal_offer_msgUp').addClass('alert alert-primary');
+        $('#modal_prod_msgUp').text('Formati i gabuar!');
+        $('#modal_prod_msgUp').addClass('alert alert-primary');
       } else if (filesize > 5000000) {
-        $('#modal_offer_msgUp').text('Imazhi nuk mund te jete me shume se 5MB!');
-        $('#modal_offer_msgUp').addClass('alert alert-primary');
+        $('#modal_prod_msgUp').text('Imazhi nuk mund te jete me shume se 5MB!');
+        $('#modal_prod_msgUp').addClass('alert alert-primary');
       } else {
+
         let inputData = new FormData();
         inputData.append('offerimg', imgfile);
-        inputData.append('name', name);
-        inputData.append('discount', discount);
-        inputData.append('start_date', start_date);
-        inputData.append('end_date', end_date);
-        inputData.append('description', description);
-
+        inputData.append('offer_id', offer_id);
         // send data and receive url
         $.ajax({
           type: "post",
-          url: "../php/add_offers.php",
+          url: "../php/offer_img.php",
           data: inputData,
           contentType: false,
           cache: false,
           processData: false,
           beforeSend: function () {
-            $('#add_offer .spinner-border').removeClass('d-none');
+            $('#update_offer_mod .spinner-border').removeClass('d-none');
           },
           success: function (response) {
-            $('#offerModalUpdate .custom-file-input').val('');
-            $('#offerModalUpdate .custom-file-label').text('Zgjidh imazhin');
-            $('#add_offer .spinner-border').addClass('d-none');
-            $('#modal_offer_msgAd').addClass('alert alert-primary');
-            $('#modal_offer_msgAd').html(response);
+            $('#update_offer_mod .spinner-border').addClass('d-none');
+            $('#modal_offer_msgUp').html('Perditesimi u krye me sukses!');
+            $('#modal_offer_msgUp').addClass('alert alert-primary');
+            $('#modal_offer_msgUp').addClass('alert alert-primary');
             getAllOffers();
-            $('form').trigger('reset');
             setTimeout(function () {
-              $('#modal_offer_msgAd').html('');
-              $('#modal_offer_msgAd').removeClass('alert alert-primary');
-              $('#offerModalAdd').modal('hide');
-            }, 1800);
+              $('#offerModalUpdate').modal('hide');
+            }, 1000);
+
           },
           error: function (xhr, ajaxOptions, thrownError) {
-            $('#add_offer .spinner-border').addClass('d-none');
+            $('#update_offer_mod .spinner-border').addClass('d-none');
             $.notify(xhr.responseText, 'error');
           }
         });
       }
     }
-  });
 
-  $(document).on('click', '.updateo', function (e) {
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    offer_id = $(this).attr("id");
+    $.ajax({
+      url: "../php/update_offer.php",
+      method: "POST",
+      data: { offer_id: offer_id, name: name, discount: discount, start_date: start_date, end_date: end_date, description: description },
 
-    $(document).on('click', '#update_offer_mod', function (e) {
-      let name = $('#name_upo').val();
-      let discount = $('#discount_upo').val();
-      let start_date = $('#start_date_upo').val();
-      let end_date = $('#end_date_upo').val();
-      let description = $('#description_upo').val();
-      let imgfile = document.getElementById('offerimg2').files[0];
-
-      // if file was selected
-      if (imgfile) {
-        let extensions = ['jpg', 'jpeg', 'png', 'gif'];
-        let filename = imgfile.name;
-        let filesize = imgfile.size;
-
-        // if not allowed file type or above allowed size
-        if (!extensions.includes(filename.split('.').pop())) {
-          $('#modal_prod_msgUp').text('Formati i gabuar!');
-          $('#modal_prod_msgUp').addClass('alert alert-primary');
-        } else if (filesize > 5000000) {
-          $('#modal_prod_msgUp').text('Imazhi nuk mund te jete me shume se 5MB!');
-          $('#modal_prod_msgUp').addClass('alert alert-primary');
-        } else {
-
-          let inputData = new FormData();
-          inputData.append('offerimg', imgfile);
-          inputData.append('offer_id', offer_id);
-          // send data and receive url
-          $.ajax({
-            type: "post",
-            url: "../php/offer_img.php",
-            data: inputData,
-            contentType: false,
-            cache: false,
-            processData: false,
-            beforeSend: function () {
-              $('#update_offer_mod .spinner-border').removeClass('d-none');
-            },
-            success: function (response) {
-              $('#update_offer_mod .spinner-border').addClass('d-none');
-              $('#modal_offer_msgUp').html('Perditesimi u krye me sukses!');
-              $('#modal_offer_msgUp').addClass('alert alert-primary');
-              $('form').trigger('reset');
-              $('#modal_offer_msgUp').addClass('alert alert-primary');
-              getAllOffers();
-              $('#offerModalUpdate .custom-file-input').val('');
-              $('#offerModalUpdate .custom-file-label').text('Zgjidh imazhin');
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
-              $('#update_offer_mod .spinner-border').addClass('d-none');
-              $.notify(xhr.responseText, 'error');
-            }
-          });
-        }
+      beforeSend: function () {
+        $('#update_offer_mod .spinner-border').removeClass('d-none');
+      },
+      success: function (data) {
+        $('#update_offer_mod .spinner-border').addClass('d-none');
+        $('#modal_offer_msgUp').html(data);
+        $('#modal_offer_msgUp').addClass('alert alert-primary');
+        getAllOffers();
+        setTimeout(function () {
+          $('#offerModalUpdate').modal('hide');
+        }, 1000);
+      },
+      error: function (xhr, ajaxOptions, thrownError) {
+        $.notify(xhr.responseText, "error");
+        $('#update_offer_mod .spinner-border').addClass('d-none');
       }
-      $.ajax({
-        url: "../php/update_offer.php",
-        method: "POST",
-        data: { offer_id: offer_id, name: name, discount: discount, start_date: start_date, end_date: end_date, description: description },
-
-        beforeSend: function () {
-          $('#update_offer_mod .spinner-border').removeClass('d-none');
-        },
-        success: function (data) {
-          $('#offerModalUpdate .custom-file-input').val('');
-          $('#offerModalUpdate .custom-file-label').text('Zgjidh imazhin');
-          $('#kuti_offer .spinner-border').addClass('d-none');
-          $('#modal_offer_msgUp').html(data);
-          $('#modal_offer_msgUp').addClass('alert alert-primary');
-          getAllOffers();
-          $('form').trigger('reset');
-          setTimeout(function () {
-            $('#modal_offer_msgUp').html('');
-            $('#modal_offer_msgUp').removeClass('alert alert-primary');
-            $('#offerModalUpdate').modal('hide');
-          }, 1800);
-        },
-        error: function (xhr, ajaxOptions, thrownError) {
-          $.notify(xhr.responseText, "error");
-        }
-      });
     });
   });
 });

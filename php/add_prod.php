@@ -22,7 +22,7 @@
             if ($url != '') {
 
                 $stmt = $conn->prepare("INSERT INTO `Product` (`adm_id`, `cat_id`, `name`, `price`, `image`) VALUES (?, ?, ?, ?, ?)");
-                $stmt->bind_param('sssss', $_SESSION['id'], $category, $name, $price, $url);
+                $stmt->bind_param('dssds', $_SESSION['id'], $category, $name, $price, $url);
                 $result = $stmt->execute();
                 $prod_id = $stmt->insert_id;
                 
@@ -31,7 +31,7 @@
 
                     //insert each selected ingredient into prod_ingredient table in db
                     if(isset($_POST["ingredients"])){
-                        $ingredients = json_decode($_POST["ingredients"]);
+                        $ingredients = $_POST["ingredients"];
                         foreach($ingredients as $i){
                             $stmt = $conn->prepare("INSERT INTO `Prod_Ingredient` (`prod_id`, `ing_id`) VALUES (?, ?)");
                             $stmt->bind_param('dd', $prod_id, $i);
