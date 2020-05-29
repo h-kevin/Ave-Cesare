@@ -361,30 +361,30 @@ $('#mgu-section').on('hidden.bs.modal', '.modal', function () {
 
 $(document).on('click', '.delete', function () {
   user_id = $(this).attr("data-id");
-  $("#delete_mod").show();
+});
 
-  $(document).on('click', '#delete_mod', function () {
-    $.ajax({
-      url: "../php/delete_user.php",
-      method: "POST",
-      data: { user_id: user_id },
-      beforeSend: function () {
-        $('#admp .spinner-border').removeClass('d-none');
-      },
-      success: function (data) {
-        $('#admp .spinner-border').addClass('d-none');
-        $("#delete_mod").hide();
-        $('#modal_msgDel').addClass('alert alert-primary');
-        $('#modal_msgDel').html(data);
-        getAll();
-        setTimeout(function () {
-          $('#userModalDelete').modal('hide');
-        }, 1000);
-      },
-      error: function (xhr, ajaxOptions, thrownError) {
-        $.notify(xhr.responseText, "error");
-      }
-    });
+$(document).on('click', '#delete_mod', function () {
+  $.ajax({
+    url: "../php/delete_user.php",
+    method: "POST",
+    data: { user_id: user_id },
+    beforeSend: function () {
+      $('#admp .spinner-border').removeClass('d-none');
+    },
+    success: function (data) {
+      $('#admp .spinner-border').addClass('d-none');
+      $("#delete_mod").hide();
+      $('#modal_msgDel').addClass('alert alert-primary');
+      $('#modal_msgDel').html(data);
+      getAll();
+      setTimeout(function () {
+        $('#userModalDelete').modal('hide');
+      }, 1000);
+    },
+    error: function (xhr, ajaxOptions, thrownError) {
+      $.notify(xhr.responseText, "error");
+      $('#admp .spinner-border').addClass('d-none');
+    }
   });
 });
 

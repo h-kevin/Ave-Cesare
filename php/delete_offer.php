@@ -10,29 +10,22 @@
         session_start();
     }
     
-    if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST["offer_id"])){
+    if($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($_SESSION['admin'] == 1) {
 
-            $stmt = $conn->prepare("SELECT id FROM Offer WHERE id=" . $_POST["offer_id"]);
+            // check foreign keys and remove them
+            $stmt = $conn->prepare("DELETE FROM `Prod_Offer` WHERE offer_id=?");
+            $stmt->bind_param("d", $_POST['offer_id']);
             $stmt->execute();
-            $result = $stmt->get_result();
-            $row = $result->fetch_row();
             
-            
-            if($result->num_rows > 0){
+            $stmt = $conn->prepare("DELETE FROM `Offer` WHERE id=?");
+            $stmt->bind_param("d", $_POST["offer_id"]);
 
-                    $stmt = $conn->prepare("DELETE FROM Offer WHERE id=" . $_POST["offer_id"]);
-                    $result = $stmt->execute();
-
-                    if($result){
-                    echo 'Oferta u fshi me sukses!';
-                    }
-                    else{
-                        header('HTTP/1.1 404 Not Found');
-                        echo 'Oferta nuk u gjet. Mund te jete fshire me pare';
-                    }
-            } else {
-                echo 'Kjo oferte nuk u gjet. Mund te jete duke u modifikuar ne databaze ose eshte fshire me pare';
+            if($stmt->execute() && $stmt->affected_rows != 0){
+                echo 'Oferta u fshi me sukses!';
+            } else{
+                header('HTTP/1.1 500 Internal Server Error');
+                exit("Fshirja e ofertes deshtoi!");
             }
         }
     } else {
