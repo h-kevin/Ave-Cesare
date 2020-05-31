@@ -1,0 +1,17 @@
+/* body */
+
+#verifyb {
+  display: grid;
+  justify-content: center;
+  justify-items: center;
+  align-content: center;
+  text-align: center;
+}
+
+/* image */
+
+#verifyb img {
+  width: 50vmin;
+  height: 50vmin;
+  margin-bottom: 20px;
+}

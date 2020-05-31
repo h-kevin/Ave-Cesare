@@ -41,18 +41,18 @@
         if ($result) {
             $mail = new PHPMailer(true);
             $mail->isSMTP();
-            $mail->SMTPAuth = true;
-            $mail->SMTPSecure = 'ssl';
             $mail->Host = 'smtp.gmail.com';
-            $mail->Port = '465';
-            $mail->isHTML(true);
+            $mail->SMTPAuth = true;
             $mail->Username = 'avecesarepizza@gmail.com';
-            $mail->Password = 'GST4DEm65X6a';
+            $mail->Password = 'hvawoxvhsbwfeoju';
+            $mail->SMTPSecure = 'tls';
+            $mail->Port = '587';
             $mail->setFrom('no-reply@avecesare.com', 'Ave Cesare');
-            $mail->Subject = 'Email verification';
-            $mail->Body = "<a href='http://localhost:3000/php/verify.php?vkey=$vkey'>
-                    Klikoni ketu per te verifikuar llogarine</a>";
             $mail->AddAddress($email);
+            $mail->isHTML(true);
+            $mail->Subject = 'Email verification';
+            $mail->Body = "<a href='https://ave-cesare.herokuapp.com/php/verify.php?vkey=$vkey'>
+                Klikoni ketu per te verifikuar llogarine</a>";
 
             try {
                 $mail->Send();

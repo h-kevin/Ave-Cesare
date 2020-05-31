@@ -373,7 +373,6 @@ $(document).on('click', '#delete_mod', function () {
     },
     success: function (data) {
       $('#admp .spinner-border').addClass('d-none');
-      $("#delete_mod").hide();
       $('#modal_msgDel').addClass('alert alert-primary');
       $('#modal_msgDel').html(data);
       getAll();
@@ -958,7 +957,6 @@ $(document).on('click', '#delete_offer_mod', function () {
     },
     success: function (data) {
       $('#delete_offer_mod .spinner-border').addClass('d-none');
-      $("#delete_offer_mod").hide();
       $('#modal_offer_msgDel').addClass('alert alert-primary');
       $('#modal_offer_msgDel').html(data);
       getAllOffers();
