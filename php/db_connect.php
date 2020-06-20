@@ -4,10 +4,10 @@
  * PHP file to set up connection with the database
  */
 
-$dbServername = 'remotemysql.com';
-$dbUsername = 'OxBKxErBYb';
-$dbPassword = 'VxUmHNePFp';
-$dbName = 'OxBKxErBYb';
+$dbServername = db_server_example;
+$dbUsername = db_username_example;
+$dbPassword = db_password_example;
+$dbName = db_name_example;
 
 $conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
 
