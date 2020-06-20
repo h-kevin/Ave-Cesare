@@ -43,8 +43,8 @@
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
-            $mail->Username = 'avecesarepizza@gmail.com';
-            $mail->Password = 'hvawoxvhsbwfeoju';
+            $mail->Username = gmail_example;
+            $mail->Password = password_example;
             $mail->SMTPSecure = 'tls';
             $mail->Port = '587';
             $mail->setFrom('no-reply@avecesare.com', 'Ave Cesare');
