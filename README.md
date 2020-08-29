@@ -3,10 +3,9 @@
 ## Access project online: https://ave-cesare.herokuapp.com/
 
 ### Manager: Kevin Haxhi (kevin.haxhi@outlook.com)
-### Developers:
-####  Edit Muzhaqi (edit.muzhaqi@fshnstudent.info)
-####  Neraida Muho (neraida.muho@fshnstudent.info)
-####  Sara Gjikdhima (sara.gjikdhima@fshnstudent.info)
+### Edit Muzhaqi (edit.muzhaqi@fshnstudent.info)
+### Neraida Muho (neraida.muho@fshnstudent.info)
+### Sara Gjikdhima (sara.gjikdhima@fshnstudent.info)
 
 ###### Tiranë 2020
 
